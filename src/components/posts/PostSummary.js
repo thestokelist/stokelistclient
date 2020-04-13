@@ -43,7 +43,7 @@ const PostSummaryContainer = styled.div`
 
 function PostSummary({post}) {
 
-    let imgURL = post.photo_file_size ? "http://list.thestoke.ca/photos/"+post.id+"/thumb.jpg" : "http://list.thestoke.ca/images/placeholder.png";
+    let imgURL = post.photoFileSize ? "https://list.thestoke.ca/photos/"+post.id+"/thumb.jpg" : "https://list.thestoke.ca/images/placeholder.png";
     
     const createMarkup = sanitizedHTML => { return {__html: sanitizedHTML} }
 

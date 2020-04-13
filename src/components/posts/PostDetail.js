@@ -81,7 +81,7 @@ function PostDetail({ match }) {
         });
     }, [setPostDetails, postID])
 
-    const imgURL = "http://list.thestoke.ca/photos/"+postID+"/original.jpg";
+    const imgURL = "https://list.thestoke.ca/photos/"+postID+"/original.jpg";
     
     const createMarkup = sanitizedHTML => { return {__html: sanitizedHTML} }
 
@@ -103,7 +103,7 @@ function PostDetail({ match }) {
                     <PostTitle>{postDetails.title}</PostTitle>
                     <PostPrice>{postDetails.price}</PostPrice>
                     <PostLocation>{postDetails.location}</PostLocation>
-                    {postDetails.photo_file_size !== null ? <PostImg src={imgURL} alt="Post"/> : null}
+                    {postDetails.photoFileSize !== null ? <PostImg src={imgURL} alt="Post"/> : null}
                     <PostText dangerouslySetInnerHTML={createMarkup(postDetails.description)} />
                     <PostDateTime>{postDetails.created_at}</PostDateTime>
                 </div>
