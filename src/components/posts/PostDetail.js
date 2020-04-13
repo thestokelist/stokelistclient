@@ -81,7 +81,7 @@ function PostDetail({ match }) {
         });
     }, [setPostDetails, postID])
 
-    const imgURL = "https://list.thestoke.ca/photos/"+postID+"/original.jpg";
+    const imgURL = "http://list.thestoke.ca/photos/"+postID+"/original.jpg";
     
     const createMarkup = sanitizedHTML => { return {__html: sanitizedHTML} }
 
