@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import PostSummary from "./PostSummary"
+import { Title } from "../shared/Text"
 
 const SearchBox = styled.input`
   padding: 10px 0px;
@@ -22,13 +23,8 @@ const SearchBar = styled.div`
     justify-content: center;
 `;
 
-const PostSectionHeader = styled.div`
-    font-weight: bold;
-    font-size:1.2em;
-`;
-
 const PostSection = styled.div`
-    margin: 20px 6%;
+    margin: 20px 0;
 `;
 
 const MoreButton = styled.button`
@@ -133,7 +129,7 @@ function PostList() {
                 {(searchLoading || searchLoaded) ? 
                     <div>
                     <PostSection>
-                        <PostSectionHeader>Search Results</PostSectionHeader>
+                        <Title>Search Results</Title>
                         {searchLoading ? <div>Loading...</div> : null}
                         {searchLoaded ?
                             searchPosts.length > 0 ?
@@ -151,11 +147,11 @@ function PostList() {
                 :
                     <div>
                     <PostSection>
-                        <PostSectionHeader>Sticky Posts</PostSectionHeader>
+                        <Title>Sticky Posts</Title>
                         {stickyPosts.map(post => <PostSummary post={post} key={post.id}/>)}
                     </PostSection>
                     <PostSection>
-                        <PostSectionHeader>Latest Posts</PostSectionHeader>
+                        <Title>Latest Posts</Title>
                         {latestPosts.map(post => <PostSummary post={post} key={post.id}/>)}
                         <MoreButton onClick={loadMoreLatestPosts}>More Posts</MoreButton>
                     </PostSection>

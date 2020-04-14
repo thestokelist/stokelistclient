@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import {GreyWhiteButton} from "../shared/Buttons"
 
 const HeaderContainer = styled.div`
-  padding: 2% 6%;
-  width: 100%;
-  box-sizing:border-box;
   font-size:2em;
 `;
 
@@ -42,7 +39,7 @@ function Header() {
                 <HeaderLinks>
                     <HiddenLink to="/"><WhiteGreyLink>Latest Posts</WhiteGreyLink></HiddenLink>
                     <HiddenLink to="/garage"><WhiteGreyLink>Garage Sale Map</WhiteGreyLink></HiddenLink>
-                    <HiddenLink to="/post"><GreyWhiteButton>CreatePost</GreyWhiteButton></HiddenLink>
+                    <HiddenLink to="/post"><GreyWhiteButton>Create Post</GreyWhiteButton></HiddenLink>
                 </HeaderLinks>
                 {/* eslint-disable-next-line */}
                 <HiddenLink to="/">//THE <b>STOKE LIST</b></HiddenLink>

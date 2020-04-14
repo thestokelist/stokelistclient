@@ -2,15 +2,10 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {GreyWhiteButton} from "../shared/Buttons"
+import { Title } from "../shared/Text"
 
 const PostReply = styled.div`
     float:right;
-`;
-
-const PostTitle = styled.div`
-    font-weight: bold;
-    font-size:1.2em
-    margin: 5px 0px;
 `;
 
 const PostPrice = styled.div`
@@ -30,10 +25,6 @@ const PostLocation = styled.div`
     font-weight: normal;
     font-size:0.9em;
     margin: 5px 0px;
-`;
-
-const PostContainer = styled.div`
-    margin: 2% 6%
 `;
 
 const PostText = styled.div`
@@ -76,7 +67,6 @@ function PostDetail({ match }) {
     const replyToPost = () => {window.location.href = `mailto:list-${postID}@thestoke.ca`;}
 
     return (<div>
-        <PostContainer>
             {postDetails === null ? 
                 <div>Loading...</div>
             :
@@ -87,7 +77,7 @@ function PostDetail({ match }) {
                             <CopyLink>Copy Email Address</CopyLink>
                         </CopyToClipboard>
                     </PostReply>
-                    <PostTitle>{postDetails.title}</PostTitle>
+                    <Title>{postDetails.title}</Title>
                     <PostPrice>{postDetails.price}</PostPrice>
                     <PostLocation>{postDetails.location}</PostLocation>
                     {postDetails.photoFileSize !== null ? <PostImg src={imgURL} alt="Post"/> : null}
@@ -95,8 +85,6 @@ function PostDetail({ match }) {
                     <PostDateTime>{postDetails.created_at}</PostDateTime>
                 </div>
             }
-            
-        </PostContainer>
     </div>)
 }
 
