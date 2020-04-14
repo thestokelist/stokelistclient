@@ -72,7 +72,7 @@ function PostDetail({ match }) {
 
     useEffect(() => {
         console.log("Loading post details")
-        fetch(`https://stokelistapi.herokuapp.com/posts/${postID}`)
+        fetch(`${process.env.REACT_APP_API_URL}/posts/${postID}`)
         .then((response) => {
             return response.json();
         })

@@ -58,14 +58,14 @@ function PostList() {
 
     useEffect(() => {
         console.log("Loading latest posts")
-        fetch('https://stokelistapi.herokuapp.com/posts/sticky')
+        fetch(`${process.env.REACT_APP_API_URL}/posts/sticky`)
         .then((response) => {
             return response.json();
         })
         .then((posts) => {
             setStickyPosts(posts)
         });
-        fetch('https://stokelistapi.herokuapp.com/posts')
+        fetch(`${process.env.REACT_APP_API_URL}/posts`)
         .then((response) => {
             return response.json();
         })
@@ -78,7 +78,7 @@ function PostList() {
     const loadMoreLatestPosts = () => {
         const currentOffset = offset+50;
         setOffset(currentOffset)
-        fetch(`https://stokelistapi.herokuapp.com/posts?offset=${currentOffset}`)
+        fetch(`${process.env.REACT_APP_API_URL}/posts?offset=${currentOffset}`)
         .then((response) => {
             console.log(response)
             return response.json();
@@ -94,7 +94,7 @@ function PostList() {
         if (searchTerm === "") {
             setSearchPosts([])
         } else {
-            fetch(`https://stokelistapi.herokuapp.com/posts/search?term=${searchTerm}`)
+            fetch(`${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}`)
             .then((response) => {
                 return response.json();
             })
@@ -109,7 +109,7 @@ function PostList() {
     const loadMoreSearchPosts = () => {
         const currentOffset = searchOffset+50;
         setSearchOffset(currentOffset)
-        fetch(`https://stokelistapi.herokuapp.com/posts/search?term=${searchTerm}&offset=${currentOffset}`)
+        fetch(`${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}&offset=${currentOffset}`)
         .then((response) => {
             return response.json();
         })
