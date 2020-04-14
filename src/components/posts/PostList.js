@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import Header from "../shared/Header";
 import PostSummary from "./PostSummary"
 
 const SearchBox = styled.input`
@@ -128,7 +127,6 @@ function PostList() {
     }
 
     return (<div>
-                <Header />
                 <SearchBar>
                     <SearchBox type="text" onChange={updateSearchTerm} /><SearchButton onClick={doSearch}>Search</SearchButton>
                 </SearchBar>

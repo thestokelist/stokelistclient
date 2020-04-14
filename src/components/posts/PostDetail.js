@@ -1,22 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import Header from "../shared/Header";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {GreyWhiteButton} from "../shared/Buttons"
 
 const PostReply = styled.div`
     float:right;
-`;
-
-const ReplyButton = styled.button`
-    border-radius:5px;
-    background-color:white;
-    border: solid grey 2px;
-    padding:8px;
-    font-weight:bold;
-    color:grey;
-    text-align:center;
-    margin: 0 auto;
-    display: block;
 `;
 
 const PostTitle = styled.div`
@@ -88,14 +76,13 @@ function PostDetail({ match }) {
     const replyToPost = () => {window.location.href = `mailto:list-${postID}@thestoke.ca`;}
 
     return (<div>
-        <Header />
         <PostContainer>
             {postDetails === null ? 
                 <div>Loading...</div>
             :
                 <div>
                     <PostReply>
-                        <ReplyButton onClick={replyToPost}>Reply to Post</ReplyButton>
+                        <GreyWhiteButton onClick={replyToPost}>Reply to Post</GreyWhiteButton>
                         <CopyToClipboard text={`list-${postID}@thestoke.ca`}>
                             <CopyLink>Copy Email Address</CopyLink>
                         </CopyToClipboard>
