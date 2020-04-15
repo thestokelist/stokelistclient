@@ -66,6 +66,16 @@ function PostDetail({ match }) {
 
     const replyToPost = () => {window.location.href = `mailto:list-${postID}@thestoke.ca`;}
 
+    const getPostLocation = postDetails => {
+        const text = <PostLocation>{postDetails.location}</PostLocation>
+        if (postDetails.exactLocation && postDetails.exactLocation.coordinates) {
+            const href = `https://www.google.com/maps/search/?api=1&query=${postDetails.exactLocation.coordinates[1]},${postDetails.exactLocation.coordinates[0]}`
+            return <a rel="noopener noreferrer" target="_blank" href={href}>{text}</a>
+        } else {
+            return text
+        }          
+    }
+
     return (<div>
             {postDetails === null ? 
                 <div>Loading...</div>
@@ -79,7 +89,7 @@ function PostDetail({ match }) {
                     </PostReply>
                     <Title>{postDetails.title}</Title>
                     <PostPrice>{postDetails.price}</PostPrice>
-                    <PostLocation>{postDetails.location}</PostLocation>
+                    {getPostLocation(postDetails)}
                     {postDetails.photoFileSize !== null ? <PostImg src={imgURL} alt="Post"/> : null}
                     <PostText dangerouslySetInnerHTML={createMarkup(postDetails.description)} />
                     <PostDateTime>{postDetails.created_at}</PostDateTime>
