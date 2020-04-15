@@ -12,3 +12,15 @@ export const GreyWhiteButton = styled.button`
     display: block;
     margin: 0em 1em;
 `;
+
+export const BigGreyButton = styled.button`
+    border-radius:5px;
+    background-color:#383838;
+    border: solid #383838 2px;
+    padding:8px 20px;
+    font-weight:bold;
+    color:white;
+    text-align:center;
+    display: block;
+    margin: 1em 0;
+`;
