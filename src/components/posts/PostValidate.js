@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import Cookies from "universal-cookie"
 
 import { Title } from "../shared/Text" 
-import PostSummary from "./PostSummary"
+import { Flash } from "../shared/Layouts"
+import PostDetail from "./PostDetail"
 
 
 function PostValidate({ match }) {
@@ -30,14 +31,18 @@ function PostValidate({ match }) {
     //eslint-disable-next-line
     }, [])
     return (<div>
-        <Title>Validate Post</Title>
         {postDetails === null ? 
-            <div>Validating...</div>
+            <div>
+                <Title>Validate Post</Title>
+                <div>Validating...</div>
+            </div>
         :
             <div>
-                <PostSummary post={postDetails} />
-                Post validated succesfully
-        </div>}</div>)
+                <Flash>Your email has been verified, you'll see your post on the Stoke List soon</Flash>
+                <PostDetail postDetails={postDetails} />
+            </div>
+        }
+    </div>)
 }
 
 export default PostValidate

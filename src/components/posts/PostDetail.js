@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {GreyWhiteButton} from "../shared/Buttons"
@@ -43,28 +43,16 @@ const PostImg = styled.img`
     margin: 5px 0px;
 `;
 
-function PostDetail({ match }) {
+function PostDetail({ postDetails }) {
 
-    const postID = match.params.id;
-    //eslint-disable-next-line
-    const [postDetails, setPostDetails] = useState(null)
+    const post = postDetails;
+    console.log(postDetails)
 
-    useEffect(() => {
-        console.log("Loading post details")
-        fetch(`${process.env.REACT_APP_API_URL}/posts/${postID}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((post) => {
-            setPostDetails(post) 
-        });
-    }, [setPostDetails, postID])
-
-    const imgURL = "http://list.thestoke.ca/photos/"+postID+"/original.jpg";
+    const imgURL = () => {return "http://list.thestoke.ca/photos/"+post.id+"/original.jpg"}
     
     const createMarkup = sanitizedHTML => { return {__html: sanitizedHTML} }
 
-    const replyToPost = () => {window.location.href = `mailto:list-${postID}@thestoke.ca`;}
+    const replyToPost = () => {window.location.href = `mailto:list-${post.id}@thestoke.ca`;}
 
     const getPostLocation = postDetails => {
         const text = <PostLocation>{postDetails.location}</PostLocation>
@@ -76,26 +64,21 @@ function PostDetail({ match }) {
         }          
     }
 
-    return (<div>
-            {postDetails === null ? 
-                <div>Loading...</div>
-            :
-                <div>
-                    <PostReply>
-                        <GreyWhiteButton onClick={replyToPost}>Reply to Post</GreyWhiteButton>
-                        <CopyToClipboard text={`list-${postID}@thestoke.ca`}>
-                            <CopyLink>Copy Email Address</CopyLink>
-                        </CopyToClipboard>
-                    </PostReply>
-                    <Title>{postDetails.title}</Title>
-                    <PostPrice>{postDetails.price}</PostPrice>
-                    {getPostLocation(postDetails)}
-                    {postDetails.photoFileSize !== null ? <PostImg src={imgURL} alt="Post"/> : null}
-                    <PostText dangerouslySetInnerHTML={createMarkup(postDetails.description)} />
-                    <PostDateTime>{postDetails.created_at}</PostDateTime>
-                </div>
-            }
-    </div>)
+    return (post ? <div>
+                <PostReply>
+                    <GreyWhiteButton onClick={replyToPost}>Reply to Post</GreyWhiteButton>
+                    <CopyToClipboard text={`list-${post.id}@thestoke.ca`}>
+                        <CopyLink>Copy Email Address</CopyLink>
+                    </CopyToClipboard>
+                </PostReply>
+                <Title>{post.title}</Title>
+                <PostPrice>{post.price}</PostPrice>
+                {getPostLocation(post)}
+                {post.photoFileSize !== null ? <PostImg src={imgURL()} alt="Post"/> : null}
+                <PostText dangerouslySetInnerHTML={createMarkup(post.description)} />
+                <PostDateTime>{post.created_at}</PostDateTime>
+            </div> : null
+           )
 }
 
 export default PostDetail

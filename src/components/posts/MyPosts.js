@@ -44,12 +44,16 @@ function MyPosts() {
         }
     }
 
+    const getLoginForm = () => {
+        return <div>Please Login</div>
+    }
+
     return (<div>
                 <Title>My Posts</Title>
                 {isCookieSet ? 
                     getPostList()
                 :
-                    <div>Not logged in </div>
+                    getLoginForm()
                  }
             </div>)
 }
