@@ -38,7 +38,8 @@ function Header() {
             <HeaderContainer>
                 <HeaderLinks>
                     <HiddenLink to="/"><WhiteGreyLink>Latest Posts</WhiteGreyLink></HiddenLink>
-                    <HiddenLink to="/garage"><WhiteGreyLink>Garage Sale Map</WhiteGreyLink></HiddenLink>
+                    <HiddenLink to="/garage"><WhiteGreyLink>Garage Sale Map</WhiteGreyLink></HiddenLink> <WhiteGreyLink>|</WhiteGreyLink>
+                    <HiddenLink to="/myposts"><WhiteGreyLink>My Posts</WhiteGreyLink></HiddenLink>
                     <HiddenLink to="/post"><GreyWhiteButton>Create Post</GreyWhiteButton></HiddenLink>
                 </HeaderLinks>
                 {/* eslint-disable-next-line */}

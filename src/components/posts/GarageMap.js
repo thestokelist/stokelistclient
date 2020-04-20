@@ -1,7 +1,4 @@
-//eslint-disable-next-line
-import React, {useEffect, useState} from 'react'
-//eslint-disable-next-line
-import styled from 'styled-components'
+import React from 'react'
 import { Title } from "../shared/Text" 
 
 function PostCreate() {

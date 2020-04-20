@@ -57,7 +57,7 @@ function PostCreate() {
             body: JSON.stringify(postData) // body data type must match "Content-Type" header
         });
         if (response.status === 200) {
-            //TODO: Show posting confirmation
+            //TODO: Show posting confirmation as per modal in design, then redirect to latest posts
             console.log("New post successfully submitted")
         } else {
             //TODO: Show posting error

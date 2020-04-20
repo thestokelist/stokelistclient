@@ -6,6 +6,8 @@ import PostList from "./posts/PostList";
 import PostDetail from "./posts/PostDetail"
 import PostCreate from "./posts/PostCreate"
 import GarageMap from "./posts/GarageMap"
+import MyPosts from "./posts/MyPosts"
+import PostValidate from "./posts/PostValidate"
 import Header from "./shared/Header";
 import { StokeListContainer } from "./shared/Layouts"
 
@@ -15,7 +17,10 @@ function MainApp() {
         <Route exact path="/" component={PostList} />
         <Route exact path="/post" component={PostCreate} />
         <Route exact path="/post/:id" component={PostDetail} />
+        <Route exact path="/post/v/:uuid" component={PostValidate} />
         <Route exact path="/garage/" component={GarageMap} />
+        <Route exact path="/myposts" component={MyPosts} />
+
 
     </StokeListContainer>
 }
