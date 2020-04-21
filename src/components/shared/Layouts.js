@@ -13,3 +13,26 @@ export const Flash = styled.div`
     vertical-align:middle;
     padding: 0.2em
 `
+
+export const FloatRight = styled.div`
+    float: right;
+`
+
+export const AlignRight = styled.div`
+    display:flex;
+    width:100%;
+    justify-content: flex-end;
+`
+
+export const DisabledOverlay = styled.div`
+    float:left;
+    width:100%;
+    height:100%;
+    background-color:white;
+    opacity:0.8;
+    grid-area: 1 / 1;
+`
+
+export const GridLayout = styled.div`
+    display:grid;
+`

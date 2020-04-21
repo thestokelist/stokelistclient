@@ -1,28 +1,35 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import React from 'react'
+import { Route } from 'react-router-dom'
 
 // pages
-import PostList from "./posts/PostList";
-import PostView from "./posts/PostView"
-import PostCreate from "./posts/PostCreate"
-import GarageMap from "./posts/GarageMap"
-import MyPosts from "./posts/MyPosts"
-import PostValidate from "./posts/PostValidate"
-import Header from "./shared/Header";
-import { StokeListContainer } from "./shared/Layouts"
+import PostList from './pages/PostList'
+import PostView from './pages/PostView'
+import PostCreate from './pages/PostCreate'
+import GarageMap from './pages/GarageMap'
+import MyPosts from './pages/MyPosts'
+import PostValidate from './pages/PostValidate'
+import UserLogin from './pages/UserLogin'
+import Header from './shared/Header'
+import { StokeListContainer } from './shared/Layouts'
 
 function MainApp() {
-    return <StokeListContainer className="App">
-        <Route path="/" component={Header} />
-        <Route exact path="/" component={PostList} />
-        <Route exact path="/post" component={PostCreate} />
-        <Route exact path="/post/:id" component={PostView} />
-        <Route exact path="/post/v/:uuid" component={PostValidate} />
-        <Route exact path="/garage/" component={GarageMap} />
-        <Route exact path="/myposts" component={MyPosts} />
+    return (
+        <StokeListContainer className="App">
+            {/*Header appears at the top of all pages*/}
+            <Route path="/" component={Header} />
 
+            {/*Routes related to posts*/}
+            <Route exact path="/" component={PostList} />
+            <Route exact path="/post" component={PostCreate} />
+            <Route exact path="/post/:id" component={PostView} />
+            <Route exact path="/post/v/:uuid" component={PostValidate} />
+            <Route exact path="/garage/" component={GarageMap} />
+            <Route exact path="/myposts" component={MyPosts} />
 
-    </StokeListContainer>
+            {/*Routes related to users*/}
+            <Route exact path="/login/:uuid" component={UserLogin} />
+        </StokeListContainer>
+    )
 }
 
 export default MainApp

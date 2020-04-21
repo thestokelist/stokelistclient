@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "email-validator": "^2.0.4",
     "leaflet": "^1.6.0",
+    "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
@@ -38,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
   }
 }
