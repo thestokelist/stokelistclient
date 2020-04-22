@@ -1,14 +1,17 @@
 //eslint-disable-next-line
-import React from 'react'
+import React, { useState } from 'react'
 //eslint-disable-next-line
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
 import { Map, TileLayer, Marker } from 'react-leaflet'
+import Modal from 'simple-react-modal'
 
 import { Title } from '../shared/Text'
-import { BigGreyButton } from '../shared/Buttons'
+import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
 import { Label, Input } from '../shared/Forms'
+import { AlignRight } from '../shared/Layouts'
+import PostDetails from '../posts/PostDetail'
 
 const Description = styled.textarea``
 
@@ -25,6 +28,19 @@ const MapContainer = styled.div`
 
 function PostCreate() {
     const { register, handleSubmit, errors, setValue, watch } = useForm() // initialise the hook
+    const [modal, setModal] = useState(false)
+    const [postDetails, setPostDetails] = useState(null)
+    const [postSubmitted, setPostSubmitted] = useState(false)
+
+    const showModal = () => {
+        setModal(true)
+    }
+
+    const hideModal = () => {
+        setModal(false)
+        setPostSubmitted(true)
+    }
+
     const onSubmit = async (data) => {
         //TODO: Sanitize these inputs as could be html?
         let title = data.title
@@ -52,14 +68,15 @@ function PostCreate() {
             exactLocation,
             email,
         }
-
+        setPostDetails(postData)
         const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postData), // body data type must match "Content-Type" header
         })
         if (response.status === 200) {
-            //TODO: Show posting confirmation as per modal in design, then redirect to latest posts
+            showModal()
+            //TODO: Redirect to latest posts
             console.log('New post successfully submitted')
         } else {
             //TODO: Show posting error
@@ -115,6 +132,7 @@ function PostCreate() {
     return (
         <div>
             <Title>Create Post</Title>
+            {postSubmitted ? <PostDetails postDetails={postDetails} /> :
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Label>Post Title</Label>
                 <Input
@@ -204,7 +222,19 @@ function PostCreate() {
                 {/*TODO: Captcha*/}
                 {/*TODO: Terms of Service */}
                 <BigGreyButton type="submit">Submit</BigGreyButton>
-            </form>
+            </form>}
+            <Modal closeOnOuterClick={true} show={modal} onClose={hideModal}>
+                <div>
+                    <Title>Post Submitted</Title>
+                    It will not display on The Stoke List until you verify your
+                    email. Check your inbox now!
+                    <AlignRight>
+                        <GreyWhiteButton onClick={hideModal}>
+                            I Understand
+                        </GreyWhiteButton>
+                    </AlignRight>
+                </div>
+            </Modal>
         </div>
     )
 }
