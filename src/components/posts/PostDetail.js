@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { GreyWhiteButton } from '../shared/Buttons'
 import { Title } from '../shared/Text'
-
-const PostReply = styled.div`
-    float: right;
-`
+import { FloatRight } from '../shared/Layouts'
 
 const PostPrice = styled.div`
     font-weight: normal;
@@ -78,14 +75,14 @@ function PostDetail({ postDetails }) {
 
     return post ? (
         <div>
-            <PostReply>
+            <FloatRight>
                 <GreyWhiteButton onClick={replyToPost}>
                     Reply to Post
                 </GreyWhiteButton>
                 <CopyToClipboard text={`list-${post.id}@thestoke.ca`}>
                     <CopyLink>Copy Email Address</CopyLink>
                 </CopyToClipboard>
-            </PostReply>
+            </FloatRight>
             <Title>{post.title}</Title>
             <PostPrice>{post.price}</PostPrice>
             {getPostLocation(post)}

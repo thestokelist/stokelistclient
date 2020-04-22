@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Title } from '../shared/Text'
 import { Flash } from '../shared/Layouts'
 import PostDetail from '../posts/PostDetail'
-import { setCookies } from '../shared/Functions'
+import { setCookies } from '../util/cookies'
 
 function PostValidate({ match }) {
     const postUUID = match.params.uuid
@@ -18,7 +18,7 @@ function PostValidate({ match }) {
             )
             const responseObject = await response.json()
             setPostDetails(responseObject.post)
-            setCookies(responseObject.post.email,postUUID,responseObject.hmac)
+            setCookies(responseObject.post.email, postUUID, responseObject.hmac)
         }
         fetchData()
         //remove any dependencies to force a single load

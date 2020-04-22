@@ -9,7 +9,8 @@ import { Title } from '../shared/Text'
 import MyPost from '../posts/MyPost'
 import { Input } from '../shared/Forms'
 import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
-import { removeCookies } from '../shared/Functions'
+import { removeCookies } from '../util/cookies'
+import { FloatRight } from '../shared/Layouts'
 
 function MyPosts() {
     const cookies = new Cookies()
@@ -54,8 +55,12 @@ function MyPosts() {
                 `${process.env.REACT_APP_API_URL}/posts/mine`,
                 { credentials: 'include' }
             )
-            const responseObject = await response.json()
-            setMyPosts(responseObject)
+            if (response.status === 200) {
+                const responseObject = await response.json()
+                setMyPosts(responseObject)
+            } else {
+                //TODO: Handle post loading error
+            }
         }
         if (isCookieSet) {
             fetchPosts()
@@ -112,15 +117,13 @@ function MyPosts() {
 
     return (
         <div>
-            <Title>My Posts</Title>
             {isCookieSet ? (
-                <div>
+                <FloatRight>
                     <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
-                    {getPostList()}
-                </div>
-            ) : (
-                getLoginForm()
-            )}
+                </FloatRight>
+            ) : null}
+            <Title>My Posts</Title>
+            {isCookieSet ? getPostList() : getLoginForm()}
         </div>
     )
 }

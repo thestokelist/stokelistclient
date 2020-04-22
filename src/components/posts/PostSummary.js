@@ -18,8 +18,6 @@ const PostImageContainer = styled.div`
     background-color: lightgrey;
 `
 
-const PostImage = styled.img``
-
 const PostDetailsContainer = styled.div`
     flex-grow: 1;
     box-sizing: border-box;
@@ -39,8 +37,9 @@ const PostSummaryContainer = styled.div`
     grid-area: 1 / 1;
 `
 
+//Generates a full width summary for a post, can be disabled
 function PostSummary({ post, disabled }) {
-    let imgURL = post.photoFileSize
+    const imgURL = post.photoFileSize
         ? 'http://list.thestoke.ca/photos/' + post.id + '/thumb.jpg'
         : 'http://list.thestoke.ca/images/placeholder.png'
 
@@ -54,7 +53,7 @@ function PostSummary({ post, disabled }) {
             <PostSummaryContainer>
                 <PostImageContainer>
                     <Link to={`/post/${post.id}`}>
-                        <PostImage src={imgURL} alt={'thumbnail'} />
+                        <img src={imgURL} alt={'thumbnail'} />
                     </Link>
                 </PostImageContainer>
                 <PostDetailsContainer>

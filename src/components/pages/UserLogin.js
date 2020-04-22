@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import { Redirect } from 'react-router'
 
-import { setCookies } from '../shared/Functions'
+import { setCookies } from '../util/cookies'
 
 function UserLogin({ match, location }) {
     const loginToken = match.params.uuid
