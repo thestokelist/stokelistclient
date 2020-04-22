@@ -1,6 +1,7 @@
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
-const cookieOptions = { path: '/', sameSite: 'Strict', maxAge: 2592000 }
+const domain = process.env.REACT_APP_API_DOMAIN
+const cookieOptions = { path: '/', sameSite: 'Strict', maxAge: 2592000, domain: domain }
 
 export const removeCookies = () => {
     cookies.remove('hmac', cookieOptions)
