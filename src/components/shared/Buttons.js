@@ -13,6 +13,9 @@ export const GreyWhiteButton = styled.button`
     margin: 0em 1em;
 `;
 
+export const WhiteWhiteButton = styled(GreyWhiteButton)`
+    border:none
+`
 export const SmallGreyWhiteButton = styled(GreyWhiteButton)`
     font-weight:normal;
     font-size:11px;
