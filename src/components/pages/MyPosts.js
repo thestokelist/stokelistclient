@@ -65,9 +65,7 @@ function MyPosts() {
 
     const getPostList = () => {
         if (myPosts && myPosts.length && myPosts.length > 0) {
-            return myPosts.map((post) => (
-                <MyPost post={post} key={post.id} />
-            ))
+            return myPosts.map((post) => <MyPost post={post} key={post.id} />)
         } else {
             return <div>Posts Loading...</div>
         }
