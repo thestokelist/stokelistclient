@@ -1,6 +1,9 @@
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
-const cookieOptions = { path: '/', sameSite: 'Strict', maxAge: 2592000 }
+const cookieOptions =
+    process.env.NODE_ENV === 'production'
+        ? { path: '/', sameSite: 'None', maxAge: 2592000, secure: true }
+        : { path: '/', sameSite: 'Strict', maxAge: 2592000 }
 
 export const removeCookies = () => {
     cookies.remove('hmac', cookieOptions)
