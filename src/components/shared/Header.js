@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { GreyWhiteButton } from '../shared/Buttons'
@@ -39,7 +39,7 @@ const WhiteGreyLink = styled.div`
 
 function Header() {
     return (
-        <div>
+        <Fragment>
             <HeaderContainer>
                 <HeaderLinks>
                     <HiddenLink to="/">
@@ -62,7 +62,7 @@ function Header() {
                 </HiddenLink>
             </HeaderContainer>
             <hr />
-        </div>
+        </Fragment>
     )
 }
 

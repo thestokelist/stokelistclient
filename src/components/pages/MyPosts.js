@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 //eslint-disable-next-line
 import styled from 'styled-components'
 import Cookies from 'universal-cookie'
@@ -116,7 +116,7 @@ function MyPosts() {
     }
 
     return (
-        <div>
+        <Fragment>
             {isCookieSet ? (
                 <FloatRight>
                     <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
@@ -124,7 +124,7 @@ function MyPosts() {
             ) : null}
             <Title>My Posts</Title>
             {isCookieSet ? getPostList() : getLoginForm()}
-        </div>
+        </Fragment>
     )
 }
 

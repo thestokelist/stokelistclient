@@ -1,5 +1,5 @@
 //eslint-disable-next-line
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 //eslint-disable-next-line
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
@@ -130,101 +130,106 @@ function PostCreate() {
     }
 
     return (
-        <div>
+        <Fragment>
             <Title>Create Post</Title>
-            {postSubmitted ? <PostDetails postDetails={postDetails} /> :
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Label>Post Title</Label>
-                <Input
-                    name="title"
-                    placeholder="50 characters max"
-                    ref={register({ required: true, maxLength: 50 })}
-                />
-                {errors.title &&
-                    errors.title.type === 'required' &&
-                    'Title is required.'}
-                {errors.title &&
-                    errors.title.type === 'maxLength' &&
-                    'Title has a max length of 50 characters.'}
-                {/*TODO: Garage Sale?*/}
-                <Label>Post Description</Label>
-                <Description
-                    rows="10"
-                    cols="80"
-                    name="description"
-                    ref={register({ required: true })}
-                />
-                {errors.description && 'Description is required.'}
-                {/*TODO: Images/Media*/}
-                <Label>Add a Price</Label>
-                $
-                <Input
-                    type="numeric"
-                    name="price"
-                    ref={register({ validate: validatePrice })}
-                    onChange={updatePriceForm}
-                />
-                <Input
-                    type="radio"
-                    name="priceRadio"
-                    value="priceNA"
-                    ref={register()}
-                    onChange={updatePriceForm}
-                />
-                Not Applicable
-                <Input
-                    type="radio"
-                    name="priceRadio"
-                    value="priceFree"
-                    ref={register()}
-                    onChange={updatePriceForm}
-                />
-                Free
-                <br />
-                {errors.price && 'Enter a price or select an option'}
-                <Label>Add Location</Label>
-                <Input name="location" ref={register} />
-                <Input type="hidden" name="lat" ref={register} />
-                <Input type="hidden" name="lng" ref={register} />
-                <MapContainer>
-                    <Map
-                        center={position}
-                        zoom={13}
-                        style={{ height: '350px' }}
-                    >
-                        <TileLayer
-                            name="OSM Base Map"
-                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker
-                            draggable={true}
-                            onDragend={updateLocation}
-                            position={position}
-                        />
-                    </Map>
-                </MapContainer>
-                <Label>
-                    Your Contact Email
-                    <SubLabel> - This will not be published</SubLabel>
-                </Label>
-                <Input
-                    type="email"
-                    name="email"
-                    ref={register({ required: true, validate: validateEmail })}
-                />
-                {errors.email &&
-                    errors.email.type === 'required' &&
-                    'Email is required.'}
-                {errors.email &&
-                    errors.email.type === 'validate' &&
-                    'Must be an email address.'}
-                {/*TODO: Captcha*/}
-                {/*TODO: Terms of Service */}
-                <BigGreyButton type="submit">Submit</BigGreyButton>
-            </form>}
+            {postSubmitted ? (
+                <PostDetails postDetails={postDetails} />
+            ) : (
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Label>Post Title</Label>
+                    <Input
+                        name="title"
+                        placeholder="50 characters max"
+                        ref={register({ required: true, maxLength: 50 })}
+                    />
+                    {errors.title &&
+                        errors.title.type === 'required' &&
+                        'Title is required.'}
+                    {errors.title &&
+                        errors.title.type === 'maxLength' &&
+                        'Title has a max length of 50 characters.'}
+                    {/*TODO: Garage Sale?*/}
+                    <Label>Post Description</Label>
+                    <Description
+                        rows="10"
+                        cols="80"
+                        name="description"
+                        ref={register({ required: true })}
+                    />
+                    {errors.description && 'Description is required.'}
+                    {/*TODO: Images/Media*/}
+                    <Label>Add a Price</Label>
+                    $
+                    <Input
+                        type="numeric"
+                        name="price"
+                        ref={register({ validate: validatePrice })}
+                        onChange={updatePriceForm}
+                    />
+                    <Input
+                        type="radio"
+                        name="priceRadio"
+                        value="priceNA"
+                        ref={register()}
+                        onChange={updatePriceForm}
+                    />
+                    Not Applicable
+                    <Input
+                        type="radio"
+                        name="priceRadio"
+                        value="priceFree"
+                        ref={register()}
+                        onChange={updatePriceForm}
+                    />
+                    Free
+                    <br />
+                    {errors.price && 'Enter a price or select an option'}
+                    <Label>Add Location</Label>
+                    <Input name="location" ref={register} />
+                    <Input type="hidden" name="lat" ref={register} />
+                    <Input type="hidden" name="lng" ref={register} />
+                    <MapContainer>
+                        <Map
+                            center={position}
+                            zoom={13}
+                            style={{ height: '350px' }}
+                        >
+                            <TileLayer
+                                name="OSM Base Map"
+                                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Marker
+                                draggable={true}
+                                onDragend={updateLocation}
+                                position={position}
+                            />
+                        </Map>
+                    </MapContainer>
+                    <Label>
+                        Your Contact Email
+                        <SubLabel> - This will not be published</SubLabel>
+                    </Label>
+                    <Input
+                        type="email"
+                        name="email"
+                        ref={register({
+                            required: true,
+                            validate: validateEmail,
+                        })}
+                    />
+                    {errors.email &&
+                        errors.email.type === 'required' &&
+                        'Email is required.'}
+                    {errors.email &&
+                        errors.email.type === 'validate' &&
+                        'Must be an email address.'}
+                    {/*TODO: Captcha*/}
+                    {/*TODO: Terms of Service */}
+                    <BigGreyButton type="submit">Submit</BigGreyButton>
+                </form>
+            )}
             <Modal closeOnOuterClick={true} show={modal} onClose={hideModal}>
-                <div>
                     <Title>Post Submitted</Title>
                     It will not display on The Stoke List until you verify your
                     email. Check your inbox now!
@@ -233,9 +238,8 @@ function PostCreate() {
                             I Understand
                         </GreyWhiteButton>
                     </AlignRight>
-                </div>
             </Modal>
-        </div>
+        </Fragment>
     )
 }
 

@@ -2,11 +2,7 @@ import React from 'react'
 import { Title } from '../shared/Text'
 
 function PostCreate() {
-    return (
-        <div>
-            <Title>Garage Sale Map</Title>
-        </div>
-    )
+    return <Title>Garage Sale Map</Title>
 }
 
 export default PostCreate

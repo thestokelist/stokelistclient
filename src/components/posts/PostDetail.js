@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { GreyWhiteButton } from '../shared/Buttons'
@@ -74,7 +74,7 @@ function PostDetail({ postDetails }) {
     }
 
     return post ? (
-        <div>
+        <Fragment>
             <FloatRight>
                 <GreyWhiteButton onClick={replyToPost}>
                     Reply to Post
@@ -93,7 +93,7 @@ function PostDetail({ postDetails }) {
                 dangerouslySetInnerHTML={createMarkup(post.description)}
             />
             <PostDateTime>{post.created_at}</PostDateTime>
-        </div>
+        </Fragment>
     ) : null
 }
 

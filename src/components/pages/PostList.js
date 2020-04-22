@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import styled from 'styled-components'
 import PostSummary from '../posts/PostSummary'
 import { Title } from '../shared/Text'
@@ -124,41 +124,34 @@ function PostList() {
     }
 
     return (
-        <div>
+        <Fragment>
             <SearchBar>
                 <SearchBox type="text" onChange={updateSearchTerm} />
                 <SearchButton onClick={doSearch}>Search</SearchButton>
             </SearchBar>
             {searchLoading || searchLoaded ? (
-                <div>
-                    <PostSection>
-                        <Title>Search Results</Title>
-                        {searchLoading ? <div>Loading...</div> : null}
-                        {searchLoaded ? (
-                            searchPosts.length > 0 ? (
-                                <div>
-                                    {searchPosts.map((post) => (
-                                        <PostSummary
-                                            post={post}
-                                            key={post.id}
-                                        />
-                                    ))}
-                                    {searchPosts.length === 50 ? (
-                                        <MoreButton
-                                            onClick={loadMoreSearchPosts}
-                                        >
-                                            More Results
-                                        </MoreButton>
-                                    ) : null}
-                                </div>
-                            ) : (
-                                <div>No Results Found</div>
-                            )
-                        ) : null}
-                    </PostSection>
-                </div>
+                <PostSection>
+                    <Title>Search Results</Title>
+                    {searchLoading ? <div>Loading...</div> : null}
+                    {searchLoaded ? (
+                        searchPosts.length > 0 ? (
+                            <div>
+                                {searchPosts.map((post) => (
+                                    <PostSummary post={post} key={post.id} />
+                                ))}
+                                {searchPosts.length === 50 ? (
+                                    <MoreButton onClick={loadMoreSearchPosts}>
+                                        More Results
+                                    </MoreButton>
+                                ) : null}
+                            </div>
+                        ) : (
+                            <div>No Results Found</div>
+                        )
+                    ) : null}
+                </PostSection>
             ) : (
-                <div>
+                <Fragment>
                     <PostSection>
                         <Title>Sticky Posts</Title>
                         {stickyPosts.map((post) => (
@@ -174,9 +167,9 @@ function PostList() {
                             More Posts
                         </MoreButton>
                     </PostSection>
-                </div>
+                </Fragment>
             )}
-        </div>
+        </Fragment>
     )
 }
 

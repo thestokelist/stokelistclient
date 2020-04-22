@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 
 import { SmallGreyWhiteButton, GreyWhiteButton, WhiteWhiteButton } from '../shared/Buttons'
 import { AlignRight } from '../shared/Layouts'
@@ -32,26 +32,25 @@ function MyPost({ post }) {
     }
 
     return (
-        <div>
+        <Fragment>
             {deleted ? (
-                <div>
+                <Fragment>
                     <PostSummary post={post} disabled={true} />
                     <AlignRight>
                         <div>This post has been deleted</div>
                     </AlignRight>
-                </div>
+                </Fragment>
             ) : (
-                <div>
+                <Fragment>
                     <PostSummary post={post} />
                     <AlignRight>
                         <SmallGreyWhiteButton onClick={showModal}>
                             Delete
                         </SmallGreyWhiteButton>
                     </AlignRight>
-                </div>
+                </Fragment>
             )}
             <Modal closeOnOuterClick={true} show={modal} onClose={hideModal}>
-                <div>
                     <Title>Delete Post</Title>
                     Are you sure you want to delete this post?
                     <PostSummary post={post} />
@@ -59,9 +58,8 @@ function MyPost({ post }) {
                         <WhiteWhiteButton onClick={hideModal}>Cancel</WhiteWhiteButton>
                         <GreyWhiteButton onClick={deletePost}>Yes, Delete Post</GreyWhiteButton>
                     </AlignRight>
-                </div>
             </Modal>
-        </div>
+        </Fragment>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import PostDetail from '../posts/PostDetail'
 
 function PostView({ match }) {
@@ -19,13 +19,13 @@ function PostView({ match }) {
     }, [postID])
 
     return (
-        <div>
+        <Fragment>
             {postDetails === null ? (
                 <div>Loading...</div>
             ) : (
                 <PostDetail postDetails={postDetails} />
             )}
-        </div>
+        </Fragment>
     )
 }
 

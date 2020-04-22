@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 
 import { Title } from '../shared/Text'
 import { Flash } from '../shared/Layouts'
@@ -25,22 +25,22 @@ function PostValidate({ match }) {
         //eslint-disable-next-line
     }, [])
     return (
-        <div>
+        <Fragment>
             {postDetails === null ? (
-                <div>
+                <Fragment>
                     <Title>Validate Post</Title>
                     <div>Validating...</div>
-                </div>
+                </Fragment>
             ) : (
-                <div>
+                <Fragment>
                     <Flash>
                         Your email has been verified, you'll see your post on
                         the Stoke List soon
                     </Flash>
                     <PostDetail postDetails={postDetails} />
-                </div>
+                </Fragment>
             )}
-        </div>
+        </Fragment>
     )
 }
 

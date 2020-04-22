@@ -22,11 +22,12 @@ function UserLogin({ match, location }) {
                 }
             )
             if (res.status === 200) {
+                console.log(`Logged in with login token: ${loginToken}`)
                 const hmac = await res.text()
                 setCookies(parsed.email,loginToken,hmac)
                 setLoggedIn(true)
             } else {
-                console.log('Login failed')
+                console.log(`Login failed with login token: ${loginToken}`)
                 setLoggedIn(false)
             }
         }
@@ -45,7 +46,7 @@ function UserLogin({ match, location }) {
         }
     }
 
-    return <div>{generateText()}</div>
+    return generateText()
 }
 
 export default UserLogin
