@@ -117,11 +117,11 @@ function MyPosts() {
 
     return (
         <Fragment>
-            {isCookieSet ? (
+            {isCookieSet && (
                 <FloatRight>
                     <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
                 </FloatRight>
-            ) : null}
+            )}
             <Title>My Posts</Title>
             {isCookieSet ? getPostList() : getLoginForm()}
         </Fragment>
