@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
 import { Map, TileLayer, Marker } from 'react-leaflet'
-import Modal from 'simple-react-modal'
+import ReactModal from 'react-modal'
+import { useModal } from 'react-modal-hook'
 
 import { Title } from '../shared/Text'
 import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
@@ -28,18 +29,21 @@ const MapContainer = styled.div`
 
 function PostCreate() {
     const { register, handleSubmit, errors, setValue, watch } = useForm() // initialise the hook
-    const [modal, setModal] = useState(false)
     const [postDetails, setPostDetails] = useState(null)
     const [postSubmitted, setPostSubmitted] = useState(false)
 
-    const showModal = () => {
-        setModal(true)
-    }
-
-    const hideModal = () => {
-        setModal(false)
-        setPostSubmitted(true)
-    }
+    const [showModal, hideModal] = useModal(() => (
+        <ReactModal isOpen>
+            <Title>Post Submitted</Title>
+            It will not display on The Stoke List until you verify your email.
+            Check your inbox now!
+            <AlignRight>
+                <GreyWhiteButton onClick={hideModal}>
+                    I Understand
+                </GreyWhiteButton>
+            </AlignRight>
+        </ReactModal>
+    ))
 
     const onSubmit = async (data) => {
         //TODO: Sanitize these inputs as could be html?
@@ -70,11 +74,12 @@ function PostCreate() {
         }
         setPostDetails(postData)
         const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(postData), // body data type must match "Content-Type" header
+            body: JSON.stringify(postData),
         })
         if (response.status === 200) {
+            setPostSubmitted(true)
             showModal()
             //TODO: Redirect to latest posts
             console.log('New post successfully submitted')
@@ -229,16 +234,6 @@ function PostCreate() {
                     <BigGreyButton type="submit">Submit</BigGreyButton>
                 </form>
             )}
-            <Modal closeOnOuterClick={true} show={modal} onClose={hideModal}>
-                    <Title>Post Submitted</Title>
-                    It will not display on The Stoke List until you verify your
-                    email. Check your inbox now!
-                    <AlignRight>
-                        <GreyWhiteButton onClick={hideModal}>
-                            I Understand
-                        </GreyWhiteButton>
-                    </AlignRight>
-            </Modal>
         </Fragment>
     )
 }

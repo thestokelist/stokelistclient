@@ -1,5 +1,8 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { ModalProvider } from 'react-modal-hook'
+
+
 
 // pages
 import PostList from './pages/PostList'
@@ -14,6 +17,7 @@ import { StokeListContainer } from './shared/Layouts'
 
 function MainApp() {
     return (
+<ModalProvider>
         <StokeListContainer className="App">
             {/*Header appears at the top of all pages*/}
             <Route path="/" component={Header} />
@@ -29,6 +33,7 @@ function MainApp() {
             {/*Routes related to users*/}
             <Route exact path="/login/:uuid" component={UserLogin} />
         </StokeListContainer>
+        </ModalProvider>
     )
 }
 

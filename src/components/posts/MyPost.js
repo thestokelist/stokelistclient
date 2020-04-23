@@ -1,9 +1,14 @@
 import React, { useState, Fragment } from 'react'
 
-import { SmallGreyWhiteButton, GreyWhiteButton, WhiteWhiteButton } from '../shared/Buttons'
+import {
+    SmallGreyWhiteButton,
+    GreyWhiteButton,
+    WhiteWhiteButton,
+} from '../shared/Buttons'
 import { AlignRight } from '../shared/Layouts'
 import PostSummary from './PostSummary'
-import Modal from 'simple-react-modal'
+import ReactModal from 'react-modal'
+import { useModal } from 'react-modal-hook'
 import { Title } from '../shared/Text'
 
 function MyPost({ post }) {
@@ -21,15 +26,19 @@ function MyPost({ post }) {
     }
 
     const [deleted, setDeleted] = useState(false)
-    const [modal, setModal] = useState(false)
-
-    const showModal = () => {
-        setModal(true)
-    }
-
-    const hideModal = () => {
-        setModal(false)
-    }
+    const [showModal, hideModal] = useModal(() => (
+        <ReactModal isOpen onRequestClose={hideModal}>
+            <Title>Delete Post</Title>
+            Are you sure you want to delete this post?
+            <PostSummary post={post} />
+            <AlignRight>
+                <WhiteWhiteButton onClick={hideModal}>Cancel</WhiteWhiteButton>
+                <GreyWhiteButton onClick={deletePost}>
+                    Yes, Delete Post
+                </GreyWhiteButton>
+            </AlignRight>
+        </ReactModal>
+    ), [post])
 
     return (
         <Fragment>
@@ -50,15 +59,6 @@ function MyPost({ post }) {
                     </AlignRight>
                 </Fragment>
             )}
-            <Modal closeOnOuterClick={true} show={modal} onClose={hideModal}>
-                    <Title>Delete Post</Title>
-                    Are you sure you want to delete this post?
-                    <PostSummary post={post} />
-                    <AlignRight>
-                        <WhiteWhiteButton onClick={hideModal}>Cancel</WhiteWhiteButton>
-                        <GreyWhiteButton onClick={deletePost}>Yes, Delete Post</GreyWhiteButton>
-                    </AlignRight>
-            </Modal>
         </Fragment>
     )
 }
