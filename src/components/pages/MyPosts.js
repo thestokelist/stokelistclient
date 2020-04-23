@@ -21,6 +21,8 @@ function MyPosts() {
         [cookies]
     )
 
+    const cookieEmail = useMemo(() => cookies.get('email'), [cookies])
+
     useEffect(() => {
         if (cookiesExist) {
             setIsCookieSet(true)
@@ -29,7 +31,7 @@ function MyPosts() {
 
     useEffect(() => {
         async function fetchPosts() {
-            console.log(`Fetching posts for ${cookies.get('email')}`)
+            console.log(`Fetching posts for ${cookieEmail}`)
             //Include credentials to send cookie for authentication
             const response = await fetch(
                 `${process.env.REACT_APP_API_URL}/posts/mine`,
@@ -45,8 +47,7 @@ function MyPosts() {
         if (isCookieSet) {
             fetchPosts()
         }
-        //eslint-disable-next-line
-    }, [isCookieSet])
+    }, [isCookieSet, cookieEmail])
 
     const logout = () => {
         console.log('Logging out')

@@ -3,7 +3,6 @@ import PostDetail from '../posts/PostDetail'
 
 function PostView({ match }) {
     const postID = match.params.id
-    //eslint-disable-next-line
     const [postDetails, setPostDetails] = useState(null)
 
     useEffect(() => {
