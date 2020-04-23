@@ -50,69 +50,57 @@ function PostList() {
     const [searchLoading, setSearchLoading] = useState(false)
 
     useEffect(() => {
-        console.log('Loading latest posts')
-        fetch(`${process.env.REACT_APP_API_URL}/posts/sticky`)
-            .then((response) => {
-                return response.json()
-            })
-            .then((posts) => {
-                setStickyPosts(posts)
-            })
-        fetch(`${process.env.REACT_APP_API_URL}/posts`)
-            .then((response) => {
-                return response.json()
-            })
-            .then((posts) => {
-                setLatestPosts(posts)
-            })
-    }, [setLatestPosts, setStickyPosts])
+        async function loadData() {
+            console.log('Loading latest posts')
+            const stickyResponse = await fetch(
+                `${process.env.REACT_APP_API_URL}/posts/sticky`
+            )
+            const stickyPosts = await stickyResponse.json()
+            setStickyPosts(stickyPosts)
+            const latestResponse = await fetch(
+                `${process.env.REACT_APP_API_URL}/posts`
+            )
+            const latestPosts = await latestResponse.json()
+            setLatestPosts(latestPosts)
+        }
+        loadData()
+        //Run only once so [] dependency
+    }, [])
 
-    const loadMoreLatestPosts = () => {
+    const loadMoreLatestPosts = async () => {
         const currentOffset = offset + 50
         setOffset(currentOffset)
-        fetch(`${process.env.REACT_APP_API_URL}/posts?offset=${currentOffset}`)
-            .then((response) => {
-                console.log(response)
-                return response.json()
-            })
-            .then((posts) => {
-                setLatestPosts(latestPosts.concat(posts))
-            })
+        const latestResponse = await fetch(
+            `${process.env.REACT_APP_API_URL}/posts?offset=${currentOffset}`
+        )
+        const moreLatestPosts = await latestResponse.json()
+        setLatestPosts(latestPosts.concat(moreLatestPosts))
     }
 
-    const doSearch = (event) => {
+    const doSearch = async (event) => {
         setSearchLoading(true)
         setSearchLoaded(false)
         if (searchTerm === '') {
             setSearchPosts([])
         } else {
-            fetch(
+            const searchResponse = await fetch(
                 `${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}`
             )
-                .then((response) => {
-                    return response.json()
-                })
-                .then((posts) => {
-                    setSearchLoaded(true)
-                    setSearchLoading(false)
-                    setSearchPosts(posts)
-                })
+            const searchPosts = await searchResponse.json()
+            setSearchLoaded(true)
+            setSearchLoading(false)
+            setSearchPosts(searchPosts)
         }
     }
 
-    const loadMoreSearchPosts = () => {
+    const loadMoreSearchPosts = async () => {
         const currentOffset = searchOffset + 50
         setSearchOffset(currentOffset)
-        fetch(
+        const moreSearchResponse = await fetch(
             `${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}&offset=${currentOffset}`
         )
-            .then((response) => {
-                return response.json()
-            })
-            .then((posts) => {
-                console.log(posts)
-                setSearchPosts(searchPosts.concat(posts))
-            })
+        const moreSearchPosts = await moreSearchResponse.json()
+        setSearchPosts(searchPosts.concat(moreSearchPosts))
     }
 
     const updateSearchTerm = (event) => {
