@@ -1,29 +1,31 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment, useMemo } from 'react'
 import Cookies from 'universal-cookie'
 
 import { Title } from '../shared/Text'
-import MyPost from '../posts/MyPost'
+import MyPostList from '../posts/MyPostList'
 import { GreyWhiteButton } from '../shared/Buttons'
 import { removeCookies } from '../util/cookies'
-import { FloatRight} from '../shared/Layouts'
-import Login from "../forms/Login"
+import { FloatRight } from '../shared/Layouts'
+import Login from '../forms/Login'
 
 function MyPosts() {
     const cookies = new Cookies()
     const [isCookieSet, setIsCookieSet] = useState(false)
-    const [myPosts, setMyPosts] = useState([])
+    const [myPosts, setMyPosts] = useState(null)
 
-    useEffect(() => {
-        console.log(cookies)
-        if (
+    const cookiesExist = useMemo(
+        () =>
             cookies.get('hmac') &&
             cookies.get('challenge') &&
-            cookies.get('email')
-        ) {
+            cookies.get('email'),
+        [cookies]
+    )
+
+    useEffect(() => {
+        if (cookiesExist) {
             setIsCookieSet(true)
         }
-        //eslint-disable-next-line
-    }, [])
+    }, [cookiesExist])
 
     useEffect(() => {
         async function fetchPosts() {
@@ -46,30 +48,25 @@ function MyPosts() {
         //eslint-disable-next-line
     }, [isCookieSet])
 
-    const getPostList = () => {
-        //TODO: Need to handle no posts for a user, not assume it means posts are still loading
-        if (myPosts && myPosts.length && myPosts.length > 0) {
-            return myPosts.map((post) => <MyPost post={post} key={post.id} />)
-        } else {
-            return <div>Posts Loading...</div>
-        }
-    }
-
     const logout = () => {
         console.log('Logging out')
         removeCookies()
         setIsCookieSet(false)
     }
 
+    const getLogoutButton = () => {
+        return (
+            <FloatRight>
+                <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
+            </FloatRight>
+        )
+    }
+
     return (
         <Fragment>
-            {isCookieSet && (
-                <FloatRight>
-                    <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
-                </FloatRight>
-            )}
+            {isCookieSet && getLogoutButton()}
             <Title>My Posts</Title>
-            {isCookieSet ? getPostList() : <Login />}
+            {isCookieSet ? <MyPostList posts={myPosts} /> : <Login />}
         </Fragment>
     )
 }
