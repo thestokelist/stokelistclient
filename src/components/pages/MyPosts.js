@@ -1,22 +1,33 @@
 import React, { useEffect, useState, Fragment } from 'react'
-//eslint-disable-next-line
-import styled from 'styled-components'
 import Cookies from 'universal-cookie'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
+import ReactModal from 'react-modal'
+import { useModal } from 'react-modal-hook'
 
 import { Title } from '../shared/Text'
 import MyPost from '../posts/MyPost'
 import { Input } from '../shared/Forms'
 import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
 import { removeCookies } from '../util/cookies'
-import { FloatRight } from '../shared/Layouts'
+import { FloatRight, AlignRight } from '../shared/Layouts'
 
 function MyPosts() {
     const cookies = new Cookies()
     const [isCookieSet, setIsCookieSet] = useState(false)
     const [myPosts, setMyPosts] = useState([])
-    const { register, handleSubmit, errors, watch } = useForm() // initialise the hook
+    const { register, handleSubmit, errors, watch } = useForm()
+    const [showModal, hideModal] = useModal(() => (
+        <ReactModal isOpen>
+            <Title>Login Email Sent</Title>
+            To login, please check your email and click on the link - no passwords required!
+            <AlignRight>
+                <GreyWhiteButton onClick={hideModal}>
+                    I Understand
+                </GreyWhiteButton>
+            </AlignRight>
+        </ReactModal>
+    ))
 
     const onSubmit = async (data) => {
         let postData = { email: data.email }
@@ -28,7 +39,7 @@ function MyPosts() {
             body: JSON.stringify(postData),
         })
         if (response.status === 200) {
-            //TODO Show modal telling people to check their email
+            showModal()
         } else {
             //TODO: Show error
             console.log('Login error: ' + response.status)
