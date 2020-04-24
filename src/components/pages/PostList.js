@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import styled from 'styled-components'
-import PostSummary from '../posts/PostSummary'
-import { Title } from '../shared/Text'
+import PostSection from '../posts/PostSection'
+import { useMemo } from 'react'
 
 const SearchBox = styled.input`
     padding: 10px 0px;
@@ -21,10 +21,6 @@ const SearchBar = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-`
-
-const PostSection = styled.div`
-    margin: 20px 0;
 `
 
 const MoreButton = styled.button`
@@ -48,6 +44,11 @@ function PostList() {
     const [searchTerm, setSearchTerm] = useState('')
     const [searchLoaded, setSearchLoaded] = useState(false)
     const [searchLoading, setSearchLoading] = useState(false)
+
+    const showSearchResults = useMemo(() => searchLoading || searchLoaded, [
+        searchLoading,
+        searchLoaded,
+    ])
 
     useEffect(() => {
         async function loadData() {
@@ -111,52 +112,56 @@ function PostList() {
         }
     }
 
+    const getSearchSection = () => {
+        if (searchLoading) {
+            return <div>Loading...</div>
+        } else if (searchLoaded) {
+            return (
+                <PostSection
+                    title="Search Results"
+                    posts={searchPosts}
+                    hideEmpty={false}
+                >
+                    {searchPosts.length === 50 && (
+                        <MoreButton onClick={loadMoreSearchPosts}>
+                            More Results
+                        </MoreButton>
+                    )}
+                </PostSection>
+            )
+        } else {
+            return null
+        }
+    }
+
+    const getLatestSection = () => {
+        return (
+            <Fragment>
+                <PostSection
+                    title="Sticky Posts"
+                    posts={stickyPosts}
+                    hideEmpty={true}
+                />
+                <PostSection
+                    title="Latest Posts"
+                    posts={latestPosts}
+                    hideEmpty={false}
+                >
+                    <MoreButton onClick={loadMoreLatestPosts}>
+                        More Posts
+                    </MoreButton>
+                </PostSection>
+            </Fragment>
+        )
+    }
+
     return (
         <Fragment>
             <SearchBar>
                 <SearchBox type="text" onChange={updateSearchTerm} />
                 <SearchButton onClick={doSearch}>Search</SearchButton>
             </SearchBar>
-            {searchLoading || searchLoaded ? (
-                <PostSection>
-                    <Title>Search Results</Title>
-                    {searchLoading ? <div>Loading...</div> : null}
-                    {searchLoaded ? (
-                        searchPosts.length > 0 ? (
-                            <div>
-                                {searchPosts.map((post) => (
-                                    <PostSummary post={post} key={post.id} />
-                                ))}
-                                {searchPosts.length === 50 ? (
-                                    <MoreButton onClick={loadMoreSearchPosts}>
-                                        More Results
-                                    </MoreButton>
-                                ) : null}
-                            </div>
-                        ) : (
-                            <div>No Results Found</div>
-                        )
-                    ) : null}
-                </PostSection>
-            ) : (
-                <Fragment>
-                    <PostSection>
-                        <Title>Sticky Posts</Title>
-                        {stickyPosts.map((post) => (
-                            <PostSummary post={post} key={post.id} />
-                        ))}
-                    </PostSection>
-                    <PostSection>
-                        <Title>Latest Posts</Title>
-                        {latestPosts.map((post) => (
-                            <PostSummary post={post} key={post.id} />
-                        ))}
-                        <MoreButton onClick={loadMoreLatestPosts}>
-                            More Posts
-                        </MoreButton>
-                    </PostSection>
-                </Fragment>
-            )}
+            {showSearchResults ? getSearchSection() : getLatestSection()}
         </Fragment>
     )
 }
