@@ -1,5 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import PostDetail from '../posts/PostDetail'
+import { endpointFunctions } from '../../constants/endpoints'
+import { apiGet } from '../../util/network'
 
 function PostView({ match }) {
     const postID = match.params.id
@@ -8,11 +10,11 @@ function PostView({ match }) {
     useEffect(() => {
         async function loadPost() {
             console.log('Loading post details')
-            const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/posts/${postID}`
-            )
-            const post = await res.json()
-            setPostDetails(post)
+            const res = await apiGet(endpointFunctions.POSTS(postID))
+            if (res) {
+                const post = await res.json()
+                setPostDetails(post)
+            }
         }
         loadPost()
     }, [postID])

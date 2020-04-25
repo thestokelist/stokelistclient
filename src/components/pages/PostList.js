@@ -1,8 +1,12 @@
 import React, { useState, Fragment, useReducer, useMemo } from 'react'
 import styled from 'styled-components'
+
 import PostSection from '../posts/PostSection'
-import { usePosts, useMountEffect } from '../hooks'
-import { searchLoadReducer } from '../reducers'
+import { usePosts, useMountEffect } from '../../hooks'
+import { searchLoadReducer } from '../../reducers'
+import { MoreButton } from '../shared/Buttons'
+import { endpoints } from '../../constants/endpoints'
+import { apiGet } from '../../util/network'
 
 const SearchBox = styled.input`
     padding: 10px 0px;
@@ -24,28 +28,13 @@ const SearchBar = styled.div`
     justify-content: center;
 `
 
-const MoreButton = styled.button`
-    width: 150px;
-    height: 30px;
-    background-color: blue;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    display: block;
-    margin: 0 auto;
-`
-
 function PostList() {
     const [searchOffset, setSearchOffset] = useState(0)
     const [searchPosts, setSearchPosts] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
 
-    const [latestPosts, loadLatestPosts] = usePosts(
-        `${process.env.REACT_APP_API_URL}/posts`
-    )
-    const [stickyPosts, loadStickyPosts] = usePosts(
-        `${process.env.REACT_APP_API_URL}/posts/sticky`
-    )
+    const [latestPosts, loadLatestPosts] = usePosts(endpoints.POSTS)
+    const [stickyPosts, loadStickyPosts] = usePosts(endpoints.STICKY)
 
     useMountEffect(() => {
         loadLatestPosts()
@@ -60,12 +49,6 @@ function PostList() {
         [state]
     )
 
-    const searchURL = useMemo(
-        () =>
-            `${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}`,
-        [searchTerm]
-    )
-
     const doSearch = async (event) => {
         setSearchOffset(0)
         dispatch({ type: 'loadStart' })
@@ -73,21 +56,30 @@ function PostList() {
             setSearchPosts([])
             dispatch({ type: 'loadReset' })
         } else {
-            const searchResponse = await fetch(searchURL)
-            const searchPosts = await searchResponse.json()
-            setSearchPosts(searchPosts)
-            dispatch({ type: 'loadSuccess' })
+            const searchResponse = await apiGet(endpoints.SEARCH, {
+                term: searchTerm,
+            })
+            if (searchResponse) {
+                const searchPosts = await searchResponse.json()
+                setSearchPosts(searchPosts)
+                dispatch({ type: 'loadSuccess' })
+            } else {
+                dispatch({ type: 'loadReset' })
+            }
         }
     }
 
     const loadMoreSearchPosts = async () => {
         const currentOffset = searchOffset + 50
         setSearchOffset(currentOffset)
-        const moreSearchResponse = await fetch(
-            `${searchURL}&offset=${currentOffset}`
-        )
-        const moreSearchPosts = await moreSearchResponse.json()
-        setSearchPosts(searchPosts.concat(moreSearchPosts))
+        const moreSearchResponse = await apiGet(endpoints.SEARCH, {
+            term: searchTerm,
+            offset: currentOffset,
+        })
+        if (moreSearchResponse) {
+            const moreSearchPosts = await moreSearchResponse.json()
+            setSearchPosts(searchPosts.concat(moreSearchPosts))
+        }
     }
 
     const updateSearchTerm = (event) => {

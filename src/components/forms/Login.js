@@ -8,6 +8,8 @@ import { Title } from '../shared/Text'
 import { Input } from '../shared/Forms'
 import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
 import { AlignRight } from '../shared/Layouts'
+import { endpoints } from '../../constants/endpoints'
+import { apiPost } from '../../util/network'
 
 function Login() {
     const { register, handleSubmit, errors, watch } = useForm()
@@ -25,19 +27,10 @@ function Login() {
     ))
 
     const onSubmit = async (data) => {
-        let postData = { email: data.email }
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(postData),
-        })
-        if (response.status === 200) {
+        const postData = { email: data.email }
+        const response = await apiPost(endpoints.LOGIN, postData)
+        if (response) {
             showModal()
-        } else {
-            //TODO: Show error
-            console.log('Login error: ' + response.status)
         }
     }
 

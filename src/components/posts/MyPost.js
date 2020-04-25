@@ -10,14 +10,13 @@ import PostSummary from './PostSummary'
 import ReactModal from 'react-modal'
 import { useModal } from 'react-modal-hook'
 import { Title } from '../shared/Text'
+import { authApiDelete } from '../../util/network'
+import { endpointFunctions } from '../../constants/endpoints'
 
 function MyPost({ post }) {
     const deletePost = async () => {
-        const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/posts/${post.id}`,
-            { method: 'DELETE', credentials: 'include' }
-        )
-        if (response.status === 204) {
+        const response = await authApiDelete(endpointFunctions.POSTS(post.id))
+        if (response) {
             setDeleted(true)
         } else {
             console.log(`Delete failed for post with id ${post.id}`)

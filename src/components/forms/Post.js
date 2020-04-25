@@ -10,6 +10,8 @@ import { Title } from '../shared/Text'
 import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
 import { Label, Input } from '../shared/Forms'
 import { AlignRight } from '../shared/Layouts'
+import { endpoints } from '../../constants/endpoints'
+import { apiPost } from '../../util/network'
 
 const Description = styled.textarea``
 
@@ -26,8 +28,9 @@ const MapContainer = styled.div`
 
 function Post({ setPostDetails, setPostSubmitted}) {
     const { register, handleSubmit, errors, setValue, watch } = useForm() // initialise the hook
+    const modalStyles = {overlay: {zIndex: 9999}};
     const [showModal, hideModal] = useModal(() => (
-        <ReactModal isOpen>
+        <ReactModal isOpen style={ modalStyles }>
             <Title>Post Submitted</Title>
             It will not display on The Stoke List until you verify your email.
             Check your inbox now!
@@ -72,18 +75,11 @@ function Post({ setPostDetails, setPostSubmitted}) {
             email,
         }
         setPostDetails(postData)
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/posts`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(postData),
-        })
-        if (response.status === 200) {
+        const response = await apiPost(endpoints.POSTS,postData)
+        if (response) {
             showModal()
             //TODO: Redirect to latest posts
             console.log('New post successfully submitted')
-        } else {
-            //TODO: Show posting error
-            console.log('New post error: ' + response.status)
         }
     }
 

@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import queryString from 'query-string'
 import { Redirect } from 'react-router'
 
-import { setCookies } from '../util/cookies'
+import { setCookies } from '../../util/cookies'
+import { useMountEffect } from  '../../hooks'
+import { endpointFunctions } from '../../constants/endpoints'
+import { apiPost } from '../../util/network'
 
 function UserLogin({ match, location }) {
     const loginToken = match.params.uuid
     const parsed = queryString.parse(location.search)
     const [loggedIn, setLoggedIn] = useState(null)
 
-    useEffect(() => {
+    useMountEffect(() => {
         async function login() {
             console.log(`Logging in with login token: ${loginToken}`)
             const bodyObject = { email: parsed.email }
-            const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/login/${loginToken}`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(bodyObject),
-                }
-            )
-            if (res.status === 200) {
+            const res = await apiPost(endpointFunctions.LOGIN(loginToken),bodyObject)
+            if (res) {
                 console.log(`Logged in with login token: ${loginToken}`)
                 const hmac = await res.text()
                 setCookies(parsed.email,loginToken,hmac)
@@ -32,9 +28,7 @@ function UserLogin({ match, location }) {
             }
         }
         login()
-        //Only run once
-        //eslint-disable-next-line
-    }, [])
+    })
 
     const generateText = () => {
         if (loggedIn === null) {

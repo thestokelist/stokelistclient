@@ -52,7 +52,7 @@ function Header() {
                     <HiddenLink to="/myposts">
                         <WhiteGreyLink>My Posts</WhiteGreyLink>
                     </HiddenLink>
-                    <HiddenLink to="/post">
+                    <HiddenLink to="/post" >
                         <GreyWhiteButton>Create Post</GreyWhiteButton>
                     </HiddenLink>
                 </HeaderLinks>
