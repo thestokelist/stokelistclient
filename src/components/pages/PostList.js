@@ -1,6 +1,8 @@
-import React, { useState, Fragment, useReducer, useEffect, useMemo } from 'react'
+import React, { useState, Fragment, useReducer, useMemo } from 'react'
 import styled from 'styled-components'
 import PostSection from '../posts/PostSection'
+import { usePosts, useMountEffect } from '../hooks'
+import { searchLoadReducer } from '../reducers'
 
 const SearchBox = styled.input`
     padding: 10px 0px;
@@ -34,68 +36,44 @@ const MoreButton = styled.button`
 `
 
 function PostList() {
-
-
     const [searchOffset, setSearchOffset] = useState(0)
     const [searchPosts, setSearchPosts] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
 
-    const [latestPosts, loadLatestPosts] = usePosts(`${process.env.REACT_APP_API_URL}/posts`) 
-    const [stickyPosts, loadStickyPosts] = usePosts(`${process.env.REACT_APP_API_URL}/posts/sticky`) 
-    
+    const [latestPosts, loadLatestPosts] = usePosts(
+        `${process.env.REACT_APP_API_URL}/posts`
+    )
+    const [stickyPosts, loadStickyPosts] = usePosts(
+        `${process.env.REACT_APP_API_URL}/posts/sticky`
+    )
 
-    function usePosts(url) {
-        const [posts, setPosts] = useState([])
-        const [offset, setOffset] = useState(null);
-
-        const loadMorePosts = async () => {
-            const currentOffset = (offset === null) ? 0 : offset + 50
-            setOffset(currentOffset)
-            const response = await fetch(`${url}?offset=${currentOffset}`)
-            const morePosts = await response.json()
-            setPosts(posts.concat(morePosts))
-        }
-        return [posts,loadMorePosts]
-    }
-
-
-    useEffect(() => {
+    useMountEffect(() => {
         loadLatestPosts()
         loadStickyPosts()
-    }, [])
-
+    })
 
     const initialState = [{ searchLoaded: false }, { searchLoading: false }]
-
-    //this reducer doesn't reply on previous state
-    const reducer = (previousState , action) => {
-        if (action.type === 'loadStart') {
-            return { searchLoading: true, searchLoaded: false }
-        }
-        if (action.type === 'loadReset') {
-            return { searchLoading: false, searchLoaded: false }
-        }
-        if (action.type === 'loadSuccess') {
-            return { searchLoading: false, searchLoaded: true }
-        }
-    }
-
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(searchLoadReducer, initialState)
 
     const showSearchResults = useMemo(
-        () => (state.searchLoading || state.searchLoaded),
+        () => state.searchLoading || state.searchLoaded,
         [state]
     )
 
+    const searchURL = useMemo(
+        () =>
+            `${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}`,
+        [searchTerm]
+    )
+
     const doSearch = async (event) => {
+        setSearchOffset(0)
         dispatch({ type: 'loadStart' })
         if (searchTerm === '') {
             setSearchPosts([])
             dispatch({ type: 'loadReset' })
         } else {
-            const searchResponse = await fetch(
-                `${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}`
-            )
+            const searchResponse = await fetch(searchURL)
             const searchPosts = await searchResponse.json()
             setSearchPosts(searchPosts)
             dispatch({ type: 'loadSuccess' })
@@ -106,7 +84,7 @@ function PostList() {
         const currentOffset = searchOffset + 50
         setSearchOffset(currentOffset)
         const moreSearchResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/posts/search?term=${searchTerm}&offset=${currentOffset}`
+            `${searchURL}&offset=${currentOffset}`
         )
         const moreSearchPosts = await moreSearchResponse.json()
         setSearchPosts(searchPosts.concat(moreSearchPosts))
@@ -116,7 +94,7 @@ function PostList() {
         const newSearchTerm = event.target.value
         setSearchTerm(newSearchTerm)
         if (newSearchTerm === '') {
-            dispatch({type: 'loadReset'})
+            dispatch({ type: 'loadReset' })
         }
     }
 
@@ -130,7 +108,7 @@ function PostList() {
                     posts={searchPosts}
                     hideEmpty={false}
                 >
-                    {searchPosts.length === 50 && (
+                    {searchPosts.length % 50 === 0 && (
                         <MoreButton onClick={loadMoreSearchPosts}>
                             More Results
                         </MoreButton>
