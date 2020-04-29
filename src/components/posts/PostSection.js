@@ -5,6 +5,7 @@ import { Title } from '../shared/Text'
 
 const PostSectionContainer = styled.div`
     margin: 20px 0;
+    width:100%
 `
 
 function PostSection({ title, children, posts, hideEmpty }) {

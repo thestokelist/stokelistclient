@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { FloatRight, DisabledOverlay, GridLayout } from '../shared/Layouts'
+import { getDateRangeString } from '../../util/datetime'
 
 const PostDetail = styled.div`
     font-weight: bold;
@@ -47,6 +48,8 @@ function PostSummary({ post, disabled }) {
         return { __html: sanitizedHTML }
     }
 
+    const isGarageSale = (post.isGarageSale === true)
+
     return (
         <GridLayout>
             {disabled ? <DisabledOverlay /> : null}
@@ -61,7 +64,7 @@ function PostSummary({ post, disabled }) {
                     <PostDetail>
                         <Link to={`/post/${post.id}`}>{post.title}</Link>
                     </PostDetail>
-                    <PostDetail>{post.price}</PostDetail>
+                    <PostDetail>{isGarageSale ? getDateRangeString(post.startTime,post.endTime) : post.price}</PostDetail>
                     <PostTextSummary
                         dangerouslySetInnerHTML={createMarkup(post.description)}
                     />

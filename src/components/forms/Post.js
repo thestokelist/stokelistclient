@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, Fragment } from 'react'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
@@ -26,11 +26,12 @@ const MapContainer = styled.div`
     margin: 1em 0;
 `
 
-function Post({ setPostDetails, setPostSubmitted}) {
+function Post({ setPostDetails, setPostSubmitted }) {
+    const [isGarageSale, setIsGarageSale] = useState(false)
     const { register, handleSubmit, errors, setValue, watch } = useForm() // initialise the hook
-    const modalStyles = {overlay: {zIndex: 9999}};
+    const modalStyles = { overlay: { zIndex: 9999 } }
     const [showModal, hideModal] = useModal(() => (
-        <ReactModal isOpen style={ modalStyles }>
+        <ReactModal isOpen style={modalStyles}>
             <Title>Post Submitted</Title>
             It will not display on The Stoke List until you verify your email.
             Check your inbox now!
@@ -49,23 +50,32 @@ function Post({ setPostDetails, setPostSubmitted}) {
 
     const onSubmit = async (data) => {
         //TODO: Sanitize these inputs as could be html?
-        let title = data.title
-        let description = data.description
-        let price =
+        const title = data.title
+        const description = data.description
+        const price =
             data.price === ''
                 ? data.priceRadio === 'priceFree'
                     ? 'Free'
                     : ''
                 : data.price
-        let location = data.location
-        let exactLocation =
+        const location = data.location
+        const exactLocation =
             data.lng !== '' && data.lat !== ''
                 ? {
                       type: 'Point',
                       coordinates: [data.lng, data.lat],
                   }
                 : null
-        let email = data.email
+        const email = data.email
+        const startTime =
+            data.startTime && data.garageDate
+                ? new Date(data.startTime + ' ' + data.garageDate)
+                : null
+        const endTime =
+            data.endTime && data.garageDate && startTime
+                ? new Date(data.startTime + ' ' + data.garageDate)
+                : null
+
         const postData = {
             title,
             description,
@@ -73,9 +83,13 @@ function Post({ setPostDetails, setPostSubmitted}) {
             location,
             exactLocation,
             email,
+            isGarageSale,
+            startTime,
+            endTime,
         }
         setPostDetails(postData)
-        const response = await apiPost(endpoints.POSTS,postData)
+        console.log(postData)
+        const response = await apiPost(endpoints.POSTS, postData)
         if (response) {
             showModal()
             //TODO: Redirect to latest posts
@@ -93,6 +107,11 @@ function Post({ setPostDetails, setPostSubmitted}) {
             //Text was entered, so clear both price radio boxes
             setValue('priceRadio', null)
         }
+    }
+
+    const updateGarageSale = (e) => {
+        const isSet = e.target.value === 'yes'
+        setIsGarageSale(isSet)
     }
 
     const updateLocation = async (e) => {
@@ -128,6 +147,34 @@ function Post({ setPostDetails, setPostSubmitted}) {
         return validator.validate(email)
     }
 
+    const getGarageDateComponent = () => {
+        return (
+            <Fragment>
+                <Label>When's it happening?</Label>
+                From
+                <Input
+                    type="time"
+                    name="startTime"
+                    ref={register({ required: true })}
+                />
+                To
+                <Input
+                    type="time"
+                    name="endTime"
+                    ref={register({ required: true })}
+                />
+                On
+                <Input
+                    type="date"
+                    name="garageDate"
+                    ref={register({ required: true })}
+                />
+                {(errors.startTime || errors.endTime || errors.garageDate) &&
+                    'Start time, Finish time and date are all required for a garage sale.'}
+            </Fragment>
+        )
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Label>Post Title</Label>
@@ -142,7 +189,26 @@ function Post({ setPostDetails, setPostSubmitted}) {
             {errors.title &&
                 errors.title.type === 'maxLength' &&
                 'Title has a max length of 50 characters.'}
-            {/*TODO: Garage Sale?*/}
+            <Label>Is this a garage sale</Label>
+            <Input
+                type="radio"
+                name="garageSaleRadio"
+                value="no"
+                ref={register()}
+                onChange={updateGarageSale}
+                checked={!isGarageSale}
+            />
+            No
+            <Input
+                type="radio"
+                name="garageSaleRadio"
+                value="yes"
+                ref={register()}
+                onChange={updateGarageSale}
+                checked={isGarageSale}
+            />
+            Yes
+            {isGarageSale && getGarageDateComponent()}
             <Label>Post Description</Label>
             <Description
                 rows="10"
@@ -152,32 +218,36 @@ function Post({ setPostDetails, setPostSubmitted}) {
             />
             {errors.description && 'Description is required.'}
             {/*TODO: Images/Media*/}
-            <Label>Add a Price</Label>
-            $
-            <Input
-                type="numeric"
-                name="price"
-                ref={register({ validate: validatePrice })}
-                onChange={updatePriceForm}
-            />
-            <Input
-                type="radio"
-                name="priceRadio"
-                value="priceNA"
-                ref={register()}
-                onChange={updatePriceForm}
-            />
-            Not Applicable
-            <Input
-                type="radio"
-                name="priceRadio"
-                value="priceFree"
-                ref={register()}
-                onChange={updatePriceForm}
-            />
-            Free
-            <br />
-            {errors.price && 'Enter a price or select an option'}
+            {!isGarageSale && (
+                <Fragment>
+                    <Label>Add a Price</Label>
+                    $
+                    <Input
+                        type="numeric"
+                        name="price"
+                        ref={register({ validate: validatePrice })}
+                        onChange={updatePriceForm}
+                    />
+                    <Input
+                        type="radio"
+                        name="priceRadio"
+                        value="priceNA"
+                        ref={register()}
+                        onChange={updatePriceForm}
+                    />
+                    Not Applicable
+                    <Input
+                        type="radio"
+                        name="priceRadio"
+                        value="priceFree"
+                        ref={register()}
+                        onChange={updatePriceForm}
+                    />
+                    Free
+                    <br />
+                    {errors.price && 'Enter a price or select an option'}
+                </Fragment>
+            )}
             <Label>Add Location</Label>
             <Input name="location" ref={register} />
             <Input type="hidden" name="lat" ref={register} />

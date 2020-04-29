@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+
 import { GreyWhiteButton } from '../shared/Buttons'
 import { Title } from '../shared/Text'
 import { FloatRight } from '../shared/Layouts'
+import { getDateRangeString } from '../../util/datetime'
 
 const PostPrice = styled.div`
     font-weight: normal;
@@ -42,6 +44,7 @@ const PostImg = styled.img`
 
 function PostDetail({ postDetails }) {
     const post = postDetails
+    const isGarageSale = (post.isGarageSale === true)
     console.log(postDetails)
 
     const imgURL = () => {
@@ -84,7 +87,11 @@ function PostDetail({ postDetails }) {
                 </CopyToClipboard>
             </FloatRight>
             <Title>{post.title}</Title>
-            <PostPrice>{post.price}</PostPrice>
+            <PostPrice>
+                {isGarageSale
+                    ? getDateRangeString(post.startTime, post.endTime)
+                    : post.price}
+            </PostPrice>
             {getPostLocation(post)}
             {post.photoFileSize !== null ? (
                 <PostImg src={imgURL()} alt="Post" />

@@ -36,3 +36,9 @@ export const DisabledOverlay = styled.div`
 export const GridLayout = styled.div`
     display:grid;
 `
+
+export const HalfWidth = styled.div`
+    flex:50%;
+    padding: 0 1em;
+    box-sizing: border-box;
+`
