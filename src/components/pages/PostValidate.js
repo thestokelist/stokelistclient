@@ -5,7 +5,7 @@ import { Flash } from '../shared/Layouts'
 import PostDetail from '../posts/PostDetail'
 import { setCookies } from '../../util/cookies'
 import { useMountEffect } from '../../hooks'
-import { endpointFunctions } from '../../constants/endpoints'
+import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
 
 function PostValidate({ match }) {
@@ -15,7 +15,7 @@ function PostValidate({ match }) {
     useMountEffect(() => {
         async function fetchData() {
             console.log(`Validating post with UUID: ${postUUID}`)
-            const response = await apiPost(endpointFunctions.VALIDATE(postUUID))
+            const response = await apiPost(`${endpoints.VALIDATE}/${postUUID}`)
             console.log(response)
             if (response) {
                 const responseObject = await response.json()
@@ -24,7 +24,6 @@ function PostValidate({ match }) {
             }
         }
         fetchData()
-
     })
 
     return (

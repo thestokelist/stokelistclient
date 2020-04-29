@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 
 import { setCookies } from '../../util/cookies'
 import { useMountEffect } from  '../../hooks'
-import { endpointFunctions } from '../../constants/endpoints'
+import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
 
 function UserLogin({ match, location }) {
@@ -16,7 +16,7 @@ function UserLogin({ match, location }) {
         async function login() {
             console.log(`Logging in with login token: ${loginToken}`)
             const bodyObject = { email: parsed.email }
-            const res = await apiPost(endpointFunctions.LOGIN(loginToken),bodyObject)
+            const res = await apiPost(`${endpoints.LOGIN}/${loginToken}`,bodyObject)
             if (res) {
                 console.log(`Logged in with login token: ${loginToken}`)
                 const hmac = await res.text()

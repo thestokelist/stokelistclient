@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import PostDetail from '../posts/PostDetail'
-import { endpointFunctions } from '../../constants/endpoints'
+import { endpoints } from '../../constants/endpoints'
 import { apiGet } from '../../util/network'
 
 function PostView({ match }) {
@@ -10,7 +10,7 @@ function PostView({ match }) {
     useEffect(() => {
         async function loadPost() {
             console.log('Loading post details')
-            const res = await apiGet(endpointFunctions.POSTS(postID))
+            const res = await apiGet(`${endpoints.POSTS}/${postID}`)
             if (res) {
                 const post = await res.json()
                 setPostDetails(post)

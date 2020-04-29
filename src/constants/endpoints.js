@@ -3,11 +3,7 @@ export const endpoints = Object.freeze({
     POSTS: '/posts',
     MY_POSTS: '/posts/mine',
     SEARCH: '/posts/search',
-    STICKY: '/posts/sticky'
+    STICKY: '/posts/sticky',
+    VALIDATE: '/posts/v',
+    GARAGE: '/posts/garage'
 });
-
-export const endpointFunctions = Object.freeze({
-    VALIDATE: (postUUID) => `/posts/v/${postUUID}`,
-    POSTS: (postUUID) => `/posts/${postUUID}`,
-    LOGIN: (token) => `/login/${token}`,
-})

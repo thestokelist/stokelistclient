@@ -11,11 +11,11 @@ import ReactModal from 'react-modal'
 import { useModal } from 'react-modal-hook'
 import { Title } from '../shared/Text'
 import { authApiDelete } from '../../util/network'
-import { endpointFunctions } from '../../constants/endpoints'
+import { endpoints } from '../../constants/endpoints'
 
 function MyPost({ post }) {
     const deletePost = async () => {
-        const response = await authApiDelete(endpointFunctions.POSTS(post.id))
+        const response = await authApiDelete(`${endpoints.POSTS}/${post.id}`)
         if (response) {
             setDeleted(true)
         } else {
