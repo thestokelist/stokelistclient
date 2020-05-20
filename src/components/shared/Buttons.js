@@ -21,6 +21,18 @@ export const SmallGreyWhiteButton = styled(GreyWhiteButton)`
     font-size: 11px;
 `
 
+export const BlueButton = styled.button`
+    border-radius: 8px;
+    background: #175E88 0% 0% no-repeat padding-box;
+    padding: 0.5em 2em;
+    color: white;
+    text-align: center;
+    font-size:20px;
+    font-weight: 600;
+    border: none
+
+`
+
 export const MoreButton = styled.button`
     width: 150px;
     height: 30px;
