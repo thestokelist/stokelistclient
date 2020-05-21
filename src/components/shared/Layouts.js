@@ -1,11 +1,16 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 export const StokeListContainer = styled.div`
     padding: 2% 6%;
     width: 100%;
     box-sizing: border-box;
     flex-grow: 1;
+`
+
+export const FlexColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 `
 
 export const Flash = styled.div`
@@ -44,18 +49,4 @@ export const HalfWidth = styled.div`
     padding: 0 1em;
     box-sizing: border-box;
 `
-export const HiddenLink = styled(Link)`
-    text-decoration: none;
-    color: inherit;
-    text-decoration: inherit;
 
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-        text-decoration: none;
-        color: inherit;
-        text-decoration: inherit;
-    }
-`

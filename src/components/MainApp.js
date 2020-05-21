@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { ModalProvider } from 'react-modal-hook'
-import styled from 'styled-components'
 
 // static pages
 import Commandments from './pages/Commandments'
@@ -21,20 +20,14 @@ import UserLogin from './pages/UserLogin'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 
-import { StokeListContainer } from './shared/Layouts'
-
-const FlexContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-`
+import { StokeListContainer, FlexColumn } from './shared/Layouts'
 
 function MainApp() {
     
     return (
         <ModalProvider>
             {/*Header appears at the top of all pages*/}
-            <FlexContainer>
+            <FlexColumn>
                 <Header />
                 <StokeListContainer className="App">
                     {/*Routes related to posts*/}
@@ -62,7 +55,7 @@ function MainApp() {
                     />
                 </StokeListContainer>
                 <Footer />
-            </FlexContainer>
+            </FlexColumn>
         </ModalProvider>
     )
 }

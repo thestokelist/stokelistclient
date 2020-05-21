@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import queryString from 'query-string'
-import { Redirect } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
-import { setCookies } from '../../util/cookies'
 import { useMountEffect } from  '../../hooks'
 import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
+import { store } from '../store'
+import { actionTypes } from '../../constants/actions'
 
 function UserLogin({ match, location }) {
     const loginToken = match.params.uuid
     const parsed = queryString.parse(location.search)
-    const [loggedIn, setLoggedIn] = useState(null)
+    const { dispatch } = useContext(store)
+    const [loginError, setLoginError] = useState(false)
+    const history = useHistory()
 
     useMountEffect(() => {
         async function login() {
@@ -19,28 +22,24 @@ function UserLogin({ match, location }) {
             const res = await apiPost(`${endpoints.LOGIN}/${loginToken}`,bodyObject)
             if (res) {
                 console.log(`Logged in with login token: ${loginToken}`)
-                const hmac = await res.text()
-                setCookies(parsed.email,loginToken,hmac)
-                setLoggedIn(true)
+                const token = await res.text()
+                dispatch({
+                    type: actionTypes.LOGIN_SUCCESS,
+                    item: {
+                        token: token,
+                        email: parsed.email,
+                    },
+                })
+                history.push('/myposts')
             } else {
                 console.log(`Login failed with login token: ${loginToken}`)
-                setLoggedIn(false)
+                setLoginError(true)
             }
         }
         login()
     })
 
-    const generateText = () => {
-        if (loggedIn === null) {
-            return <div>Logging in...</div>
-        } else if (loggedIn === false) {
-            return <div>Login Failed</div>
-        } else if (loggedIn === true) {
-            return <Redirect to="/myposts" />
-        }
-    }
-
-    return generateText()
+    return loginError ? <div>Login failed</div> : <div>Logging in...</div>
 }
 
 export default UserLogin

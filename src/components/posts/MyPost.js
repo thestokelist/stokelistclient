@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useContext } from 'react'
 
 import {
     SmallGreyWhiteButton,
@@ -11,19 +11,11 @@ import ReactModal from 'react-modal'
 import { useModal } from 'react-modal-hook'
 import { Title } from '../shared/Text'
 import { authApiDelete } from '../../util/network'
+import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
 
 function MyPost({ post }) {
-    const deletePost = async () => {
-        const response = await authApiDelete(`${endpoints.POSTS}/${post.id}`)
-        if (response) {
-            setDeleted(true)
-        } else {
-            console.log(`Delete failed for post with id ${post.id}`)
-        }
-        hideModal()
-    }
-
+    const { state, } = useContext(store)
     const [deleted, setDeleted] = useState(false)
     const [showModal, hideModal] = useModal(() => (
         <ReactModal isOpen onRequestClose={hideModal}>
@@ -38,6 +30,16 @@ function MyPost({ post }) {
             </AlignRight>
         </ReactModal>
     ), [post])
+
+    const deletePost = async () => {
+        const response = await authApiDelete(`${endpoints.POSTS}/${post.id}`, state.token)
+        if (response) {
+            setDeleted(true)
+        } else {
+            console.log(`Delete failed for post with id ${post.id}`)
+        }
+        hideModal()
+    }
 
     return (
         <Fragment>

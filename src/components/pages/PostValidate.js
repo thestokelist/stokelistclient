@@ -1,16 +1,18 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useContext } from 'react'
 
 import { Title } from '../shared/Text'
 import { Flash } from '../shared/Layouts'
 import PostDetail from '../posts/PostDetail'
-import { setCookies } from '../../util/cookies'
 import { useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
+import { actionTypes } from '../../constants/actions'
+import { store } from '../store'
 
 function PostValidate({ match }) {
     const postUUID = match.params.uuid
     const [postDetails, setPostDetails] = useState(null)
+    const { dispatch } = useContext(store)
 
     useMountEffect(() => {
         async function fetchData() {
@@ -20,7 +22,13 @@ function PostValidate({ match }) {
             if (response) {
                 const responseObject = await response.json()
                 setPostDetails(responseObject.post)
-                setCookies(responseObject.post.email, postUUID, responseObject.hmac)
+                dispatch({
+                    type: actionTypes.LOGIN_SUCCESS,
+                    item: {
+                        token: responseObject.token,
+                        email: responseObject.post.email,
+                    },
+                })
             }
         }
         fetchData()

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { HiddenLink } from '../shared/Layouts'
+import { HiddenLink } from '../shared/Text'
 
 const FooterContainer = styled.div`
     padding: 0% 6%;

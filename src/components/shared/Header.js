@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlueButton } from '../shared/Buttons'
-import { HiddenLink } from '../shared/Layouts'
+import { HiddenLink } from '../shared/Text'
 
 const HeaderContainer = styled.div`
     padding: 0% 6%;
@@ -31,6 +31,12 @@ const HeaderText = styled.div`
     color: #2f2838;
 `
 
+const HeaderSpacer = styled.div`
+    background: #595959;
+    height: 34px;
+    width: 2px;
+`
+
 function Header() {
     return (
         <HeaderContainer>
@@ -44,7 +50,7 @@ function Header() {
                 <HiddenLink to="/">
                     <HeaderLinkText>Home</HeaderLinkText>
                 </HiddenLink>
-                |
+                <HeaderSpacer />
                 <HiddenLink to="/myposts">
                     <HeaderLinkText>Your Posts</HeaderLinkText>
                 </HiddenLink>

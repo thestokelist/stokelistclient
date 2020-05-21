@@ -1,70 +1,58 @@
-import React, { useEffect, useState, Fragment, useMemo } from 'react'
-import Cookies from 'universal-cookie'
+import React, {
+    useEffect,
+    useState,
+    Fragment,
+    useContext,
+    useMemo,
+} from 'react'
 
 import { Title } from '../shared/Text'
 import MyPostList from '../posts/MyPostList'
 import { GreyWhiteButton } from '../shared/Buttons'
-import { removeCookies } from '../../util/cookies'
-import { FloatRight } from '../shared/Layouts'
 import Login from '../forms/Login'
-import { endpoints } from '../../constants/endpoints' 
+import { endpoints } from '../../constants/endpoints'
 import { authApiGet } from '../../util/network'
+import { store } from '../store'
+import { actionTypes } from '../../constants/actions'
 
 function MyPosts() {
-    const cookies = new Cookies()
-    const [isCookieSet, setIsCookieSet] = useState(false)
     const [myPosts, setMyPosts] = useState(null)
+    const { state, dispatch } = useContext(store)
 
-    const cookiesExist = useMemo(
-        () =>
-            cookies.get('hmac') &&
-            cookies.get('challenge') &&
-            cookies.get('email'),
-        [cookies]
-    )
-
-    const cookieEmail = useMemo(() => cookies.get('email'), [cookies])
-
-    useEffect(() => {
-        if (cookiesExist) {
-            setIsCookieSet(true)
-        }
-    }, [cookiesExist])
+    const loggedIn = useMemo(() => {
+        return state.loggedIn === true
+    }, [state])
 
     useEffect(() => {
         async function fetchPosts() {
-            console.log(`Fetching posts for ${cookieEmail}`)
-            //Include credentials to send cookie for authentication
-            const response = await authApiGet(endpoints.MY_POSTS)
+            console.log(`Fetching posts`)
+            const response = await authApiGet(endpoints.MY_POSTS, state.token)
             if (response) {
                 const responseObject = await response.json()
                 setMyPosts(responseObject)
             }
         }
-        if (isCookieSet) {
+        if (loggedIn) {
             fetchPosts()
         }
-    }, [isCookieSet, cookieEmail])
+    }, [state.token, loggedIn])
 
     const logout = () => {
         console.log('Logging out')
-        removeCookies()
-        setIsCookieSet(false)
+        dispatch({
+            type: actionTypes.LOGOUT,
+        })
     }
 
     const getLogoutButton = () => {
-        return (
-            <FloatRight>
-                <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
-            </FloatRight>
-        )
+        return <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
     }
 
     return (
         <Fragment>
-            {isCookieSet && getLogoutButton()}
+            {loggedIn && getLogoutButton()}
             <Title>My Posts</Title>
-            {isCookieSet ? <MyPostList posts={myPosts} /> : <Login />}
+            {loggedIn ? <MyPostList posts={myPosts} /> : <Login />}
         </Fragment>
     )
 }

@@ -2,6 +2,11 @@ const queryString = require('query-string');
 
 const apiUrl = process.env.REACT_APP_API_URL
 
+const standardHeaders = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+}
+
 const handleErrors = async (response,method) => {
     const isOK = await !response.ok
     if (isOK) {
@@ -11,22 +16,24 @@ const handleErrors = async (response,method) => {
     return response
 }
 
+const tokenHeaders = token => {
+    return Object.assign(standardHeaders, {'Authorization': `Bearer ${token}`});
+}
+
 export const apiPost = async (endpoint, data) => {
     let response = await fetch(apiUrl+endpoint, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: standardHeaders,
         body: JSON.stringify(data),
     })
     response = await handleErrors(response,'POST')
     return response
 }
 
-export const authApiGet = async endpoint => {
+export const authApiGet = async (endpoint, token) => {
     let response = await fetch(apiUrl+endpoint, {
         method: 'GET',
-        credentials: 'include'
+        headers: tokenHeaders(token),
     })
     response = await handleErrors(response,'GET')
     return response
@@ -35,16 +42,17 @@ export const authApiGet = async endpoint => {
 export const apiGet = async (endpoint, params) => {
     console.log(endpoint)
     let response = await fetch(`${apiUrl}${endpoint}?${queryString.stringify(params)}`, {
-        method: 'GET'
+        method: 'GET',
+        headers: standardHeaders,
     })
     response = await handleErrors(response,'GET')
     return response
 }
 
-export const authApiDelete = async (endpoint, data) => {
+export const authApiDelete = async (endpoint, token) => {
     let response = await fetch(apiUrl+endpoint, {
         method: 'DELETE',
-        credentials: 'include'
+        headers: tokenHeaders(token),
     })
     response = await handleErrors(response,'GET')
     return response
