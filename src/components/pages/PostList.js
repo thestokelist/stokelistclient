@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useReducer, useMemo } from 'react'
 import styled from 'styled-components'
+import { FaSearch } from 'react-icons/fa'
 
 import PostSection from '../posts/PostSection'
 import { usePosts, useMountEffect } from '../../hooks'
@@ -9,23 +10,39 @@ import { endpoints } from '../../constants/endpoints'
 import { apiGet } from '../../util/network'
 
 const SearchBox = styled.input`
-    padding: 10px 0px;
-    width: 50%;
-    text-align: center;
-    box-sizing: border-box;
-    border: solid grey 1px;
-    border-radius: 5px;
+    flex-grow: 1;
+    ::placeholder {
+        color: #175e88;
+    }
+    padding-left: 10px;
+    color: #175e88;
+    font-size: 1em;
+    border: none;
 `
 
 const SearchButton = styled.button`
-    border-radius: 5px;
+    width: 50px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 1px 1px 5px #0000001a;
+    border: 1px solid #dce2e8;
+    border-radius: 0px 5px 5px 0px;
+    opacity: 1;
 `
 
 const SearchBar = styled.div`
-    margin: 40px auto;
+    height: 50px;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 5px #0000001a;
+    border: 1px solid #dce2e8;
+    border-radius: 5px;
+`
+const Strapline = styled.div`
+    color: #434653;
+    text-align: center;
+    margin-bottom:1em;
 `
 
 function PostList() {
@@ -119,6 +136,7 @@ function PostList() {
                     title="Sticky Posts"
                     posts={stickyPosts}
                     hideEmpty={true}
+                    hideDates={true}
                 />
                 <PostSection
                     title="Latest Posts"
@@ -126,7 +144,7 @@ function PostList() {
                     hideEmpty={false}
                 >
                     <MoreButton onClick={loadLatestPosts}>
-                        More Posts
+                        Show More
                     </MoreButton>
                 </PostSection>
             </Fragment>
@@ -135,9 +153,18 @@ function PostList() {
 
     return (
         <Fragment>
+            <Strapline>
+                Buy, sell, love, yell – Revelstoke’s online classifieds.
+            </Strapline>
             <SearchBar>
-                <SearchBox type="text" onChange={updateSearchTerm} />
-                <SearchButton onClick={doSearch}>Search</SearchButton>
+                <SearchBox
+                    type="text"
+                    onChange={updateSearchTerm}
+                    placeholder="Search Posts"
+                />
+                <SearchButton onClick={doSearch}>
+                    <FaSearch size={25} color={'#175E88'} />
+                </SearchButton>
             </SearchBar>
             {showSearchResults ? getSearchSection() : getLatestSection()}
         </Fragment>

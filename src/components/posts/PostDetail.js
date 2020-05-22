@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { GreyWhiteButton } from '../shared/Buttons'
+import PostLocation from './PostLocation'
 import { Title } from '../shared/Text'
 import { FloatRight } from '../shared/Layouts'
 import { getDateRangeString } from '../../util/datetime'
@@ -19,11 +20,6 @@ const CopyLink = styled.div`
     text-decoration: underline;
     color: grey;
     margin: 10px auto;
-`
-const PostLocation = styled.div`
-    font-weight: normal;
-    font-size: 0.9em;
-    margin: 5px 0px;
 `
 
 const PostText = styled.div`
@@ -59,23 +55,6 @@ function PostDetail({ postDetails }) {
         window.location.href = `mailto:list-${post.id}@thestoke.ca`
     }
 
-    const getPostLocation = (postDetails) => {
-        const text = <PostLocation>{postDetails.location}</PostLocation>
-        if (
-            postDetails.exactLocation &&
-            postDetails.exactLocation.coordinates
-        ) {
-            const href = `https://www.google.com/maps/search/?api=1&query=${postDetails.exactLocation.coordinates[1]},${postDetails.exactLocation.coordinates[0]}`
-            return (
-                <a rel="noopener noreferrer" target="_blank" href={href}>
-                    {text}
-                </a>
-            )
-        } else {
-            return text
-        }
-    }
-
     return post ? (
         <Fragment>
             <FloatRight>
@@ -92,7 +71,7 @@ function PostDetail({ postDetails }) {
                     ? getDateRangeString(post.startTime, post.endTime)
                     : post.price}
             </PostPrice>
-            {getPostLocation(post)}
+            <PostLocation postDetails={post} />
             {post.photoFileSize !== null ? (
                 <PostImg src={imgURL()} alt="Post" />
             ) : null}

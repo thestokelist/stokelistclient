@@ -5,12 +5,19 @@ export const StokeListContainer = styled.div`
     width: 100%;
     box-sizing: border-box;
     flex-grow: 1;
+    background: #f8f8f8 0% 0% no-repeat padding-box;
 `
 
-export const FlexColumn = styled.div`
+export const FlexFullHeightColumn = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
+`
+
+export const FlexBetweenColumn = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 `
 
 export const Flash = styled.div`
@@ -49,4 +56,3 @@ export const HalfWidth = styled.div`
     padding: 0 1em;
     box-sizing: border-box;
 `
-

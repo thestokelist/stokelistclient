@@ -17,7 +17,7 @@ const Description = styled.textarea``
 
 const SubLabel = styled.span`
     font-weight: normal;
-    font-size: 12px;
+    font-size: 1em;
 `
 
 const MapContainer = styled.div`

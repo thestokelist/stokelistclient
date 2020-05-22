@@ -20,14 +20,14 @@ import UserLogin from './pages/UserLogin'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 
-import { StokeListContainer, FlexColumn } from './shared/Layouts'
+import { StokeListContainer, FlexFullHeightColumn } from './shared/Layouts'
 
 function MainApp() {
     
     return (
         <ModalProvider>
             {/*Header appears at the top of all pages*/}
-            <FlexColumn>
+            <FlexFullHeightColumn>
                 <Header />
                 <StokeListContainer className="App">
                     {/*Routes related to posts*/}
@@ -55,7 +55,7 @@ function MainApp() {
                     />
                 </StokeListContainer>
                 <Footer />
-            </FlexColumn>
+            </FlexFullHeightColumn>
         </ModalProvider>
     )
 }

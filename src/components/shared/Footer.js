@@ -13,19 +13,19 @@ const FooterContainer = styled.div`
 
 const FooterLinkText = styled.div`
     color: white;
-    font-size: 16px;
+    font-size: 1.1em;
     font-weight: 500;
 `
 
 const CopyrightText = styled.div`
     color: white;
-    font-size: 16px;
+    font-size: 1.1em;
     font-weight: 300;
     text-align: right;
 `
 
 const FooterText = styled.div`
-    font-size: 39px;
+    font-size: 2.4em;
     color: white;
 `
 

@@ -11,11 +11,12 @@ const HeaderContainer = styled.div`
     box-shadow: 0px 3px 10px #00000026;
     align-items: center;
     justify-content: space-between;
+    z-index: 10;
 `
 
 const HeaderLinkText = styled.div`
     color: #175e88;
-    font-size: 20px;
+    font-size: 1.3em;
     margin: 0em 1em;
     font-weight: 500;
 `
@@ -27,8 +28,9 @@ const HeaderLinks = styled.div`
 `
 
 const HeaderText = styled.div`
-    font-size: 54px;
+    font-size: 3.2em;
     color: #2f2838;
+    font-weight:300;
 `
 
 const HeaderSpacer = styled.div`
