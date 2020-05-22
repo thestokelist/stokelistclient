@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {
     DisabledOverlay,
     GridLayout,
-    FlexBetweenColumn,
+    FlexBetweenRow,
 } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
@@ -86,14 +86,14 @@ function PostSummary({ post, disabled }) {
                     </Link>
                 </PostImageContainer>
                 <PostDetailsContainer>
-                    <FlexBetweenColumn>
+                    <FlexBetweenRow>
                         <PostTitle>
                             <HiddenLink to={`/post/${post.id}`}>
                                 {post.title}
                             </HiddenLink>
                         </PostTitle>
                         <PostLocation postDetails={post} />
-                    </FlexBetweenColumn>
+                    </FlexBetweenRow>
                     <PostDetail>
                         {isGarageSale
                             ? getDateRangeString(post.startTime, post.endTime)

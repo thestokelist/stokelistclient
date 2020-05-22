@@ -14,9 +14,15 @@ export const FlexFullHeightColumn = styled.div`
     height: 100%;
 `
 
-export const FlexBetweenColumn = styled.div`
+export const FlexRow = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
+`
+
+
+
+export const FlexBetweenRow = styled(FlexRow)`
     justify-content: space-between;
 `
 

@@ -111,9 +111,10 @@ function PostList() {
         if (state.searchLoading) {
             return <div>Loading...</div>
         } else if (state.searchLoaded) {
+            const searchTitle = `Search Results: ${searchTerm}`
             return (
                 <PostSection
-                    title="Search Results"
+                    title={searchTitle}
                     posts={searchPosts}
                     hideEmpty={false}
                 >
