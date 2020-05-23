@@ -1,5 +1,6 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState } from 'react'
 import PostDetail from '../posts/PostDetail'
+import PostSearch from '../posts/PostSearch'
 import { endpoints } from '../../constants/endpoints'
 import { apiGet } from '../../util/network'
 
@@ -20,13 +21,13 @@ function PostView({ match }) {
     }, [postID])
 
     return (
-        <Fragment>
+        <PostSearch>
             {postDetails === null ? (
                 <div>Loading...</div>
             ) : (
                 <PostDetail postDetails={postDetails} />
             )}
-        </Fragment>
+        </PostSearch>
     )
 }
 

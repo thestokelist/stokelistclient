@@ -29,6 +29,7 @@ const PostText = styled.div`
     font-size: 0.8em;
     padding: 1em 0.5em;
     width: 70%;
+    min-height: 3em;
 `
 
 const PostDateTime = styled.div`
@@ -41,6 +42,9 @@ const PostDateTime = styled.div`
 const PostImg = styled.img`
     max-height: 400px;
     margin: 5px 0px;
+    box-shadow: 1px 1px 5px #0000001a;
+    border: 1px solid #dce2e8;
+    border-radius: 5px;
 `
 
 function PostDetail({ postDetails }) {

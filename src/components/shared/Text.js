@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const Title = styled.div`
     font-weight: 500;
     font-size: 1.5em;
-    margin: 20px 0px;
+    margin-bottom: 1em;
     color: #175E88;
 `
 export const HiddenLink = styled(Link)`

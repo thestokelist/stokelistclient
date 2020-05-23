@@ -28,10 +28,12 @@ export const FlexBetweenRow = styled(FlexRow)`
 
 export const Flash = styled.div`
     width: 100%;
-    border: solid grey 1px;
-    background-color: lightgoldenrodyellow;
     vertical-align: middle;
     padding: 0.2em;
+    color: #434653;
+    font-size:1em;
+    font-weight:bold;
+    margin-bottom:.5em
 `
 
 export const AlignRight = styled.div`

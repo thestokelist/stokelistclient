@@ -19,6 +19,7 @@ import UserLogin from './pages/UserLogin'
 //landing pages
 import PostSubmitLanding from './pages/landing/PostSubmitLanding'
 import LoginLanding from './pages/landing/LoginLanding'
+import ValidationFailedLanding from './pages/landing/ValidationFailedLanding'
 
 // header/footer
 import Header from './shared/Header'
@@ -52,6 +53,7 @@ function MainApp() {
                 {/* Landng Pages */}
                 <Route exact path="/submitted" component={PostSubmitLanding} />
                 <Route exact path="/loginemail" component={LoginLanding} />
+                <Route exact path="/validationfailed" component={ValidationFailedLanding} />
             </StokeListContainer>
             <Footer />
         </FlexFullHeightColumn>

@@ -37,6 +37,7 @@ const SearchBar = styled.div`
     box-shadow: 1px 1px 5px #0000001a;
     border: 1px solid #dce2e8;
     border-radius: 5px;
+    margin-bottom:1em;
 `
 const Strapline = styled.div`
     color: #434653;

@@ -1,4 +1,5 @@
 import React, { useState, Fragment, useContext } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
 import { Flash } from '../shared/Layouts'
@@ -29,29 +30,37 @@ function PostValidate({ match }) {
                         email: responseObject.post.email,
                     },
                 })
+            } else {
+                setPostDetails(false)
             }
         }
         fetchData()
     })
 
-    return (
-        <Fragment>
-            {postDetails === null ? (
+    const getContent = () => {
+        let content
+        if (postDetails === null) {
+            //Haven't loaded yet
+            content = (
                 <Fragment>
                     <Title>Validate Post</Title>
                     <div>Validating...</div>
                 </Fragment>
-            ) : (
+            )
+        } else if (postDetails === false) {
+            content = <Redirect to="/validationfailed" />
+        } else {
+            content = (
                 <Fragment>
-                    <Flash>
-                        Your email has been verified, you'll see your post on
-                        the Stoke List soon
-                    </Flash>
+                    <Flash>Your email address has been confirmed</Flash>
                     <PostDetail postDetails={postDetails} />
                 </Fragment>
-            )}
-        </Fragment>
-    )
+            )
+        }
+        return content
+    }
+
+    return getContent()
 }
 
 export default PostValidate
