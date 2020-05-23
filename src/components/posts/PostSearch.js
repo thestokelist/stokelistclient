@@ -37,7 +37,7 @@ const SearchBar = styled.div`
     box-shadow: 1px 1px 5px #0000001a;
     border: 1px solid #dce2e8;
     border-radius: 5px;
-    margin-bottom:1em;
+    margin-bottom: 1em;
 `
 const Strapline = styled.div`
     color: #434653;
@@ -131,6 +131,11 @@ function PostSearch({ children }) {
                     type="text"
                     onChange={updateSearchTerm}
                     placeholder="Search Posts"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            doSearch()
+                        }
+                    }}
                 />
                 <SearchButton onClick={doSearch}>
                     <FaSearch size={25} color={'#175E88'} />

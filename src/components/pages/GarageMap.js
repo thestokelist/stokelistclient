@@ -34,6 +34,7 @@ function GarageMap() {
                     posts={garageSales}
                     hideEmpty={false}
                     style={{ display: 'inline' }}
+                    hideDates={true}
                 />
             </HalfWidth>
             <HalfWidth>
