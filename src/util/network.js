@@ -54,7 +54,27 @@ export const authApiDelete = async (endpoint, token) => {
         method: 'DELETE',
         headers: tokenHeaders(token),
     })
-    response = await handleErrors(response,'GET')
+    response = await handleErrors(response,'DELETE')
+    return response
+}
+
+export const authApiPut = async (endpoint, data, token) => {
+    let response = await fetch(apiUrl+endpoint, {
+        method: 'PUT',
+        headers: tokenHeaders(token),
+        body: JSON.stringify(data),
+    })
+    response = await handleErrors(response,'PUT')
+    return response
+
+}
+
+export const authApiPatch = async (endpoint, token) => {
+    let response = await fetch(apiUrl+endpoint, {
+        method: 'PATCH',
+        headers: tokenHeaders(token),
+    })
+    response = await handleErrors(response,'PATCH')
     return response
 
 }

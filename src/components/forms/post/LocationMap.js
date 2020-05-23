@@ -1,7 +1,14 @@
-import React, { useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Map, TileLayer, Marker } from 'react-leaflet'
-import { Input, InputContainer, Label, HalfWidthInput, RadioInput, RadioText } from '../../shared/Forms'
+import {
+    Input,
+    InputContainer,
+    Label,
+    HalfWidthInput,
+    RadioInput,
+    RadioText,
+} from '../../shared/Forms'
 import { FlexRow } from '../../shared/Layouts'
 
 const MapContainer = styled.div`
@@ -10,10 +17,11 @@ const MapContainer = styled.div`
     margin: 1em 0;
 `
 
-function LocationMap({ setValue, register }) {
-    const [hasExactLocation, setHasExactLocation] = useState(false)
+function LocationMap({ setValue, register, watch }) {
+    const hasLocation = watch('lat') && watch('lng')
 
-    const position = [50.9981, -118.1957]
+    let startPosition = [50.9981, -118.1957]
+    const position = hasLocation ? [watch('lat'), watch('lng')] : startPosition
 
     const updateLocation = async (e) => {
         try {
@@ -36,6 +44,16 @@ function LocationMap({ setValue, register }) {
         }
     }
 
+    const handleLocationCheckbox = (e) => {
+        if (e.target.checked) {
+            setValue('lat', startPosition[0])
+            setValue('lng', startPosition[1])
+        } else {
+            setValue('lat', null)
+            setValue('lng', null)
+        }
+    }
+
     return (
         <Fragment>
             <InputContainer>
@@ -46,15 +64,17 @@ function LocationMap({ setValue, register }) {
                         ref={register}
                         placeholder="Where you at?"
                     />
+                    {/*Component intentially not registered - just provides some page logic, the hidden fields capture the input data */}
                     <RadioInput
-                        type="radio"
-                        name="locationRadio"
-                        onClick={() => setHasExactLocation(true)}
+                        type="checkbox"
+                        name="exactLocation"
+                        checked={hasLocation}
+                        onClick={handleLocationCheckbox}
                     />
                     <RadioText>Set Exact Location</RadioText>
                 </FlexRow>
             </InputContainer>
-            {hasExactLocation && (
+            {hasLocation && (
                 <MapContainer>
                     <Map
                         center={position}

@@ -32,7 +32,7 @@ const Prefix = styled.div`
 `
 
 function PostPrice({ errors, register, watch, setValue }) {
-    const [isGarageSale, setIsGarageSale] = useState(false)
+    const [isGarageSale, setIsGarageSale] = useState(watch('priceRadio') === 'priceGarage')
 
     const validatePrice = () => {
         const price = watch('price')

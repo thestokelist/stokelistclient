@@ -5,16 +5,18 @@ import { Title } from '../shared/Text'
 import Post from '../forms/Post'
 
 function PostCreate() {
-    const [, setPostDetails] = useState(null)
-    const [postSubmitted, setPostSubmitted] = useState(false)
+    const [postDetails, setPostDetails] = useState(null)
 
     return (
         <Fragment>
             <Title>Create Post</Title>
-            {postSubmitted ? (
+            {postDetails ? (
                 <Redirect to="/submitted" />
             ) : (
-                <Post setPostDetails={setPostDetails} setPostSubmitted={setPostSubmitted} />
+                <Post
+                    responseCallback={setPostDetails}
+                    buttonText="Submit"
+                />
             )}
         </Fragment>
     )

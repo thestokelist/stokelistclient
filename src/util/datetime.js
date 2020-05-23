@@ -19,3 +19,14 @@ export const getPrettyDateString = (date) => {
     const dateTime = moment(date, moment.ISO_8601)
     return dateTime.format('LLL')
 }
+
+export const getDatePortionForInput = dateString => {
+    const date = moment(dateString, moment.ISO_8601)
+    return date.format('YYYY-MM-DD')
+}
+
+export const getTimePortionForInput = dateString => {
+    const date = moment(dateString, moment.ISO_8601)
+    return date.format('HH:mm')
+
+}

@@ -1,6 +1,6 @@
 export const endpoints = Object.freeze({
-    LOGIN: '/login',
-    POSTS: '/posts',
+    LOGIN: '/login/',
+    POSTS: '/posts/',
     MY_POSTS: '/posts/mine',
     SEARCH: '/posts/search',
     STICKY: '/posts/sticky',

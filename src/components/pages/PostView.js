@@ -10,7 +10,7 @@ function PostView({ match }) {
     useEffect(() => {
         async function loadPost() {
             console.log('Loading post details')
-            const res = await apiGet(`${endpoints.POSTS}/${postID}`)
+            const res = await apiGet(`${endpoints.POSTS}${postID}`)
             if (res) {
                 const post = await res.json()
                 setPostDetails(post)

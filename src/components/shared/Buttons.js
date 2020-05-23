@@ -1,26 +1,5 @@
 import styled from 'styled-components'
 
-export const GreyWhiteButton = styled.button`
-    border-radius: 5px;
-    background-color: white;
-    border: solid grey 2px;
-    padding: 8px;
-    font-weight: bold;
-    color: grey;
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-    margin: 0em 1em;
-`
-
-export const WhiteWhiteButton = styled(GreyWhiteButton)`
-    border: none;
-`
-export const SmallGreyWhiteButton = styled(GreyWhiteButton)`
-    font-weight: normal;
-    font-size: 0.9em;
-`
-
 export const BlueButton = styled.button`
     border-radius: 8px;
     background: #175e88 0% 0% no-repeat padding-box;
@@ -43,6 +22,10 @@ export const WhiteBlueButton = styled.button`
     text-align: center;
     font-size: 1em;
     font-weight: 600;
+`
+export const WhiteRedButton = styled(WhiteBlueButton)`
+    border: 1px solid #C30C2F;
+    color: #C30C2F;
 `
 
 export const CenteredWhiteBlueButton = styled(WhiteBlueButton)`
