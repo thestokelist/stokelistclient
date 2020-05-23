@@ -47,9 +47,10 @@ const PostImg = styled.img`
     border-radius: 5px;
 `
 
-function PostDetail({ postDetails }) {
+function PostDetail({ postDetails, notSubmitted }) {
     const post = postDetails
     const isGarageSale = post.isGarageSale === true
+    const submitted = !notSubmitted
 
     const imgURL = () => {
         return 'http://list.thestoke.ca/photos/' + post.id + '/original.jpg'
@@ -72,18 +73,22 @@ function PostDetail({ postDetails }) {
                         )}
                     </PostPriceText>
                 </FlexFullHeightColumn>
-                <PostCopy postDetails={post} />
+                {submitted && <PostCopy postDetails={post} />}
             </FlexBetweenRow>
 
             <PostLocation postDetails={post} />
-            {post.photoFileSize !== null ? (
+            {post.photoFileSize !== null && submitted && (
                 <PostImg src={imgURL()} alt="Post" />
-            ) : null}
+            )}
             <Label>Post Description</Label>
             <PostText
                 dangerouslySetInnerHTML={createMarkup(post.description)}
             />
-            <PostDateTime>{getPrettyDateString(post.created_at)}</PostDateTime>
+            {submitted && (
+                <PostDateTime>
+                    {getPrettyDateString(post.created_at)}
+                </PostDateTime>
+            )}
         </Fragment>
     ) : null
 }

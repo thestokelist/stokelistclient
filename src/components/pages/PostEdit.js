@@ -33,6 +33,7 @@ function PostEdit({ match }) {
                     post={postDetails}
                     responseCallback={setPostUpdated}
                     buttonText="Update"
+                    editMode={true}
                 />
             ) : (
                 <div>Loading...</div>
