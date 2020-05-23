@@ -1,10 +1,10 @@
 import React, { useMemo, Fragment } from 'react'
 import styled from 'styled-components'
 import PostSummary from '../posts/PostSummary'
+import MyPost from '../posts/MyPost'
 import { Title } from '../shared/Text'
 
 const PostSectionContainer = styled.div`
-    margin: 20px 0;
     width: 100%;
     display: flex;
     flex-direction:column; 
@@ -14,7 +14,7 @@ const PostDateHeader = styled(Title)`
     color: #434653;
 `
 
-function PostSection({ title, children, posts, hideEmpty, hideDates }) {
+function PostSection({ title, children, posts, hideEmpty, hideDates, adminMode }) {
 
     const getDateLabel = (init,differenceInDays) => {
         let createdDate = init
@@ -67,9 +67,16 @@ function PostSection({ title, children, posts, hideEmpty, hideDates }) {
         if (posts.length === 0) {
             postSummaries = <div>No Results Found</div>
         } else {
-            postSummaries = postArray.map((post) => (
-                <PostSummary post={post} key={post.id} />
-            ))
+            if (adminMode === true) {
+                postSummaries = postArray.map((post) => (
+                    <MyPost post={post} key={post.id} />
+                ))
+            } else {
+                postSummaries = postArray.map((post) => (
+                    <PostSummary post={post} key={post.id} />
+                ))
+            }
+ 
         }
         return postSummaries
     }

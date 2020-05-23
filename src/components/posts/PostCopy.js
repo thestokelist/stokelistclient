@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FaPaperclip } from 'react-icons/fa'
 
-import { WhiteBlueButton } from '../shared/Buttons'
+import { CenteredWhiteBlueButton } from '../shared/Buttons'
 import { FlexFullHeightColumn } from '../shared/Layouts'
 
 
@@ -34,9 +34,9 @@ function PostDetail({ postDetails }) {
     }
 
     return <FlexFullHeightColumn>
-                    <WhiteBlueButton onClick={replyToPost}>
+                    <CenteredWhiteBlueButton onClick={replyToPost}>
                         Reply to Post
-                    </WhiteBlueButton>
+                    </CenteredWhiteBlueButton>
                     {emailCopied ? (
                         <CopiedText>Email Address Copied!</CopiedText>
                     ) : (

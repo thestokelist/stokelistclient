@@ -7,16 +7,17 @@ import React, {
 } from 'react'
 
 import { Title } from '../shared/Text'
-import MyPostList from '../posts/MyPostList'
-import { GreyWhiteButton } from '../shared/Buttons'
+import PostSection from '../posts/PostSection'
+import { WhiteBlueButton } from '../shared/Buttons'
 import Login from '../forms/Login'
+import { FlexBetweenRow } from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { authApiGet } from '../../util/network'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
 
 function MyPosts() {
-    const [myPosts, setMyPosts] = useState(null)
+    const [myPosts, setMyPosts] = useState([])
     const { state, dispatch } = useContext(store)
 
     const loggedIn = useMemo(() => {
@@ -45,14 +46,21 @@ function MyPosts() {
     }
 
     const getLogoutButton = () => {
-        return <GreyWhiteButton onClick={logout}>Logout</GreyWhiteButton>
+        return <WhiteBlueButton onClick={logout}>Log Out</WhiteBlueButton>
     }
 
     return (
         <Fragment>
-            {loggedIn && getLogoutButton()}
-            <Title>My Posts</Title>
-            {loggedIn ? <MyPostList posts={myPosts} /> : <Login />}
+            <FlexBetweenRow>
+                <Title>Your Posts</Title>
+                {loggedIn && getLogoutButton()}
+            </FlexBetweenRow>
+
+            {loggedIn ? (
+                <PostSection posts={myPosts} adminMode={true} />
+            ) : (
+                <Login />
+            )}
         </Fragment>
     )
 }

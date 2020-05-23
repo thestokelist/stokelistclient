@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import { apiGet } from '../util/network'
+import { searchLoadReducer } from '../reducers'
 
 export const usePosts = (endpoint) => {
     const [posts, setPosts] = useState([])
@@ -18,3 +19,12 @@ export const usePosts = (endpoint) => {
 }
 
 export const useMountEffect = (fun) => useEffect(fun, [])
+
+export const useSearchReducer = () => {
+    const initialState = [{ searchLoaded: false }, { searchLoading: false }]
+    const [state, dispatch] = useReducer(searchLoadReducer, initialState)
+
+    return [state, dispatch]
+}
+
+

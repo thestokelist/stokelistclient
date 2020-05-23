@@ -34,10 +34,6 @@ export const Flash = styled.div`
     padding: 0.2em;
 `
 
-export const FloatRight = styled.div`
-    float: right;
-`
-
 export const AlignRight = styled.div`
     display: flex;
     width: 100%;
