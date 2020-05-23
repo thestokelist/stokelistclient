@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
 import { Flash } from '../shared/Layouts'
-import PostDetail from '../posts/PostDetail'
+import MyPosts from '../pages/MyPosts'
 import { useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
@@ -22,7 +22,6 @@ function PostValidate({ match }) {
             console.log(response)
             if (response) {
                 const responseObject = await response.json()
-                setPostDetails(responseObject.post)
                 dispatch({
                     type: actionTypes.LOGIN_SUCCESS,
                     item: {
@@ -30,6 +29,7 @@ function PostValidate({ match }) {
                         email: responseObject.post.email,
                     },
                 })
+                setPostDetails(responseObject.post)
             } else {
                 setPostDetails(false)
             }
@@ -53,7 +53,7 @@ function PostValidate({ match }) {
             content = (
                 <Fragment>
                     <Flash>Your email address has been confirmed</Flash>
-                    <PostDetail postDetails={postDetails} />
+                    <MyPosts />
                 </Fragment>
             )
         }
