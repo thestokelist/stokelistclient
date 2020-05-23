@@ -1,16 +1,8 @@
-import React, {
-    useEffect,
-    useState,
-    Fragment,
-    useContext,
-    useMemo,
-} from 'react'
+import React, { useEffect, useState, useContext, useMemo } from 'react'
 
-import { Title } from '../shared/Text'
 import PostSection from '../posts/PostSection'
 import { WhiteBlueButton } from '../shared/Buttons'
 import Login from '../forms/Login'
-import { FlexBetweenRow } from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { authApiGet } from '../../util/network'
 import { store } from '../store'
@@ -49,19 +41,15 @@ function MyPosts() {
         return <WhiteBlueButton onClick={logout}>Log Out</WhiteBlueButton>
     }
 
-    return (
-        <Fragment>
-            <FlexBetweenRow>
-                <Title>Your Posts</Title>
-                {loggedIn && getLogoutButton()}
-            </FlexBetweenRow>
-
-            {loggedIn ? (
-                <PostSection posts={myPosts} adminMode={true} />
-            ) : (
-                <Login />
-            )}
-        </Fragment>
+    return loggedIn ? (
+        <PostSection
+            posts={myPosts}
+            adminMode={true}
+            title={'Your Posts'}
+            titleButton={getLogoutButton()}
+        />
+    ) : (
+        <Login />
     )
 }
 

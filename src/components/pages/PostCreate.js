@@ -1,18 +1,18 @@
 import React, { useState, Fragment } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
-import PostDetails from '../posts/PostDetail'
 import Post from '../forms/Post'
 
 function PostCreate() {
-    const [postDetails, setPostDetails] = useState(null)
+    const [, setPostDetails] = useState(null)
     const [postSubmitted, setPostSubmitted] = useState(false)
 
     return (
         <Fragment>
             <Title>Create Post</Title>
             {postSubmitted ? (
-                <PostDetails postDetails={postDetails} />
+                <Redirect to="/submitted" />
             ) : (
                 <Post setPostDetails={setPostDetails} setPostSubmitted={setPostSubmitted} />
             )}

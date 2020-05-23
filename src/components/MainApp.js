@@ -16,6 +16,9 @@ import MyPosts from './pages/MyPosts'
 import PostValidate from './pages/PostValidate'
 import UserLogin from './pages/UserLogin'
 
+//landing pages
+import PostSubmitLanding from './pages/PostSubmitLanding'
+
 // header/footer
 import Header from './shared/Header'
 import Footer from './shared/Footer'
@@ -53,6 +56,9 @@ function MainApp() {
                         path="/commandments"
                         component={Commandments}
                     />
+
+                    {/* Landng Pages */}
+                    <Route exact path="/submitted" component={PostSubmitLanding} />
                 </StokeListContainer>
                 <Footer />
             </FlexFullHeightColumn>

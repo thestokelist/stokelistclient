@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import PostSummary from '../posts/PostSummary'
 import MyPost from '../posts/MyPost'
 import { Title } from '../shared/Text'
+import { FlexBetweenRow } from '../shared/Layouts'
 
 const PostSectionContainer = styled.div`
     width: 100%;
@@ -14,7 +15,7 @@ const PostDateHeader = styled(Title)`
     color: #434653;
 `
 
-function PostSection({ title, children, posts, hideEmpty, hideDates, adminMode }) {
+function PostSection({  children, title, titleButton, posts, hideEmpty, hideDates, adminMode }) {
 
     const getDateLabel = (init,differenceInDays) => {
         let createdDate = init
@@ -65,7 +66,7 @@ function PostSection({ title, children, posts, hideEmpty, hideDates, adminMode }
     const getPostSummaryList = (postArray) => {
         let postSummaries
         if (posts.length === 0) {
-            postSummaries = <div>No Results Found</div>
+            postSummaries = <div>No Posts Found</div>
         } else {
             if (adminMode === true) {
                 postSummaries = postArray.map((post) => (
@@ -98,7 +99,11 @@ function PostSection({ title, children, posts, hideEmpty, hideDates, adminMode }
         } else {
             return (
                 <PostSectionContainer>
+                    <FlexBetweenRow>
                     <Title>{title}</Title>
+                    {titleButton}
+                    </FlexBetweenRow>
+                    
                     {hideDates === true
                         ? getPostSummaryList(posts)
                         : displayPostsByDate(groupedPosts)}

@@ -39,9 +39,7 @@ function PostList() {
 
     return (
         <Fragment>
-            <PostSearch>
-                {getLatestSection()}
-            </PostSearch>
+            <PostSearch>{getLatestSection()}</PostSearch>
         </Fragment>
     )
 }

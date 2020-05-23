@@ -43,21 +43,8 @@ export const WhiteBlueButton = styled.button`
     text-align: center;
     font-size: 1em;
     font-weight: 600;
-
 `
 
 export const CenteredWhiteBlueButton = styled(WhiteBlueButton)`
     margin: 0 auto;
-`
-
-export const BigGreyButton = styled.button`
-    border-radius: 5px;
-    background-color: #383838;
-    border: solid #383838 2px;
-    padding: 8px 20px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    display: block;
-    margin: 1em 0;
 `

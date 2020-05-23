@@ -64,6 +64,7 @@ function Post({ setPostDetails, setPostSubmitted }) {
         console.log(postData)
         const response = await apiPost(endpoints.POSTS, postData)
         if (response) {
+            setPostSubmitted(true)
             console.log('New post successfully submitted')
         }
     }

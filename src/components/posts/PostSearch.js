@@ -41,7 +41,7 @@ const SearchBar = styled.div`
 const Strapline = styled.div`
     color: #434653;
     text-align: center;
-    margin-bottom:1em;
+    margin-bottom: 1em;
 `
 
 function PostSearch({ children }) {

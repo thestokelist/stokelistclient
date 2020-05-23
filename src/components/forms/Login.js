@@ -5,8 +5,8 @@ import ReactModal from 'react-modal'
 import { useModal } from 'react-modal-hook'
 
 import { Title } from '../shared/Text'
-import { Input } from '../shared/Forms'
-import { BigGreyButton, GreyWhiteButton } from '../shared/Buttons'
+import { Input, InputContainer } from '../shared/Forms'
+import { BlueButton, GreyWhiteButton } from '../shared/Buttons'
 import { AlignRight } from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
@@ -42,21 +42,26 @@ function Login() {
                     address below and we'll email you a login link
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input
-                        type="email"
-                        name="email"
-                        ref={register({
-                            required: true,
-                            validate: validateEmail,
-                        })}
-                    />
-                    {errors.email &&
-                        errors.email.type === 'required' &&
-                        'Email is required.'}
-                    {errors.email &&
-                        errors.email.type === 'validate' &&
-                        'Must be an email address.'}
-                    <BigGreyButton type="submit">Login</BigGreyButton>
+                    <InputContainer>
+                        <Input
+                            type="email"
+                            name="email"
+                            ref={register({
+                                required: true,
+                                validate: validateEmail,
+                            })}
+                            placeholder="you@example.com"
+
+                        />
+                        {errors.email &&
+                            errors.email.type === 'required' &&
+                            'Email is required.'}
+                        {errors.email &&
+                            errors.email.type === 'validate' &&
+                            'Must be an email address.'}
+                    </InputContainer>
+
+                    <BlueButton type="submit">Login</BlueButton>
                 </form>
             </div>
         )

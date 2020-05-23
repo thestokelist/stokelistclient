@@ -9,7 +9,7 @@ export const usePosts = (endpoint) => {
     const loadMorePosts = async () => {
         const currentOffset = offset === null ? 0 : offset + 50
         setOffset(currentOffset)
-        const response = await apiGet(endpoint, {offset: currentOffset})
+        const response = await apiGet(endpoint, { offset: currentOffset })
         if (response) {
             const morePosts = await response.json()
             setPosts(posts.concat(morePosts))
@@ -26,5 +26,3 @@ export const useSearchReducer = () => {
 
     return [state, dispatch]
 }
-
-
