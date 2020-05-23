@@ -5,7 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import PostSection from '../posts/PostSection'
 import { usePosts, useMountEffect } from '../../hooks'
 import { searchLoadReducer } from '../../reducers'
-import { MoreButton } from '../shared/Buttons'
+import { WhiteBlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { apiGet } from '../../util/network'
 
@@ -119,9 +119,9 @@ function PostList() {
                     hideEmpty={false}
                 >
                     {searchPosts.length % 50 === 0 && (
-                        <MoreButton onClick={loadMoreSearchPosts}>
+                        <WhiteBlueButton onClick={loadMoreSearchPosts}>
                             More Results
-                        </MoreButton>
+                        </WhiteBlueButton>
                     )}
                 </PostSection>
             )
@@ -144,9 +144,9 @@ function PostList() {
                     posts={latestPosts}
                     hideEmpty={false}
                 >
-                    <MoreButton onClick={loadLatestPosts}>
+                    <WhiteBlueButton onClick={loadLatestPosts}>
                         Show More
-                    </MoreButton>
+                    </WhiteBlueButton>
                 </PostSection>
             </Fragment>
         )

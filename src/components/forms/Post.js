@@ -75,7 +75,7 @@ function Post({ setPostDetails, setPostSubmitted }) {
                     Aw, snap - you missed a step! See the alerts in red below
                 </WholeFormError>
             )}
-            <PostTitle errors={errors} register={register} />
+            <PostTitle errors={errors} register={register} watch={watch} />
             <PostDescription errors={errors} register={register} />
             {/*TODO: Images/Media*/}
             <PriceGarage

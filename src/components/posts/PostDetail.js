@@ -1,35 +1,40 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { GreyWhiteButton } from '../shared/Buttons'
+import { FlexBetweenRow, FlexFullHeightColumn } from '../shared/Layouts'
+import { Label } from '../shared/Forms'
+import { getDateRangeString, getPrettyDateString } from '../../util/datetime'
+import PostPrice from './PostPrice'
 import PostLocation from './PostLocation'
-import { Title } from '../shared/Text'
-import { FloatRight } from '../shared/Layouts'
-import { getDateRangeString } from '../../util/datetime'
+import PostCopy from './PostCopy'
 
-const PostPrice = styled.div`
-    font-weight: normal;
-    font-size: 1em;
-    margin: 5px 0px;
+const PostTitle = styled.div`
+    color: #434653;
+    font-size: 1.6em;
+    font-weight: 500;
+    margin-bottom: 0.1em;
 `
 
-const CopyLink = styled.div`
-    font-weight: normal;
-    font-size: 0.9em;
-    text-decoration: underline;
-    color: grey;
-    margin: 10px auto;
+const PostPriceText = styled(PostTitle)`
+    color: #175e88;
+    margin-bottom: 0.5em;
 `
 
 const PostText = styled.div`
-    font-size:0.8em
-    margin: 5px 0px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 1px 1px 5px #0000001a;
+    border: 1px solid #dce2e8;
+    border-radius: 5px;
+    color: #000000cb;
+    font-size: 0.8em;
+    padding: 1em 0.5em;
+    width: 70%;
 `
 
 const PostDateTime = styled.div`
-    font-size: 0.7em;
-    font-weight: bold;
+    font-size: 0.8em;
+    font-style: italic;
+    color: #434653;
     margin: 5px 0px;
 `
 
@@ -40,8 +45,7 @@ const PostImg = styled.img`
 
 function PostDetail({ postDetails }) {
     const post = postDetails
-    const isGarageSale = (post.isGarageSale === true)
-    console.log(postDetails)
+    const isGarageSale = post.isGarageSale === true
 
     const imgURL = () => {
         return 'http://list.thestoke.ca/photos/' + post.id + '/original.jpg'
@@ -51,34 +55,31 @@ function PostDetail({ postDetails }) {
         return { __html: sanitizedHTML }
     }
 
-    const replyToPost = () => {
-        window.location.href = `mailto:list-${post.id}@thestoke.ca`
-    }
-
     return post ? (
         <Fragment>
-            <FloatRight>
-                <GreyWhiteButton onClick={replyToPost}>
-                    Reply to Post
-                </GreyWhiteButton>
-                <CopyToClipboard text={`list-${post.id}@thestoke.ca`}>
-                    <CopyLink>Copy Email Address</CopyLink>
-                </CopyToClipboard>
-            </FloatRight>
-            <Title>{post.title}</Title>
-            <PostPrice>
-                {isGarageSale
-                    ? getDateRangeString(post.startTime, post.endTime)
-                    : post.price}
-            </PostPrice>
+            <FlexBetweenRow>
+                <FlexFullHeightColumn>
+                    <PostTitle>{post.title}</PostTitle>
+                    <PostPriceText>
+                        {isGarageSale ? (
+                            getDateRangeString(post.startTime, post.endTime)
+                        ) : (
+                            <PostPrice price={post.price} />
+                        )}
+                    </PostPriceText>
+                </FlexFullHeightColumn>
+                <PostCopy postDetails={post} />
+            </FlexBetweenRow>
+
             <PostLocation postDetails={post} />
             {post.photoFileSize !== null ? (
                 <PostImg src={imgURL()} alt="Post" />
             ) : null}
+            <Label>Post Description</Label>
             <PostText
                 dangerouslySetInnerHTML={createMarkup(post.description)}
             />
-            <PostDateTime>{post.created_at}</PostDateTime>
+            <PostDateTime>{getPrettyDateString(post.created_at)}</PostDateTime>
         </Fragment>
     ) : null
 }

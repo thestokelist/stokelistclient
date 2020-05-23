@@ -33,7 +33,7 @@ export const BlueButton = styled.button`
     box-shadow: 0px 3px 6px #00000034;
 `
 
-export const MoreButton = styled.button`
+export const WhiteBlueButton = styled.button`
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000033;
     border: 1px solid #175e88;
