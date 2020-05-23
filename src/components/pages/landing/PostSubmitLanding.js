@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import { Label } from '../shared/Forms'
+import { Label } from '../../shared/Forms'
 
 
 function PostSubmitLanding() {

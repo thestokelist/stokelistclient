@@ -1,36 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
-import ReactModal from 'react-modal'
-import { useModal } from 'react-modal-hook'
+import { Redirect } from 'react-router-dom'
 
-import { Title } from '../shared/Text'
 import { Input, InputContainer } from '../shared/Forms'
-import { BlueButton, GreyWhiteButton } from '../shared/Buttons'
-import { AlignRight } from '../shared/Layouts'
+import { BlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
 
 function Login() {
     const { register, handleSubmit, errors, watch } = useForm()
-    const [showModal, hideModal] = useModal(() => (
-        <ReactModal isOpen>
-            <Title>Login Email Sent</Title>
-            To login, please check your email and click on the link - no
-            passwords required!
-            <AlignRight>
-                <GreyWhiteButton onClick={hideModal}>
-                    I Understand
-                </GreyWhiteButton>
-            </AlignRight>
-        </ReactModal>
-    ))
+    const [emailSent, setEmailSent] = useState(false)
 
     const onSubmit = async (data) => {
         const postData = { email: data.email }
         const response = await apiPost(endpoints.LOGIN, postData)
         if (response) {
-            showModal()
+            setEmailSent(true)
         }
     }
 
@@ -72,7 +58,7 @@ function Login() {
         return validator.validate(email)
     }
 
-    return getLoginForm()
+    return emailSent ? <Redirect to="/loginemail" /> : getLoginForm()
 }
 
 export default Login
