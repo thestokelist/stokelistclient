@@ -51,7 +51,6 @@ function GarageMap() {
                         />
                         {garageSales.map((sale) => (
                             <GeoJSON data={sale.exactLocation} key={sale.id}>
-                                {' '}
                                 <Popup>
                                   <PostSummary post={sale} />
                                 </Popup>

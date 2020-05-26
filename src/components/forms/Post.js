@@ -19,6 +19,7 @@ import PriceGarage from './post/PriceGarage'
 import PostEmail from './post/PostEmail'
 import PostDescription from './post/PostDescription'
 import PostTitle from './post/PostTitle'
+import Terms from './post/Terms'
 
 function Post({ post, responseCallback, buttonText, editMode }) {
 
@@ -169,7 +170,7 @@ function Post({ post, responseCallback, buttonText, editMode }) {
                     />
                 )}
                 {/*TODO: Captcha*/}
-                {/*TODO: Terms of Service */}
+                <Terms register={register} errors={errors} />
                 <BlueButton type="submit">Preview</BlueButton>
             </form>
         )
