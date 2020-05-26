@@ -10,7 +10,7 @@ import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
 
 const ButtonContainer = styled(FlexBetweenRow)`
-    width: 20%;
+    width: 250px;
 `
 
 function MyPost({ post }) {

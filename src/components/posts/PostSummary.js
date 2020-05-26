@@ -64,6 +64,13 @@ const PostTitle = styled.div`
     font-weight: bold;
 `
 
+const ResponsiveRow = styled(FlexBetweenRow)`
+    /* Small Devices, Tablets */
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+`
+
 //Generates a full width summary for a post, can be disabled
 function PostSummary({ post, disabled }) {
     const imgURL = post.photoFileSize
@@ -86,14 +93,14 @@ function PostSummary({ post, disabled }) {
                     </Link>
                 </PostImageContainer>
                 <PostDetailsContainer>
-                    <FlexBetweenRow>
+                    <ResponsiveRow>
                         <PostTitle>
                             <HiddenLink to={`/post/${post.id}`}>
                                 {post.title}
                             </HiddenLink>
                         </PostTitle>
                         <PostLocation postDetails={post} />
-                    </FlexBetweenRow>
+                    </ResponsiveRow>
                     <PostDetail>
                         {isGarageSale
                             ? getDateRangeString(post.startTime, post.endTime)

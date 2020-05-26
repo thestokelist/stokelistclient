@@ -9,6 +9,10 @@ const FooterContainer = styled.div`
     background: #434653 0% 0% no-repeat padding-box;
     align-items: center;
     justify-content: space-between;
+    @media only screen and (max-width : 768px) {
+        flex-direction: column;
+        height: auto;
+    }
 `
 
 const FooterLinkText = styled.div`

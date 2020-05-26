@@ -6,12 +6,19 @@ import { HiddenLink } from '../shared/Text'
 const HeaderContainer = styled.div`
     padding: 0% 6%;
     display: flex;
+    flex-direction: row;
     min-height: 100px;
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 10px #00000026;
     align-items: center;
     justify-content: space-between;
     z-index: 10;
+    /* Small Devices, Tablets */
+	@media only screen and (max-width : 768px) {
+        flex-direction: column;
+        min-height: auto;
+        padding-bottom:1em;
+    }
 `
 
 const HeaderLinkText = styled.div`
@@ -43,9 +50,11 @@ function Header() {
     return (
         <HeaderContainer>
             <HiddenLink to="/">
-                {/*eslint-disable-next-line*/}
+
                 <HeaderText>
-                    //the <b>stoke list.</b>
+                    {/*eslint-disable-next-line*/}
+                    <span>//the </span>
+                    <span><b>stoke list.</b></span>
                 </HeaderText>
             </HiddenLink>
             <HeaderLinks>

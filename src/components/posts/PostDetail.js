@@ -45,6 +45,7 @@ const PostImg = styled.img`
     box-shadow: 1px 1px 5px #0000001a;
     border: 1px solid #dce2e8;
     border-radius: 5px;
+    max-width: 100%;
 `
 
 function PostDetail({ postDetails, notSubmitted }) {

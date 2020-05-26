@@ -12,6 +12,11 @@ import {
 import { FlexRow } from '../../shared/Layouts'
 import GarageDate from './GarageDate'
 
+const InputRadioContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+
 const PrefixInput = styled(Input)`
     border-radius: 0px 5px 5px 0px;
     margin-bottom: 0;
@@ -32,7 +37,9 @@ const Prefix = styled.div`
 `
 
 function PostPrice({ errors, register, watch, setValue }) {
-    const [isGarageSale, setIsGarageSale] = useState(watch('priceRadio') === 'priceGarage')
+    const [isGarageSale, setIsGarageSale] = useState(
+        watch('priceRadio') === 'priceGarage'
+    )
 
     const validatePrice = () => {
         const price = watch('price')
@@ -61,39 +68,43 @@ function PostPrice({ errors, register, watch, setValue }) {
         <Fragment>
             <InputContainer>
                 <Label>Add a Price</Label>
-                <FlexRow>
-                    <Prefix>$</Prefix>
-                    <PrefixInput
-                        type="numeric"
-                        name="price"
-                        ref={register({ validate: validatePrice })}
-                        onChange={updatePriceForm}
-                    />
-                    <RadioInput
-                        type="radio"
-                        name="priceRadio"
-                        value="priceNA"
-                        ref={register()}
-                        onChange={updatePriceForm}
-                    />
-                    <RadioText>Not Applicable</RadioText>
-                    <RadioInput
-                        type="radio"
-                        name="priceRadio"
-                        value="priceFree"
-                        ref={register()}
-                        onChange={updatePriceForm}
-                    />
-                    <RadioText>Free</RadioText>
-                    <RadioInput
-                        type="radio"
-                        name="priceRadio"
-                        value="priceGarage"
-                        ref={register()}
-                        onChange={updatePriceForm}
-                    />
-                    <RadioText>Garage Sale</RadioText>
-                </FlexRow>
+                <InputRadioContainer>
+                    <FlexRow>
+                        <Prefix>$</Prefix>
+                        <PrefixInput
+                            type="numeric"
+                            name="price"
+                            ref={register({ validate: validatePrice })}
+                            onChange={updatePriceForm}
+                        />
+                    </FlexRow>
+                    <FlexRow>
+                        <RadioInput
+                            type="radio"
+                            name="priceRadio"
+                            value="priceNA"
+                            ref={register()}
+                            onChange={updatePriceForm}
+                        />
+                        <RadioText>Not Applicable</RadioText>
+                        <RadioInput
+                            type="radio"
+                            name="priceRadio"
+                            value="priceFree"
+                            ref={register()}
+                            onChange={updatePriceForm}
+                        />
+                        <RadioText>Free</RadioText>
+                        <RadioInput
+                            type="radio"
+                            name="priceRadio"
+                            value="priceGarage"
+                            ref={register()}
+                            onChange={updatePriceForm}
+                        />
+                        <RadioText>Garage Sale</RadioText>
+                    </FlexRow>
+                </InputRadioContainer>
 
                 <FormError>
                     {errors.price && 'Enter a price or select an option'}

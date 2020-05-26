@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
     RadioInput,
     RadioText,
@@ -16,7 +15,7 @@ function Terms({ errors, register }) {
                 ref={register({required: true})}
             />
             <RadioText>
-                <Link>I Accept Terms of Service & Privacy Policy</Link>
+                I accept the Terms of Service & Privacy Policy
             </RadioText>
             <FormError>
                 {errors.terms &&
