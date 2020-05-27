@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 import {
@@ -37,9 +37,8 @@ const Prefix = styled.div`
 `
 
 function PostPrice({ errors, register, watch, setValue }) {
-    const [isGarageSale, setIsGarageSale] = useState(
-        watch('priceRadio') === 'priceGarage'
-    )
+
+    const isGarageSale = watch('priceRadio') === 'priceGarage'
 
     const validatePrice = () => {
         const price = watch('price')
@@ -54,13 +53,7 @@ function PostPrice({ errors, register, watch, setValue }) {
             setValue('price', '')
         } else {
             //Text was entered, so clear both price radio boxes
-            setValue('priceRadio', null)
-        }
-        //Handle displaying/hiding garage sale component
-        if (e.target.value === 'priceGarage') {
-            setIsGarageSale(true)
-        } else {
-            setIsGarageSale(false)
+            setValue('priceRadio', '')
         }
     }
 

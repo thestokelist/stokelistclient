@@ -1,12 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import ReactMarkdown from 'react-markdown'
 
-import {
-    DisabledOverlay,
-    GridLayout,
-    FlexBetweenRow,
-} from '../shared/Layouts'
+import { DisabledOverlay, GridLayout, FlexBetweenRow } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
 import { HiddenLink } from '../shared/Text'
@@ -14,8 +11,8 @@ import { getDateRangeString } from '../../util/datetime'
 
 const PostDetail = styled.div`
     margin-bottom: 10px;
-    color: #175E88;
-    font-size:1.2em;
+    color: #175e88;
+    font-size: 1.2em;
 `
 
 const PostImageContainer = styled.div`
@@ -23,7 +20,7 @@ const PostImageContainer = styled.div`
     min-height: 100%;
     border-right: 1px solid #dce2eb;
     border-radius: 5px 0px 0px 5px;
-    min-width:160px;
+    min-width: 160px;
     justify-content: center;
     align-items: center;
 `
@@ -36,12 +33,8 @@ const PostDetailsContainer = styled.div`
 
 const PostTextSummary = styled.div`
     margin-top: 15px;
-    text-overflow: ellipsis;
-    max-height: 3.6em;
-    line-height: 1.2em;
-    overflow: hidden;
     font-size: 0.9em;
-    color: #000000CC;
+    color: #000000cc;
 `
 
 const PostSummaryContainer = styled.div`
@@ -77,10 +70,6 @@ function PostSummary({ post, disabled }) {
         ? 'http://list.thestoke.ca/photos/' + post.id + '/thumb.jpg'
         : 'http://list.thestoke.ca/images/placeholder.png'
 
-    const createMarkup = (sanitizedHTML) => {
-        return { __html: sanitizedHTML }
-    }
-
     const isGarageSale = post.isGarageSale === true
 
     return (
@@ -102,13 +91,15 @@ function PostSummary({ post, disabled }) {
                         <PostLocation postDetails={post} />
                     </ResponsiveRow>
                     <PostDetail>
-                        {isGarageSale
-                            ? getDateRangeString(post.startTime, post.endTime)
-                            : <PostPrice price={post.price} />}
+                        {isGarageSale ? (
+                            getDateRangeString(post.startTime, post.endTime)
+                        ) : (
+                            <PostPrice price={post.price} />
+                        )}
                     </PostDetail>
-                    <PostTextSummary
-                        dangerouslySetInnerHTML={createMarkup(post.description)}
-                    />
+                    <PostTextSummary>
+                        <ReactMarkdown source={post.description} />
+                    </PostTextSummary>
                 </PostDetailsContainer>
             </PostSummaryContainer>
         </GridLayout>

@@ -22,7 +22,6 @@ import PostTitle from './post/PostTitle'
 import Terms from './post/Terms'
 
 function Post({ post, responseCallback, buttonText, editMode }) {
-
     const formInit = postToForm(post)
     const { state } = useContext(store)
     const { register, handleSubmit, errors, setValue, watch, reset } = useForm({
@@ -92,12 +91,16 @@ function Post({ post, responseCallback, buttonText, editMode }) {
                 formValues.priceRadio = 'priceFree'
             } else if (thePost.startTime && thePost.endTime) {
                 formValues.priceRadio = 'priceGarage'
-                formValues.garageDate = getDatePortionForInput(thePost.startTime)
+                formValues.garageDate = getDatePortionForInput(
+                    thePost.startTime
+                )
                 formValues.startTime = getTimePortionForInput(thePost.startTime)
                 formValues.endTime = getTimePortionForInput(thePost.endTime)
                 //This goes last - post.price being null doesn't only means NA if we also have no garage data
             } else if (thePost.price === null) {
                 formValues.priceRadio = 'priceNA'
+            } else {
+                formValues.priceRadio = ''
             }
             if (thePost.exactLocation) {
                 formValues.lat = thePost.exactLocation.coordinates[1]
@@ -149,7 +152,12 @@ function Post({ post, responseCallback, buttonText, editMode }) {
                     </WholeFormError>
                 )}
                 <PostTitle errors={errors} register={register} watch={watch} />
-                <PostDescription errors={errors} register={register} />
+                <PostDescription
+                    errors={errors}
+                    register={register}
+                    setValue={setValue}
+                    watch={watch}
+                />
                 {/*TODO: Images/Media*/}
                 <PriceGarage
                     errors={errors}
@@ -170,7 +178,7 @@ function Post({ post, responseCallback, buttonText, editMode }) {
                     />
                 )}
                 {/*TODO: Captcha*/}
-                <Terms register={register} errors={errors} />
+                {!editMode && <Terms register={register} errors={errors} />}
                 <BlueButton type="submit">Preview</BlueButton>
             </form>
         )

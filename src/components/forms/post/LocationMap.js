@@ -18,7 +18,7 @@ const MapContainer = styled.div`
 `
 
 function LocationMap({ setValue, register, watch }) {
-    const hasLocation = watch('lat') && watch('lng')
+    const hasLocation = !!watch('lat') && !!watch('lng')
 
     let startPosition = [50.9981, -118.1957]
     const position = hasLocation ? [watch('lat'), watch('lng')] : startPosition
@@ -64,12 +64,12 @@ function LocationMap({ setValue, register, watch }) {
                         ref={register}
                         placeholder="Where you at?"
                     />
-                    {/*Component intentially not registered - just provides some page logic, the hidden fields capture the input data */}
+                    {/*Component intentionally not registered - just provides some page logic, the hidden fields capture the input data */}
                     <RadioInput
                         type="checkbox"
                         name="exactLocation"
                         checked={hasLocation}
-                        onClick={handleLocationCheckbox}
+                        onChange={handleLocationCheckbox}
                     />
                     <RadioText>Set Exact Location</RadioText>
                 </FlexRow>

@@ -1,35 +1,48 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-    Label,
-    SubLabel,
-    FormError,
-    InputContainer
-} from '../../shared/Forms'
+import ReactMde from 'react-mde'
+import 'react-mde/lib/styles/css/react-mde-all.css'
+import ReactMarkdown from 'react-markdown'
 
-const Description = styled.textarea`
+import { Label, SubLabel, FormError, InputContainer } from '../../shared/Forms'
+
+const MDEContainer = styled.div`
     width: 80%;
 `
 
-function PostDescription({ errors, register }) {
+function PostDescription({ errors, register, setValue, watch }) {
+    register({ name: 'description' }, { required: true })
+
+    const [selectedTab, setSelectedTab] = React.useState("write");
+
     return (
         <InputContainer>
-        <Label>
-            Post Description
-            <SubLabel>
-                - Be descriptive, this will help your results show up in search
-            </SubLabel>
-        </Label>
-        <Description
-            rows="10"
-            cols="80"
-            name="description"
-            ref={register({ required: true })}
-        />
-        <FormError>
-            {errors.description && 'Description is required.'}
-        </FormError>
-    </InputContainer>
+            <Label>
+                Post Description
+                <SubLabel>
+                    - Be descriptive, this will help your results show up in
+                    search
+                </SubLabel>
+            </Label>
+            <MDEContainer>
+                {' '}
+                <ReactMde
+                    value={watch('description')}
+                    onChange={(value) => setValue('description', value)}
+                    selectedTab={selectedTab}
+                    onTabChange={setSelectedTab}
+                    generateMarkdownPreview={(markdown) =>
+                        Promise.resolve(<ReactMarkdown source={markdown} />)
+                    }
+                    toolbarCommands = {[["bold","italic","header","strikethrough"], ["code","quote","link"],["ordered-list","unordered-list","checked-list"]]}
+                           
+                />
+            </MDEContainer>
+
+            <FormError>
+                {errors.description && 'Description is required.'}
+            </FormError>
+        </InputContainer>
     )
 }
 

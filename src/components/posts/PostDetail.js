@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
 
 import { FlexBetweenRow, FlexFullHeightColumn } from '../shared/Layouts'
 import { Label } from '../shared/Forms'
@@ -57,10 +58,6 @@ function PostDetail({ postDetails, notSubmitted }) {
         return 'http://list.thestoke.ca/photos/' + post.id + '/original.jpg'
     }
 
-    const createMarkup = (sanitizedHTML) => {
-        return { __html: sanitizedHTML }
-    }
-
     return post ? (
         <Fragment>
             <FlexBetweenRow>
@@ -82,9 +79,10 @@ function PostDetail({ postDetails, notSubmitted }) {
                 <PostImg src={imgURL()} alt="Post" />
             )}
             <Label>Post Description</Label>
-            <PostText
-                dangerouslySetInnerHTML={createMarkup(post.description)}
-            />
+            <PostText>
+                <ReactMarkdown source={post.description} />
+            </PostText>
+
             {submitted && (
                 <PostDateTime>
                     {getPrettyDateString(post.created_at)}
