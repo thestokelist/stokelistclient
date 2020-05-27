@@ -5,14 +5,18 @@ import 'react-mde/lib/styles/css/react-mde-all.css'
 import ReactMarkdown from 'react-markdown'
 
 import { Label, SubLabel, FormError, InputContainer } from '../../shared/Forms'
+import { useMountEffect } from '../../../hooks'
 
 const MDEContainer = styled.div`
     width: 80%;
 `
 
 function PostDescription({ errors, register, setValue, watch }) {
-    register({ name: 'description' }, { required: true })
 
+    useMountEffect(() => {
+        register({ name: 'description' }, { required: true })
+    })
+    
     const [selectedTab, setSelectedTab] = React.useState("write");
 
     return (

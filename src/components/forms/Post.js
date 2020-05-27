@@ -1,5 +1,6 @@
-import React, { useMemo, useContext, useState, Fragment } from 'react'
+import React, { useContext, useState, Fragment } from 'react'
 import { useForm } from 'react-hook-form'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { BlueButton, WhiteBlueButton } from '../shared/Buttons'
 import { FlexBetweenRow } from '../shared/Layouts'
@@ -30,9 +31,9 @@ function Post({ post, responseCallback, buttonText, editMode }) {
 
     const [postPreview, setPostPreview] = useState(null)
 
-    const wholeFormError = useMemo(() => {
-        return Object.keys(errors).length > 0
-    }, [errors])
+    const wholeFormError = Object.keys(errors).length > 0
+
+    const { executeRecaptcha } = useGoogleReCaptcha()
 
     const formToPost = (formData) => {
         //TODO: Sanitize these inputs as could be html?
@@ -120,7 +121,10 @@ function Post({ post, responseCallback, buttonText, editMode }) {
 
     const backToCreate = () => {
         //Reset the form with the values we used for the preview
-        reset(postToForm(postPreview))
+        let formData = postToForm(postPreview)
+        //If we're going back to create, we already accepted the TOS the first time.
+        formData.terms = true
+        reset(formData)
         //Clear the preview, so we return to the form
         setPostPreview(null)
     }
@@ -130,16 +134,25 @@ function Post({ post, responseCallback, buttonText, editMode }) {
         if (editMode) {
             response = await authApiPut(
                 `${endpoints.POSTS}${post.id}`,
-                postPreview,
+                data,
                 state.token
             )
         } else {
-            response = await apiPost(endpoints.POSTS, postPreview)
+            response = await apiPost(endpoints.POSTS, data)
         }
         if (response) {
             responseCallback(postPreview)
             console.log('New post successfully submitted')
         }
+    }
+
+    const doCaptchaAndSubmit = async () => {
+        const submitPost = Object.assign({}, postPreview)
+        if (!editMode) {
+            const token = await executeRecaptcha('post')
+            submitPost['g-recaptcha-response'] = token
+        }
+        await doSubmit(submitPost)
     }
 
     const getForm = () => {
@@ -171,14 +184,16 @@ function Post({ post, responseCallback, buttonText, editMode }) {
                     watch={watch}
                 />
                 {!editMode && (
-                    <PostEmail
-                        errors={errors}
-                        register={register}
-                        watch={watch}
-                    />
+                    <Fragment>
+                        <PostEmail
+                            errors={errors}
+                            register={register}
+                            watch={watch}
+                        />
+                        <Terms register={register} errors={errors} />
+                    </Fragment>
                 )}
-                {/*TODO: Captcha*/}
-                {!editMode && <Terms register={register} errors={errors} />}
+
                 <BlueButton type="submit">Preview</BlueButton>
             </form>
         )
@@ -191,7 +206,10 @@ function Post({ post, responseCallback, buttonText, editMode }) {
                     <WhiteBlueButton onClick={backToCreate}>
                         Edit
                     </WhiteBlueButton>
-                    <BlueButton onClick={doSubmit}>{buttonText}</BlueButton>
+
+                    <BlueButton onClick={doCaptchaAndSubmit}>
+                        {buttonText}
+                    </BlueButton>
                 </FlexBetweenRow>
                 <hr />
                 <PostDetail postDetails={postPreview} notSubmitted={true} />
