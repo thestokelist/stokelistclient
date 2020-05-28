@@ -61,6 +61,9 @@ function Header() {
                 <HiddenLink to="/">
                     <HeaderLinkText>Home</HeaderLinkText>
                 </HiddenLink>
+                <HiddenLink to="/garage">
+                    <HeaderLinkText>Garage Map</HeaderLinkText>
+                </HiddenLink>
                 <HeaderSpacer />
                 <HiddenLink to="/myposts">
                     <HeaderLinkText>Your Posts</HeaderLinkText>

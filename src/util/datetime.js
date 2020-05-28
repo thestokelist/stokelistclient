@@ -1,5 +1,14 @@
 import moment from 'moment'
 
+//Returns a function which checks if the date is the same as the input date
+export const sameDate = (date1) => {
+    const firstDate = moment(date1, moment.ISO_8601)
+    return (date2) => {
+        const secondDate = moment(date2, moment.ISO_8601)
+        return firstDate.isSame(secondDate, 'day')
+    }
+}
+
 export const getDateRangeString = (start, end) => {
     let retString = ''
     const startTime = moment(start, moment.ISO_8601)

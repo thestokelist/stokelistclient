@@ -1,24 +1,23 @@
-import React from 'react'
+import React, { useState, Fragment } from 'react'
 import styled from 'styled-components'
-import { Map, TileLayer, GeoJSON, Popup } from 'react-leaflet'
+import { Map, TileLayer, GeoJSON, Popup, Tooltip } from 'react-leaflet'
+import L from 'leaflet'
 
 import PostSection from '../posts/PostSection'
 import PostSummary from '../posts/PostSummary'
 import { endpoints } from '../../constants/endpoints'
 import { useMountEffect, usePosts } from '../../hooks'
-import { HalfWidth } from '../shared/Layouts'
+import { Label, Input } from '../shared/Forms'
+import { sameDate } from '../../util/datetime'
 
 const MapContainer = styled.div`
     height: 350px;
     width: 100%;
 `
 
-const FlexContainer = styled.div`
-    display: flex;
-`
-
 function GarageMap() {
     const [garageSales, loadGarageSales] = usePosts(endpoints.GARAGE)
+    const [filteredSales,setFilteredSales] = useState(null)
 
     useMountEffect(() => {
         loadGarageSales()
@@ -26,40 +25,69 @@ function GarageMap() {
 
     const position = [50.9981, -118.1957]
 
+
+    const filterSales = e => {
+        //get date from event
+        const filterDate = e.target.value
+        if (filterDate === '') {
+            setFilteredSales(null)
+        } else {
+            const filter = sameDate(filterDate)
+            //filter only those dates
+            const filteredSalesByDate = garageSales.filter(x => filter(x.startTime))
+            setFilteredSales(filteredSalesByDate)
+        }
+    }
+
     return (
-        <FlexContainer>
-            <HalfWidth>
-                <PostSection
-                    title="Garage Sale Map"
-                    posts={garageSales}
-                    hideEmpty={false}
-                    style={{ display: 'inline' }}
-                    hideDates={true}
-                />
-            </HalfWidth>
-            <HalfWidth>
-                <MapContainer>
-                    <Map
-                        center={position}
-                        zoom={13}
-                        style={{ height: '350px' }}
-                    >
-                        <TileLayer
-                            name="OSM Base Map"
-                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        {garageSales.map((sale) => (
-                            <GeoJSON data={sale.exactLocation} key={sale.id}>
-                                <Popup>
-                                  <PostSummary post={sale} />
-                                </Popup>
-                            </GeoJSON>
-                        ))}
-                    </Map>
-                </MapContainer>
-            </HalfWidth>
-        </FlexContainer>
+        <Fragment>
+            <PostSection
+                title="Garage Sale Map"
+                posts={filteredSales || garageSales}
+                hideEmpty={false}
+                style={{ display: 'inline' }}
+                hideDates={true}
+                numbered={true}
+                titleButton={
+                    <Fragment>
+                        <div>
+                            <Label>Select Date</Label>
+                            <Input type="date" name="garageDate" onChange={filterSales}/>
+                        </div>
+                    </Fragment>
+                }
+            />
+            <MapContainer>
+                <Map center={position} zoom={13} style={{ height: '350px' }}>
+                    <TileLayer
+                        name="OSM Base Map"
+                        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {garageSales.map((sale, index) => (
+                        <GeoJSON
+                            data={sale.exactLocation}
+                            key={sale.id}
+                            pointToLayer={(feature, latlng) =>
+                                L.circleMarker(latlng, {
+                                    color: '#175e88',
+                                    radius: '18',
+                                    fillColor: 'white',
+                                    fillOpacity: 0.5,
+                                })
+                            }
+                        >
+                            <Tooltip direction="center" permanent>
+                                {index + 1}
+                            </Tooltip>
+                            <Popup>
+                                <PostSummary post={sale} />
+                            </Popup>
+                        </GeoJSON>
+                    ))}
+                </Map>
+            </MapContainer>
+        </Fragment>
     )
 }
 

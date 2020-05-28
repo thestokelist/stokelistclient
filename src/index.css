@@ -21,3 +21,18 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+
+/* Overwrite leaflet styles to display popups/tooltips how we want */
+.leaflet-tooltip{
+  background:none;
+  border:none;
+  box-shadow:none;
+  font-weight:bold;
+  font-size:2em;
+  color: black;
+  padding: none;
+}
+
+.leaflet-popup-content{
+  width: 500px !important;
+}

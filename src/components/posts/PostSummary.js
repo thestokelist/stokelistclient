@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 
 import { DisabledOverlay, GridLayout, FlexBetweenRow } from '../shared/Layouts'
@@ -16,13 +15,11 @@ const PostDetail = styled.div`
 `
 
 const PostImageContainer = styled.div`
-    display: flex;
     min-height: 100%;
     border-right: 1px solid #dce2eb;
     border-radius: 5px 0px 0px 5px;
     min-width: 160px;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 `
 
 const PostDetailsContainer = styled.div`
@@ -64,8 +61,24 @@ const ResponsiveRow = styled(FlexBetweenRow)`
     }
 `
 
+const FloatMarker = styled.div`
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 36px;
+    height: 36px;
+    line-height:36px;
+    border: 3px solid #175e88;
+    border-radius: 36px;
+    background-color: white;
+    font-size: 1.6em;
+    color: black;
+    text-align: center;
+    font-weight:500;
+`
+
 //Generates a full width summary for a post, can be disabled
-function PostSummary({ post, disabled }) {
+function PostSummary({ post, disabled, markerNumber }) {
     const imgURL = post.photoFileSize
         ? 'http://list.thestoke.ca/photos/' + post.id + '/thumb.jpg'
         : 'http://list.thestoke.ca/images/placeholder.png'
@@ -77,9 +90,9 @@ function PostSummary({ post, disabled }) {
             {disabled ? <DisabledOverlay /> : null}
             <PostSummaryContainer>
                 <PostImageContainer>
-                    <Link to={`/post/${post.id}`}>
-                        <PostImage src={imgURL} alt={'thumbnail'} />
-                    </Link>
+                    {markerNumber && <FloatMarker>{markerNumber}</FloatMarker>}
+
+                    <PostImage src={imgURL} alt={'thumbnail'} />
                 </PostImageContainer>
                 <PostDetailsContainer>
                     <ResponsiveRow>

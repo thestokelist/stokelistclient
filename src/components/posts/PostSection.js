@@ -8,16 +8,24 @@ import { FlexBetweenRow } from '../shared/Layouts'
 const PostSectionContainer = styled.div`
     width: 100%;
     display: flex;
-    flex-direction:column; 
+    flex-direction: column;
 `
 
 const PostDateHeader = styled(Title)`
     color: #434653;
 `
 
-function PostSection({  children, title, titleButton, posts, hideEmpty, hideDates, adminMode }) {
-
-    const getDateLabel = (init,differenceInDays) => {
+function PostSection({
+    children,
+    title,
+    titleButton,
+    posts,
+    hideEmpty,
+    hideDates,
+    adminMode,
+    numbered,
+}) {
+    const getDateLabel = (init, differenceInDays) => {
         let createdDate = init
         if (differenceInDays > 7 && differenceInDays <= 30) {
             createdDate = 'Older than a week'
@@ -44,9 +52,12 @@ function PostSection({  children, title, titleButton, posts, hideEmpty, hideDate
             const differenceInDays = Math.floor(
                 (currentDate - postDate) / (1000 * 60 * 60 * 24)
             )
-            
+
             //Set the creation date string, which might not be a date
-            let createdDateString = getDateLabel(postDate.toDateString(),differenceInDays)
+            let createdDateString = getDateLabel(
+                postDate.toDateString(),
+                differenceInDays
+            )
 
             //Collect the posts, grouping by date string
             if (dateString !== createdDateString) {
@@ -73,11 +84,14 @@ function PostSection({  children, title, titleButton, posts, hideEmpty, hideDate
                     <MyPost post={post} key={post.id} />
                 ))
             } else {
-                postSummaries = postArray.map((post) => (
-                    <PostSummary post={post} key={post.id} />
+                postSummaries = postArray.map((post, index) => (
+                    <PostSummary
+                        post={post}
+                        key={post.id}
+                        markerNumber={numbered && index + 1}
+                    />
                 ))
             }
- 
         }
         return postSummaries
     }
@@ -100,10 +114,10 @@ function PostSection({  children, title, titleButton, posts, hideEmpty, hideDate
             return (
                 <PostSectionContainer>
                     <FlexBetweenRow>
-                    <Title>{title}</Title>
-                    {titleButton}
+                        <Title>{title}</Title>
+                        {titleButton}
                     </FlexBetweenRow>
-                    
+
                     {hideDates === true
                         ? getPostSummaryList(posts)
                         : displayPostsByDate(groupedPosts)}

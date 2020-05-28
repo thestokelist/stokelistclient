@@ -20,8 +20,6 @@ export const FlexRow = styled.div`
     align-items: center;
 `
 
-
-
 export const FlexBetweenRow = styled(FlexRow)`
     justify-content: space-between;
 `
@@ -31,9 +29,9 @@ export const Flash = styled.div`
     vertical-align: middle;
     padding: 0.2em;
     color: #434653;
-    font-size:1em;
-    font-weight:bold;
-    margin-bottom:.5em
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
 `
 
 export const AlignRight = styled.div`
@@ -53,10 +51,4 @@ export const DisabledOverlay = styled.div`
 
 export const GridLayout = styled.div`
     display: grid;
-`
-
-export const HalfWidth = styled.div`
-    flex: 50%;
-    padding: 0 1em;
-    box-sizing: border-box;
 `
