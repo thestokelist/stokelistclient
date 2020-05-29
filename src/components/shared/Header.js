@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+
+import { store } from '../store'
 import { BlueButton } from '../shared/Buttons'
 import { HiddenLink } from '../shared/Text'
 
@@ -14,10 +16,10 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
     z-index: 10;
     /* Small Devices, Tablets */
-	@media only screen and (max-width : 768px) {
+    @media only screen and (max-width: 768px) {
         flex-direction: column;
         min-height: auto;
-        padding-bottom:1em;
+        padding-bottom: 1em;
     }
 `
 
@@ -37,7 +39,7 @@ const HeaderLinks = styled.div`
 const HeaderText = styled.div`
     font-size: 3.2em;
     color: #2f2838;
-    font-weight:300;
+    font-weight: 300;
 `
 
 const HeaderSpacer = styled.div`
@@ -47,14 +49,16 @@ const HeaderSpacer = styled.div`
 `
 
 function Header() {
+    const { state } = useContext(store)
     return (
         <HeaderContainer>
             <HiddenLink to="/">
-
                 <HeaderText>
                     {/*eslint-disable-next-line*/}
                     <span>//the </span>
-                    <span><b>stoke list.</b></span>
+                    <span>
+                        <b>stoke list.</b>
+                    </span>
                 </HeaderText>
             </HiddenLink>
             <HeaderLinks>
@@ -65,9 +69,20 @@ function Header() {
                     <HeaderLinkText>Garage Map</HeaderLinkText>
                 </HiddenLink>
                 <HeaderSpacer />
-                <HiddenLink to="/myposts">
-                    <HeaderLinkText>Your Posts</HeaderLinkText>
-                </HiddenLink>
+                {state.loggedIn && state.isAdmin && (
+                    <HiddenLink to="/moderate">
+                        <HeaderLinkText>Moderate</HeaderLinkText>
+                    </HiddenLink>
+                )}
+                {state.loggedIn ? (
+                    <HiddenLink to="/myposts">
+                        <HeaderLinkText>Your Posts</HeaderLinkText>
+                    </HiddenLink>
+                ) : (
+                    <HiddenLink to="/login">
+                        <HeaderLinkText>Login</HeaderLinkText>
+                    </HiddenLink>
+                )}
                 <HiddenLink to="/post">
                     <BlueButton>Create Post</BlueButton>
                 </HiddenLink>

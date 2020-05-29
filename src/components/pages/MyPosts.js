@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext, useMemo } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
 import PostSection from '../posts/PostSection'
 import { WhiteBlueButton } from '../shared/Buttons'
-import Login from '../forms/Login'
 import { endpoints } from '../../constants/endpoints'
 import { authApiGet } from '../../util/network'
 import { store } from '../store'
@@ -11,10 +10,6 @@ import { actionTypes } from '../../constants/actions'
 function MyPosts() {
     const [myPosts, setMyPosts] = useState([])
     const { state, dispatch } = useContext(store)
-
-    const loggedIn = useMemo(() => {
-        return state.loggedIn === true
-    }, [state])
 
     useEffect(() => {
         async function fetchPosts() {
@@ -25,10 +20,8 @@ function MyPosts() {
                 setMyPosts(responseObject)
             }
         }
-        if (loggedIn) {
-            fetchPosts()
-        }
-    }, [state.token, loggedIn])
+        fetchPosts()
+    }, [state.token])
 
     const logout = () => {
         console.log('Logging out')
@@ -41,15 +34,13 @@ function MyPosts() {
         return <WhiteBlueButton onClick={logout}>Log Out</WhiteBlueButton>
     }
 
-    return loggedIn ? (
+    return (
         <PostSection
             posts={myPosts}
             adminMode={true}
             title={'Your Posts'}
             titleButton={getLogoutButton()}
         />
-    ) : (
-        <Login />
     )
 }
 

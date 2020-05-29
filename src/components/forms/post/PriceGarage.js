@@ -103,7 +103,7 @@ function PostPrice({ errors, register, watch, setValue }) {
                     {errors.price && 'Enter a price or select an option'}
                 </FormError>
             </InputContainer>
-            {isGarageSale && <GarageDate errors={errors} register={register} />}
+            {isGarageSale && <GarageDate errors={errors} register={register} watch={watch} setValue={setValue}/>}
         </Fragment>
     )
 }

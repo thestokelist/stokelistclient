@@ -1,6 +1,7 @@
 //This is our global state handler - way easier than Redux for a small application
 import React, { createContext, useReducer, useEffect } from 'react'
 import { actionTypes } from '../../constants/actions'
+import jwt from 'jsonwebtoken'
 
 //Read in state from local storage
 const localState = localStorage.getItem('state')
@@ -9,6 +10,7 @@ const localState = localStorage.getItem('state')
 
 const initialState = {
     loggedIn: false,
+    isAdmin: false,
     email: null,
     token: null,
 }
@@ -26,10 +28,11 @@ const StateProvider = ({ children, init }) => {
                     loggedIn: true,
                     email: action.item.email,
                     token: action.item.token,
+                    isAdmin: jwt.decode(action.item.token).admin === true
                 }
                 return newState
             case actionTypes.LOGOUT:
-                newState = { ...state, loggedIn: false, email: null, token: null }
+                newState = { ...state, loggedIn: false, email: null, token: null, isAdmin: false }
                 return newState
             default:
                 throw new Error()

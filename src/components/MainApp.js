@@ -1,5 +1,7 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
+import React, {useCallback, useContext} from 'react'
+import { Route, Redirect } from 'react-router-dom'
+
+import { store } from './store'
 
 // static pages
 import Commandments from './pages/Commandments'
@@ -15,6 +17,8 @@ import GarageMap from './pages/GarageMap'
 import MyPosts from './pages/MyPosts'
 import PostValidate from './pages/PostValidate'
 import UserLogin from './pages/UserLogin'
+import Moderate from './pages/Moderate'
+import Login from './pages/Login'
 
 //landing pages
 import PostSubmitLanding from './pages/landing/PostSubmitLanding'
@@ -27,7 +31,49 @@ import Footer from './shared/Footer'
 
 import { StokeListContainer, FlexFullHeightColumn } from './shared/Layouts'
 
+
 function MainApp() {
+
+    const { state } = useContext(store)
+
+       //Route which checks user is logged in
+       const LoggedInRoute = useCallback(
+        ({ component: Component, restricted, ...rest }) => {
+            return (
+                <Route
+                    {...rest}
+                    render={(props) =>
+                        state.loggedIn ? (
+                            <Component {...props} />
+                        ) : (
+                            <Redirect to="/login" />
+                        )
+                    }
+                />
+            )
+        },
+        [state.loggedIn]
+    )
+
+    //Route which checks user is logged in and is an admin
+    const AdminRoute = useCallback(
+        ({ component: Component, restricted, ...rest }) => {
+            return (
+                <Route
+                    {...rest}
+                    render={(props) =>
+                        state.loggedIn && state.isAdmin ? (
+                            <Component {...props} />
+                        ) : (
+                            <Redirect to="/" />
+                        )
+                    }
+                />
+            )
+        },
+        [state]
+    )
+
     return (
         <FlexFullHeightColumn>
             {/*Header appears at the top of all pages*/}
@@ -40,9 +86,13 @@ function MainApp() {
                 <Route exact path="/edit/:id" component={PostEdit} />
                 <Route exact path="/post/v/:uuid" component={PostValidate} />
                 <Route exact path="/garage/" component={GarageMap} />
-                <Route exact path="/myposts" component={MyPosts} />
+
+                {/*Routes that require permissions*/}
+                <LoggedInRoute exact path="/myposts" component={MyPosts} />
+                <AdminRoute exact path="/moderate" component={Moderate} />
 
                 {/*Routes related to users*/}
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/login/:uuid" component={UserLogin} />
 
                 {/* Static Routes */}

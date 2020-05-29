@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
 import { Redirect } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { Input, InputContainer } from '../shared/Forms'
 import { BlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { apiPost } from '../../util/network'
+import { Title } from '../shared/Text'
 
 function Login() {
     const { register, handleSubmit, errors, watch } = useForm()
@@ -22,11 +23,12 @@ function Login() {
 
     const getLoginForm = () => {
         return (
-            <div>
-                <div>
-                    To see your posts you must login. To login, enter your email
-                    address below and we'll email you a login link
-                </div>
+            <Fragment>
+                <Title>Login</Title>
+                <p>
+                    To see your posts you must login. Enter your email
+                    address below and we'll send you a login link
+                </p>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <InputContainer>
                         <Input
@@ -49,7 +51,7 @@ function Login() {
 
                     <BlueButton type="submit">Login</BlueButton>
                 </form>
-            </div>
+            </Fragment>
         )
     }
 

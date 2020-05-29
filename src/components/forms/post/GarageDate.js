@@ -1,12 +1,20 @@
 import React from 'react'
-import {
-    Label,
-    Input,
-    FormError,
-    InputContainer
-} from '../../shared/Forms'
 
-function GarageDate({ errors, register }) {
+import { useMountEffect } from '../../../hooks'
+import { Label, Input, FormError, InputContainer } from '../../shared/Forms'
+import { getDatePortionForInput, getNextSaturday } from '../../../util/datetime'
+
+function GarageDate({ errors, register, watch, setValue }) {
+    
+    //Initialize form to next saturday at 9am, if no value set in form when the component mounts
+    useMountEffect(() => {
+        if (!watch('startTime')) {
+            const nextSaturday = getDatePortionForInput(getNextSaturday())
+            //create start time for next Saturday
+            setValue('garageDate', nextSaturday)
+            setValue('startTime', '09:00')
+        }
+    })
     return (
         <InputContainer>
             <Label>When's it happening?</Label>
