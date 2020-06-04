@@ -1,11 +1,13 @@
 import React, { useState, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { Title } from '../shared/Text'
-import Post from '../forms/Post'
+import PostForm from '../forms/PostForm'
 
 function PostCreate() {
     const [postDetails, setPostDetails] = useState(null)
+    const reCaptchaKey = process.env.REACT_APP_CAPTCHA_KEY
 
     return (
         <Fragment>
@@ -13,10 +15,12 @@ function PostCreate() {
             {postDetails ? (
                 <Redirect to="/submitted" />
             ) : (
-                <Post
-                    responseCallback={setPostDetails}
-                    buttonText="Submit"
-                />
+                <GoogleReCaptchaProvider reCaptchaKey={reCaptchaKey}>
+                    <PostForm
+                        responseCallback={setPostDetails}
+                        buttonText="Submit"
+                    />
+                </GoogleReCaptchaProvider>
             )}
         </Fragment>
     )
