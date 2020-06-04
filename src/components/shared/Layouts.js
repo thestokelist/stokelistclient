@@ -52,3 +52,7 @@ export const DisabledOverlay = styled.div`
 export const GridLayout = styled.div`
     display: grid;
 `
+
+export const ButtonContainer = styled(FlexBetweenRow)`
+    width: 250px;
+`

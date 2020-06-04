@@ -1,17 +1,12 @@
 import React, { useState, Fragment, useContext } from 'react'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { AlignRight, FlexBetweenRow } from '../shared/Layouts'
+import { AlignRight, ButtonContainer } from '../shared/Layouts'
 import PostSummary from './PostSummary'
 import { authApiDelete, authApiPatch } from '../../util/network'
 import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
-
-const ButtonContainer = styled(FlexBetweenRow)`
-    width: 250px;
-`
 
 function MyPost({ post }) {
     const { state } = useContext(store)
@@ -20,7 +15,7 @@ function MyPost({ post }) {
 
     const deletePost = async () => {
         const response = await authApiDelete(
-            `${endpoints.POSTS}/${post.id}`,
+            `${endpoints.POSTS}${post.id}`,
             state.token
         )
         if (response) {
@@ -32,7 +27,7 @@ function MyPost({ post }) {
 
     const undeletePost = async () => {
         const response = await authApiPatch(
-            `${endpoints.POSTS}/${post.id}`,
+            `${endpoints.POSTS}${post.id}`,
             state.token
         )
         if (response) {
