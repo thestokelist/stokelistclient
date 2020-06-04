@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
-import Post from '../forms/Post'
+import PostForm from '../forms/PostForm'
 import { endpoints } from '../../constants/endpoints'
 import { apiGet } from '../../util/network'
 
@@ -29,7 +29,7 @@ function PostEdit({ match }) {
             {postUpdated ? (
                 <Redirect to={`/post/${postID}`} />
             ) : postDetails ? (
-                <Post
+                <PostForm
                     post={postDetails}
                     responseCallback={setPostUpdated}
                     buttonText="Update"

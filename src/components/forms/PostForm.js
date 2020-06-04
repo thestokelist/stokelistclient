@@ -22,7 +22,7 @@ import PostDescription from './post/PostDescription'
 import PostTitle from './post/PostTitle'
 import Terms from './post/Terms'
 
-function Post({ post, responseCallback, buttonText, editMode }) {
+function PostForm({ post, responseCallback, buttonText, editMode }) {
     const formInit = postToForm(post)
     const { state } = useContext(store)
     const { register, handleSubmit, errors, setValue, watch, reset } = useForm({
@@ -220,4 +220,4 @@ function Post({ post, responseCallback, buttonText, editMode }) {
     return postPreview ? getPreview() : getForm()
 }
 
-export default Post
+export default PostForm
