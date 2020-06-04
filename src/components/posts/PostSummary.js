@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
+import { Link } from 'react-router-dom'
 
 import { DisabledOverlay, GridLayout, FlexBetweenRow } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
-import { HiddenLink } from '../shared/Text'
 import { getDateRangeString } from '../../util/datetime'
 
 const PostDetail = styled.div`
@@ -97,9 +97,9 @@ function PostSummary({ post, disabled, markerNumber }) {
                 <PostDetailsContainer>
                     <ResponsiveRow>
                         <PostTitle>
-                            <HiddenLink to={`/post/${post.id}`}>
+                            <Link to={`/post/${post.id}`}>
                                 {post.title}
-                            </HiddenLink>
+                            </Link>
                         </PostTitle>
                         <PostLocation postDetails={post} />
                     </ResponsiveRow>

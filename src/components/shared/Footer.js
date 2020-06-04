@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { HiddenLink } from '../shared/Text'
+import { Link } from 'react-router-dom'
 
 const FooterContainer = styled.div`
     padding: 0% 6%;
@@ -37,15 +37,15 @@ function Footer() {
     return (
         <FooterContainer>
             <FooterLinkText>
-                <HiddenLink to="/about">
+                <Link to="/about">
                     <p>About</p>
-                </HiddenLink>
-                <HiddenLink to="/terms">
+                </Link>
+                <Link to="/terms">
                     <p>Terms & Privacy</p>
-                </HiddenLink>
-                <HiddenLink to="/commandments">
+                </Link>
+                <Link to="/commandments">
                     <p>Stoke List Commandments</p>
-                </HiddenLink>
+                </Link>
             </FooterLinkText>
             {/*eslint-disable-next-line*/}
             <FooterText>

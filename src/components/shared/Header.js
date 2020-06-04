@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import { store } from '../store'
 import { BlueButton } from '../shared/Buttons'
-import { HiddenLink } from '../shared/Text'
 
 const HeaderContainer = styled.div`
     padding: 0% 6%;
@@ -52,7 +52,7 @@ function Header() {
     const { state } = useContext(store)
     return (
         <HeaderContainer>
-            <HiddenLink to="/">
+            <Link to="/">
                 <HeaderText>
                     {/*eslint-disable-next-line*/}
                     <span>//the </span>
@@ -60,32 +60,32 @@ function Header() {
                         <b>stoke list.</b>
                     </span>
                 </HeaderText>
-            </HiddenLink>
+            </Link>
             <HeaderLinks>
-                <HiddenLink to="/">
+                <Link to="/">
                     <HeaderLinkText>Home</HeaderLinkText>
-                </HiddenLink>
-                <HiddenLink to="/garage">
+                </Link>
+                <Link to="/garage">
                     <HeaderLinkText>Garage Map</HeaderLinkText>
-                </HiddenLink>
+                </Link>
                 <HeaderSpacer />
                 {state.loggedIn && state.isAdmin && (
-                    <HiddenLink to="/moderate">
+                    <Link to="/moderate">
                         <HeaderLinkText>Moderate</HeaderLinkText>
-                    </HiddenLink>
+                    </Link>
                 )}
                 {state.loggedIn ? (
-                    <HiddenLink to="/myposts">
+                    <Link to="/myposts">
                         <HeaderLinkText>Your Posts</HeaderLinkText>
-                    </HiddenLink>
+                    </Link>
                 ) : (
-                    <HiddenLink to="/login">
+                    <Link to="/login">
                         <HeaderLinkText>Login</HeaderLinkText>
-                    </HiddenLink>
+                    </Link>
                 )}
-                <HiddenLink to="/post">
+                <Link to="/post">
                     <BlueButton>Create Post</BlueButton>
-                </HiddenLink>
+                </Link>
             </HeaderLinks>
         </HeaderContainer>
     )
