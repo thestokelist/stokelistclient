@@ -3,13 +3,14 @@ import React, { useEffect, useState, useContext } from 'react'
 import PostSection from '../posts/PostSection'
 import { WhiteBlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
-import { authApiGet } from '../../util/network'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
+import { useNetworkRequest } from '../../hooks'
 
 function MyPosts() {
     const [myPosts, setMyPosts] = useState([])
     const { state, dispatch } = useContext(store)
+    const { authApiGet } = useNetworkRequest()
 
     useEffect(() => {
         async function fetchPosts() {
@@ -21,7 +22,7 @@ function MyPosts() {
             }
         }
         fetchPosts()
-    }, [state.token])
+    }, [state.token,authApiGet])
 
     const logout = () => {
         console.log('Logging out')

@@ -6,14 +6,15 @@ import { Flash } from '../shared/Layouts'
 import MyPosts from '../pages/MyPosts'
 import { useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
-import { apiPost } from '../../util/network'
 import { actionTypes } from '../../constants/actions'
 import { store } from '../store'
+import { useNetworkRequest } from '../../hooks'
 
 function PostValidate({ match }) {
     const postUUID = match.params.uuid
     const [postDetails, setPostDetails] = useState(null)
     const { dispatch } = useContext(store)
+    const { apiPost } = useNetworkRequest()
 
     useMountEffect(() => {
         async function fetchData() {

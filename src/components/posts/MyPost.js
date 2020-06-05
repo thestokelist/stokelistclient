@@ -4,14 +4,16 @@ import { useHistory } from 'react-router-dom'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
 import { AlignRight, ButtonContainer } from '../shared/Layouts'
 import PostSummary from './PostSummary'
-import { authApiDelete, authApiPatch } from '../../util/network'
 import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
+import { useNetworkRequest } from '../../hooks'
 
 function MyPost({ post }) {
+
     const { state } = useContext(store)
     const [deleted, setDeleted] = useState(false)
     const history = useHistory()
+    const { authApiDelete, authApiPatch } = useNetworkRequest()
 
     const deletePost = async () => {
         const response = await authApiDelete(

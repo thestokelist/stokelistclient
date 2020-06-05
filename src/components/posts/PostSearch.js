@@ -6,7 +6,7 @@ import PostSection from '../posts/PostSection'
 import { useSearchReducer } from '../../hooks'
 import { CenteredWhiteBlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
-import { apiGet } from '../../util/network'
+import { useNetworkRequest } from '../../hooks'
 
 const SearchBox = styled.input`
     flex-grow: 1;
@@ -56,6 +56,8 @@ function PostSearch({ children }) {
         () => state.searchLoading || state.searchLoaded,
         [state]
     )
+
+    const { apiGet } = useNetworkRequest()
 
     const doSearch = async (event) => {
         setSearchOffset(0)

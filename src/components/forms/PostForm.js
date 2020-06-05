@@ -7,12 +7,12 @@ import { FlexBetweenRow } from '../shared/Layouts'
 import { WholeFormError } from '../shared/Forms'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
-import { apiPost, authApiPut } from '../../util/network'
 import {
     getDatePortionForInput,
     getTimePortionForInput,
 } from '../../util/datetime'
 import { store } from '../store'
+import { useNetworkRequest } from '../../hooks'
 
 //Form components
 import LocationMap from './post/LocationMap'
@@ -28,12 +28,10 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     const { register, handleSubmit, errors, setValue, watch, reset } = useForm({
         defaultValues: formInit,
     })
-
     const [postPreview, setPostPreview] = useState(null)
-
-    const wholeFormError = Object.keys(errors).length > 0
-
     const { executeRecaptcha } = useGoogleReCaptcha()
+    const { authApiPut, apiPost } = useNetworkRequest()
+    const wholeFormError = Object.keys(errors).length > 0
 
     const formToPost = (formData) => {
         //TODO: Sanitize these inputs as could be html?

@@ -5,9 +5,11 @@ import validator from 'email-validator'
 import { Input, InputContainer } from '../shared/Forms'
 import { BlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
-import { apiPost } from '../../util/network'
+import { useNetworkRequest } from '../../hooks'
 
 function LoginForm({emailSent}) {
+
+    const { apiPost } = useNetworkRequest()
     const { register, handleSubmit, errors, watch } = useForm()
 
     const onSubmit = async (data) => {

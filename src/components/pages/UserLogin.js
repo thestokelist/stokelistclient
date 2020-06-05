@@ -2,11 +2,11 @@ import React, { useState, useContext } from 'react'
 import queryString from 'query-string'
 import { useHistory } from 'react-router-dom'
 
-import { useMountEffect } from  '../../hooks'
+import { useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
-import { apiPost } from '../../util/network'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
+import { useNetworkRequest } from '../../hooks'
 
 function UserLogin({ match, location }) {
     const loginToken = match.params.uuid
@@ -14,12 +14,16 @@ function UserLogin({ match, location }) {
     const { dispatch } = useContext(store)
     const [loginError, setLoginError] = useState(false)
     const history = useHistory()
+    const { apiPost } = useNetworkRequest()
 
     useMountEffect(() => {
         async function login() {
             console.log(`Logging in with login token: ${loginToken}`)
             const bodyObject = { email: parsed.email }
-            const res = await apiPost(`${endpoints.LOGIN}/${loginToken}`,bodyObject)
+            const res = await apiPost(
+                `${endpoints.LOGIN}/${loginToken}`,
+                bodyObject
+            )
             if (res) {
                 console.log(`Logged in with login token: ${loginToken}`)
                 const token = await res.text()

@@ -4,12 +4,13 @@ import { Redirect } from 'react-router-dom'
 import { Title } from '../shared/Text'
 import PostForm from '../forms/PostForm'
 import { endpoints } from '../../constants/endpoints'
-import { apiGet } from '../../util/network'
+import { useNetworkRequest } from '../../hooks'
 
 function PostEdit({ match }) {
     const postID = match.params.id
     const [postDetails, setPostDetails] = useState(null)
     const [postUpdated, setPostUpdated] = useState(false)
+    const { apiGet } = useNetworkRequest()
 
     useEffect(() => {
         async function loadPost() {
@@ -21,7 +22,7 @@ function PostEdit({ match }) {
             }
         }
         loadPost()
-    }, [postID])
+    }, [postID,apiGet])
 
     return (
         <Fragment>
