@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
-import { DisabledOverlay, GridLayout, FlexBetweenRow } from '../shared/Layouts'
+import { FlexBetweenRow } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
+import GrayableContainer from './GrayableContainer'
 import { getDateRangeString } from '../../util/datetime'
 
 const PostDetail = styled.div`
@@ -37,7 +38,6 @@ const PostTextSummary = styled.div`
 const PostSummaryContainer = styled.div`
     display: flex;
     margin: 10px 0;
-    grid-area: 1 / 1;
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 1px 1px 5px #0000001a;
     border: 1px solid #dce2e8;
@@ -67,14 +67,14 @@ const FloatMarker = styled.div`
     left: -10px;
     width: 36px;
     height: 36px;
-    line-height:36px;
+    line-height: 36px;
     border: 3px solid #175e88;
     border-radius: 36px;
     background-color: white;
     font-size: 1.6em;
     color: black;
     text-align: center;
-    font-weight:500;
+    font-weight: 500;
 `
 
 //Generates a full width summary for a post, can be disabled
@@ -86,8 +86,7 @@ function PostSummary({ post, disabled, markerNumber }) {
     const isGarageSale = post.isGarageSale === true
 
     return (
-        <GridLayout>
-            {disabled ? <DisabledOverlay /> : null}
+        <GrayableContainer disabled={disabled}>
             <PostSummaryContainer>
                 <PostImageContainer>
                     {markerNumber && <FloatMarker>{markerNumber}</FloatMarker>}
@@ -97,9 +96,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                 <PostDetailsContainer>
                     <ResponsiveRow>
                         <PostTitle>
-                            <Link to={`/post/${post.id}`}>
-                                {post.title}
-                            </Link>
+                            <Link to={`/post/${post.id}`}>{post.title}</Link>
                         </PostTitle>
                         <PostLocation postDetails={post} />
                     </ResponsiveRow>
@@ -115,7 +112,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                     </PostTextSummary>
                 </PostDetailsContainer>
             </PostSummaryContainer>
-        </GridLayout>
+        </GrayableContainer>
     )
 }
 

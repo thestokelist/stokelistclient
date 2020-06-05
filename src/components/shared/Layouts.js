@@ -40,19 +40,6 @@ export const AlignRight = styled.div`
     justify-content: flex-end;
 `
 
-export const DisabledOverlay = styled.div`
-    float: left;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    opacity: 0.8;
-    grid-area: 1 / 1;
-`
-
-export const GridLayout = styled.div`
-    display: grid;
-`
-
 export const ButtonContainer = styled(FlexBetweenRow)`
     width: 250px;
 `
