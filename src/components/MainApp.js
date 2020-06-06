@@ -1,5 +1,5 @@
-import React, {useCallback, useContext} from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import React, { useCallback, useContext } from 'react'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
 import { store } from './store'
 
@@ -13,6 +13,7 @@ import PostList from './pages/PostList'
 import PostView from './pages/PostView'
 import PostCreate from './pages/PostCreate'
 import PostEdit from './pages/PostEdit'
+import PostReport from './pages/PostReport'
 import GarageMap from './pages/GarageMap'
 import MyPosts from './pages/MyPosts'
 import PostValidate from './pages/PostValidate'
@@ -24,6 +25,8 @@ import Login from './pages/Login'
 import PostSubmitLanding from './pages/landing/PostSubmitLanding'
 import LoginLanding from './pages/landing/LoginLanding'
 import ValidationFailedLanding from './pages/landing/ValidationFailedLanding'
+import ErrorLanding from './pages/landing/ErrorLanding'
+import ReportLanding from './pages/landing/ReportLanding'
 
 // header/footer
 import Header from './shared/Header'
@@ -31,13 +34,11 @@ import Footer from './shared/Footer'
 
 import { StokeListContainer, FlexFullHeightColumn } from './shared/Layouts'
 
-
 function MainApp() {
-
     const { state } = useContext(store)
 
-       //Route which checks user is logged in
-       const LoggedInRoute = useCallback(
+    //Route which checks user is logged in
+    const LoggedInRoute = useCallback(
         ({ component: Component, restricted, ...rest }) => {
             return (
                 <Route
@@ -79,31 +80,61 @@ function MainApp() {
             {/*Header appears at the top of all pages*/}
             <Header />
             <StokeListContainer className="App">
-                {/*Routes related to posts*/}
-                <Route exact path="/" component={PostList} />
-                <Route exact path="/post" component={PostCreate} />
-                <Route exact path="/post/:id" component={PostView} />
-                <Route exact path="/edit/:id" component={PostEdit} />
-                <Route exact path="/post/v/:uuid" component={PostValidate} />
-                <Route exact path="/garage/" component={GarageMap} />
+                <Switch>
+                    {/*Routes related to posts*/}
+                    <Route exact path="/" component={PostList} />
+                    <Route exact path="/post" component={PostCreate} />
+                    {/* (\d+) is regex that restricts these routers to a series of integers */}
+                    <Route exact path="/post/:id(\d+)" component={PostView} />
+                    <Route exact path="/edit/:id(\d+)" component={PostEdit} />
+                    <Route
+                        exact
+                        path="/report/:id(\d+)"
+                        component={PostReport}
+                    />
+                    <Route
+                        exact
+                        path="/post/v/:uuid"
+                        component={PostValidate}
+                    />
+                    <Route exact path="/garage/" component={GarageMap} />
 
-                {/*Routes that require permissions*/}
-                <LoggedInRoute exact path="/myposts" component={MyPosts} />
-                <AdminRoute exact path="/moderate" component={Moderate} />
+                    {/*Routes that require permissions*/}
+                    <LoggedInRoute exact path="/myposts" component={MyPosts} />
+                    <AdminRoute exact path="/moderate" component={Moderate} />
 
-                {/*Routes related to users*/}
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/login/:uuid" component={UserLogin} />
+                    {/*Routes related to users*/}
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login/:uuid" component={UserLogin} />
 
-                {/* Static Routes */}
-                <Route exact path="/about" component={About} />
-                <Route exact path="/terms" component={Terms} />
-                <Route exact path="/commandments" component={Commandments} />
+                    {/* Static Routes */}
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/terms" component={Terms} />
+                    <Route
+                        exact
+                        path="/commandments"
+                        component={Commandments}
+                    />
 
-                {/* Landng Pages */}
-                <Route exact path="/submitted" component={PostSubmitLanding} />
-                <Route exact path="/loginemail" component={LoginLanding} />
-                <Route exact path="/validationfailed" component={ValidationFailedLanding} />
+                    {/* Landng Pages */}
+                    <Route
+                        exact
+                        path="/submitted"
+                        component={PostSubmitLanding}
+                    />
+                    <Route exact path="/loginemail" component={LoginLanding} />
+                    <Route
+                        exact
+                        path="/validationfailed"
+                        component={ValidationFailedLanding}
+                    />
+                    <Route
+                        exact
+                        path="/reported"
+                        component={ReportLanding}
+                    />
+                    <Route component={ErrorLanding} />
+                </Switch>
             </StokeListContainer>
             <Footer />
         </FlexFullHeightColumn>

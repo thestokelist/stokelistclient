@@ -1,10 +1,10 @@
-import React, { useState, Fragment, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
 import PostForm from '../forms/PostForm'
 import { endpoints } from '../../constants/endpoints'
-import { useNetworkRequest } from '../../hooks'
+import { useNetworkRequest, useMountEffect } from '../../hooks'
 
 function PostEdit({ match }) {
     const postID = match.params.id
@@ -12,7 +12,7 @@ function PostEdit({ match }) {
     const [postUpdated, setPostUpdated] = useState(false)
     const { apiGet } = useNetworkRequest()
 
-    useEffect(() => {
+    useMountEffect(() => {
         async function loadPost() {
             console.log('Loading post details')
             const res = await apiGet(`${endpoints.POSTS}${postID}`)
@@ -22,7 +22,7 @@ function PostEdit({ match }) {
             }
         }
         loadPost()
-    }, [postID,apiGet])
+    })
 
     return (
         <Fragment>
