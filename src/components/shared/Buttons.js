@@ -31,3 +31,9 @@ export const WhiteRedButton = styled(WhiteBlueButton)`
 export const CenteredWhiteBlueButton = styled(WhiteBlueButton)`
     margin: 0 auto;
 `
+
+export const RedButton = styled(WhiteBlueButton)`
+    border: 1px solid #C30C2F;
+    background: #C30C2F 0% 0% no-repeat padding-box;
+    color: #ffffff;
+`

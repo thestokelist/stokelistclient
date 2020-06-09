@@ -19,6 +19,7 @@ import MyPosts from './pages/MyPosts'
 import PostValidate from './pages/PostValidate'
 import UserLogin from './pages/UserLogin'
 import Moderate from './pages/Moderate'
+import Judge from './pages/Judge'
 import Login from './pages/Login'
 
 //landing pages
@@ -102,6 +103,7 @@ function MainApp() {
                     {/*Routes that require permissions*/}
                     <LoggedInRoute exact path="/myposts" component={MyPosts} />
                     <AdminRoute exact path="/moderate" component={Moderate} />
+                    <AdminRoute exact path="/judge/:id" component={Judge} />
 
                     {/*Routes related to users*/}
                     <Route exact path="/login" component={Login} />

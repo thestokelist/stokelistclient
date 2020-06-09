@@ -2,8 +2,6 @@ import React, { useState, Fragment, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
-import { Flash } from '../shared/Layouts'
-import MyPosts from '../pages/MyPosts'
 import { useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
 import { actionTypes } from '../../constants/actions'
@@ -51,12 +49,7 @@ function PostValidate({ match }) {
         } else if (postDetails === false) {
             content = <Redirect to="/validationfailed" />
         } else {
-            content = (
-                <Fragment>
-                    <Flash>Your email address has been confirmed</Flash>
-                    <MyPosts />
-                </Fragment>
-            )
+            content = <Redirect to="/myposts" />
         }
         return content
     }

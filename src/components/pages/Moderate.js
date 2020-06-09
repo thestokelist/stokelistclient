@@ -1,11 +1,12 @@
 import React, { useState, useContext, Fragment } from 'react'
 import styled from 'styled-components'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
 import { FormError } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { FlexRow, ButtonContainer } from '../shared/Layouts'
+import { FlexRow, ButtonContainer, FlexBetweenRow } from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import PostDetail from '../posts/PostDetail'
@@ -23,6 +24,13 @@ const MarginButtonContainer = styled(ButtonContainer)`
     margin-bottom: 1em;
 `
 
+const PostsLink = styled.span`
+    text-decoration: underline;
+    font-size: 1.2em;
+    color: #175e88;
+    font-weight: 600;
+`
+
 function Moderate() {
     const [modQueue, setModQueue] = useState([])
     const { state } = useContext(store)
@@ -30,7 +38,6 @@ function Moderate() {
     const [error, setError] = useState(false)
 
     const currentPost = modQueue[postCounter]
-    console.log(currentPost)
     const currentPostDeleted = currentPost && currentPost.deleted === true
     const currentPostKept = currentPost && currentPost.kept === true
 
@@ -55,7 +62,7 @@ function Moderate() {
         const postId = currentPost.id
         //make network request to set post as unmoderated
         const response = await authApiPut(
-            `${endpoints.POSTS}${postId}${endpoints.APPROVE}`,
+            endpoints.APPROVE + postId,
             {},
             state.token
         )
@@ -119,18 +126,31 @@ function Moderate() {
                             onClick={goLeft}
                         />
                         <ModContainer>
-                            <MarginButtonContainer>
-                                {!currentPostKept && (
-                                    <WhiteBlueButton onClick={keepCurrentPost}>
-                                        Keep
-                                    </WhiteBlueButton>
-                                )}
-                                {!currentPostDeleted && (
-                                    <WhiteRedButton onClick={deleteCurrentPost}>
-                                        Delete
-                                    </WhiteRedButton>
-                                )}
-                            </MarginButtonContainer>
+                            <FlexBetweenRow>
+                                <MarginButtonContainer>
+                                    {!currentPostKept && (
+                                        <WhiteBlueButton
+                                            onClick={keepCurrentPost}
+                                        >
+                                            Keep
+                                        </WhiteBlueButton>
+                                    )}
+                                    {!currentPostDeleted && (
+                                        <WhiteRedButton
+                                            onClick={deleteCurrentPost}
+                                        >
+                                            Delete
+                                        </WhiteRedButton>
+                                    )}
+                                </MarginButtonContainer>
+                                <Link
+                                    to={`/judge/${currentPost.id}`}
+                                >
+                                    <PostsLink>
+                                        Other Reported Posts for this User >>
+                                    </PostsLink>
+                                </Link>
+                            </FlexBetweenRow>
                             {error && (
                                 <FormError>Error moderating post</FormError>
                             )}
