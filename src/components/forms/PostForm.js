@@ -4,7 +4,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { BlueButton, WhiteBlueButton } from '../shared/Buttons'
 import { FlexBetweenRow } from '../shared/Layouts'
-import { WholeFormError } from '../shared/Forms'
+import { WholeFormError, FormError } from '../shared/Forms'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
 import {
@@ -29,6 +29,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
         defaultValues: formInit,
     })
     const [postPreview, setPostPreview] = useState(null)
+    const [submitError, setSubmitError] = useState(false)
     const { executeRecaptcha } = useGoogleReCaptcha()
     const { authApiPut, apiPost } = useNetworkRequest()
     const wholeFormError = Object.keys(errors).length > 0
@@ -128,6 +129,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     }
 
     const doSubmit = async (data) => {
+        setSubmitError(false)
         let response
         if (editMode) {
             response = await authApiPut(
@@ -141,6 +143,8 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
         if (response) {
             responseCallback(postPreview)
             console.log('New post successfully submitted')
+        } else {
+            setSubmitError(true)
         }
     }
 
@@ -209,6 +213,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                         {buttonText}
                     </BlueButton>
                 </FlexBetweenRow>
+                {submitError && <FormError>Error submitting post</FormError>}
                 <hr />
                 <PostDetail postDetails={postPreview} notSubmitted={true} />
             </Fragment>

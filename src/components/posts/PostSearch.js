@@ -105,13 +105,14 @@ function PostSearch({ children }) {
             return <div>Loading...</div>
         } else if (state.searchLoaded) {
             const searchTitle = `Search Results: ${searchTerm}`
+            const showMoreButton = searchPosts.length > 0 && searchPosts.length % 50 === 0
             return (
                 <PostSection
                     title={searchTitle}
                     posts={searchPosts}
                     hideEmpty={false}
                 >
-                    {searchPosts.length % 50 === 0 && (
+                    {showMoreButton && (
                         <CenteredWhiteBlueButton onClick={loadMoreSearchPosts}>
                             More Results
                         </CenteredWhiteBlueButton>

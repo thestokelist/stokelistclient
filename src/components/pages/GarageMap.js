@@ -39,11 +39,13 @@ function GarageMap() {
         }
     }
 
+    const currentSales = filteredSales || garageSales
+
     return (
         <Fragment>
             <PostSection
                 title="Garage Sale Map"
-                posts={filteredSales || garageSales}
+                posts={currentSales}
                 hideEmpty={false}
                 style={{ display: 'inline' }}
                 hideDates={true}
@@ -64,7 +66,7 @@ function GarageMap() {
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {garageSales.map((sale, index) => (
+                    {currentSales.map((sale, index) => (
                         <GeoJSON
                             data={sale.exactLocation}
                             key={sale.id}
