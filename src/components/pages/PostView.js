@@ -7,7 +7,7 @@ import { WhiteBlueButton } from '../shared/Buttons'
 import PostDetail from '../posts/PostDetail'
 import PostSearch from '../posts/PostSearch'
 import { endpoints } from '../../constants/endpoints'
-import { FlexBetweenRow, FlexRow } from '../shared/Layouts'
+import { ResponsiveBetweenRow, FlexRow } from '../shared/Layouts'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
 
 import {
@@ -61,7 +61,7 @@ function PostView({ match }) {
                 <PostDetail postDetails={postDetails} />
             )}
             <Label>Share This Post</Label>
-            <FlexBetweenRow>
+            <ResponsiveBetweenRow>
                 <FlexRow>
                     <EmailShareButton url={window.location.href}>
                         <EmailIcon size={30} round={true} />
@@ -90,7 +90,7 @@ function PostView({ match }) {
                         Report Post
                     </WhiteBlueButton>
                 </FlexRow>
-            </FlexBetweenRow>
+            </ResponsiveBetweenRow>
         </PostSearch>
     )
 }

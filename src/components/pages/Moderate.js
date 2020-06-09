@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { Title } from '../shared/Text'
 import { FormError } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { FlexRow, ButtonContainer, FlexBetweenRow } from '../shared/Layouts'
+import { FlexRow, ButtonContainer, ResponsiveBetweenRow } from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import PostDetail from '../posts/PostDetail'
@@ -126,7 +126,7 @@ function Moderate() {
                             onClick={goLeft}
                         />
                         <ModContainer>
-                            <FlexBetweenRow>
+                            <ResponsiveBetweenRow>
                                 <MarginButtonContainer>
                                     {!currentPostKept && (
                                         <WhiteBlueButton
@@ -150,7 +150,7 @@ function Moderate() {
                                         Other Reported Posts for this User >>
                                     </PostsLink>
                                 </Link>
-                            </FlexBetweenRow>
+                            </ResponsiveBetweenRow>
                             {error && (
                                 <FormError>Error moderating post</FormError>
                             )}

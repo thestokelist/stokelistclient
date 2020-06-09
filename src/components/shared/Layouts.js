@@ -24,6 +24,13 @@ export const FlexBetweenRow = styled(FlexRow)`
     justify-content: space-between;
 `
 
+export const ResponsiveBetweenRow = styled(FlexBetweenRow)`
+    /* Small Devices, Tablets */
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+`
+
 export const Flash = styled.div`
     width: 100%;
     vertical-align: middle;
@@ -42,4 +49,22 @@ export const AlignRight = styled.div`
 
 export const ButtonContainer = styled(FlexBetweenRow)`
     width: 250px;
+`
+
+export const NoEscape = styled.div`
+    /* https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 `

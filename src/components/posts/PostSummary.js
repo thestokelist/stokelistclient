@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
-import { FlexBetweenRow } from '../shared/Layouts'
+import { ResponsiveBetweenRow, NoEscape } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
 import GrayableContainer from './GrayableContainer'
@@ -54,13 +54,6 @@ const PostTitle = styled.div`
     font-weight: bold;
 `
 
-const ResponsiveRow = styled(FlexBetweenRow)`
-    /* Small Devices, Tablets */
-    @media only screen and (max-width: 768px) {
-        flex-direction: column;
-    }
-`
-
 const FloatMarker = styled.div`
     position: absolute;
     top: -10px;
@@ -94,12 +87,18 @@ function PostSummary({ post, disabled, markerNumber }) {
                     <PostImage src={imgURL} alt={'thumbnail'} />
                 </PostImageContainer>
                 <PostDetailsContainer>
-                    <ResponsiveRow>
+                    <ResponsiveBetweenRow>
                         <PostTitle>
-                            <Link to={`/post/${post.id}`}>{post.title}</Link>
+                            <NoEscape>
+                                <Link to={`/post/${post.id}`}>
+                                    {post.title}
+                                </Link>
+                            </NoEscape>
                         </PostTitle>
-                        <PostLocation postDetails={post} />
-                    </ResponsiveRow>
+                        <NoEscape>
+                            <PostLocation postDetails={post} />
+                        </NoEscape>
+                    </ResponsiveBetweenRow>
                     <PostDetail>
                         {isGarageSale ? (
                             getDateRangeString(post.startTime, post.endTime)
@@ -108,7 +107,9 @@ function PostSummary({ post, disabled, markerNumber }) {
                         )}
                     </PostDetail>
                     <PostTextSummary>
-                        <ReactMarkdown source={post.description} />
+                        <NoEscape>
+                            <ReactMarkdown source={post.description} />
+                        </NoEscape>
                     </PostTextSummary>
                 </PostDetailsContainer>
             </PostSummaryContainer>

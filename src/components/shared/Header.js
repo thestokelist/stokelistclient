@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { store } from '../store'
 import { BlueButton } from '../shared/Buttons'
+import { FlexRow } from '../shared/Layouts'
 
 const HeaderContainer = styled.div`
     padding: 0% 6%;
@@ -34,6 +35,9 @@ const HeaderLinks = styled.div`
     display: flex;
     align-items: center;
     color: #595959;
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+    }
 `
 
 const HeaderText = styled.div`
@@ -46,6 +50,9 @@ const HeaderSpacer = styled.div`
     background: #595959;
     height: 34px;
     width: 2px;
+    @media only screen and (max-width: 768px) {
+        display: none;
+    }
 `
 
 function Header() {
@@ -62,30 +69,34 @@ function Header() {
                 </HeaderText>
             </Link>
             <HeaderLinks>
-                <Link to="/">
-                    <HeaderLinkText>Home</HeaderLinkText>
-                </Link>
-                <Link to="/garage">
-                    <HeaderLinkText>Garage Map</HeaderLinkText>
-                </Link>
-                <HeaderSpacer />
-                {state.loggedIn && state.isAdmin && (
-                    <Link to="/moderate">
-                        <HeaderLinkText>Moderate</HeaderLinkText>
+                <FlexRow>
+                    <Link to="/">
+                        <HeaderLinkText>Home</HeaderLinkText>
                     </Link>
-                )}
-                {state.loggedIn ? (
-                    <Link to="/myposts">
-                        <HeaderLinkText>Your Posts</HeaderLinkText>
+                    <Link to="/garage">
+                        <HeaderLinkText>Garage Map</HeaderLinkText>
                     </Link>
-                ) : (
-                    <Link to="/login">
-                        <HeaderLinkText>Login</HeaderLinkText>
+                    <HeaderSpacer />
+                </FlexRow>
+                <FlexRow>
+                    {state.loggedIn && state.isAdmin && (
+                        <Link to="/moderate">
+                            <HeaderLinkText>Moderate</HeaderLinkText>
+                        </Link>
+                    )}
+                    {state.loggedIn ? (
+                        <Link to="/myposts">
+                            <HeaderLinkText>Your Posts</HeaderLinkText>
+                        </Link>
+                    ) : (
+                        <Link to="/login">
+                            <HeaderLinkText>Login</HeaderLinkText>
+                        </Link>
+                    )}
+                    <Link to="/post">
+                        <BlueButton>Create Post</BlueButton>
                     </Link>
-                )}
-                <Link to="/post">
-                    <BlueButton>Create Post</BlueButton>
-                </Link>
+                </FlexRow>
             </HeaderLinks>
         </HeaderContainer>
     )
