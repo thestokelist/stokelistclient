@@ -21,6 +21,7 @@ import PostEmail from './post/PostEmail'
 import PostDescription from './post/PostDescription'
 import PostTitle from './post/PostTitle'
 import Terms from './post/Terms'
+import Upload from './post/Upload'
 
 function PostForm({ post, responseCallback, buttonText, editMode }) {
     const formInit = postToForm(post)
@@ -173,7 +174,12 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                     setValue={setValue}
                     watch={watch}
                 />
-                {/*TODO: Images/Media*/}
+                <Upload
+                    errors={errors}
+                    register={register}
+                    setValue={setValue}
+                    watch={watch}
+                />
                 <PriceGarage
                     errors={errors}
                     setValue={setValue}

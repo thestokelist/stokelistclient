@@ -31,7 +31,7 @@ function ReportForm({ id }) {
     const onSubmit = async (data) => {
         const postData = { reason: data.reason, comment: data.comment }
         const response = await apiPost(
-            `${endpoints.POSTS}${id}${endpoints.REPORT}`,
+            `${endpoints.REPORT}${id}`,
             postData
         )
         if (response) {

@@ -67,10 +67,11 @@ function GarageMap() {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     {currentSales.map((sale, index) => (
+                        sale.exactLocation != null ? 
                         <GeoJSON
                             data={sale.exactLocation}
                             key={sale.id}
-                            pointToLayer={(feature, latlng) =>
+                            pointToLayer={(_, latlng) =>
                                 L.circleMarker(latlng, {
                                     color: '#175e88',
                                     radius: '18',
@@ -85,7 +86,7 @@ function GarageMap() {
                             <Popup>
                                 <PostSummary post={sale} />
                             </Popup>
-                        </GeoJSON>
+                        </GeoJSON> : null
                     ))}
                 </Map>
             </MapContainer>

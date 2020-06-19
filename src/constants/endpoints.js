@@ -6,8 +6,9 @@ export const endpoints = Object.freeze({
     STICKY: '/posts/sticky',
     VALIDATE: '/posts/v',
     GARAGE: '/posts/garage',
-    REPORT: '/report',
+    REPORT: '/report/',
     MODERATE: '/admin/moderate/',
     APPROVE: '/admin/approve/',
     JUDGE: '/admin/judge/',
+    UPLOAD: '/upload/'
 });
