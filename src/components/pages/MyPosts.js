@@ -6,8 +6,10 @@ import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
+import { FaSpinner } from 'react-icons/fa'
 
 function MyPosts() {
+    const [loading, setLoading] = useState(true)
     const [myPosts, setMyPosts] = useState([])
     const { state, dispatch } = useContext(store)
     const { authApiGet } = useNetworkRequest()
@@ -19,6 +21,7 @@ function MyPosts() {
             if (response) {
                 const responseObject = await response.json()
                 setMyPosts(responseObject)
+                setLoading(false)
             }
         }
         fetchPosts()
@@ -35,7 +38,9 @@ function MyPosts() {
         return <WhiteBlueButton onClick={logout}>Log Out</WhiteBlueButton>
     }
 
-    return (
+    return loading ? (
+        <FaSpinner size={40} className="fa-spin" />
+    ) : (
         <PostSection
             posts={myPosts}
             adminMode={true}

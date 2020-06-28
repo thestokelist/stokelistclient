@@ -4,7 +4,7 @@ export const endpoints = Object.freeze({
     MY_POSTS: '/posts/mine',
     SEARCH: '/posts/search',
     STICKY: '/posts/sticky',
-    VALIDATE: '/posts/v',
+    VALIDATE: '/posts/v/',
     GARAGE: '/posts/garage',
     REPORT: '/report/',
     MODERATE: '/admin/moderate/',

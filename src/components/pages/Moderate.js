@@ -6,7 +6,11 @@ import { Link } from 'react-router-dom'
 import { Title } from '../shared/Text'
 import { FormError } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { FlexRow, ButtonContainer, ResponsiveBetweenRow } from '../shared/Layouts'
+import {
+    FlexRow,
+    ButtonContainer,
+    ResponsiveBetweenRow,
+} from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import PostDetail from '../posts/PostDetail'
@@ -143,11 +147,9 @@ function Moderate() {
                                         </WhiteRedButton>
                                     )}
                                 </MarginButtonContainer>
-                                <Link
-                                    to={`/judge/${currentPost.id}`}
-                                >
+                                <Link to={`/judge/${currentPost.id}`}>
                                     <PostsLink>
-                                        Other Reported Posts for this User >>
+                                        {'Other Reported Posts for this User >>'}
                                     </PostsLink>
                                 </Link>
                             </ResponsiveBetweenRow>

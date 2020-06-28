@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import PostSection from '../posts/PostSection'
 import PostSearch from '../posts/PostSearch'
@@ -15,9 +15,7 @@ function PostList() {
         loadStickyPosts()
     })
 
-    const getLatestSection = () => {
-        return (
-            <Fragment>
+    return <PostSearch>
                 <PostSection
                     title="Sticky Posts"
                     posts={stickyPosts}
@@ -33,15 +31,7 @@ function PostList() {
                         Show More
                     </CenteredWhiteBlueButton>
                 </PostSection>
-            </Fragment>
-        )
-    }
-
-    return (
-        <Fragment>
-            <PostSearch>{getLatestSection()}</PostSearch>
-        </Fragment>
-    )
+            </PostSearch>
 }
 
 export default PostList

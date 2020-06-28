@@ -8,6 +8,7 @@ import { getDateRangeString, getPrettyDateString } from '../../util/datetime'
 import PostPrice from './PostPrice'
 import PostLocation from './PostLocation'
 import PostCopy from './PostCopy'
+import PostPhoto from './PostPhoto'
 
 const PostTitle = styled.div`
     color: #434653;
@@ -31,6 +32,7 @@ const PostText = styled.div`
     padding: 1em 0.5em;
     width: 70%;
     min-height: 3em;
+    box-sizing: border-box;
 `
 
 const PostDateTime = styled.div`
@@ -40,23 +42,10 @@ const PostDateTime = styled.div`
     margin: 5px 0px;
 `
 
-const PostImg = styled.img`
-    max-height: 400px;
-    margin: 5px 0px;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 5px;
-    max-width: 100%;
-`
-
 function PostDetail({ postDetails, notSubmitted }) {
     const post = postDetails
     const isGarageSale = post.isGarageSale === true
     const submitted = !notSubmitted
-
-    const imgURL = () => {
-        return 'http://list.thestoke.ca/photos/' + post.id + '/original.jpg'
-    }
 
     return post ? (
         <Fragment>
@@ -75,9 +64,7 @@ function PostDetail({ postDetails, notSubmitted }) {
             </FlexBetweenRow>
 
             <PostLocation postDetails={post} />
-            {post.photoFileSize !== null && submitted && (
-                <PostImg src={imgURL()} alt="Post" />
-            )}
+            <PostPhoto postDetails={post} />
             <Label>Post Description</Label>
             <PostText>
                 <ReactMarkdown source={post.description} />

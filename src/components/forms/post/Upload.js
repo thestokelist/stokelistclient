@@ -1,42 +1,55 @@
-import React from 'react'
-import styled from 'styled-components'
-import ImageUploader from 'react-images-upload'
+import React, { useState, Fragment } from 'react'
+import { FaPlusCircle } from 'react-icons/fa'
+import { useFieldArray } from 'react-hook-form'
 
-import { Label, InputContainer, SubLabel } from '../../shared/Forms'
+import { Label, SubLabel, InputContainer, FormError } from '../../shared/Forms'
+import Media from './Media'
+import MediaUpload from './MediaUpload'
 
-const UploadContainer = styled.div`
-    width: 20%;
-`
-function Upload({ errors, register, watch }) {
-    const dropHandler = async (file) => {
-        console.log(file)
-        const formData = new FormData()
-        formData.append('media', file[0])
+function Upload({ errors, register, control }) {
+    const [active, setActive] = useState(false)
 
-        const response = await fetch('http://localhost:3010/upload', {
-            method: 'POST',
-            body: formData,
-        })
-        const media = await response.json()
-        console.log(media)
-    }
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: 'media',
+        keyName: "id",
+    })
+    const attachmentSpace = fields.length < 10
+
     return (
-        <InputContainer>
+        <Fragment>
             <Label>
-                Add Images <i>optional</i>
+                Add Images <i>(optional)</i>
                 <SubLabel> - You can add up to 10 Images</SubLabel>
             </Label>
-            <UploadContainer>
-                <ImageUploader
-                    withIcon={true}
-                    buttonText="Click to Upload"
-                    onChange={dropHandler}
-                    imgExtension={['.jpg', '.gif', '.png']}
-                    maxFileSize={5242880}
-                    singleImage={true}
+            <FormError>
+                {errors.media && 'Something went wrong with your uploads'}
+            </FormError>
+            {fields.map((m, i) => (
+                /* Important: Key must match the id defined in useFieldArray */
+                <div key={m.id}>
+                <Media
+                    media={m}
+                    index={i}
+                    deleteMedia={() => remove(i)}
+                    control={control}
                 />
-            </UploadContainer>
-        </InputContainer>
+                </div>
+
+            ))}
+            {active ? (
+                attachmentSpace && <MediaUpload
+                    addMedia={append}
+                    index={fields.length}
+                    close={() => setActive(false)}
+                />
+            ) : (
+                attachmentSpace && <InputContainer onClick={() => setActive(true)}>
+                    <FaPlusCircle size={20} color={'#175E88'} />
+                    <SubLabel>Upload an Image</SubLabel>
+                </InputContainer>
+            )}
+        </Fragment>
     )
 }
 

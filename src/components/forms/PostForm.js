@@ -26,7 +26,7 @@ import Upload from './post/Upload'
 function PostForm({ post, responseCallback, buttonText, editMode }) {
     const formInit = postToForm(post)
     const { state } = useContext(store)
-    const { register, handleSubmit, errors, setValue, watch, reset } = useForm({
+    const { control, register, handleSubmit, errors, setValue, watch, reset } = useForm({
         defaultValues: formInit,
     })
     const [postPreview, setPostPreview] = useState(null)
@@ -66,6 +66,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                 ? new Date(formData.endTime + ' ' + formData.garageDate)
                 : null
         const isGarageSale = formData.priceRadio === 'priceGarage'
+        const media = formData.media
 
         const postData = {
             title,
@@ -77,6 +78,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
             isGarageSale,
             startTime,
             endTime,
+            media,
         }
 
         return postData
@@ -116,6 +118,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
         if (editMode) {
             delete postData.email
         }
+        console.log(postData)
         setPostPreview(postData)
     }
 
@@ -177,8 +180,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                 <Upload
                     errors={errors}
                     register={register}
-                    setValue={setValue}
-                    watch={watch}
+                    control={control}
                 />
                 <PriceGarage
                     errors={errors}
