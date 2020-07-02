@@ -55,13 +55,13 @@ function PostSummary({ post, markerNumber }) {
         } else if (post.photoFileSize) {
             return [
                 {
-                    link: `http://list.thestoke.ca/photos/${post.id}/thumb.jpg`,
+                    thumbLink: `http://list.thestoke.ca/photos/${post.id}/thumb.jpg`,
                 },
             ]
         } else {
             return [
                 {
-                    link: `/logo.png`,
+                    thumbLink: `/logo.png`,
                 },
             ]
         }
@@ -75,7 +75,7 @@ function PostSummary({ post, markerNumber }) {
                 media.length > 1 && <InsideMarker>{`+${media.length-1}`}</InsideMarker>
             )}
 
-            <PostImage src={media[0].link} alt={'thumbnail'} />
+            <PostImage src={media[0].thumbLink} alt={'thumbnail'} />
         </PostImageContainer>
     )
 }

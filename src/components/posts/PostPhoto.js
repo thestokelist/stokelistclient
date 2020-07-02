@@ -88,6 +88,7 @@ function PostPhoto({ postDetails }) {
             return [
                 {
                     link: `http://list.thestoke.ca/photos/${postDetails.id}/original.jpg`,
+                    thumbLink: `http://list.thestoke.ca/photos/${postDetails.id}/thumb.jpg`,
                     name: '',
                 },
             ]
@@ -157,7 +158,7 @@ function PostPhoto({ postDetails }) {
                             key={media.id}
                             onClick={() => incrementIndex(index + 1)}
                         >
-                            <SidebarPhotoImg src={media.link} />
+                            <SidebarPhotoImg src={media.thumbLink} />
                         </SidebarPhoto>
                     ))}
                 </Sidebar>

@@ -62,6 +62,13 @@ function Moderate() {
         fetchPosts()
     })
 
+    const replaceQueueAt = (index,newValue) => {
+        const newModQueue = [...modQueue]
+        newModQueue.splice(index, 1, newValue)
+        return newModQueue
+    }
+
+
     const keepCurrentPost = async () => {
         const postId = currentPost.id
         //make network request to set post as unmoderated
@@ -72,8 +79,7 @@ function Moderate() {
         )
         if (response) {
             const modPost = Object.assign({ kept: true }, currentPost)
-            modQueue.splice(postCounter, 1, modPost)
-            setModQueue(modQueue)
+            setModQueue(replaceQueueAt(postCounter,modPost))
             goRight()
         } else {
             setError(true)
@@ -85,14 +91,12 @@ function Moderate() {
         const postId = currentPost.id
         //make network request to delete post
         const response = await authApiDelete(
-            `${endpoints.POSTS}${postId}`,
+            endpoints.POSTS + postId,
             state.token
         )
         if (response) {
             const modPost = Object.assign({ deleted: true }, currentPost)
-            const newModQueue = [...modQueue]
-            newModQueue.splice(postCounter, 1, modPost)
-            setModQueue(newModQueue)
+            setModQueue(replaceQueueAt(postCounter,modPost))
             goRight()
         } else {
             setError(true)
@@ -149,7 +153,9 @@ function Moderate() {
                                 </MarginButtonContainer>
                                 <Link to={`/judge/${currentPost.id}`}>
                                     <PostsLink>
-                                        {'Other Reported Posts for this User >>'}
+                                        {
+                                            'Other Reported Posts for this User >>'
+                                        }
                                     </PostsLink>
                                 </Link>
                             </ResponsiveBetweenRow>

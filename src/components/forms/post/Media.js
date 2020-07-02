@@ -70,7 +70,7 @@ function Media({ media, index, deleteMedia, control }) {
         <InputContainer>
             <UploadContainer>
                 <ImageComponent>
-                    <UploadImg src={media.link} alt="uploaded" />
+                    <UploadImg src={media.thumbLink} alt="uploaded" />
                 </ImageComponent>
                 <TextComponent>
                     <UploadText>Add Description - {indexText}</UploadText>
@@ -103,6 +103,13 @@ function Media({ media, index, deleteMedia, control }) {
                 control={control}
                 type="hidden"
                 defaultValue={media.link}
+            />
+            <Controller
+                as={Input}
+                name={`media[${index}].thumbLink`}
+                control={control}
+                type="hidden"
+                defaultValue={media.thumbLink}
             />
             <Controller
                 as={Input}
