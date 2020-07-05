@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
-import { Title } from '../shared/Text'
+import { Title } from '../../shared/Text'
 
 const HeaderText = styled.div`
     color: #434653;

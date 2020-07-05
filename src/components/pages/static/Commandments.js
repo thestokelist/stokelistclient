@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Title } from '../shared/Text'
+import { Title } from '../../shared/Text'
 import { Link } from 'react-router-dom'
 
 function Commandments() {

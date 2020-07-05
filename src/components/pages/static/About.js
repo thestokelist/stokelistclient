@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Title } from '../shared/Text'
+import { Title } from '../../shared/Text'
 
 function About() {
     return (

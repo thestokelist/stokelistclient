@@ -4,9 +4,9 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 import { store } from './store'
 
 // static pages
-import Commandments from './pages/Commandments'
-import About from './pages/About'
-import Terms from './pages/Terms'
+import Commandments from './pages/static/Commandments'
+import About from './pages/static/About'
+import Terms from './pages/static/Terms'
 
 // pages
 import PostList from './pages/PostList'
@@ -23,11 +23,11 @@ import Judge from './pages/Judge'
 import Login from './pages/Login'
 
 //landing pages
-import PostSubmitLanding from './pages/landing/PostSubmitLanding'
-import LoginLanding from './pages/landing/LoginLanding'
-import ValidationFailedLanding from './pages/landing/ValidationFailedLanding'
-import ErrorLanding from './pages/landing/ErrorLanding'
-import ReportLanding from './pages/landing/ReportLanding'
+import PostSubmitLanding from './pages/static/PostSubmitLanding'
+import LoginLanding from './pages/static/LoginLanding'
+import ValidationFailedLanding from './pages/static/ValidationFailedLanding'
+import ErrorLanding from './pages/static/ErrorLanding'
+import ReportLanding from './pages/static/ReportLanding'
 
 // header/footer
 import Header from './shared/Header'
