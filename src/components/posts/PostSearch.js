@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { FaSearch } from 'react-icons/fa'
 
 import PostSection from '../posts/PostSection'
+import Loading from '../shared/Loading'
 import { useSearchReducer } from '../../hooks'
 import { CenteredWhiteBlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
@@ -102,10 +103,11 @@ function PostSearch({ children }) {
 
     const getSearchSection = () => {
         if (state.searchLoading) {
-            return <div>Loading...</div>
+            return <Loading />
         } else if (state.searchLoaded) {
             const searchTitle = `Search Results: ${searchTerm}`
-            const showMoreButton = searchPosts.length > 0 && searchPosts.length % 50 === 0
+            const showMoreButton =
+                searchPosts.length > 0 && searchPosts.length % 50 === 0
             return (
                 <PostSection
                     title={searchTitle}

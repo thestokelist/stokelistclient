@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, Fragment } from 'react'
 
 import PostSection from '../posts/PostSection'
 import { WhiteBlueButton } from '../shared/Buttons'
@@ -6,13 +6,17 @@ import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
-import { FaSpinner } from 'react-icons/fa'
+import { Flash } from '../shared/Layouts'
+import Loading from '../shared/Loading'
 
-function MyPosts() {
+function MyPosts({ location }) {
     const [loading, setLoading] = useState(true)
     const [myPosts, setMyPosts] = useState([])
     const { state, dispatch } = useContext(store)
-    const { authApiGet } = useNetworkRequest()
+    const { authApiGet, authApiDelete } = useNetworkRequest()
+    const fromValidation = !!(
+        location.state && location.state.validated === true
+    )
 
     useMountEffect(() => {
         async function fetchPosts() {
@@ -21,8 +25,8 @@ function MyPosts() {
             if (response) {
                 const responseObject = await response.json()
                 setMyPosts(responseObject)
-                setLoading(false)
             }
+            setLoading(false)
         }
         fetchPosts()
     })
@@ -34,19 +38,41 @@ function MyPosts() {
         })
     }
 
-    const getLogoutButton = () => {
-        return <WhiteBlueButton onClick={logout}>Log Out</WhiteBlueButton>
+    const logoutEverywhere = async () => {
+        console.log('Logging out everywhere')
+        const response = await authApiDelete(endpoints.LOGIN, state.token)
+        if (response) {
+            console.log('Logged out everywhere')
+            dispatch({
+                type: actionTypes.LOGOUT,
+            })
+        }
     }
 
     return loading ? (
-        <FaSpinner size={40} className="fa-spin" />
+        <Loading />
     ) : (
-        <PostSection
-            posts={myPosts}
-            adminMode={true}
-            title={'Your Posts'}
-            titleButton={getLogoutButton()}
-        />
+        <Fragment>
+            {fromValidation && (
+                <Flash>Your email address has been confirmed!</Flash>
+            )}
+            <PostSection
+                posts={myPosts}
+                adminMode={true}
+                emptyText={`No Posts Found. First time users require moderation approval, and won't appear here until approved`}
+                title={'Your Posts'}
+                titleButton={
+                    <div>
+                        <WhiteBlueButton onClick={logout}>
+                            Log Out
+                        </WhiteBlueButton>
+                        <WhiteBlueButton onClick={logoutEverywhere}>
+                            Log Out Everywhere!
+                        </WhiteBlueButton>
+                    </div>
+                }
+            />
+        </Fragment>
     )
 }
 

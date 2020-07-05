@@ -24,10 +24,13 @@ const CopiedText = styled.div`
 function PostDetail({ postDetails }) {
     const post = postDetails
 
+    const email = process.env.REACT_APP_EMAIL
+    const postEmail = `${email.split('@')[0]}+${post.id}@${email.split('@')[1]}`
+
     const [emailCopied, setEmailCopied] = useState(false)
 
     const replyToPost = () => {
-        window.location.href = `mailto:list-${post.id}@thestoke.ca`
+        window.location.href = `mailto:${postEmail}`
     }
 
     return (
@@ -39,7 +42,7 @@ function PostDetail({ postDetails }) {
                 <CopiedText>Email Address Copied!</CopiedText>
             ) : (
                 <CopyToClipboard
-                    text={`list-${post.id}@thestoke.ca`}
+                    text={postEmail}
                     onCopy={() => setEmailCopied(true)}
                 >
                     <CopyLink>

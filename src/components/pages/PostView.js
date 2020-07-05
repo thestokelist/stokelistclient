@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { Label } from '../shared/Forms'
 import { WhiteBlueButton } from '../shared/Buttons'
+import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
 import PostSearch from '../posts/PostSearch'
 import { endpoints } from '../../constants/endpoints'
@@ -56,7 +57,7 @@ function PostView({ match }) {
     return (
         <PostSearch>
             {postDetails === null ? (
-                <div>Loading...</div>
+                <Loading />
             ) : (
                 <PostDetail postDetails={postDetails} />
             )}

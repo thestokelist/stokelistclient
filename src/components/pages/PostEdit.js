@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { Title } from '../shared/Text'
+import Loading from '../shared/Loading'
 import PostForm from '../forms/PostForm'
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
@@ -37,7 +38,7 @@ function PostEdit({ match }) {
                     editMode={true}
                 />
             ) : (
-                <div>Loading...</div>
+                <Loading />
             )}
         </Fragment>
     )

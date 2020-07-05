@@ -47,6 +47,7 @@ function GarageMap() {
                 title="Garage Sale Map"
                 posts={currentSales}
                 hideEmpty={false}
+                emptyText={''}
                 style={{ display: 'inline' }}
                 hideDates={true}
                 numbered={true}

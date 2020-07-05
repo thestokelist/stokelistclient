@@ -49,7 +49,14 @@ function PostValidate({ match }) {
         } else if (postDetails === false) {
             content = <Redirect to="/validationfailed" />
         } else {
-            content = <Redirect to="/myposts" />
+            content = (
+                <Redirect
+                    to={{
+                        pathname: '/myposts',
+                        state: { validated: true },
+                    }}
+                />
+            )
         }
         return content
     }

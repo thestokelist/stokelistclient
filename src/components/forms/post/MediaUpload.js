@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
-import { FaSpinner, FaRegTimesCircle, FaUpload } from 'react-icons/fa'
+import { FaRegTimesCircle, FaUpload } from 'react-icons/fa'
 
 import { InputContainer } from '../../shared/Forms'
+import Loading from '../../shared/Loading'
 
 const UploadContainer = styled.div`
     display: flex;
@@ -70,7 +71,7 @@ function Media({ addMedia, index, close }) {
             <UploadContainer>
                 <UploadComponent>
                     {loading ? (
-                        <FaSpinner size={40} className="fa-spin" />
+                        <Loading />
                     ) : (
                         <FileUploadBox {...getRootProps()}>
                             <div><FaUpload size={30} /></div>

@@ -21,10 +21,13 @@ function PostSection({
     titleButton,
     posts,
     hideEmpty,
+    emptyText,
     hideDates,
     adminMode,
     numbered,
 }) {
+
+
     const getDateLabel = (init, differenceInDays) => {
         let createdDate = init
         if (differenceInDays > 7 && differenceInDays <= 30) {
@@ -77,7 +80,7 @@ function PostSection({
     const getPostSummaryList = (postArray) => {
         let postSummaries
         if (posts.length === 0) {
-            postSummaries = <div>No Posts Found</div>
+            postSummaries = <div>{emptyText}</div>
         } else {
             if (adminMode === true) {
                 postSummaries = postArray.map((post) => (
@@ -100,7 +103,7 @@ function PostSection({
         return [...postMap.keys()].map((date) => {
             return (
                 <Fragment key={date}>
-                    <PostDateHeader>{date}</PostDateHeader>
+                    {date && <PostDateHeader>{date}</PostDateHeader>}
                     {getPostSummaryList(postMap.get(date))}
                 </Fragment>
             )
@@ -128,6 +131,10 @@ function PostSection({
     }
 
     return getPostSection()
+}
+
+PostSection.defaultProps = {
+    emptyText: "No Posts Found" 
 }
 
 export default PostSection
