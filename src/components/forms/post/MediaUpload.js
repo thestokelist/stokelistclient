@@ -42,15 +42,17 @@ const Close = styled.div`
 
 function Media({ addMedia, index, close }) {
     const [loading, setLoading] = useState(false)
+    
 
     const onDrop = useCallback(
         (acceptedFiles) => {
+            const apiUrl = process.env.REACT_APP_API_URL
             const uploadFile = async (acceptedFiles) => {
                 setLoading(true)
                 const formData = new FormData()
                 formData.append('media', acceptedFiles[0])
                 //Upload the actual file
-                const response = await fetch('http://localhost:3010/upload', {
+                const response = await fetch(apiUrl+'/upload', {
                     method: 'POST',
                     body: formData,
                 })
