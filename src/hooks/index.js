@@ -74,6 +74,17 @@ export const useNetworkRequest = () => {
         return response
     }
 
+    const authApiMultipartPost = async (endpoint, data) => {
+        let response = await fetch(apiUrl+'/upload', {
+            method: 'POST',
+            body: data,
+        })
+        response = await handleErrors(response, 'POST')
+        return response
+    }
+
+
+
     const authApiGet = async (endpoint, token) => {
         let response = await fetch(apiUrl + endpoint, {
             method: 'GET',
@@ -131,5 +142,6 @@ export const useNetworkRequest = () => {
         authApiPatch,
         authApiPut,
         authApiDelete,
+        authApiMultipartPost,
     }
 }

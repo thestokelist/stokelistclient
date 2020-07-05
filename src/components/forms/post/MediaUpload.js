@@ -1,10 +1,13 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
 import { FaRegTimesCircle, FaUpload } from 'react-icons/fa'
 
 import { InputContainer } from '../../shared/Forms'
 import Loading from '../../shared/Loading'
+import { endpoints } from '../../../constants/endpoints'
+import { useNetworkRequest } from '../../../hooks'
+import { store } from '../../store'
 
 const UploadContainer = styled.div`
     display: flex;
@@ -24,14 +27,13 @@ const UploadComponent = styled.div`
     align-items: center;
     justify-content: center;
     height: 10em;
-
 `
 
 const FileUploadBox = styled.div`
     display: flex;
     flex-grow: 1;
     height: 100%;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 `
@@ -42,27 +44,28 @@ const Close = styled.div`
 
 function Media({ addMedia, index, close }) {
     const [loading, setLoading] = useState(false)
-    
+    const { authApiMultipartPost } = useNetworkRequest()
+    const { state } = useContext(store)
 
     const onDrop = useCallback(
         (acceptedFiles) => {
-            const apiUrl = process.env.REACT_APP_API_URL
             const uploadFile = async (acceptedFiles) => {
                 setLoading(true)
                 const formData = new FormData()
                 formData.append('media', acceptedFiles[0])
                 //Upload the actual file
-                const response = await fetch(apiUrl+'/upload', {
-                    method: 'POST',
-                    body: formData,
-                })
+                const response = await authApiMultipartPost(
+                    endpoints.UPLOAD,
+                    formData,
+                    state.token
+                )
                 const media = await response.json()
                 addMedia(media)
                 setLoading(false)
             }
             uploadFile(acceptedFiles)
         },
-        [addMedia]
+        [addMedia, state.token, authApiMultipartPost]
     )
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
@@ -76,14 +79,14 @@ function Media({ addMedia, index, close }) {
                         <Loading />
                     ) : (
                         <FileUploadBox {...getRootProps()}>
-                            <div><FaUpload size={30} /></div>
-                            <input {...getInputProps({multiple: false})} />
+                            <div>
+                                <FaUpload size={30} />
+                            </div>
+                            <input {...getInputProps({ multiple: false })} />
                             {isDragActive ? (
                                 <p>Drop the files here ...</p>
                             ) : (
-                                <p>
-                                    Click or Drag to Upload
-                                </p>
+                                <p>Click or Drag to Upload</p>
                             )}
                         </FileUploadBox>
                     )}
