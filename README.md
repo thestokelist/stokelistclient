@@ -1,4 +1,15 @@
+# Stoke List Client
+
+This is the Client for [The Stoke List](https://github.com/lukenorman/stokelistapi).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Configuring the Environment
+
+Referring to sample.env, configure the enviroment
+```
+cp sample.env .env
+```
 
 ## Available Scripts
 
