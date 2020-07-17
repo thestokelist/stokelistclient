@@ -34,6 +34,7 @@ function PostList() {
                 title="Latest Posts"
                 posts={latestPosts}
                 hideEmpty={false}
+                includeAds={true}
             >
                 <CenteredWhiteBlueButton onClick={loadLatestPosts}>
                     Show More

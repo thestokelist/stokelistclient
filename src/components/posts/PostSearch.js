@@ -113,6 +113,7 @@ function PostSearch({ children }) {
                     title={searchTitle}
                     posts={searchPosts}
                     hideEmpty={false}
+                    includeAds={true}
                 >
                     {showMoreButton && (
                         <CenteredWhiteBlueButton onClick={loadMoreSearchPosts}>

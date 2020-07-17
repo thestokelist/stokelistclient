@@ -2,6 +2,7 @@ import React, { useMemo, Fragment } from 'react'
 import styled from 'styled-components'
 import PostSummary from '../posts/PostSummary'
 import MyPost from '../posts/MyPost'
+import Ad from '../adverts/Ad'
 import { Title } from '../shared/Text'
 import { FlexBetweenRow } from '../shared/Layouts'
 
@@ -25,8 +26,8 @@ function PostSection({
     hideDates,
     adminMode,
     numbered,
+    includeAds,
 }) {
-
 
     const getDateLabel = (init, differenceInDays) => {
         let createdDate = init
@@ -39,6 +40,7 @@ function PostSection({
         }
         return createdDate
     }
+
     //A map of posts, grouped by posting date
     const groupedPosts = useMemo(() => {
         const dateMap = new Map()
@@ -50,7 +52,8 @@ function PostSection({
         //Posts are ordered by creation date
         let dateString = null
         let postArray = []
-        for (let post of posts) {
+        
+        for (const post of posts) {
             const postDate = new Date(post.created_at.substring(0, 10))
             const differenceInDays = Math.floor(
                 (currentDate - postDate) / (1000 * 60 * 60 * 24)
@@ -77,6 +80,8 @@ function PostSection({
         return dateMap
     }, [posts])
 
+
+    //Display an array of posts
     const getPostSummaryList = (postArray) => {
         let postSummaries
         if (posts.length === 0) {
@@ -99,42 +104,49 @@ function PostSection({
         return postSummaries
     }
 
+    //Display the posts, grouped by date
     const displayPostsByDate = (postMap) => {
+        //We only handle adverts here, because they only happen on pages grouped by date
+        let adCounter = 0
+        let adInserted = false
         return [...postMap.keys()].map((date) => {
+            const postGroup = getPostSummaryList(postMap.get(date))
+            if (includeAds && !adInserted) {
+                //Insert a single advert after the 3rd post, if there is one
+                if (adCounter + postGroup.length > 3) {
+                    const spliceIndex = 3 - adCounter
+                    postGroup.splice(spliceIndex,0,<Ad />)
+                    adInserted = true
+                } else {
+                    adCounter =+ postGroup.length
+                }
+            }
             return (
                 <Fragment key={date}>
                     {date && <PostDateHeader>{date}</PostDateHeader>}
-                    {getPostSummaryList(postMap.get(date))}
+                    {postGroup}
                 </Fragment>
             )
         })
     }
 
-    const getPostSection = () => {
-        if (posts.length === 0 && hideEmpty === true) {
-            return null
-        } else {
-            return (
-                <PostSectionContainer>
-                    <FlexBetweenRow>
-                        <Title>{title}</Title>
-                        {titleButton}
-                    </FlexBetweenRow>
+    return posts.length === 0 && hideEmpty === true ? null : (
+        <PostSectionContainer>
+            <FlexBetweenRow>
+                <Title>{title}</Title>
+                {titleButton}
+            </FlexBetweenRow>
 
-                    {hideDates === true
-                        ? getPostSummaryList(posts)
-                        : displayPostsByDate(groupedPosts)}
-                    {children}
-                </PostSectionContainer>
-            )
-        }
-    }
-
-    return getPostSection()
+            {hideDates === true
+                ? getPostSummaryList(posts)
+                : displayPostsByDate(groupedPosts)}
+            {children}
+        </PostSectionContainer>
+    )
 }
 
 PostSection.defaultProps = {
-    emptyText: "No Posts Found" 
+    emptyText: 'No Posts Found',
 }
 
 export default PostSection
