@@ -6,10 +6,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Configuring the Environment
 
-Referring to sample.env, configure the enviroment
+Clone this Github
+```
+git clone https://github.com/thestokelist/stokelistclient
+```
+
+Download dependencies
+```
+npm install
+```
+
+Configure your environment
 ```
 cp sample.env .env
 ```
+Referring to sample.env, configure the enviroment
 
 ## Available Scripts
 
