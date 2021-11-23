@@ -2,6 +2,7 @@ import React, { useState, useContext, Fragment } from 'react'
 
 import PostSection from '../posts/PostSection'
 import { WhiteBlueButton } from '../shared/Buttons'
+import { SmallLink } from '../shared/Text'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
@@ -66,9 +67,9 @@ function MyPosts({ location }) {
                         <WhiteBlueButton onClick={logout}>
                             Log Out
                         </WhiteBlueButton>
-                        <WhiteBlueButton onClick={logoutEverywhere}>
-                            Log Out Everywhere!
-                        </WhiteBlueButton>
+                        <SmallLink onClick={logoutEverywhere}>
+                            Log Out on All Devices
+                        </SmallLink>
                     </div>
                 }
             />
