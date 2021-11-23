@@ -67,7 +67,7 @@ function PostDetail({ postDetails, notSubmitted }) {
             <PostPhoto postDetails={post} />
             <Label>Post Description</Label>
             <PostText>
-                <ReactMarkdown source={post.description} />
+                <ReactMarkdown children={post.description} />
             </PostText>
 
             {submitted && (

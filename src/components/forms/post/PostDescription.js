@@ -36,7 +36,7 @@ function PostDescription({ errors, register, setValue, watch }) {
                     selectedTab={selectedTab}
                     onTabChange={setSelectedTab}
                     generateMarkdownPreview={(markdown) =>
-                        Promise.resolve(<ReactMarkdown source={markdown} />)
+                        Promise.resolve(<ReactMarkdown children={markdown} />)
                     }
                     toolbarCommands = {[["bold","italic","header","strikethrough"], ["code","quote","link"],["ordered-list","unordered-list","checked-list"]]}
                            

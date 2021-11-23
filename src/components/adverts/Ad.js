@@ -18,7 +18,7 @@ function Ad() {
     return (
         <AdvertContainer>
             <NoEscape>
-                <ReactMarkdown source={adContent} />
+                <ReactMarkdown children={adContent} />
             </NoEscape>
         </AdvertContainer>
     )

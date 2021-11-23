@@ -20,6 +20,7 @@ export const usePosts = (endpoint) => {
     return [posts, loadMorePosts]
 }
 
+// eslint-disable-next-line
 export const useMountEffect = (fun) => useEffect(fun, [])
 
 export const useSearchReducer = () => {

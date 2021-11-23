@@ -74,7 +74,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                     </PostDetail>
                     <PostTextSummary>
                         <NoEscape>
-                            <ReactMarkdown source={post.description} />
+                            <ReactMarkdown children={post.description} />
                         </NoEscape>
                     </PostTextSummary>
                 </PostDetailsContainer>
