@@ -87,8 +87,8 @@ function PostPhoto({ postDetails }) {
         } else if (postDetails.photoFileSize) {
             return [
                 {
-                    link: `http://list.thestoke.ca/photos/${postDetails.id}/original.jpg`,
-                    thumbLink: `http://list.thestoke.ca/photos/${postDetails.id}/thumb.jpg`,
+                    link: `${process.env.REACT_APP_LEGACY_IMG_URL}/photos/${postDetails.id}/original.jpg`,
+                    thumbLink: `${process.env.REACT_APP_LEGACY_IMG_URL}/photos/${postDetails.id}/thumb.jpg`,
                     name: '',
                 },
             ]

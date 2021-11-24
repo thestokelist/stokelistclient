@@ -55,7 +55,7 @@ function PostSummary({ post, markerNumber }) {
         } else if (post.photoFileSize) {
             return [
                 {
-                    thumbLink: `http://list.thestoke.ca/photos/${post.id}/thumb.jpg`,
+                    thumbLink: `${process.env.REACT_APP_LEGACY_IMG_URL}/photos/${post.id}/thumb.jpg`,
                 },
             ]
         } else {
