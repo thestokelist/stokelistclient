@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
+import jwt from 'jsonwebtoken'
 
 import { Title } from '../shared/Text'
 import { useMountEffect } from '../../hooks'
@@ -21,11 +22,12 @@ function PostValidate({ match }) {
             console.log(response)
             if (response) {
                 const responseObject = await response.json()
+                console.log(responseObject)
                 dispatch({
                     type: actionTypes.LOGIN_SUCCESS,
                     item: {
                         token: responseObject.token,
-                        email: responseObject.post.email,
+                        email: jwt.decode(responseObject.token).email,
                     },
                 })
                 setPostDetails(responseObject.post)

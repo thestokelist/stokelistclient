@@ -26,7 +26,15 @@ import Upload from './post/Upload'
 function PostForm({ post, responseCallback, buttonText, editMode }) {
     const formInit = postToForm(post)
     const { state } = useContext(store)
-    const { control, register, handleSubmit, errors, setValue, watch, reset } = useForm({
+    const {
+        control,
+        register,
+        handleSubmit,
+        errors,
+        setValue,
+        watch,
+        reset,
+    } = useForm({
         defaultValues: formInit,
     })
     const [postPreview, setPostPreview] = useState(null)
@@ -36,6 +44,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     const wholeFormError = Object.keys(errors).length > 0
 
     const formToPost = (formData) => {
+        console.log(state)
         //TODO: Sanitize these inputs as could be html?
         const title = formData.title
         const description = formData.description
@@ -56,7 +65,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                       coordinates: [formData.lng, formData.lat],
                   }
                 : null
-        const email = formData.email
+        const email = state.loggedIn ? state.email : formData.email
         const startTime =
             formData.startTime && formData.garageDate
                 ? new Date(formData.startTime + ' ' + formData.garageDate)
@@ -177,11 +186,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                     setValue={setValue}
                     watch={watch}
                 />
-                <Upload
-                    errors={errors}
-                    register={register}
-                    control={control}
-                />
+                <Upload errors={errors} register={register} control={control} />
                 <PriceGarage
                     errors={errors}
                     setValue={setValue}
@@ -193,16 +198,14 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                     register={register}
                     watch={watch}
                 />
-                {!editMode && (
-                    <Fragment>
-                        <PostEmail
-                            errors={errors}
-                            register={register}
-                            watch={watch}
-                        />
-                        <Terms register={register} errors={errors} />
-                    </Fragment>
+                {!editMode && !state.loggedIn && (
+                    <PostEmail
+                        errors={errors}
+                        register={register}
+                        watch={watch}
+                    />
                 )}
+                {!editMode && <Terms register={register} errors={errors} />}
 
                 <BlueButton type="submit">Preview</BlueButton>
             </form>
