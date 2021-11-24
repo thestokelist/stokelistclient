@@ -12,14 +12,16 @@ function Terms({ errors, register }) {
             <RadioInput
                 type="checkbox"
                 name="terms"
-                ref={register({required: true})}
+                ref={register({ required: true })}
             />
             <RadioText>
-                I accept the Terms of Service & Privacy Policy
+                I accept the{' '}
+                <a target="_blank" href="/terms">
+                    Terms of Service & Privacy Policy
+                </a>
             </RadioText>
             <FormError>
-                {errors.terms &&
-                    'You must accept the Terms and Conditions'}
+                {errors.terms && 'You must accept the Terms of Service & Privacy Policy'}
             </FormError>
         </InputContainer>
     )
