@@ -115,7 +115,7 @@ function PostSection({
                 //Insert a single advert after the 3rd post, if there is one
                 if (adCounter + postGroup.length > 3) {
                     const spliceIndex = 3 - adCounter
-                    postGroup.splice(spliceIndex,0,<Ad />)
+                    postGroup.splice(spliceIndex,0,<Ad key={"ad"}/>)
                     adInserted = true
                 } else {
                     adCounter =+ postGroup.length

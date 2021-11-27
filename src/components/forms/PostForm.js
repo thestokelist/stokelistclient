@@ -44,8 +44,6 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     const wholeFormError = Object.keys(errors).length > 0
 
     const formToPost = (formData) => {
-        console.log(state)
-        //TODO: Sanitize these inputs as could be html?
         const title = formData.title
         const description = formData.description
         let price = formData.price
@@ -127,7 +125,6 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
         if (editMode) {
             delete postData.email
         }
-        console.log(postData)
         setPostPreview(postData)
     }
 
