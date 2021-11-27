@@ -8,7 +8,7 @@ import { FormError } from '../shared/Forms'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
-import PostSummary from '../posts/PostSummary'
+import MyPost from '../posts/MyPost'
 
 function Judge({ match }) {
     const postID = match.params.id
@@ -56,10 +56,11 @@ function Judge({ match }) {
             <FlexBetweenRow>
                 <Title>Commence Judgement</Title>
                 {hasQueue && <RedButton onClick={banUser}>Ban</RedButton>}
+                {error && <FormError>Error banning user</FormError>}
             </FlexBetweenRow>
-            {error && <FormError>Error banning user</FormError>}
+     
             {hasQueue ? (
-                judgeQueue.map((post) => <PostSummary post={post} />)
+                judgeQueue.map((post) => <MyPost post={post} />)
             ) : (
                 <div>No posts to show for this user</div>
             )}

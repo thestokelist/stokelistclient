@@ -140,21 +140,21 @@ function Moderate() {
                                         <WhiteBlueButton
                                             onClick={keepCurrentPost}
                                         >
-                                            Keep
+                                            {currentPostDeleted ? "Actually, Keep" : "Keep"}
                                         </WhiteBlueButton>
                                     )}
                                     {!currentPostDeleted && (
                                         <WhiteRedButton
                                             onClick={deleteCurrentPost}
                                         >
-                                            Delete
+                                            {currentPostKept ? "Actually, Delete" : "Delete"}
                                         </WhiteRedButton>
                                     )}
                                 </MarginButtonContainer>
                                 <Link to={`/judge/${currentPost.id}`}>
                                     <PostsLink>
                                         {
-                                            'Other Reported Posts for this User >>'
+                                            'See All Other Posts by this User >>'
                                         }
                                     </PostsLink>
                                 </Link>
