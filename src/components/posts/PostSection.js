@@ -3,17 +3,12 @@ import styled from 'styled-components'
 import PostSummary from '../posts/PostSummary'
 import MyPost from '../posts/MyPost'
 import Ad from '../adverts/Ad'
-import { Title } from '../shared/Text'
 import { FlexBetweenRow } from '../shared/Layouts'
 
 const PostSectionContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-`
-
-const PostDateHeader = styled(Title)`
-    color: #434653;
 `
 
 function PostSection({
@@ -123,7 +118,7 @@ function PostSection({
             }
             return (
                 <Fragment key={date}>
-                    {date && <PostDateHeader>{date}</PostDateHeader>}
+                    {date && <div className="text-2xl font-medium mb-1 text-slate">{date}</div>}
                     {postGroup}
                 </Fragment>
             )
@@ -133,7 +128,7 @@ function PostSection({
     return posts.length === 0 && hideEmpty === true ? null : (
         <PostSectionContainer>
             <FlexBetweenRow>
-                <Title>{title}</Title>
+                <div className="title">{title}</div>
                 {titleButton}
             </FlexBetweenRow>
 

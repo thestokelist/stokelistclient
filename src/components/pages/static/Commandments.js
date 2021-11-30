@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react'
-import { Title } from '../../shared/Text'
 import { Link } from 'react-router-dom'
 
 function Commandments() {
     return (
         <Fragment>
-            <Title>Stoke List Commandments</Title>
+            <div className="title">Stoke List Commandments</div>
             <p>Hello Revelstoke folks,</p>
             <p>
                 Whether you’re a new or long-time reader, welcome to the Stoke

@@ -37,12 +37,6 @@ const PostSummaryContainer = styled.div`
     border-radius: 5px;
 `
 
-const PostTitle = styled.div`
-    color: #434653;
-    font-size: 1.3em;
-    font-weight: bold;
-`
-
 //Generates a full width summary for a post, can be disabled
 function PostSummary({ post, disabled, markerNumber }) {
 
@@ -54,13 +48,13 @@ function PostSummary({ post, disabled, markerNumber }) {
                 <PostSummaryPhoto post={post} markerNumber={markerNumber}/>
                 <PostDetailsContainer>
                     <ResponsiveBetweenRow>
-                        <PostTitle>
+                        <div className="text-slate font-bold text-xl">
                             <NoEscape>
                                 <Link to={`/post/${post.id}`}>
                                     {post.title}
                                 </Link>
                             </NoEscape>
-                        </PostTitle>
+                        </div>
                         <NoEscape>
                             <PostLocation postDetails={post} />
                         </NoEscape>

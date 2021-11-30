@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-import { Title } from '../shared/Text'
 import { FormError } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
 import {
@@ -124,7 +123,7 @@ function Moderate() {
 
     return (
         <Fragment>
-            <Title>Let's Do the Moderation</Title>
+            <div className="title">Let's Do the Moderation</div>
             <FlexRow>
                 {modQueue && modQueue.length > 0 ? (
                     <Fragment>

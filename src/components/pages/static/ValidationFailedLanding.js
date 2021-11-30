@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react'
-import { Title } from '../../shared/Text'
 
 function ValidationFailedLanding() {
     return (
         <Fragment>
-            <Title>Validate Post</Title>
+            <div className="title">Validate Post</div>
             <p>Post validation failed - did you already validate this post?</p>
         </Fragment>
     )

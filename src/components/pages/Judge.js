@@ -1,7 +1,6 @@
 import React, { useState, useContext, Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { Title } from '../shared/Text'
 import { RedButton } from '../shared/Buttons'
 import { FlexBetweenRow } from '../shared/Layouts'
 import { FormError } from '../shared/Forms'
@@ -54,7 +53,7 @@ function Judge({ match }) {
     return (
         <Fragment>
             <FlexBetweenRow>
-                <Title>Commence Judgement</Title>
+                <div className="title">Commence Judgement</div>
                 {hasQueue && <RedButton onClick={banUser}>Ban</RedButton>}
                 {error && <FormError>Error banning user</FormError>}
             </FlexBetweenRow>

@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react'
-import { Title } from '../../shared/Text'
 
 function About() {
     return (
         <Fragment>
-            <Title>About</Title>
+            <div className="title">About</div>
             <p>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                 diam nonumy eirmod tempor invidunt ut labore et dolore magna

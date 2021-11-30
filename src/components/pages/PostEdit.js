@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { Title } from '../shared/Text'
 import Loading from '../shared/Loading'
 import PostForm from '../forms/PostForm'
 import { endpoints } from '../../constants/endpoints'
@@ -27,7 +26,7 @@ function PostEdit({ match }) {
 
     return (
         <Fragment>
-            <Title>Edit Post</Title>
+            <div className="title">Edit Post</div>
             {postUpdated ? (
                 <Redirect to={`/post/${postID}`} />
             ) : postDetails ? (

@@ -2,7 +2,6 @@ import React, { useState, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
-import { Title } from '../shared/Text'
 import PostForm from '../forms/PostForm'
 
 function PostCreate() {
@@ -11,7 +10,7 @@ function PostCreate() {
 
     return (
         <Fragment>
-            <Title>Create Post</Title>
+            <div className="title">Create Post</div>
             {postDetails ? (
                 <Redirect to="/submitted" />
             ) : (

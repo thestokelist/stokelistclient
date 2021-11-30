@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 
-import { Title } from '../shared/Text'
 import ReportForm from '../forms/ReportForm'
 import { Flash } from '../shared/Layouts'
 
@@ -10,7 +9,7 @@ function PostReport({ match }) {
 
     return (
         <Fragment>
-        <Title>Report Post</Title>
+        <div className="title">Report Post</div>
         <Flash>How does this post break The Stoke List Commandments?</Flash>
         <ReportForm id={postID}/>
         </Fragment>

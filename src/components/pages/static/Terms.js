@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
-import { Title } from '../../shared/Text'
-
 const HeaderText = styled.div`
     color: #434653;
     font-size: 1.3em;
@@ -11,7 +9,7 @@ const HeaderText = styled.div`
 function Terms() {
     return (
         <Fragment>
-            <Title>Terms & Privacy</Title>
+            <div className="title">Terms & Privacy</div>
             (Updated September 18, 2017)
             <HeaderText>1. Disclaimer Of Liability</HeaderText>
             <p>

@@ -1,0 +1,3 @@
+.title {
+    @apply text-blue text-2xl font-medium mb-1;
+  }

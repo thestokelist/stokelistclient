@@ -2,7 +2,6 @@ import React, { useState, Fragment, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import jwt from 'jsonwebtoken'
 
-import { Title } from '../shared/Text'
 import { useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
 import { actionTypes } from '../../constants/actions'
@@ -44,7 +43,7 @@ function PostValidate({ match }) {
             //Haven't loaded yet
             content = (
                 <Fragment>
-                    <Title>Validate Post</Title>
+                    <div className="title">Validate Post</div>
                     <div>Validating...</div>
                 </Fragment>
             )

@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { Title } from '../shared/Text'
 import LoginForm from '../forms/LoginForm'
 
 function Login() {
@@ -14,7 +13,7 @@ function Login() {
     const getLoginForm = () => {
         return (
             <Fragment>
-                <Title>Login</Title>
+                <div className="title">Login</div>
                 <p>
                     To see your posts you must login. Enter your email
                     address below and we'll send you a login link
