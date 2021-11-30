@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
 export const StokeListContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width:1240px;
+    margin:auto;
+`
+
+export const BodyContainer = styled.div`
     padding: 2% 6%;
     width: 100%;
     box-sizing: border-box;

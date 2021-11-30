@@ -8,14 +8,16 @@ import { FlexRow } from '../shared/Layouts'
 
 const HeaderContainer = styled.div`
     padding: 0% 6%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     min-height: 100px;
     background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 10px #00000026;
+    box-shadow: 0 8px 5px -5px #00000026;
     align-items: center;
     justify-content: space-between;
     z-index: 10;
+    box-sizing: border-box;
     /* Small Devices, Tablets */
     @media only screen and (max-width: 768px) {
         flex-direction: column;
