@@ -1,15 +1,7 @@
 import React, { useMemo, Fragment } from 'react'
-import styled from 'styled-components'
 import PostSummary from '../posts/PostSummary'
 import MyPost from '../posts/MyPost'
 import Ad from '../adverts/Ad'
-import { FlexBetweenRow } from '../shared/Layouts'
-
-const PostSectionContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-`
 
 function PostSection({
     children,
@@ -126,17 +118,17 @@ function PostSection({
     }
 
     return posts.length === 0 && hideEmpty === true ? null : (
-        <PostSectionContainer>
-            <FlexBetweenRow>
+        <div classNAme="flex flex-col w-full">
+            <div className="flexed-row justify-between">
                 <div className="title">{title}</div>
                 {titleButton}
-            </FlexBetweenRow>
+            </div>
 
             {hideDates === true
                 ? getPostSummaryList(posts)
                 : displayPostsByDate(groupedPosts)}
             {children}
-        </PostSectionContainer>
+        </div>
     )
 }
 

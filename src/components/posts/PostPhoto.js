@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { FlexBetweenRow } from '../shared/Layouts'
-
 const PostPhotoContainer = styled.div`
     width: 100%;
     max-height: 450px;
@@ -10,11 +8,6 @@ const PostPhotoContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
-`
-
-const FullHeightBetweenRow = styled(FlexBetweenRow)`
-    height: 100%;
-    max-height: 100%;
 `
 
 const PostImgContainer = styled.div`
@@ -143,7 +136,7 @@ function PostPhoto({ postDetails }) {
 
     return media ? (
         <PostPhotoContainer>
-            <FullHeightBetweenRow>
+            <div className="flexed-row justify-between h-full max-h-full">
                 <PostImgContainer>
                     <PostImg src={currentImgURL()} alt="Post" />
                     <TextContainer>
@@ -162,7 +155,7 @@ function PostPhoto({ postDetails }) {
                         </SidebarPhoto>
                     ))}
                 </Sidebar>
-            </FullHeightBetweenRow>
+            </div>
         </PostPhotoContainer>
     ) : null
 }

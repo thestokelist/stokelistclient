@@ -8,7 +8,6 @@ import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
 import PostSearch from '../posts/PostSearch'
 import { endpoints } from '../../constants/endpoints'
-import { ResponsiveBetweenRow, FlexRow } from '../shared/Layouts'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
 
 import {
@@ -62,8 +61,8 @@ function PostView({ match }) {
                 <PostDetail postDetails={postDetails} />
             )}
             <Label>Share This Post</Label>
-            <ResponsiveBetweenRow>
-                <FlexRow>
+            <div className="flexed-responsive">
+                <div className="flexed-row">
                     <EmailShareButton url={window.location.href}>
                         <EmailIcon size={30} round={true} />
                     </EmailShareButton>
@@ -79,8 +78,8 @@ function PostView({ match }) {
                     <FacebookMessengerShareButton url={window.location.href}>
                         <FacebookMessengerIcon size={30} round={true} />
                     </FacebookMessengerShareButton>
-                </FlexRow>
-                <FlexRow>
+                </div>
+                <div className="flexed-row">
                     <ReportText>
                         Does this post break{' '}
                         <Link to="/commandments">
@@ -90,8 +89,8 @@ function PostView({ match }) {
                     <WhiteBlueButton onClick={doReport}>
                         Report Post
                     </WhiteBlueButton>
-                </FlexRow>
-            </ResponsiveBetweenRow>
+                </div>
+            </div>
         </PostSearch>
     )
 }

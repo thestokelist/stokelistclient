@@ -4,7 +4,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FaPaperclip } from 'react-icons/fa'
 
 import { CenteredWhiteBlueButton } from '../shared/Buttons'
-import { FlexFullHeightColumn } from '../shared/Layouts'
 
 const CopyLink = styled.div`
     font-size: 1em;
@@ -34,7 +33,7 @@ function PostDetail({ postDetails }) {
     }
 
     return (
-        <FlexFullHeightColumn>
+        <div className="flexed-column">
             <CenteredWhiteBlueButton onClick={replyToPost}>
                 Reply to Post
             </CenteredWhiteBlueButton>
@@ -51,7 +50,7 @@ function PostDetail({ postDetails }) {
                     </CopyLink>
                 </CopyToClipboard>
             )}
-        </FlexFullHeightColumn>
+        </div>
     )
 }
 

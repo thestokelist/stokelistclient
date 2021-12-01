@@ -1,0 +1,11 @@
+.flexed-row {
+    @apply flex flex-row items-center
+}
+
+.flexed-responsive {
+    @apply flex flex-col lg:flex-row items-center justify-between
+}
+
+.flexed-column {
+    @apply flex h-full flex-col
+}

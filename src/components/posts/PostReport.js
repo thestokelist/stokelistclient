@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { FlexRow } from '../shared/Layouts'
-
 const ReportContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -25,14 +23,14 @@ const Content = styled.div`
 function PostReport({ report }) {
     return (
         <ReportContainer>
-            <FlexRow>
+            <div className="flexed-row">
                 <Title>Reason</Title>
                 <Content><b>{report.reason}</b></Content>
-            </FlexRow>
-            <FlexRow>
+            </div>
+            <div className="flexed-row">
                 <Title>Comment</Title>
                 <Content>{report.comment}</Content>
-            </FlexRow>
+            </div>
         </ReportContainer>
     )
 }

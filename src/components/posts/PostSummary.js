@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
-import { ResponsiveBetweenRow, NoEscape } from '../shared/Layouts'
+import { NoEscape } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
 import PostSummaryPhoto from './PostSummaryPhoto'
@@ -39,15 +39,14 @@ const PostSummaryContainer = styled.div`
 
 //Generates a full width summary for a post, can be disabled
 function PostSummary({ post, disabled, markerNumber }) {
-
     const isGarageSale = post.isGarageSale === true
 
     return (
         <GrayableContainer disabled={disabled}>
             <PostSummaryContainer>
-                <PostSummaryPhoto post={post} markerNumber={markerNumber}/>
+                <PostSummaryPhoto post={post} markerNumber={markerNumber} />
                 <PostDetailsContainer>
-                    <ResponsiveBetweenRow>
+                    <div className="flexed-responsive">
                         <div className="text-slate font-bold text-xl">
                             <NoEscape>
                                 <Link to={`/post/${post.id}`}>
@@ -58,7 +57,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                         <NoEscape>
                             <PostLocation postDetails={post} />
                         </NoEscape>
-                    </ResponsiveBetweenRow>
+                    </div>
                     <PostDetail>
                         {isGarageSale ? (
                             getDateRangeString(post.startTime, post.endTime)

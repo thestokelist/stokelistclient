@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 
-import { FlexBetweenRow, FlexFullHeightColumn } from '../shared/Layouts'
 import { Label } from '../shared/Forms'
 import { getDateRangeString, getPrettyDateString } from '../../util/datetime'
 import PostPrice from './PostPrice'
@@ -49,8 +48,8 @@ function PostDetail({ postDetails, notSubmitted }) {
 
     return post ? (
         <Fragment>
-            <FlexBetweenRow>
-                <FlexFullHeightColumn>
+            <div className="flexed-row justify-between">
+                <div className="flexed-column">
                     <PostTitle>{post.title}</PostTitle>
                     <PostPriceText>
                         {isGarageSale ? (
@@ -59,9 +58,9 @@ function PostDetail({ postDetails, notSubmitted }) {
                             <PostPrice price={post.price} />
                         )}
                     </PostPriceText>
-                </FlexFullHeightColumn>
+                </div>
                 {submitted && <PostCopy postDetails={post} />}
-            </FlexBetweenRow>
+            </div>
 
             <PostLocation postDetails={post} />
             <PostPhoto postDetails={post} />

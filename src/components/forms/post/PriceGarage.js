@@ -9,7 +9,6 @@ import {
     RadioText,
     FormError,
 } from '../../shared/Forms'
-import { FlexRow } from '../../shared/Layouts'
 import GarageDate from './GarageDate'
 
 const InputRadioContainer = styled.div`
@@ -62,7 +61,7 @@ function PostPrice({ errors, register, watch, setValue }) {
             <InputContainer>
                 <Label>Add a Price</Label>
                 <InputRadioContainer>
-                    <FlexRow>
+                    <div className="flexed-row">
                         <Prefix>$</Prefix>
                         <PrefixInput
                             type="numeric"
@@ -70,8 +69,8 @@ function PostPrice({ errors, register, watch, setValue }) {
                             ref={register({ validate: validatePrice })}
                             onChange={updatePriceForm}
                         />
-                    </FlexRow>
-                    <FlexRow>
+                    </div>
+                    <div className="flexed-row">
                         <RadioInput
                             type="radio"
                             name="priceRadio"
@@ -96,7 +95,7 @@ function PostPrice({ errors, register, watch, setValue }) {
                             onChange={updatePriceForm}
                         />
                         <RadioText>Garage Sale</RadioText>
-                    </FlexRow>
+                    </div>
                 </InputRadioContainer>
 
                 <FormError>

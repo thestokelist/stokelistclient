@@ -33,8 +33,6 @@ import ReportLanding from './pages/static/ReportLanding'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 
-import { BodyContainer, StokeListContainer } from './shared/Layouts'
-
 function MainApp() {
     const { state } = useContext(store)
 
@@ -77,10 +75,10 @@ function MainApp() {
     )
 
     return (
-        <StokeListContainer>
+        <div className="flex flex-col items-center m-auto max-w-screen-xl ">
             {/*Header appears at the top of all pages*/}
             <Header />
-            <BodyContainer className="App">
+            <div className="App w-full box-border flex-grow bg-cream px-20 py-8">
                 <Switch>
                     {/*Routes related to posts*/}
                     <Route exact path="/" component={PostList} />
@@ -137,9 +135,9 @@ function MainApp() {
                     />
                     <Route component={ErrorLanding} />
                 </Switch>
-            </BodyContainer>
+            </div>
             <Footer />
-        </StokeListContainer>
+        </div>
     )
 }
 

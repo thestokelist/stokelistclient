@@ -2,7 +2,7 @@ import React, { useState, Fragment, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { AlignRight, ButtonContainer } from '../shared/Layouts'
+import { AlignRight } from '../shared/Layouts'
 import PostSummary from './PostSummary'
 import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
@@ -52,14 +52,14 @@ function MyPost({ post }) {
                         Undelete
                     </WhiteBlueButton>
                 ) : (
-                    <ButtonContainer>
+                    <div className="flexed-row justify-between w-16">
                         <WhiteBlueButton onClick={editPost}>
                             Edit
                         </WhiteBlueButton>
                         <WhiteRedButton onClick={deletePost}>
                             Delete
                         </WhiteRedButton>
-                    </ButtonContainer>
+                    </div>
                 )}
             </AlignRight>
         </Fragment>

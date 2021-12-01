@@ -11,13 +11,8 @@ import {
     FormError,
 } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { FlexRow, ButtonContainer } from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
-
-const WideButtonContainer = styled(ButtonContainer)`
-    width: 300px;
-`
 
 const Comment = styled.textarea`
     width: 60%;
@@ -45,7 +40,7 @@ function ReportForm({ id }) {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <FlexRow>
+            <div className="flexed-row">
                 <RadioInput
                     type="radio"
                     name="reason"
@@ -53,8 +48,8 @@ function ReportForm({ id }) {
                     ref={register()}
                 />
                 <RadioText>Slander</RadioText>
-            </FlexRow>
-            <FlexRow>
+            </div>
+            <div className="flexed-row">
                 <RadioInput
                     type="radio"
                     name="reason"
@@ -62,8 +57,8 @@ function ReportForm({ id }) {
                     ref={register()}
                 />
                 <RadioText>Scam</RadioText>
-            </FlexRow>
-            <FlexRow>
+            </div>
+            <div className="flexed-row">
                 <RadioInput
                     type="radio"
                     name="reason"
@@ -71,8 +66,8 @@ function ReportForm({ id }) {
                     ref={register()}
                 />
                 <RadioText>Defamation</RadioText>
-            </FlexRow>
-            <FlexRow>
+            </div>
+            <div className="flexed-row">
                 <RadioInput
                     type="radio"
                     name="reason"
@@ -80,8 +75,8 @@ function ReportForm({ id }) {
                     ref={register()}
                 />
                 <RadioText>Xenophobia</RadioText>
-            </FlexRow>
-            <FlexRow>
+            </div>
+            <div className="flexed-row">
                 <RadioInput
                     type="radio"
                     name="reason"
@@ -89,8 +84,8 @@ function ReportForm({ id }) {
                     ref={register()}
                 />
                 <RadioText>Incites Crime or Threats</RadioText>
-            </FlexRow>
-            <FlexRow>
+            </div>
+            <div className="flexed-row">
                 <RadioInput
                     type="radio"
                     name="reason"
@@ -99,7 +94,7 @@ function ReportForm({ id }) {
                     ref={register({ required: true })}
                 />
                 <RadioText>Profanity or Obsenity</RadioText>
-            </FlexRow>
+            </div>
             <FormError>
                 {errors.reason &&
                     errors.reason.type === 'required' &&
@@ -110,12 +105,12 @@ function ReportForm({ id }) {
                 <Comment name="comment" ref={register()} />
             </InputContainer>
 
-            <WideButtonContainer>
+            <div className="flexed-row justify-between w-20">
                 <WhiteBlueButton type="button" onClick={doCancel}>
                     Cancel
                 </WhiteBlueButton>
                 <WhiteRedButton type="submit">Report Post</WhiteRedButton>
-            </WideButtonContainer>
+            </div>
         </form>
     )
 }

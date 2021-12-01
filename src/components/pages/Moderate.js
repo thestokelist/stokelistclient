@@ -5,11 +5,6 @@ import { Link } from 'react-router-dom'
 
 import { FormError } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import {
-    FlexRow,
-    ButtonContainer,
-    ResponsiveBetweenRow,
-} from '../shared/Layouts'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import PostDetail from '../posts/PostDetail'
@@ -21,10 +16,6 @@ const ModContainer = styled.div`
     width: 80%;
     margin: 0 auto;
     justify-content: center;
-`
-
-const MarginButtonContainer = styled(ButtonContainer)`
-    margin-bottom: 1em;
 `
 
 const PostsLink = styled.span`
@@ -124,7 +115,7 @@ function Moderate() {
     return (
         <Fragment>
             <div className="title">Let's Do the Moderation</div>
-            <FlexRow>
+            <div className="flexed-row">
                 {modQueue && modQueue.length > 0 ? (
                     <Fragment>
                         <FaChevronLeft
@@ -133,8 +124,8 @@ function Moderate() {
                             onClick={goLeft}
                         />
                         <ModContainer>
-                            <ResponsiveBetweenRow>
-                                <MarginButtonContainer>
+                            <div className="flexed-responsive">
+                                <div className="flexed-row justify-between mb-1">
                                     {!currentPostKept && (
                                         <WhiteBlueButton
                                             onClick={keepCurrentPost}
@@ -149,7 +140,7 @@ function Moderate() {
                                             {currentPostKept ? "Actually, Delete" : "Delete"}
                                         </WhiteRedButton>
                                     )}
-                                </MarginButtonContainer>
+                                </div>
                                 <Link to={`/judge/${currentPost.id}`}>
                                     <PostsLink>
                                         {
@@ -157,7 +148,7 @@ function Moderate() {
                                         }
                                     </PostsLink>
                                 </Link>
-                            </ResponsiveBetweenRow>
+                            </div>
                             {error && (
                                 <FormError>Error moderating post</FormError>
                             )}
@@ -186,7 +177,7 @@ function Moderate() {
                 ) : (
                     <div>Nothing to moderate right now</div>
                 )}
-            </FlexRow>
+            </div>
         </Fragment>
     )
 }

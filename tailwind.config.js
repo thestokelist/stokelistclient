@@ -6,6 +6,7 @@ module.exports = {
             colors: {
                 blue: '#175e88',
                 slate: '#434653',
+                cream: '#f8f8f8'
             },
         },
     },

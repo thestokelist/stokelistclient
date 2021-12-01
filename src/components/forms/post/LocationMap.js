@@ -9,7 +9,6 @@ import {
     RadioInput,
     RadioText,
 } from '../../shared/Forms'
-import { FlexRow } from '../../shared/Layouts'
 
 const MapContainer = styled.div`
     height: 350px;
@@ -58,7 +57,7 @@ function LocationMap({ setValue, register, watch }) {
         <Fragment>
             <InputContainer>
                 <Label>Add Location</Label>
-                <FlexRow>
+                <div className="flexed-row">
                     <HalfWidthInput
                         name="location"
                         ref={register}
@@ -72,7 +71,7 @@ function LocationMap({ setValue, register, watch }) {
                         onChange={handleLocationCheckbox}
                     />
                     <RadioText>Set Exact Location</RadioText>
-                </FlexRow>
+                </div>
             </InputContainer>
             {hasLocation && (
                 <MapContainer>

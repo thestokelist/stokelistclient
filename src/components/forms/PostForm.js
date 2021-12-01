@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { BlueButton, WhiteBlueButton } from '../shared/Buttons'
-import { FlexBetweenRow } from '../shared/Layouts'
 import { WholeFormError, FormError } from '../shared/Forms'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
@@ -212,7 +211,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     const getPreview = () => {
         return (
             <Fragment>
-                <FlexBetweenRow>
+                <div className="flexed-row justify-between">
                     <WhiteBlueButton onClick={backToCreate}>
                         Edit
                     </WhiteBlueButton>
@@ -220,7 +219,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                     <BlueButton onClick={doCaptchaAndSubmit}>
                         {buttonText}
                     </BlueButton>
-                </FlexBetweenRow>
+                </div>
                 {submitError && <FormError>Error submitting post</FormError>}
                 <hr />
                 <PostDetail postDetails={postPreview} notSubmitted={true} />
