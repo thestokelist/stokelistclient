@@ -1,106 +1,50 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { store } from '../store'
 import { BlueButton } from '../shared/Buttons'
 import { FlexRow } from '../shared/Layouts'
 
-const HeaderContainer = styled.div`
-    padding: 0% 6%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    min-height: 100px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0 8px 5px -5px #00000026;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 10;
-    box-sizing: border-box;
-    /* Small Devices, Tablets */
-    @media only screen and (max-width: 768px) {
-        flex-direction: column;
-        min-height: auto;
-        padding-bottom: 1em;
-    }
-`
-
-const HeaderLinkText = styled.div`
-    color: #175e88;
-    font-size: 1.3em;
-    margin: 0em 1em;
-    font-weight: 500;
-`
-
-const HeaderLinks = styled.div`
-    display: flex;
-    align-items: center;
-    color: #595959;
-    @media only screen and (max-width: 768px) {
-        flex-direction: column;
-    }
-`
-
-const HeaderText = styled.div`
-    font-size: 3.2em;
-    color: #2f2838;
-    font-weight: 300;
-`
-
-const HeaderSpacer = styled.div`
-    background: #595959;
-    height: 34px;
-    width: 2px;
-    @media only screen and (max-width: 768px) {
-        display: none;
-    }
-`
-
 function Header() {
     const { state } = useContext(store)
     return (
-        <HeaderContainer>
+        <div className="bg-white w-full flex px-0 lg:px-16 flex-col lg:flex-row h-auto lg:h-24 pb-1 lg:pb-0 box-border items-center justify-between z-10 bottom-shadow">
             <Link to="/">
-                <HeaderText>
-                    {/*eslint-disable-next-line*/}
-                    <span>//the </span>
-                    <span>
-                        <b>stoke list.</b>
-                    </span>
-                </HeaderText>
+                <div className="text-black text-5xl font-light">
+                    {"//"}the <span className="font-medium">stoke list.</span>
+                </div>
             </Link>
-            <HeaderLinks>
+            <div className="flex items-center flex-column lg:flex-row text-gray-400">
                 <FlexRow>
                     <Link to="/">
-                        <HeaderLinkText>Home</HeaderLinkText>
+                        <div className="header-link">Home</div>
                     </Link>
                     <Link to="/garage">
-                        <HeaderLinkText>Garage Map</HeaderLinkText>
+                        <div className="header-link">Garage Map</div>
                     </Link>
-                    <HeaderSpacer />
+                    <div className="w-0.5 h-8 bg-gray-400 hidden md:block"/>
                 </FlexRow>
                 <FlexRow>
                     {state.loggedIn && state.isAdmin && (
                         <Link to="/moderate">
-                            <HeaderLinkText>Moderate</HeaderLinkText>
+                            <div className="header-link">Moderate</div>
                         </Link>
                     )}
                     {state.loggedIn ? (
                         <Link to="/myposts">
-                            <HeaderLinkText>Your Posts</HeaderLinkText>
+                            <div className="header-link">Your Posts</div>
                         </Link>
                     ) : (
                         <Link to="/login">
-                            <HeaderLinkText>Login</HeaderLinkText>
+                            <div className="header-link">Login</div>
                         </Link>
                     )}
                     <Link to="/post">
                         <BlueButton>Create Post</BlueButton>
                     </Link>
                 </FlexRow>
-            </HeaderLinks>
-        </HeaderContainer>
+            </div>
+        </div>
     )
 }
 

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.bottom-shadow {
+  box-shadow: 0 8px 5px -5px #00000026;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
