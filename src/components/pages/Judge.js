@@ -2,7 +2,6 @@ import React, { useState, useContext, Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { RedButton } from '../shared/Buttons'
-import { FormError } from '../shared/Forms'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
@@ -54,7 +53,7 @@ function Judge({ match }) {
             <div className="flexed-row justify-between">
                 <div className="title">Commence Judgement</div>
                 {hasQueue && <RedButton onClick={banUser}>Ban</RedButton>}
-                {error && <FormError>Error banning user</FormError>}
+                {error && <div className="form-error">Error banning user</div>}
             </div>
      
             {hasQueue ? (

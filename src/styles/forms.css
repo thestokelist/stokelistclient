@@ -1,0 +1,23 @@
+.form-label {
+    @apply font-medium text-blue my-2
+}
+
+.form-sublabel {
+    @apply text-blue font-normal
+}
+
+.form-input-container { 
+    @apply mb-4
+}
+
+.form-radio-text {
+    @apply text-sm text-slate ml-1 mr-4
+}
+
+.form-error {
+    @apply text-red-500 text-sm
+}
+
+.form-input {
+    @apply h-8 rounded border border-solid border-gray-300 shadow bg-white
+}

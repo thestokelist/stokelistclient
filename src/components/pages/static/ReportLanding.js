@@ -1,11 +1,9 @@
 import React from 'react'
-import { Label } from '../../shared/Forms'
-
 
 function ReportLanding() {
 
     return (
-        <Label>Thank you! Our admins will review your report.</Label> 
+        <div className="form-label">Thank you! Our admins will review your report.</div> 
     )
 }
 

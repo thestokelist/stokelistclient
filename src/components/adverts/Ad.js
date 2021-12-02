@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 
 import { adContent } from './Ad.md.js'
-import { NoEscape } from '../shared/Layouts'
 
 const AdvertContainer = styled.div`
     display: flex;
@@ -17,9 +16,9 @@ const AdvertContainer = styled.div`
 function Ad() {
     return (
         <AdvertContainer>
-            <NoEscape>
+            <div className="no-escape">
                 <ReactMarkdown children={adContent} />
-            </NoEscape>
+            </div>
         </AdvertContainer>
     )
 }

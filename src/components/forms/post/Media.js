@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { FaRegTimesCircle, FaCheck } from 'react-icons/fa'
 import { Controller } from 'react-hook-form'
 
-import { InputContainer, Input } from '../../shared/Forms'
-
 const UploadContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -49,10 +47,6 @@ const SuccessText = styled.div`
     margin: 0.5em 0;
 `
 
-const FullWidthInput = styled(Input)`
-    width: 100%;
-`
-
 const UploadImg = styled.img`
     max-height: 100%;
     max-width: 100%;
@@ -67,7 +61,7 @@ function Media({ media, index, deleteMedia, control }) {
     }`
 
     return (
-        <InputContainer>
+        <div className="form-input-container">
             <UploadContainer>
                 <ImageComponent>
                     <UploadImg src={media.thumbLink} alt="uploaded" />
@@ -75,7 +69,7 @@ function Media({ media, index, deleteMedia, control }) {
                 <TextComponent>
                     <UploadText>Add Description - {indexText}</UploadText>
                     <Controller
-                        as={FullWidthInput}
+                        as={<input className="form-input w-full" />}
                         name={`media[${index}].name`}
                         control={control}
                         type="text"
@@ -91,34 +85,34 @@ function Media({ media, index, deleteMedia, control }) {
                 </Close>
             </UploadContainer>
             <Controller
-                as={Input}
+                as={<input className="form-input" />}
                 name={`media[${index}].guid`}
                 control={control}
                 type="hidden"
                 defaultValue={media.guid || ''}
             />
             <Controller
-                as={Input}
+                as={<input className="form-input" />}
                 name={`media[${index}].link`}
                 control={control}
                 type="hidden"
                 defaultValue={media.link}
             />
             <Controller
-                as={Input}
+                as={<input className="form-input" />}
                 name={`media[${index}].thumbLink`}
                 control={control}
                 type="hidden"
                 defaultValue={media.thumbLink}
             />
             <Controller
-                as={Input}
+                as={<input className="form-input" />}
                 name={`media[${index}].id`}
                 control={control}
                 type="hidden"
                 defaultValue={media.id}
             />
-        </InputContainer>
+        </div>
     )
 }
 

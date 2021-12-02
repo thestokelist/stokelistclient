@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
-import { NoEscape } from '../shared/Layouts'
 import PostLocation from './PostLocation'
 import PostPrice from './PostPrice'
 import PostSummaryPhoto from './PostSummaryPhoto'
@@ -48,15 +47,15 @@ function PostSummary({ post, disabled, markerNumber }) {
                 <PostDetailsContainer>
                     <div className="flexed-responsive">
                         <div className="text-slate font-bold text-xl">
-                            <NoEscape>
+                            <div className="no-escape">
                                 <Link to={`/post/${post.id}`}>
                                     {post.title}
                                 </Link>
-                            </NoEscape>
+                            </div>
                         </div>
-                        <NoEscape>
+                        <div className="no-escape">
                             <PostLocation postDetails={post} />
-                        </NoEscape>
+                        </div>
                     </div>
                     <PostDetail>
                         {isGarageSale ? (
@@ -66,9 +65,9 @@ function PostSummary({ post, disabled, markerNumber }) {
                         )}
                     </PostDetail>
                     <PostTextSummary>
-                        <NoEscape>
+                        <div className="no-escape">
                             <ReactMarkdown children={post.description} />
-                        </NoEscape>
+                        </div>
                     </PostTextSummary>
                 </PostDetailsContainer>
             </PostSummaryContainer>

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-import { FormError } from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
@@ -150,7 +149,7 @@ function Moderate() {
                                 </Link>
                             </div>
                             {error && (
-                                <FormError>Error moderating post</FormError>
+                                <div className="form-error">Error moderating post</div>
                             )}
                             {currentPost && (
                                 <GrayableContainer

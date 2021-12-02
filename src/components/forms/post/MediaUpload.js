@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
 import { FaRegTimesCircle, FaUpload } from 'react-icons/fa'
 
-import { InputContainer } from '../../shared/Forms'
 import Loading from '../../shared/Loading'
 import { endpoints } from '../../../constants/endpoints'
 import { useNetworkRequest } from '../../../hooks'
@@ -72,7 +71,7 @@ function Media({ addMedia, index, close }) {
     })
 
     return (
-        <InputContainer>
+        <div className="form-input-container">
             <UploadContainer>
                 <UploadComponent>
                     {loading ? (
@@ -95,7 +94,7 @@ function Media({ addMedia, index, close }) {
                     <FaRegTimesCircle size={20} onClick={close} />
                 </Close>
             </UploadContainer>
-        </InputContainer>
+        </div>
     )
 }
 

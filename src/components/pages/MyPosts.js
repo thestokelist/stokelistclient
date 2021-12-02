@@ -6,7 +6,6 @@ import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
-import { Flash } from '../shared/Layouts'
 import Loading from '../shared/Loading'
 
 function MyPosts({ location }) {
@@ -54,7 +53,7 @@ function MyPosts({ location }) {
     ) : (
         <Fragment>
             {fromValidation && (
-                <Flash>Your email address has been confirmed!</Flash>
+                <div className="flash">Your email address has been confirmed!</div>
             )}
             <PostSection
                 posts={myPosts}

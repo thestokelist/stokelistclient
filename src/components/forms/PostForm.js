@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { BlueButton, WhiteBlueButton } from '../shared/Buttons'
-import { WholeFormError, FormError } from '../shared/Forms'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
 import {
@@ -170,10 +169,10 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
         return (
             <form onSubmit={handleSubmit(onPreview)}>
                 {wholeFormError && (
-                    <WholeFormError>
+                    <div className="form-error font-bold mb-2">
                         Aw, snap - you missed a step! See the alerts in red
                         below
-                    </WholeFormError>
+                    </div>
                 )}
                 <PostTitle errors={errors} register={register} watch={watch} />
                 <PostDescription
@@ -220,7 +219,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                         {buttonText}
                     </BlueButton>
                 </div>
-                {submitError && <FormError>Error submitting post</FormError>}
+                {submitError && <div className="form-error">Error submitting post</div>}
                 <hr />
                 <PostDetail postDetails={postPreview} notSubmitted={true} />
             </Fragment>

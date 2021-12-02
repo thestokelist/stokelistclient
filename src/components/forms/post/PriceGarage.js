@@ -1,24 +1,11 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
-import {
-    Input,
-    InputContainer,
-    Label,
-    RadioInput,
-    RadioText,
-    FormError,
-} from '../../shared/Forms'
 import GarageDate from './GarageDate'
 
 const InputRadioContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-`
-
-const PrefixInput = styled(Input)`
-    border-radius: 0px 5px 5px 0px;
-    margin-bottom: 0;
 `
 
 const Prefix = styled.div`
@@ -36,7 +23,6 @@ const Prefix = styled.div`
 `
 
 function PostPrice({ errors, register, watch, setValue }) {
-
     const isGarageSale = watch('priceRadio') === 'priceGarage'
 
     const validatePrice = () => {
@@ -58,12 +44,13 @@ function PostPrice({ errors, register, watch, setValue }) {
 
     return (
         <Fragment>
-            <InputContainer>
-                <Label>Add a Price</Label>
+            <div className="form-input-container">
+                <div className="form-label">Add a Price</div>
                 <InputRadioContainer>
                     <div className="flexed-row">
                         <Prefix>$</Prefix>
-                        <PrefixInput
+                        <input
+                            className="form-input mb-0 rounded"
                             type="numeric"
                             name="price"
                             ref={register({ validate: validatePrice })}
@@ -71,38 +58,45 @@ function PostPrice({ errors, register, watch, setValue }) {
                         />
                     </div>
                     <div className="flexed-row">
-                        <RadioInput
+                        <input
                             type="radio"
                             name="priceRadio"
                             value="priceNA"
                             ref={register()}
                             onChange={updatePriceForm}
                         />
-                        <RadioText>Not Applicable</RadioText>
-                        <RadioInput
+                        <span text="form-radio-text">Not Applicable</span>
+                        <input
                             type="radio"
                             name="priceRadio"
                             value="priceFree"
                             ref={register()}
                             onChange={updatePriceForm}
                         />
-                        <RadioText>Free</RadioText>
-                        <RadioInput
+                        <span text="form-radio-text">Free</span>
+                        <input
                             type="radio"
                             name="priceRadio"
                             value="priceGarage"
                             ref={register()}
                             onChange={updatePriceForm}
                         />
-                        <RadioText>Garage Sale</RadioText>
+                        <span text="form-radio-text">Garage Sale</span>
                     </div>
                 </InputRadioContainer>
 
-                <FormError>
+                <div className="form-error">
                     {errors.price && 'Enter a price or select an option'}
-                </FormError>
-            </InputContainer>
-            {isGarageSale && <GarageDate errors={errors} register={register} watch={watch} setValue={setValue}/>}
+                </div>
+            </div>
+            {isGarageSale && (
+                <GarageDate
+                    errors={errors}
+                    register={register}
+                    watch={watch}
+                    setValue={setValue}
+                />
+            )}
         </Fragment>
     )
 }

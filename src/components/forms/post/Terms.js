@@ -1,29 +1,24 @@
 import React from 'react'
-import {
-    RadioInput,
-    RadioText,
-    FormError,
-    InputContainer,
-} from '../../shared/Forms'
 
 function Terms({ errors, register }) {
     return (
-        <InputContainer>
-            <RadioInput
+        <div className="form-input-container">
+            <input
                 type="checkbox"
                 name="terms"
                 ref={register({ required: true })}
             />
-            <RadioText>
+            <span text="form-radio-text">
                 I accept the{' '}
                 <a target="_blank" href="/terms">
                     Terms of Service & Privacy Policy
                 </a>
-            </RadioText>
-            <FormError>
-                {errors.terms && 'You must accept the Terms of Service & Privacy Policy'}
-            </FormError>
-        </InputContainer>
+            </span>
+            <div className="form-error">
+                {errors.terms &&
+                    'You must accept the Terms of Service & Privacy Policy'}
+            </div>
+        </div>
     )
 }
 

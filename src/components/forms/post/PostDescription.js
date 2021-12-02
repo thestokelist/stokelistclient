@@ -4,7 +4,6 @@ import ReactMde from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 import ReactMarkdown from 'react-markdown'
 
-import { Label, SubLabel, FormError, InputContainer } from '../../shared/Forms'
 import { useMountEffect } from '../../../hooks'
 
 const MDEContainer = styled.div`
@@ -20,14 +19,14 @@ function PostDescription({ errors, register, setValue, watch }) {
     const [selectedTab, setSelectedTab] = React.useState("write");
 
     return (
-        <InputContainer>
-            <Label>
+        <div className="form-input-container">
+            <div className="form-label">
                 Post Description
-                <SubLabel>
+                <span className="form-sublabel">
                     - Be descriptive, this will help your results show up in
                     search
-                </SubLabel>
-            </Label>
+                </span>
+            </div>
             <MDEContainer>
                 {' '}
                 <ReactMde
@@ -43,10 +42,10 @@ function PostDescription({ errors, register, setValue, watch }) {
                 />
             </MDEContainer>
 
-            <FormError>
+            <div className="form-error">
                 {errors.description && 'Description is required.'}
-            </FormError>
-        </InputContainer>
+            </div>
+        </div>
     )
 }
 

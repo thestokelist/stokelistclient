@@ -1,14 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Map, TileLayer, Marker } from 'react-leaflet'
-import {
-    Input,
-    InputContainer,
-    Label,
-    HalfWidthInput,
-    RadioInput,
-    RadioText,
-} from '../../shared/Forms'
 
 const MapContainer = styled.div`
     height: 350px;
@@ -55,24 +47,25 @@ function LocationMap({ setValue, register, watch }) {
 
     return (
         <Fragment>
-            <InputContainer>
-                <Label>Add Location</Label>
+            <div className="form-input-container">
+                <div className="form-label">Add Location</div>
                 <div className="flexed-row">
-                    <HalfWidthInput
+                    <input 
+                        className="form-input w-2/4 mr-4"
                         name="location"
                         ref={register}
                         placeholder="Where you at?"
                     />
                     {/*Component intentionally not registered - just provides some page logic, the hidden fields capture the input data */}
-                    <RadioInput
+                    <input
                         type="checkbox"
                         name="exactLocation"
                         checked={hasLocation}
                         onChange={handleLocationCheckbox}
                     />
-                    <RadioText>Set Exact Location</RadioText>
+                    <span text="form-radio-text">Set Exact Location</span>
                 </div>
-            </InputContainer>
+            </div>
             {hasLocation && (
                 <MapContainer>
                     <Map
@@ -93,8 +86,16 @@ function LocationMap({ setValue, register, watch }) {
                     </Map>
                 </MapContainer>
             )}
-            <Input type="hidden" name="lat" ref={register} />
-            <Input type="hidden" name="lng" ref={register} />
+            <input
+                type="hidden"
+                name="lat"
+                ref={register}
+            />
+            <input
+                type="hidden"
+                name="lng"
+                ref={register}
+            />
         </Fragment>
     )
 }

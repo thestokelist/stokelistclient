@@ -3,13 +3,6 @@ import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 
-import {
-    RadioInput,
-    RadioText,
-    InputContainer,
-    Label,
-    FormError,
-} from '../shared/Forms'
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
@@ -41,69 +34,69 @@ function ReportForm({ id }) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flexed-row">
-                <RadioInput
+                <input
                     type="radio"
                     name="reason"
                     value="Slander"
                     ref={register()}
                 />
-                <RadioText>Slander</RadioText>
+                <span text="form-radio-text">Slander</span>
             </div>
             <div className="flexed-row">
-                <RadioInput
+                <input
                     type="radio"
                     name="reason"
                     value="Scam"
                     ref={register()}
                 />
-                <RadioText>Scam</RadioText>
+                <span text="form-radio-text">Scam</span>
             </div>
             <div className="flexed-row">
-                <RadioInput
+                <input
                     type="radio"
                     name="reason"
                     value="Defamation"
                     ref={register()}
                 />
-                <RadioText>Defamation</RadioText>
+                <span text="form-radio-text">Defamation</span>
             </div>
             <div className="flexed-row">
-                <RadioInput
+                <input
                     type="radio"
                     name="reason"
                     value="Xenophobia"
                     ref={register()}
                 />
-                <RadioText>Xenophobia</RadioText>
+                <span text="form-radio-text">Xenophobia</span>
             </div>
             <div className="flexed-row">
-                <RadioInput
+                <input
                     type="radio"
                     name="reason"
                     value="Crime"
                     ref={register()}
                 />
-                <RadioText>Incites Crime or Threats</RadioText>
+                <span text="form-radio-text">Incites Crime or Threats</span>
             </div>
             <div className="flexed-row">
-                <RadioInput
+                <input
                     type="radio"
                     name="reason"
                     value="Rude"
                     //With react-hook-form/required radio buttons, register the last one as required
                     ref={register({ required: true })}
                 />
-                <RadioText>Profanity or Obsenity</RadioText>
+                <span text="form-radio-text">Profanity or Obsenity</span>
             </div>
-            <FormError>
+            <div className="form-error">
                 {errors.reason &&
                     errors.reason.type === 'required' &&
                     'You must give a reason'}
-            </FormError>
-            <InputContainer>
-                <Label>Comment</Label>
+            </div>
+            <div className="form-input-container">
+                <div className="form-label">Comment</div>
                 <Comment name="comment" ref={register()} />
-            </InputContainer>
+            </div>
 
             <div className="flexed-row justify-between w-20">
                 <WhiteBlueButton type="button" onClick={doCancel}>

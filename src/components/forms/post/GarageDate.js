@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { useMountEffect } from '../../../hooks'
-import { Label, Input, FormError, InputContainer } from '../../shared/Forms'
 import { getDatePortionForInput, getNextSaturday } from '../../../util/datetime'
 
 function GarageDate({ errors, register, watch, setValue }) {
@@ -16,31 +15,34 @@ function GarageDate({ errors, register, watch, setValue }) {
         }
     })
     return (
-        <InputContainer>
-            <Label>When's it happening?</Label>
+        <div className="form-input-container">
+            <div className="form-label">When's it happening?</div>
             From
-            <Input
+            <input  
+                className="form-input"
                 type="time"
                 name="startTime"
                 ref={register({ required: true })}
             />
             To
-            <Input
+            <input
+                className="form-input"
                 type="time"
                 name="endTime"
                 ref={register({ required: true })}
             />
             On
-            <Input
+            <input
+                className="form-input"
                 type="date"
                 name="garageDate"
                 ref={register({ required: true })}
             />
-            <FormError>
+            <div className="form-error">
                 {(errors.startTime || errors.endTime || errors.garageDate) &&
                     'Start time, Finish time and date are all required for a garage sale.'}
-            </FormError>
-        </InputContainer>
+            </div>
+        </div>
     )
 }
 

@@ -1,14 +1,6 @@
 import React from 'react'
 import validator from 'email-validator'
 
-import {
-    Label,
-    FormError,
-    InputContainer,
-    SubLabel,
-    HalfWidthInput
-} from '../../shared/Forms'
-
 function PostEmail({ errors, register, watch }) {
 
     const validateEmail = () => {
@@ -17,12 +9,13 @@ function PostEmail({ errors, register, watch }) {
     }
 
     return (
-        <InputContainer>
-                <Label>
+        <div className="form-input-container">
+                <div className="form-label">
                     Your Contact Email
-                    <SubLabel> - This will not be published</SubLabel>
-                </Label>
-                <HalfWidthInput
+                    <span className="form-sublabel"> - This will not be published</span>
+                </div>
+                <input
+                    className="form-input w-2/4 mr-4"
                     type="email"
                     name="email"
                     ref={register({
@@ -30,15 +23,15 @@ function PostEmail({ errors, register, watch }) {
                         validate: validateEmail,
                     })}
                 />
-                <FormError>
+                <div className="form-error">
                     {errors.email &&
                         errors.email.type === 'required' &&
                         'Email is required.'}
                     {errors.email &&
                         errors.email.type === 'validate' &&
                         'Must be an email address.'}
-                </FormError>
-            </InputContainer>
+                </div>
+            </div>
     )
 }
 

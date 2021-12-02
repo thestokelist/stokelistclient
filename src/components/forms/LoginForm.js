@@ -2,7 +2,6 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
 
-import { Input, InputContainer } from '../shared/Forms'
 import { BlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
@@ -26,8 +25,9 @@ function LoginForm({emailSent}) {
     }
 
     return  <form onSubmit={handleSubmit(onSubmit)}>
-    <InputContainer>
-        <Input
+    <div className="form-input-container">
+        <input  
+            className="form-input"
             type="email"
             name="email"
             ref={register({
@@ -43,7 +43,7 @@ function LoginForm({emailSent}) {
         {errors.email &&
             errors.email.type === 'validate' &&
             'Must be an email address.'}
-    </InputContainer>
+    </div>
 
     <BlueButton type="submit">Login</BlueButton>
 </form>

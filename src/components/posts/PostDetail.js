@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 
-import { Label } from '../shared/Forms'
 import { getDateRangeString, getPrettyDateString } from '../../util/datetime'
 import PostPrice from './PostPrice'
 import PostLocation from './PostLocation'
@@ -64,7 +63,7 @@ function PostDetail({ postDetails, notSubmitted }) {
 
             <PostLocation postDetails={post} />
             <PostPhoto postDetails={post} />
-            <Label>Post Description</Label>
+            <div className="form-label">Post Description</div>
             <PostText>
                 <ReactMarkdown children={post.description} />
             </PostText>

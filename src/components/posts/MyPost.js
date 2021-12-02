@@ -2,7 +2,6 @@ import React, { useState, Fragment, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
-import { AlignRight } from '../shared/Layouts'
 import PostSummary from './PostSummary'
 import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
@@ -46,7 +45,7 @@ function MyPost({ post }) {
     return (
         <Fragment>
             <PostSummary post={post} disabled={deleted} />
-            <AlignRight>
+            <div className="flex w-full justify-end">
                 {deleted ? (
                     <WhiteBlueButton onClick={undeletePost}>
                         Undelete
@@ -61,7 +60,7 @@ function MyPost({ post }) {
                         </WhiteRedButton>
                     </div>
                 )}
-            </AlignRight>
+            </div>
         </Fragment>
     )
 }

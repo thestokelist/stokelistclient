@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react'
-import { Label } from '../../shared/Forms'
 
 function PostSubmitLanding() {
     return (
         <Fragment>
-            <Label>Please confirm your email address</Label>
+            <div className="form-label">Please confirm your email address</div>
             <p>
                 Your post has been submitted but will not appear until you
                 confirm your email address

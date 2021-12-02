@@ -1,10 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Label, Input, FormError, InputContainer } from '../../shared/Forms'
-
-const WideInput = styled(Input)`
-    width: 80%;
-`
 
 function PostTitle({ errors, register, watch }) {
     const validateYelling = () => {
@@ -19,9 +13,10 @@ function PostTitle({ errors, register, watch }) {
     }
 
     return (
-        <InputContainer>
-            <Label>Post Title</Label>
-            <WideInput
+        <div className="form-input-container">
+            <div className="form-label">Post Title</div>
+            <input
+                className="form-input w-4/5"
                 name="title"
                 placeholder="Max 50 characters"
                 ref={register({
@@ -30,7 +25,7 @@ function PostTitle({ errors, register, watch }) {
                     validate: validateYelling,
                 })}
             />
-            <FormError>
+            <div className="form-error">
                 {' '}
                 {errors.title &&
                     errors.title.type === 'required' &&
@@ -41,8 +36,8 @@ function PostTitle({ errors, register, watch }) {
                 {errors.title &&
                     errors.title.type === 'validate' &&
                     'Your post title can’t be created with the CAPS LOCK on; it looks like you’re yelling.'}
-            </FormError>
-        </InputContainer>
+            </div>
+        </div>
     )
 }
 

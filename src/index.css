@@ -31,6 +31,10 @@ a {
   text-decoration: inherit;
 }
 
+svg {
+  display: inline;
+}
+
 /* Overwrite leaflet styles to display popups/tooltips how we want */
 .leaflet-tooltip{
   background:none;

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
 
-import { Label } from '../shared/Forms'
 import { WhiteBlueButton } from '../shared/Buttons'
 import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
@@ -60,7 +59,7 @@ function PostView({ match }) {
             ) : (
                 <PostDetail postDetails={postDetails} />
             )}
-            <Label>Share This Post</Label>
+            <div className="form-label">Share This Post</div>
             <div className="flexed-responsive">
                 <div className="flexed-row">
                     <EmailShareButton url={window.location.href}>
