@@ -2,7 +2,6 @@ import React, { useContext, useState, Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
-import { BlueButton, WhiteBlueButton } from '../shared/Buttons'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
 import {
@@ -202,7 +201,9 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                 )}
                 {!editMode && <Terms register={register} errors={errors} />}
 
-                <BlueButton type="submit">Preview</BlueButton>
+                <button className="btn-blue" type="submit">
+                    Preview
+                </button>
             </form>
         )
     }
@@ -211,15 +212,17 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
         return (
             <Fragment>
                 <div className="flexed-row justify-between">
-                    <WhiteBlueButton onClick={backToCreate}>
+                    <button className="btn-white" onClick={backToCreate}>
                         Edit
-                    </WhiteBlueButton>
+                    </button>
 
-                    <BlueButton onClick={doCaptchaAndSubmit}>
+                    <button className="btn-blue" onClick={doCaptchaAndSubmit}>
                         {buttonText}
-                    </BlueButton>
+                    </button>
                 </div>
-                {submitError && <div className="form-error">Error submitting post</div>}
+                {submitError && (
+                    <div className="form-error">Error submitting post</div>
+                )}
                 <hr />
                 <PostDetail postDetails={postPreview} notSubmitted={true} />
             </Fragment>

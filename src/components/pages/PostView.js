@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
 
-import { WhiteBlueButton } from '../shared/Buttons'
 import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
 import PostSearch from '../posts/PostSearch'
@@ -85,9 +84,9 @@ function PostView({ match }) {
                             <u>The Stoke List Commandments?</u>
                         </Link>
                     </ReportText>
-                    <WhiteBlueButton onClick={doReport}>
+                    <button className="btn-white" onClick={doReport}>
                         Report Post
-                    </WhiteBlueButton>
+                    </button>
                 </div>
             </div>
         </PostSearch>

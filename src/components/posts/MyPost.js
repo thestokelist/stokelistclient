@@ -1,7 +1,6 @@
 import React, { useState, Fragment, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
 import PostSummary from './PostSummary'
 import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
@@ -47,17 +46,17 @@ function MyPost({ post }) {
             <PostSummary post={post} disabled={deleted} />
             <div className="flex w-full justify-end">
                 {deleted ? (
-                    <WhiteBlueButton onClick={undeletePost}>
+                    <button className="btn-white" onClick={undeletePost}>
                         Undelete
-                    </WhiteBlueButton>
+                    </button>
                 ) : (
-                    <div className="flexed-row justify-between w-16">
-                        <WhiteBlueButton onClick={editPost}>
+                    <div className="flexed-row justify-between w-64">
+                        <button className="btn-white" onClick={editPost}>
                             Edit
-                        </WhiteBlueButton>
-                        <WhiteRedButton onClick={deletePost}>
+                        </button>
+                        <button className="btn-white-red"  onClick={deletePost}>
                             Delete
-                        </WhiteRedButton>
+                        </button>
                     </div>
                 )}
             </div>

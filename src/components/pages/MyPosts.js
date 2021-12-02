@@ -1,7 +1,7 @@
 import React, { useState, useContext, Fragment } from 'react'
 
 import PostSection from '../posts/PostSection'
-import { WhiteBlueButton } from '../shared/Buttons'
+
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import { actionTypes } from '../../constants/actions'
@@ -61,10 +61,10 @@ function MyPosts({ location }) {
                 emptyText={`No Posts Found. First time users require moderation approval, and won't appear here until approved`}
                 title={'Your Posts'}
                 titleButton={
-                    <div>
-                        <WhiteBlueButton onClick={logout}>
+                    <div className="text-center">
+                        <button className="btn-white" onClick={logout}>
                             Log Out
-                        </WhiteBlueButton>
+                        </button>
                         <div className="text-blue text-xs underline" onClick={logoutEverywhere}>
                             Log Out on All Devices
                         </div>

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { store } from '../store'
 import PostDetail from '../posts/PostDetail'
@@ -51,12 +50,11 @@ function Moderate() {
         fetchPosts()
     })
 
-    const replaceQueueAt = (index,newValue) => {
+    const replaceQueueAt = (index, newValue) => {
         const newModQueue = [...modQueue]
         newModQueue.splice(index, 1, newValue)
         return newModQueue
     }
-
 
     const keepCurrentPost = async () => {
         const postId = currentPost.id
@@ -68,7 +66,7 @@ function Moderate() {
         )
         if (response) {
             const modPost = Object.assign({ kept: true }, currentPost)
-            setModQueue(replaceQueueAt(postCounter,modPost))
+            setModQueue(replaceQueueAt(postCounter, modPost))
             goRight()
         } else {
             setError(true)
@@ -85,7 +83,7 @@ function Moderate() {
         )
         if (response) {
             const modPost = Object.assign({ deleted: true }, currentPost)
-            setModQueue(replaceQueueAt(postCounter,modPost))
+            setModQueue(replaceQueueAt(postCounter, modPost))
             goRight()
         } else {
             setError(true)
@@ -126,30 +124,36 @@ function Moderate() {
                             <div className="flexed-responsive">
                                 <div className="flexed-row justify-between mb-1">
                                     {!currentPostKept && (
-                                        <WhiteBlueButton
+                                        <button
+                                            className="btn-white"
                                             onClick={keepCurrentPost}
                                         >
-                                            {currentPostDeleted ? "Actually, Keep" : "Keep"}
-                                        </WhiteBlueButton>
+                                            {currentPostDeleted
+                                                ? 'Actually, Keep'
+                                                : 'Keep'}
+                                        </button>
                                     )}
                                     {!currentPostDeleted && (
-                                        <WhiteRedButton
+                                        <button
+                                            className="btn-white-red"
                                             onClick={deleteCurrentPost}
                                         >
-                                            {currentPostKept ? "Actually, Delete" : "Delete"}
-                                        </WhiteRedButton>
+                                            {currentPostKept
+                                                ? 'Actually, Delete'
+                                                : 'Delete'}
+                                        </button>
                                     )}
                                 </div>
                                 <Link to={`/judge/${currentPost.id}`}>
                                     <PostsLink>
-                                        {
-                                            'See All Other Posts by this User >>'
-                                        }
+                                        {'See All Other Posts by this User >>'}
                                     </PostsLink>
                                 </Link>
                             </div>
                             {error && (
-                                <div className="form-error">Error moderating post</div>
+                                <div className="form-error">
+                                    Error moderating post
+                                </div>
                             )}
                             {currentPost && (
                                 <GrayableContainer

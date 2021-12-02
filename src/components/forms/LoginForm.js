@@ -2,7 +2,6 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import validator from 'email-validator'
 
-import { BlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
 
@@ -45,7 +44,7 @@ function LoginForm({emailSent}) {
             'Must be an email address.'}
     </div>
 
-    <BlueButton type="submit">Login</BlueButton>
+    <button className="btn-blue" type="submit">Login</button>
 </form>
 }
 

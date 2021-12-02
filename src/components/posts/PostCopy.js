@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FaPaperclip } from 'react-icons/fa'
 
-import { CenteredWhiteBlueButton } from '../shared/Buttons'
-
 const CopyLink = styled.div`
     font-size: 1em;
     text-decoration: underline;
@@ -34,9 +32,9 @@ function PostDetail({ postDetails }) {
 
     return (
         <div className="flexed-column">
-            <CenteredWhiteBlueButton onClick={replyToPost}>
+            <button className="btn-white mx-auto my-0" onClick={replyToPost}>
                 Reply to Post
-            </CenteredWhiteBlueButton>
+            </button>
             {emailCopied ? (
                 <CopiedText>Email Address Copied!</CopiedText>
             ) : (

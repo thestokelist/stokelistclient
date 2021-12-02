@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { store } from '../store'
-import { BlueButton } from '../shared/Buttons'
 
 function Header() {
     const { state } = useContext(store)
@@ -39,7 +38,7 @@ function Header() {
                         </Link>
                     )}
                     <Link to="/post">
-                        <BlueButton>Create Post</BlueButton>
+                        <button className="btn-blue">Create Post</button>
                     </Link>
                 </div>
             </div>

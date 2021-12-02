@@ -1,0 +1,19 @@
+.btn-base {
+    @apply shadow rounded-lg px-10 py-2 font-bold text-center;
+}
+
+.btn-blue {
+    @apply btn-base border-none text-lg text-white bg-blue;
+}
+
+.btn-white {
+    @apply btn-base text-blue bg-white border border-solid border-blue;
+}
+
+.btn-white-red {
+    @apply btn-base border border-solid border-red-600 text-red-600 bg-white;
+}
+
+.btn-red {
+    @apply btn-base border-red-600 bg-red-600 text-white;
+}

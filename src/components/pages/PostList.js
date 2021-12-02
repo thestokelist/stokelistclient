@@ -5,7 +5,6 @@ import PostSection from '../posts/PostSection'
 import PostSearch from '../posts/PostSearch'
 import Loading from '../shared/Loading'
 import { usePosts, useMountEffect } from '../../hooks'
-import { CenteredWhiteBlueButton } from '../shared/Buttons'
 import { endpoints } from '../../constants/endpoints'
 
 function PostList() {
@@ -39,9 +38,9 @@ function PostList() {
                 includeAds={true}
                 adminMode={state.isAdmin === true}
             >
-                <CenteredWhiteBlueButton onClick={loadLatestPosts}>
+                <button className="btn-white my-0 mx-auto" onClick={loadLatestPosts}>
                     Show More
-                </CenteredWhiteBlueButton>
+                </button>
             </PostSection>
         </PostSearch>
     )

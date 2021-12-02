@@ -5,7 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import PostSection from '../posts/PostSection'
 import Loading from '../shared/Loading'
 import { useSearchReducer } from '../../hooks'
-import { CenteredWhiteBlueButton } from '../shared/Buttons'
+
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
 
@@ -116,9 +116,9 @@ function PostSearch({ children }) {
                     includeAds={true}
                 >
                     {showMoreButton && (
-                        <CenteredWhiteBlueButton onClick={loadMoreSearchPosts}>
+                        <button className="btn-white mx-auto my-0" onClick={loadMoreSearchPosts}>
                             More Results
-                        </CenteredWhiteBlueButton>
+                        </button>
                     )}
                 </PostSection>
             )

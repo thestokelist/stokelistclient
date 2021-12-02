@@ -118,7 +118,7 @@ function PostSection({
     }
 
     return posts.length === 0 && hideEmpty === true ? null : (
-        <div classNAme="flex flex-col w-full">
+        <div className="flex flex-col w-full">
             <div className="flexed-row justify-between">
                 <div className="title">{title}</div>
                 {titleButton}

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 
-import { WhiteBlueButton, WhiteRedButton } from '../shared/Buttons'
+
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
 
@@ -99,10 +99,10 @@ function ReportForm({ id }) {
             </div>
 
             <div className="flexed-row justify-between w-20">
-                <WhiteBlueButton type="button" onClick={doCancel}>
+                <button className="btn-white" type="button" onClick={doCancel}>
                     Cancel
-                </WhiteBlueButton>
-                <WhiteRedButton type="submit">Report Post</WhiteRedButton>
+                </button>
+                <button className="btn-white-red" type="submit">Report Post</button>
             </div>
         </form>
     )
