@@ -16,10 +16,10 @@ function PostDetail({ postDetails, notSubmitted }) {
         <Fragment>
             <div className="flexed-row justify-between">
                 <div className="flexed-column">
-                    <div className="mb-1 font-medium text-2xl text-slate">
+                    <div className="mb-1 font-light text-2xl text-slate">
                         {post.title}
                     </div>
-                    <div className="text-blue mb-2 font-medium text-2xl">
+                    <div className="text-blue mb-2 font-bold text-2xl">
                         {isGarageSale ? (
                             getDateRangeString(post.startTime, post.endTime)
                         ) : (

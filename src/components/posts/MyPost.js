@@ -50,7 +50,7 @@ function MyPost({ post }) {
                         Undelete
                     </button>
                 ) : (
-                    <div className="flexed-row justify-between w-64">
+                    <div className="flexed-row justify-between w-72">
                         <button className="btn-white" onClick={editPost}>
                             Edit
                         </button>

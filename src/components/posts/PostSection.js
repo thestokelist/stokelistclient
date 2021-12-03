@@ -88,7 +88,7 @@ function PostSection({
                 ))
             }
         }
-        return postSummaries
+        return <div className="mt-4"> {postSummaries}</div>
     }
 
     //Display the posts, grouped by date
@@ -110,15 +110,15 @@ function PostSection({
             }
             return (
                 <Fragment key={date}>
-                    {date && <div className="text-2xl font-medium mb-1 text-slate">{date}</div>}
-                    {postGroup}
+                    {date && <div className="text-3xl font-medium text-slate">{date}</div>}
+                    <div className="mt-4 mb-8">{postGroup}</div>
                 </Fragment>
             )
         })
     }
 
     return posts.length === 0 && hideEmpty === true ? null : (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-4">
             <div className="flexed-row justify-between">
                 <div className="title">{title}</div>
                 {titleButton}

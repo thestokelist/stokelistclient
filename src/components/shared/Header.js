@@ -6,7 +6,7 @@ import { store } from '../store'
 function Header() {
     const { state } = useContext(store)
     return (
-        <div className="bg-white w-full flex px-0 lg:px-16 flex-col lg:flex-row h-auto lg:h-24 pb-1 lg:pb-0 box-border items-center justify-between z-10 bottom-shadow">
+        <div className="bg-white w-full flex px-0 lg:px-20 flex-col lg:flex-row h-auto lg:h-24 pb-1 lg:pb-0 box-border items-center justify-between z-10 bottom-shadow">
             <Link to="/">
                 <div className="text-black text-5xl font-light">
                     {"//"}the <span className="font-medium">stoke list.</span>

@@ -94,12 +94,12 @@ function PostSearch({ children }) {
 
     return (
         <Fragment>
-            <div className="mb-4 text-center text-slate">
+            <div className="mb-4 text-lg text-center text-slate font-light">
                 Buy, sell, love, yell – Revelstoke’s online classifieds.
             </div>
-            <div className="mb-4 rounded gray-border shadow box-border flex flex-row w-full h-12">
+            <div className="mb-8 rounded-lg gray-border shadow box-border flex flex-row w-full h-16">
                 <input
-                    className="flex-grow pl-4 text-blue border-0 placeholder-blue"
+                    className="flex-grow font-light rounded-lg pl-8 text-xl text-blue border-0 placeholder-blue"
                     type="text"
                     onChange={updateSearchTerm}
                     placeholder="Search Posts"
@@ -110,7 +110,7 @@ function PostSearch({ children }) {
                     }}
                 />
                 <button
-                    className="w-12 bg-white shadow rounded border-l border-l-solid border-l-gray-300 bg-opacity-100"
+                    className="w-12 bg-white shadow rounded-lg border-l border-l-solid border-l-gray-300 bg-opacity-100"
                     onClick={doSearch}
                 >
                     <FaSearch size={25} color={'#175E88'} />

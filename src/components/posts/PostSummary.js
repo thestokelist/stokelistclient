@@ -14,11 +14,11 @@ function PostSummary({ post, disabled, markerNumber }) {
 
     return (
         <GrayableContainer disabled={disabled}>
-            <div className="flex my-2 bg-white shadow gray-border rounded">
+            <div className="flex p-1 mb-4 bg-white shadow gray-border rounded">
                 <PostSummaryPhoto post={post} markerNumber={markerNumber} />
-                <div className="flex-grow box-border mx-4 my-8">
+                <div className="flex-grow box-border px-4 py-2">
                     <div className="flexed-responsive">
-                        <div className="text-slate font-bold text-xl">
+                        <div className="text-slate font-medium text-2xl">
                             <div className="no-escape">
                                 <Link to={`/post/${post.id}`}>
                                     {post.title}
@@ -29,14 +29,14 @@ function PostSummary({ post, disabled, markerNumber }) {
                             <PostLocation postDetails={post} />
                         </div>
                     </div>
-                    <div className="mb-4 text-blue text-lg">
+                    <div className="mb-2 text-blue text-xl">
                         {isGarageSale ? (
                             getDateRangeString(post.startTime, post.endTime)
                         ) : (
                             <PostPrice price={post.price} />
                         )}
                     </div>
-                    <div className="mt-6 text-slate">
+                    <div className="text-slate">
                         <div className="no-escape">
                             <ReactMarkdown children={post.description} />
                         </div>
