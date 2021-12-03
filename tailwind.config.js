@@ -14,15 +14,19 @@ module.exports = {
                 '3/4': '75%',
             },
             minWidth: {
-                'xxs': '16rem'
+                xxs: '16rem',
             },
             minHeight: {
                 '16': '4rem',
             },
+            height: {
+                '112': '28rem',
+            },
             maxHeight: {
-                '100': '25rem',
                 '1/3': '33%',
-            }
+                '102': '25.5rem',
+                '112': '28rem',
+            },
         },
     },
     variants: {

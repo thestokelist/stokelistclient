@@ -65,18 +65,18 @@ function PostPhoto({ postDetails }) {
     }
 
     return media ? (
-        <div className="w-full max-h-160 h-450 flex flex-col mb-4">
+        <div className="w-full max-h-112 h-112 flex flex-col">
             <div className="flexed-row justify-between h-full max-h-full">
-                <div className="flex mx-2 shadow gray-border rounded justify-center w-3/4 flex-col h-full max-h-full">
+                <div className="bg-white flex shadow gray-border rounded justify-center w-3/4 flex-col h-full max-h-full">
                     <img
-                        className="contained max-w-full max-h-160"
+                        className="contained max-w-full max-h-102"
                         src={currentImgURL()}
-                        alt="Post"
+                        alt="post"
                     />
-                    <div className="Flex bg-slate text-white rounded-b h-10 p-2">
-                        <p>{` ${photoIndex + 1}/${
+                    <div className="flex font-bold bg-slate text-white rounded-b h-10 p-2">
+                        <p>{media.length === 1 ? '' : ` ${photoIndex + 1}/${
                             media.length
-                        } ${currentDescription()}`}</p>
+                        } - `} {currentDescription()}</p>
                     </div>
                 </div>
                 <div className="flex w-1/4 h-full flex-col h-full max-h-full">
