@@ -1,17 +1,11 @@
 import React, { Fragment } from 'react'
-import styled from 'styled-components'
 
-const HeaderText = styled.div`
-    color: #434653;
-    font-size: 1.3em;
-    font-weight: bold;
-`
 function Terms() {
     return (
         <Fragment>
             <div className="title">Terms & Privacy</div>
             (Updated September 18, 2017)
-            <HeaderText>1. Disclaimer Of Liability</HeaderText>
+            <div className="header-text">1. Disclaimer Of Liability</div>
             <p>
                 1.1 The owners of the website the Stoke List (“the Stoke List”)
                 are not liable for the accuracy nor honesty of any postings
@@ -79,7 +73,7 @@ function Terms() {
                 through the services, or featured in any banner or other
                 advertising.
             </p>
-            <HeaderText>2. Privacy</HeaderText>
+            <div className="header-text">2. Privacy</div>
             <p>
                 2.1 The Stoke List has put in place reasonable electronic
                 measures to protect your information from loss, theft, and

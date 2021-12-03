@@ -1,22 +1,6 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FaPaperclip } from 'react-icons/fa'
-
-const CopyLink = styled.div`
-    font-size: 1em;
-    text-decoration: underline;
-    color: #175e88;
-    margin: 10px auto;
-    text-align: center;
-`
-
-const CopiedText = styled.div`
-    font-size: 1em;
-    color: #434653;
-    font-weight: bold;
-    margin: 10px auto;
-`
 
 function PostDetail({ postDetails }) {
     const post = postDetails
@@ -36,16 +20,18 @@ function PostDetail({ postDetails }) {
                 Reply to Post
             </button>
             {emailCopied ? (
-                <CopiedText>Email Address Copied!</CopiedText>
+                <div className="text-slate font-bold mx-4">
+                    Email Address Copied!
+                </div>
             ) : (
                 <CopyToClipboard
                     text={postEmail}
                     onCopy={() => setEmailCopied(true)}
                 >
-                    <CopyLink>
+                    <div className="underline text-blue mx-4 text-center">
                         <FaPaperclip color={'#175e88'} />
                         Copy Email Address
-                    </CopyLink>
+                    </div>
                 </CopyToClipboard>
             )}
         </div>

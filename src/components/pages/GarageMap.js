@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react'
-import styled from 'styled-components'
 import { Map, TileLayer, GeoJSON, Popup, Tooltip } from 'react-leaflet'
 import L from 'leaflet'
 
@@ -8,11 +7,6 @@ import PostSummary from '../posts/PostSummary'
 import { endpoints } from '../../constants/endpoints'
 import { useMountEffect, usePosts } from '../../hooks'
 import { sameDate } from '../../util/datetime'
-
-const MapContainer = styled.div`
-    height: 350px;
-    width: 100%;
-`
 
 function GarageMap() {
     const [garageSales, loadGarageSales] = usePosts(endpoints.GARAGE)
@@ -65,7 +59,7 @@ function GarageMap() {
                     </Fragment>
                 }
             />
-            <MapContainer>
+            <div className="w-full">
                 <Map center={position} zoom={13} style={{ height: '350px' }}>
                     <TileLayer
                         name="OSM Base Map"
@@ -96,7 +90,7 @@ function GarageMap() {
                         ) : null
                     )}
                 </Map>
-            </MapContainer>
+            </div>
         </Fragment>
     )
 }

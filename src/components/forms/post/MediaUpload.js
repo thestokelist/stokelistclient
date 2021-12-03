@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useContext } from 'react'
-import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
 import { FaRegTimesCircle, FaUpload } from 'react-icons/fa'
 
@@ -7,39 +6,6 @@ import Loading from '../../shared/Loading'
 import { endpoints } from '../../../constants/endpoints'
 import { useNetworkRequest } from '../../../hooks'
 import { store } from '../../store'
-
-const UploadContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 5px;
-    opacity: 1;
-    justify-content: space-between;
-`
-
-const UploadComponent = styled.div`
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    height: 10em;
-`
-
-const FileUploadBox = styled.div`
-    display: flex;
-    flex-grow: 1;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`
-
-const Close = styled.div`
-    padding: 1em;
-`
 
 function Media({ addMedia, index, close }) {
     const [loading, setLoading] = useState(false)
@@ -72,12 +38,15 @@ function Media({ addMedia, index, close }) {
 
     return (
         <div className="form-input-container">
-            <UploadContainer>
-                <UploadComponent>
+            <div className="flex flex-row w-4/5 bg-white shado gray-border rounded bg-opacity-100 justify-between">
+                <div className="flex flex-grow items-center justify-center h-40">
                     {loading ? (
                         <Loading />
                     ) : (
-                        <FileUploadBox {...getRootProps()}>
+                        <div
+                            className="flex flex-grow h-full flex-col items-center justify-center"
+                            {...getRootProps()}
+                        >
                             <div>
                                 <FaUpload size={30} />
                             </div>
@@ -87,13 +56,13 @@ function Media({ addMedia, index, close }) {
                             ) : (
                                 <p>Click or Drag to Upload</p>
                             )}
-                        </FileUploadBox>
+                        </div>
                     )}
-                </UploadComponent>
-                <Close>
+                </div>
+                <div className="p-4">
                     <FaRegTimesCircle size={20} onClick={close} />
-                </Close>
-            </UploadContainer>
+                </div>
+            </div>
         </div>
     )
 }

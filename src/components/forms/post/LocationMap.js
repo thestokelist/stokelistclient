@@ -1,12 +1,5 @@
 import React, { Fragment } from 'react'
-import styled from 'styled-components'
 import { Map, TileLayer, Marker } from 'react-leaflet'
-
-const MapContainer = styled.div`
-    height: 350px;
-    width: 60%;
-    margin: 1em 0;
-`
 
 function LocationMap({ setValue, register, watch }) {
     const hasLocation = !!watch('lat') && !!watch('lng')
@@ -67,7 +60,7 @@ function LocationMap({ setValue, register, watch }) {
                 </div>
             </div>
             {hasLocation && (
-                <MapContainer>
+                <div className="w-3/5 h-350 mx-1">
                     <Map
                         center={position}
                         zoom={13}
@@ -84,7 +77,7 @@ function LocationMap({ setValue, register, watch }) {
                             position={position}
                         />
                     </Map>
-                </MapContainer>
+                </div>
             )}
             <input
                 type="hidden"

@@ -1,14 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import ReactMde from 'react-mde'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 import ReactMarkdown from 'react-markdown'
 
 import { useMountEffect } from '../../../hooks'
-
-const MDEContainer = styled.div`
-    width: 80%;
-`
 
 function PostDescription({ errors, register, setValue, watch }) {
 
@@ -27,7 +22,7 @@ function PostDescription({ errors, register, setValue, watch }) {
                     search
                 </span>
             </div>
-            <MDEContainer>
+            <div className="w-4/5">
                 {' '}
                 <ReactMde
                     value={watch('description')}
@@ -40,7 +35,7 @@ function PostDescription({ errors, register, setValue, watch }) {
                     toolbarCommands = {[["bold","italic","header","strikethrough"], ["code","quote","link"],["ordered-list","unordered-list","checked-list"]]}
                            
                 />
-            </MDEContainer>
+            </div>
 
             <div className="form-error">
                 {errors.description && 'Description is required.'}

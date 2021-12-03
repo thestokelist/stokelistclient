@@ -1,27 +1,6 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
-const PostImageContainer = styled.div`
-    max-height: 100%;
-    height:100%
-    border-right: 1px solid #dce2eb;
-    border-radius: 5px 0px 0px 5px;
-    max-width: 160px;
-    width: 160px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
-const PostImage = styled.img`
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-`
-
 const OutsideMarker = styled.div`
     position: absolute;
     top: -10px;
@@ -68,15 +47,20 @@ function PostSummary({ post, markerNumber }) {
     }, [post])
 
     return (
-        <PostImageContainer>
+        <div className="max-h-full h-full gray-border items-center justify-center flex relative w-40 max-w-40">
             {markerNumber ? (
                 <OutsideMarker>{markerNumber}</OutsideMarker>
             ) : (
-                media.length > 1 && <InsideMarker>{`+${media.length-1}`}</InsideMarker>
+                media.length > 1 && (
+                    <InsideMarker>{`+${media.length - 1}`}</InsideMarker>
+                )
             )}
-
-            <PostImage src={media[0].thumbLink} alt={'thumbnail'} />
-        </PostImageContainer>
+            <img
+                className="max-h-full max-w-full w-auto h-auto object-contain"
+                src={media[0].thumbLink}
+                alt={'thumbnail'}
+            />
+        </div>
     )
 }
 

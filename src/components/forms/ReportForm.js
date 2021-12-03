@@ -1,15 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 
-
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
-
-const Comment = styled.textarea`
-    width: 60%;
-`
 
 function ReportForm({ id }) {
     const { register, handleSubmit, errors } = useForm()
@@ -95,7 +89,7 @@ function ReportForm({ id }) {
             </div>
             <div className="form-input-container">
                 <div className="form-label">Comment</div>
-                <Comment name="comment" ref={register()} />
+                <textarea className="w-3/5" name="comment" ref={register()} />
             </div>
 
             <div className="flexed-row justify-between w-20">

@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 
@@ -9,42 +8,15 @@ import PostSummaryPhoto from './PostSummaryPhoto'
 import GrayableContainer from './GrayableContainer'
 import { getDateRangeString } from '../../util/datetime'
 
-const PostDetail = styled.div`
-    margin-bottom: 10px;
-    color: #175e88;
-    font-size: 1.2em;
-`
-
-const PostDetailsContainer = styled.div`
-    flex-grow: 1;
-    box-sizing: border-box;
-    margin: 10px 20px;
-`
-
-const PostTextSummary = styled.div`
-    margin-top: 15px;
-    font-size: 0.9em;
-    color: #000000cc;
-`
-
-const PostSummaryContainer = styled.div`
-    display: flex;
-    margin: 10px 0;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 5px;
-`
-
 //Generates a full width summary for a post, can be disabled
 function PostSummary({ post, disabled, markerNumber }) {
     const isGarageSale = post.isGarageSale === true
 
     return (
         <GrayableContainer disabled={disabled}>
-            <PostSummaryContainer>
+            <div className="flex my-2 bg-white shadow gray-border rounded">
                 <PostSummaryPhoto post={post} markerNumber={markerNumber} />
-                <PostDetailsContainer>
+                <div className="flex-grow box-border mx-4 my-8">
                     <div className="flexed-responsive">
                         <div className="text-slate font-bold text-xl">
                             <div className="no-escape">
@@ -57,20 +29,20 @@ function PostSummary({ post, disabled, markerNumber }) {
                             <PostLocation postDetails={post} />
                         </div>
                     </div>
-                    <PostDetail>
+                    <div className="mb-4 text-blue text-lg">
                         {isGarageSale ? (
                             getDateRangeString(post.startTime, post.endTime)
                         ) : (
                             <PostPrice price={post.price} />
                         )}
-                    </PostDetail>
-                    <PostTextSummary>
+                    </div>
+                    <div className="mt-6 text-slate">
                         <div className="no-escape">
                             <ReactMarkdown children={post.description} />
                         </div>
-                    </PostTextSummary>
-                </PostDetailsContainer>
-            </PostSummaryContainer>
+                    </div>
+                </div>
+            </div>
         </GrayableContainer>
     )
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
 
 import Loading from '../shared/Loading'
@@ -20,14 +19,6 @@ import {
     WhatsappShareButton,
     WhatsappIcon,
 } from 'react-share'
-
-const ReportText = styled.div`
-    font-weight: 400;
-    font-size: 0.9em;
-    color: #175e88;
-    font-style: italic;
-    margin-right: 1em;
-`
 
 function PostView({ match }) {
     const postID = match.params.id
@@ -78,12 +69,12 @@ function PostView({ match }) {
                     </FacebookMessengerShareButton>
                 </div>
                 <div className="flexed-row">
-                    <ReportText>
+                    <div className="text-blue italic mr-4">
                         Does this post break{' '}
                         <Link to="/commandments">
                             <u>The Stoke List Commandments?</u>
                         </Link>
-                    </ReportText>
+                    </div>
                     <button className="btn-white" onClick={doReport}>
                         Report Post
                     </button>

@@ -1,5 +1,4 @@
 import React, { useState, useContext, Fragment } from 'react'
-import styled from 'styled-components'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
@@ -9,19 +8,6 @@ import PostDetail from '../posts/PostDetail'
 import PostReport from '../posts/PostReport'
 import GrayableContainer from '../posts/GrayableContainer'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
-
-const ModContainer = styled.div`
-    width: 80%;
-    margin: 0 auto;
-    justify-content: center;
-`
-
-const PostsLink = styled.span`
-    text-decoration: underline;
-    font-size: 1.2em;
-    color: #175e88;
-    font-weight: 600;
-`
 
 function Moderate() {
     const [modQueue, setModQueue] = useState([])
@@ -120,9 +106,9 @@ function Moderate() {
                             color={canGoLeft ? '#175E88' : 'grey'}
                             onClick={goLeft}
                         />
-                        <ModContainer>
+                        <div className="w-4/5 mx-0 my-auto justify-center">
                             <div className="flexed-responsive">
-                                <div className="flexed-row justify-between mb-1">
+                                <div className="flexed-row justify-between mb-1 w-1/3">
                                     {!currentPostKept && (
                                         <button
                                             className="btn-white"
@@ -145,9 +131,9 @@ function Moderate() {
                                     )}
                                 </div>
                                 <Link to={`/judge/${currentPost.id}`}>
-                                    <PostsLink>
+                                    <span className="underline text-lg text-blue font-semibold">
                                         {'See All Other Posts by this User >>'}
-                                    </PostsLink>
+                                    </span>
                                 </Link>
                             </div>
                             {error && (
@@ -170,7 +156,7 @@ function Moderate() {
                                     ))}
                                 </GrayableContainer>
                             )}
-                        </ModContainer>
+                        </div>
                         <FaChevronRight
                             size={50}
                             color={canGoRight ? '#175E88' : 'grey'}

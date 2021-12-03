@@ -1,26 +1,6 @@
 import React, { Fragment } from 'react'
-import styled from 'styled-components'
 
 import GarageDate from './GarageDate'
-
-const InputRadioContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`
-
-const Prefix = styled.div`
-    display: flex;
-    color: #0000009a;
-    height: 32px;
-    width: 20px;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-right: none;
-    border-radius: 5px 0px 0px 5px;
-`
 
 function PostPrice({ errors, register, watch, setValue }) {
     const isGarageSale = watch('priceRadio') === 'priceGarage'
@@ -46,9 +26,9 @@ function PostPrice({ errors, register, watch, setValue }) {
         <Fragment>
             <div className="form-input-container">
                 <div className="form-label">Add a Price</div>
-                <InputRadioContainer>
+                <div className="flex flex-wrap">
                     <div className="flexed-row">
-                        <Prefix>$</Prefix>
+                        <div className="flex items-center justify-center bg-white shadow gray-border border-r-0 px-1 h-8 rounded">$</div>
                         <input
                             className="form-input mb-0 rounded"
                             type="numeric"
@@ -83,7 +63,7 @@ function PostPrice({ errors, register, watch, setValue }) {
                         />
                         <span text="form-radio-text">Garage Sale</span>
                     </div>
-                </InputRadioContainer>
+                </div>
 
                 <div className="form-error">
                     {errors.price && 'Enter a price or select an option'}

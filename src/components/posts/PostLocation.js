@@ -1,20 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import { FaMapMarker } from 'react-icons/fa'
-
-const FlexUnderline = styled.u`
-    display: flex;
-`
-const LocationText = styled.div`
-    font-weight: normal;
-    font-size: 0.9em;
-    margin: 5px 0px;
-    color: #175e88;
-`
 
 function PostLocation({ postDetails }) {
     const getText = () => {
-        const text = <LocationText>{postDetails.location}</LocationText>
+        const text = <div className="text-sm text-blue mx-2">{postDetails.location}</div>
         if (
             postDetails.exactLocation &&
             postDetails.exactLocation.coordinates
@@ -26,10 +15,10 @@ function PostLocation({ postDetails }) {
                     target="_blank"
                     href={href}
                 >
-                    <FlexUnderline>
+                    <u className="flex">
                         {text}
                         <FaMapMarker color={'#175E88'} />
-                    </FlexUnderline>
+                    </u>
                 </a>
             )
         } else {

@@ -11,7 +11,7 @@
 }
 
 .flash {
-    @apply w-full mb-2 font-bold p-1 align-middle text-slate
+    @apply w-full mb-2 font-bold p-1 align-middle text-slate;
 }
 
 .no-escape {
@@ -30,4 +30,12 @@
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+}
+
+.grid-area-1 {
+    grid-area: 1 / 1;
+}
+
+.gray-border {
+    @apply border border-solid border-gray-300
 }
