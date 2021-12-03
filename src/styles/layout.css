@@ -39,3 +39,7 @@
 .gray-border {
     @apply border border-solid border-gray-300
 }
+
+.contained {
+    @apply w-auto h-auto object-contain
+}

@@ -45,7 +45,7 @@ function PostPrice({ errors, register, watch, setValue }) {
                             ref={register()}
                             onChange={updatePriceForm}
                         />
-                        <span text="form-radio-text">Not Applicable</span>
+                        <span className="form-radio-text">Not Applicable</span>
                         <input
                             type="radio"
                             name="priceRadio"
@@ -53,15 +53,16 @@ function PostPrice({ errors, register, watch, setValue }) {
                             ref={register()}
                             onChange={updatePriceForm}
                         />
-                        <span text="form-radio-text">Free</span>
+                        <span className="form-radio-text">Free</span>
                         <input
+                            className="hidden"
                             type="radio"
                             name="priceRadio"
                             value="priceGarage"
                             ref={register()}
                             onChange={updatePriceForm}
                         />
-                        <span text="form-radio-text">Garage Sale</span>
+                        <span className="hidden form-radio-text">Garage Sale</span>
                     </div>
                 </div>
 

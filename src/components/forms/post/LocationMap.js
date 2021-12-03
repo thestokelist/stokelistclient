@@ -56,7 +56,7 @@ function LocationMap({ setValue, register, watch }) {
                         checked={hasLocation}
                         onChange={handleLocationCheckbox}
                     />
-                    <span text="form-radio-text">Set Exact Location</span>
+                    <span className="form-radio-text">Set Exact Location</span>
                 </div>
             </div>
             {hasLocation && (

@@ -8,7 +8,7 @@ function Terms({ errors, register }) {
                 name="terms"
                 ref={register({ required: true })}
             />
-            <span text="form-radio-text">
+            <span className="form-radio-text">
                 I accept the{' '}
                 <a target="_blank" href="/terms">
                     Terms of Service & Privacy Policy

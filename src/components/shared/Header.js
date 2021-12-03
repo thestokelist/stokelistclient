@@ -18,7 +18,7 @@ function Header() {
                         <div className="header-link">Home</div>
                     </Link>
                     <Link to="/garage">
-                        <div className="header-link">Garage Map</div>
+                        <div className="hidden header-link">Garage Map</div>
                     </Link>
                     <div className="w-0.5 h-8 bg-gray-400 hidden md:block"/>
                 </div>

@@ -1,29 +1,4 @@
 import React, { useMemo } from 'react'
-import styled from 'styled-components'
-
-const OutsideMarker = styled.div`
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    border: 3px solid #175e88;
-    border-radius: 36px;
-    background-color: white;
-    font-size: 1.6em;
-    color: black;
-    text-align: center;
-    font-weight: 500;
-`
-
-const InsideMarker = styled(OutsideMarker)`
-    top: 0px;
-    left: 0px;
-    font-size: 0.9em;
-    border: 2px solid #175e88;
-    font-weight: 400;
-`
 
 //Generates a full width summary for a post, can be disabled
 function PostSummary({ post, markerNumber }) {
@@ -47,16 +22,20 @@ function PostSummary({ post, markerNumber }) {
     }, [post])
 
     return (
-        <div className="max-h-full h-full gray-border items-center justify-center flex relative w-40 max-w-40">
+        <div className="max-h-full items-center justify-center flex relative w-40 max-w-40">
             {markerNumber ? (
-                <OutsideMarker>{markerNumber}</OutsideMarker>
+                <div className="absolute text-black text-center font-medium bg-white border-2 border-solid border-blue rounded-full w-8 h-8 leading-8 -top-4 -left-4">
+                    {markerNumber}
+                </div>
             ) : (
                 media.length > 1 && (
-                    <InsideMarker>{`+${media.length - 1}`}</InsideMarker>
+                    <div className="absolute text-black text-center text-sm font-medium bg-white border-2 border-solid border-blue rounded-full w-8 h-8 leading-8 -top-0 -left-0">{`+${
+                        media.length - 1
+                    }`}</div>
                 )
             )}
             <img
-                className="max-h-full max-w-full w-auto h-auto object-contain"
+                className="max-h-full max-w-full contained"
                 src={media[0].thumbLink}
                 alt={'thumbnail'}
             />

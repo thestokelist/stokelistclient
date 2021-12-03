@@ -12,7 +12,7 @@ function Media({ media, index, deleteMedia, control }) {
             <div className="flex flex-row w-4/5 bg-white shadow gray-border rounded bg-opacity-100">
                 <div className="flex w-1/4 max-w-1/4 items-center justify-center max-h-40">
                     <img
-                        className="w-auto h-auto max-h-full max-w-full object-contain"
+                        className="max-h-full max-w-full contained"
                         src={media.thumbLink}
                         alt="uploaded"
                     />

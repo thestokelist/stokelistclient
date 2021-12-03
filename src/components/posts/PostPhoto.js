@@ -1,74 +1,4 @@
 import React, { useState, useMemo } from 'react'
-import styled from 'styled-components'
-
-const PostPhotoContainer = styled.div`
-    width: 100%;
-    max-height: 450px;
-    height: 450px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-`
-
-const PostImgContainer = styled.div`
-    display: flex;
-    margin: 5px 0px;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 5px;
-    justify-content: center;
-    width: 70%;
-    flex-direction: column;
-    height: 100%;
-    max-height: 100%;
-`
-
-const TextContainer = styled.div`
-    display: flex;
-    background: #434653 0% 0% no-repeat padding-box;
-    color: #ffffff;
-    border-radius: 0 0 5px 5px;
-    height: 50px;
-    padding: 0 1em;
-`
-
-const Sidebar = styled.div`
-    display: flex;
-    width: 25%;
-    height: 100%;
-    flex-direction: column;
-    height: 100%;
-    max-height: 100%;
-`
-
-const SidebarPhoto = styled.div`
-    display: flex;
-    margin: 5px 0px;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 5px;
-    flex-direction: column;
-    height: 30%;
-    max-height: 30%;
-    margin-bottom: 3%;
-    justify-content: center;
-`
-
-const SidebarPhotoImg = styled.img`
-    max-height: 100%;
-    max-width: 100%;
-    height: auto;
-    width: auto;
-    object-fit: contain;
-`
-
-const PostImg = styled.img`
-    max-height: 400px;
-    max-width: 100%;
-    height: auto;
-    width: auto;
-    object-fit: contain;
-`
 
 function PostPhoto({ postDetails }) {
     const [photoIndex, setPhotoIndex] = useState(0)
@@ -135,28 +65,37 @@ function PostPhoto({ postDetails }) {
     }
 
     return media ? (
-        <PostPhotoContainer>
+        <div className="w-full max-h-160 h-450 flex flex-col mb-4">
             <div className="flexed-row justify-between h-full max-h-full">
-                <PostImgContainer>
-                    <PostImg src={currentImgURL()} alt="Post" />
-                    <TextContainer>
+                <div className="flex mx-2 shadow gray-border rounded justify-center w-3/4 flex-col h-full max-h-full">
+                    <img
+                        className="contained max-w-full max-h-160"
+                        src={currentImgURL()}
+                        alt="Post"
+                    />
+                    <div className="Flex bg-slate text-white rounded-b h-10 p-2">
                         <p>{` ${photoIndex + 1}/${
                             media.length
                         } ${currentDescription()}`}</p>
-                    </TextContainer>
-                </PostImgContainer>
-                <Sidebar>
+                    </div>
+                </div>
+                <div className="flex w-1/4 h-full flex-col h-full max-h-full">
                     {remainingImages.map((media, index) => (
-                        <SidebarPhoto
+                        <div
+                            className="flex my-2 shadow gray-border rounded flex-col h-1/3 max-h-1/3 mb-4 justify-center"
                             key={media.id}
                             onClick={() => incrementIndex(index + 1)}
                         >
-                            <SidebarPhotoImg src={media.thumbLink} />
-                        </SidebarPhoto>
+                            <img
+                                className="contained max-w-full max-h-full"
+                                src={media.thumbLink}
+                                alt="thumbnail"
+                            />
+                        </div>
                     ))}
-                </Sidebar>
+                </div>
             </div>
-        </PostPhotoContainer>
+        </div>
     ) : null
 }
 

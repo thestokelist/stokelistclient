@@ -21,3 +21,9 @@
 .form-input {
     @apply h-8 rounded border border-solid border-gray-300 shadow bg-white
 }
+
+.placeholder-blue {
+    ::placeholder {
+        color: #175e88;
+    }
+}

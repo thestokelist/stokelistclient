@@ -1,5 +1,4 @@
 import React, { useState, Fragment, useMemo } from 'react'
-import styled from 'styled-components'
 import { FaSearch } from 'react-icons/fa'
 
 import PostSection from '../posts/PostSection'
@@ -8,43 +7,6 @@ import { useSearchReducer } from '../../hooks'
 
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
-
-const SearchBox = styled.input`
-    flex-grow: 1;
-    ::placeholder {
-        color: #175e88;
-    }
-    padding-left: 10px;
-    color: #175e88;
-    font-size: 1em;
-    border: none;
-`
-
-const SearchButton = styled.button`
-    width: 50px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 0px 5px 5px 0px;
-    opacity: 1;
-`
-
-const SearchBar = styled.div`
-    height: 50px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-    box-shadow: 1px 1px 5px #0000001a;
-    border: 1px solid #dce2e8;
-    border-radius: 5px;
-    margin-bottom: 1em;
-`
-const Strapline = styled.div`
-    color: #434653;
-    text-align: center;
-    margin-bottom: 1em;
-`
 
 function PostSearch({ children }) {
     const [searchOffset, setSearchOffset] = useState(0)
@@ -116,7 +78,10 @@ function PostSearch({ children }) {
                     includeAds={true}
                 >
                     {showMoreButton && (
-                        <button className="btn-white mx-auto my-0" onClick={loadMoreSearchPosts}>
+                        <button
+                            className="btn-white mx-auto my-0"
+                            onClick={loadMoreSearchPosts}
+                        >
                             More Results
                         </button>
                     )}
@@ -129,11 +94,12 @@ function PostSearch({ children }) {
 
     return (
         <Fragment>
-            <Strapline>
+            <div className="mb-4 text-center text-slate">
                 Buy, sell, love, yell – Revelstoke’s online classifieds.
-            </Strapline>
-            <SearchBar>
-                <SearchBox
+            </div>
+            <div className="mb-4 rounded gray-border shadow box-border flex flex-row w-full h-12">
+                <input
+                    className="flex-grow pl-4 text-blue border-0 placeholder-blue"
                     type="text"
                     onChange={updateSearchTerm}
                     placeholder="Search Posts"
@@ -143,10 +109,13 @@ function PostSearch({ children }) {
                         }
                     }}
                 />
-                <SearchButton onClick={doSearch}>
+                <button
+                    className="w-12 bg-white shadow rounded border-l border-l-solid border-l-gray-300 bg-opacity-100"
+                    onClick={doSearch}
+                >
                     <FaSearch size={25} color={'#175E88'} />
-                </SearchButton>
-            </SearchBar>
+                </button>
+            </div>
             {showSearchResults ? getSearchSection() : children}
         </Fragment>
     )
