@@ -36,7 +36,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                             <PostPrice price={post.price} />
                         )}
                     </div>
-                    <div className="text-slate">
+                    <div className="text-slate text-sm">
                         <div className="no-escape">
                             <ReactMarkdown children={post.description} />
                         </div>

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .bottom-shadow {
   box-shadow: 0 8px 5px -5px #00000026;
 }

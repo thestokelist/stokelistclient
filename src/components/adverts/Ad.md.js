@@ -1,4 +1,5 @@
-export const adContent = `
-# This is an advert
-## It has markdown
-`
+export const adContent = 
+`# This *is* an **advert**
+
+- Item 1
+- Item 2`

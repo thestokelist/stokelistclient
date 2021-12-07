@@ -6,6 +6,10 @@
     @apply text-blue text-xl mx-4 font-medium;
 }
 
+.header-link-active {
+    @apply text-slate cursor-default;
+}
+
 .header-text {
     @apply font-bold text-xl text-slate;
 }

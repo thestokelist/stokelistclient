@@ -30,46 +30,18 @@ function PostPhoto({ postDetails }) {
 
     const remainingImages = useMemo(() => {
         if (Array.isArray(media) && media.length > 1) {
-            //clone the array
-            let remaining = media.map((x) => x)
-            const DESIRED_PHOTOS = media.length > 3 ? 3 : media.length - 1
-            const nextPhotoStart = photoIndex + 1
-
-            //Show the next 3 images
-            if (photoIndex + DESIRED_PHOTOS < media.length) {
-                //Assignment here, get the 3 items returned by the splice
-                remaining = remaining.splice(nextPhotoStart, DESIRED_PHOTOS)
-            } else {
-                const endPart = remaining.slice(nextPhotoStart)
-                const startPart = remaining.slice(
-                    0,
-                    DESIRED_PHOTOS - endPart.length
-                )
-                console.log('endPart', endPart)
-                console.log('startPart', startPart)
-                remaining = endPart.concat(startPart)
-            }
-
-            return remaining
+            return media
         } else {
             return []
         }
-    }, [media, photoIndex])
-
-    const incrementIndex = (increment) => {
-        let newIndex = photoIndex + increment
-        if (newIndex >= media.length) {
-            newIndex -= media.length
-        }
-        setPhotoIndex(newIndex)
-    }
+    }, [media])
 
     return media ? (
         <div className="w-full max-h-112 h-112 flex flex-col">
             <div className="flexed-row justify-between h-full max-h-full">
                 <div className="bg-white flex shadow gray-border rounded justify-center w-3/4 flex-col h-full max-h-full">
                     <img
-                        className="contained max-w-full max-h-102"
+                        className="contained max-w-full max-h-102 my-auto p-2"
                         src={currentImgURL()}
                         alt="post"
                     />
@@ -79,12 +51,12 @@ function PostPhoto({ postDetails }) {
                         } - `} {currentDescription()}</p>
                     </div>
                 </div>
-                <div className="flex w-1/4 h-full flex-col h-full max-h-full">
+                <div className="flex w-1/4 h-full flex-col h-full max-h-full overflow-y-auto p-2 scrollbar">
                     {remainingImages.map((media, index) => (
                         <div
                             className="flex my-2 shadow gray-border rounded flex-col h-1/3 max-h-1/3 mb-4 justify-center"
                             key={media.id}
-                            onClick={() => incrementIndex(index + 1)}
+                            onClick={() => setPhotoIndex(index)}
                         >
                             <img
                                 className="contained max-w-full max-h-full"

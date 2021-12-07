@@ -15,7 +15,6 @@ function PostSection({
     numbered,
     includeAds,
 }) {
-
     const getDateLabel = (init, differenceInDays) => {
         let createdDate = init
         if (differenceInDays > 7 && differenceInDays <= 30) {
@@ -39,7 +38,7 @@ function PostSection({
         //Posts are ordered by creation date
         let dateString = null
         let postArray = []
-        
+
         for (const post of posts) {
             const postDate = new Date(post.created_at.substring(0, 10))
             const differenceInDays = Math.floor(
@@ -67,7 +66,6 @@ function PostSection({
         return dateMap
     }, [posts])
 
-
     //Display an array of posts
     const getPostSummaryList = (postArray) => {
         let postSummaries
@@ -88,7 +86,7 @@ function PostSection({
                 ))
             }
         }
-        return <div className="mt-4"> {postSummaries}</div>
+        return postSummaries
     }
 
     //Display the posts, grouped by date
@@ -98,19 +96,27 @@ function PostSection({
         let adInserted = false
         return [...postMap.keys()].map((date) => {
             const postGroup = getPostSummaryList(postMap.get(date))
+            console.log(postGroup)
             if (includeAds && !adInserted) {
+                console.log('Could post an ad')
                 //Insert a single advert after the 3rd post, if there is one
                 if (adCounter + postGroup.length > 3) {
+                    console.log('Posting an ad')
                     const spliceIndex = 3 - adCounter
-                    postGroup.splice(spliceIndex,0,<Ad key={"ad"}/>)
+                    postGroup.splice(spliceIndex, 0, <Ad key={'ad'} />)
                     adInserted = true
                 } else {
-                    adCounter =+ postGroup.length
+                    adCounter += postGroup.length
+                    console.log(adCounter, 'Ad Counter')
                 }
             }
             return (
                 <Fragment key={date}>
-                    {date && <div className="text-3xl font-medium text-slate">{date}</div>}
+                    {date && (
+                        <div className="text-2xl font-medium text-slate">
+                            {date}
+                        </div>
+                    )}
                     <div className="mt-4 mb-8">{postGroup}</div>
                 </Fragment>
             )
@@ -125,7 +131,7 @@ function PostSection({
             </div>
 
             {hideDates === true
-                ? getPostSummaryList(posts)
+                ? <div className="mt-4">{getPostSummaryList(posts)}</div>
                 : displayPostsByDate(groupedPosts)}
             {children}
         </div>

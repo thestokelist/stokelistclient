@@ -3,9 +3,9 @@ import { Link, useHistory } from 'react-router-dom'
 
 import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
-import PostSearch from '../posts/PostSearch'
 import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
+import Ad from '../adverts/Ad'
 
 import {
     EmailShareButton,
@@ -43,7 +43,7 @@ function PostView({ match }) {
     }
 
     return (
-        <PostSearch>
+        <div>
             {postDetails === null ? (
                 <Loading />
             ) : (
@@ -80,7 +80,10 @@ function PostView({ match }) {
                     </button>
                 </div>
             </div>
-        </PostSearch>
+            <div className="my-4">
+                <Ad />
+            </div>
+        </div>
     )
 }
 

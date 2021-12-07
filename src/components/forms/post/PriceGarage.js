@@ -5,13 +5,6 @@ import GarageDate from './GarageDate'
 function PostPrice({ errors, register, watch, setValue }) {
     const isGarageSale = watch('priceRadio') === 'priceGarage'
 
-    const validatePrice = () => {
-        const price = watch('price')
-        const priceRadio = watch('priceRadio')
-        //Validation fails if there is no price entered, nor a radio button selected
-        return !(price === '' && priceRadio === '')
-    }
-
     const updatePriceForm = (e) => {
         if (e.target.checked) {
             //A price radio box was checked, so clear price text field
@@ -33,27 +26,11 @@ function PostPrice({ errors, register, watch, setValue }) {
                             className="form-input mb-0 rounded"
                             type="numeric"
                             name="price"
-                            ref={register({ validate: validatePrice })}
+                            ref={register()}
                             onChange={updatePriceForm}
                         />
                     </div>
                     <div className="flexed-row">
-                        <input
-                            type="radio"
-                            name="priceRadio"
-                            value="priceNA"
-                            ref={register()}
-                            onChange={updatePriceForm}
-                        />
-                        <span className="form-radio-text">Not Applicable</span>
-                        <input
-                            type="radio"
-                            name="priceRadio"
-                            value="priceFree"
-                            ref={register()}
-                            onChange={updatePriceForm}
-                        />
-                        <span className="form-radio-text">Free</span>
                         <input
                             className="hidden"
                             type="radio"
@@ -64,10 +41,6 @@ function PostPrice({ errors, register, watch, setValue }) {
                         />
                         <span className="hidden form-radio-text">Garage Sale</span>
                     </div>
-                </div>
-
-                <div className="form-error">
-                    {errors.price && 'Enter a price or select an option'}
                 </div>
             </div>
             {isGarageSale && (
