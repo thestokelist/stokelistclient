@@ -4,6 +4,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
+import { formTypes } from '../../constants/forms'
 import {
     getDatePortionForInput,
     getTimePortionForInput,
@@ -20,7 +21,7 @@ import PostTitle from './post/PostTitle'
 import Terms from './post/Terms'
 import Upload from './post/Upload'
 
-function PostForm({ post, responseCallback, buttonText, editMode }) {
+function PostForm({ post, responseCallback, stateCallback, buttonText, editMode }) {
     const formInit = postToForm(post)
     const { state } = useContext(store)
     const {
@@ -118,6 +119,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     }
 
     const onPreview = (data) => {
+        stateCallback(formTypes.PREVIEW)
         const postData = formToPost(data)
         if (editMode) {
             delete postData.email
@@ -126,6 +128,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     }
 
     const backToCreate = () => {
+        stateCallback(formTypes.POST)
         //Reset the form with the values we used for the preview
         let formData = postToForm(postPreview)
         //If we're going back to create, we already accepted the TOS the first time.
@@ -211,7 +214,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     const getPreview = () => {
         return (
             <Fragment>
-                <div className="flexed-row justify-between">
+                <div className="flexed-row justify-between mx-8 mb-4">
                     <button className="btn-white" onClick={backToCreate}>
                         Edit
                     </button>
@@ -223,7 +226,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                 {submitError && (
                     <div className="form-error">Error submitting post</div>
                 )}
-                <hr />
+                <hr className="border-blue border-2 border-solid mb-8" />
                 <PostDetail postDetails={postPreview} notSubmitted={true} />
             </Fragment>
         )
