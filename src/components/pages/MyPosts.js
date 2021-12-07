@@ -8,14 +8,11 @@ import { actionTypes } from '../../constants/actions'
 import { useNetworkRequest, useMountEffect } from '../../hooks'
 import Loading from '../shared/Loading'
 
-function MyPosts({ location }) {
+function MyPosts() {
     const [loading, setLoading] = useState(true)
     const [myPosts, setMyPosts] = useState([])
     const { state, dispatch } = useContext(store)
     const { authApiGet, authApiDelete } = useNetworkRequest()
-    const fromValidation = !!(
-        location.state && location.state.validated === true
-    )
 
     useMountEffect(() => {
         async function fetchPosts() {
@@ -52,9 +49,6 @@ function MyPosts({ location }) {
         <Loading />
     ) : (
         <Fragment>
-            {fromValidation && (
-                <div className="flash">Your email address has been confirmed!</div>
-            )}
             <PostSection
                 posts={myPosts}
                 adminMode={true}

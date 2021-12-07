@@ -14,6 +14,7 @@ function PostSection({
     adminMode,
     numbered,
     includeAds,
+    highlightFirst,
 }) {
     const getDateLabel = (init, differenceInDays) => {
         let createdDate = init
@@ -96,18 +97,17 @@ function PostSection({
         let adInserted = false
         return [...postMap.keys()].map((date) => {
             const postGroup = getPostSummaryList(postMap.get(date))
-            console.log(postGroup)
+            if (adCounter === 0) {
+                postGroup[0] = <div className="shake">{postGroup[0]}</div>
+            }
             if (includeAds && !adInserted) {
-                console.log('Could post an ad')
                 //Insert a single advert after the 3rd post, if there is one
                 if (adCounter + postGroup.length > 3) {
-                    console.log('Posting an ad')
                     const spliceIndex = 3 - adCounter
                     postGroup.splice(spliceIndex, 0, <Ad key={'ad'} />)
                     adInserted = true
                 } else {
                     adCounter += postGroup.length
-                    console.log(adCounter, 'Ad Counter')
                 }
             }
             return (

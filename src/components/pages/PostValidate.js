@@ -53,7 +53,7 @@ function PostValidate({ match }) {
             content = (
                 <Redirect
                     to={{
-                        pathname: '/myposts',
+                        pathname: '/',
                         state: { validated: true },
                     }}
                 />

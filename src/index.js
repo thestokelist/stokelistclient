@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './styles/animations.css'
 import './styles/buttons.css'
 import './styles/forms.css'
 import './styles/layout.css'
