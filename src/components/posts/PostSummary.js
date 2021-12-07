@@ -9,11 +9,11 @@ import GrayableContainer from './GrayableContainer'
 import { getDateRangeString } from '../../util/datetime'
 
 //Generates a full width summary for a post, can be disabled
-function PostSummary({ post, disabled, markerNumber, highlight }) {
+function PostSummary({ post, disabled, markerNumber }) {
     const isGarageSale = post.isGarageSale === true
 
     return (
-        <GrayableContainer className={highlight ? "shake" : ""} disabled={disabled}>
+        <GrayableContainer disabled={disabled}>
             <div className="flex p-1 mb-4 bg-white shadow gray-border rounded">
                 <PostSummaryPhoto post={post} markerNumber={markerNumber} />
                 <div className="flex-grow box-border px-4 py-2">

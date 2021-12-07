@@ -29,8 +29,8 @@ function PostList({ location }) {
         <Loading />
     ) : (
         <PostSearch>
-            {true && (
-                <div className="w-full font-bold align-middle text-slate fadeOut">
+            {fromValidation && (
+                <div className="w-full font-bold align-middle text-xl text-slate fadeOut">
                     Your post has been validated and will appear below!
                 </div>
             )}

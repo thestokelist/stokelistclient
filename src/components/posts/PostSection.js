@@ -97,8 +97,8 @@ function PostSection({
         let adInserted = false
         return [...postMap.keys()].map((date) => {
             const postGroup = getPostSummaryList(postMap.get(date))
-            if (adCounter === 0) {
-                postGroup[0] = <div className="shake">{postGroup[0]}</div>
+            if (adCounter === 0 && highlightFirst) {
+                postGroup[0] = <div className="fadeIn">{postGroup[0]}</div>
             }
             if (includeAds && !adInserted) {
                 //Insert a single advert after the 3rd post, if there is one
