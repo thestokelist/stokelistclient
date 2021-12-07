@@ -1,5 +1,8 @@
 export const adContent = 
-`# This *is* an **advert**
+`# Advert
 
-- Item 1
-- Item 2`
+![Earfun Logo](https://www.myearfun.com/images/navbar/header-logo.png)
+[Link to Earfun Logo](https://www.myearfun.com/images/navbar/header-logo.png)
+
+Some text with **bold** and *italic*
+`

@@ -38,7 +38,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                     </div>
                     <div className="text-slate text-sm">
                         <div className="no-escape">
-                            <ReactMarkdown children={post.description} />
+                            <ReactMarkdown className="markdown" children={post.description} />
                         </div>
                     </div>
                 </div>

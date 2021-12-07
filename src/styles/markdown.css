@@ -1,0 +1,36 @@
+.markdown h1 {
+    @apply text-3xl text-slate;
+}
+
+.markdown h2 {
+    @apply text-2xl text-slate;
+}
+
+.markdown h3 {
+    @apply text-xl text-slate;
+}
+
+.markdown h4 {
+    @apply text-lg text-slate;
+}
+
+.markdown blockquote {
+    margin: revert;
+}
+
+.markdown a {
+    text-decoration: revert;
+    color: revert;
+}
+
+.markdown ol {
+    list-style: revert;
+    margin: revert;
+    padding: revert;
+}
+
+.markdown ul {
+    list-style: revert;
+    margin: revert;
+    padding: revert;
+}
