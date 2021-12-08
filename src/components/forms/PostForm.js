@@ -38,7 +38,7 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
     const [postPreview, setPostPreview] = useState(null)
     const [submitError, setSubmitError] = useState(false)
     const { executeRecaptcha } = useGoogleReCaptcha()
-    const { authApiPut, apiPost } = useNetworkRequest()
+    const { authApiPut, authApiPost, apiPost } = useNetworkRequest()
     const wholeFormError = Object.keys(errors).length > 0
 
     const formToPost = (formData) => {
@@ -144,6 +144,12 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
         if (editMode) {
             response = await authApiPut(
                 `${endpoints.POSTS}${post.id}`,
+                data,
+                state.token
+            )
+        } else if (state.loggedIn) {
+            response = await authApiPost(
+                endpoints.POSTS,
                 data,
                 state.token
             )

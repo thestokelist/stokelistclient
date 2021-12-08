@@ -31,9 +31,9 @@ function PostCreate() {
                         posted.
                     </p>
                     <p>
-                        If you're happy then hit 'Submit' to post it the The
-                        Stoke List. If there's something you want to change, hit
-                        'Edit' instead.
+                        If you're happy then hit Submit to post it the The Stoke
+                        List. If there's something you want to change, hit Edit
+                        instead.
                     </p>
                 </div>
             ) : (

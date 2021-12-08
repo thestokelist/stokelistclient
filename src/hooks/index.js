@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, useContext } from 'react'
+import { useState, useEffect, useReducer, useContext, useRef } from 'react'
 import { searchLoadReducer } from '../reducers'
 import { actionTypes } from '../constants/actions'
 import { store } from '../components/store'
@@ -76,7 +76,7 @@ export const useNetworkRequest = () => {
     }
 
     const authApiMultipartPost = async (endpoint, data) => {
-        let response = await fetch(apiUrl+'/upload', {
+        let response = await fetch(apiUrl + '/upload', {
             method: 'POST',
             body: data,
         })
@@ -84,7 +84,15 @@ export const useNetworkRequest = () => {
         return response
     }
 
-
+    const authApiPost = async (endpoint, data, token) => {
+        let response = await fetch(apiUrl + endpoint, {
+            method: 'POST',
+            headers: tokenHeaders(token),
+            body: JSON.stringify(data),
+        })
+        response = await handleErrors(response, 'POST')
+        return response
+    }
 
     const authApiGet = async (endpoint, token) => {
         let response = await fetch(apiUrl + endpoint, {
@@ -141,8 +149,25 @@ export const useNetworkRequest = () => {
         apiPost,
         authApiGet,
         authApiPatch,
+        authApiPost,
         authApiPut,
         authApiDelete,
         authApiMultipartPost,
     }
+}
+
+export const useTimeout = (callback, delay) => {
+    const timeoutRef = useRef(null)
+    const savedCallback = useRef(callback)
+    useEffect(() => {
+        savedCallback.current = callback
+    }, [callback])
+    useEffect(() => {
+        const tick = () => savedCallback.current()
+        if (typeof delay === 'number') {
+            timeoutRef.current = window.setTimeout(tick, delay)
+            return () => window.clearTimeout(timeoutRef.current)
+        }
+    }, [delay])
+    return timeoutRef
 }

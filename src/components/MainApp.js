@@ -23,7 +23,7 @@ import Judge from './pages/Judge'
 import Login from './pages/Login'
 
 //landing pages
-import PostSubmitLanding from './pages/static/PostSubmitLanding'
+import PostSubmitLanding from './pages/PostSubmitLanding'
 import LoginLanding from './pages/static/LoginLanding'
 import ValidationFailedLanding from './pages/static/ValidationFailedLanding'
 import ErrorLanding from './pages/static/ErrorLanding'
