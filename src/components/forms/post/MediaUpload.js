@@ -9,11 +9,13 @@ import { store } from '../../store'
 
 function Media({ addMedia, index, close }) {
     const [loading, setLoading] = useState(false)
+    const [uploadError, setUploadError] = useState(false)
     const { authApiMultipartPost } = useNetworkRequest()
     const { state } = useContext(store)
 
     const onDrop = useCallback(
         (acceptedFiles) => {
+            setUploadError(false)
             const uploadFile = async (acceptedFiles) => {
                 setLoading(true)
                 const formData = new FormData()
@@ -24,9 +26,15 @@ function Media({ addMedia, index, close }) {
                     formData,
                     state.token
                 )
-                const media = await response.json()
-                addMedia(media)
-                setLoading(false)
+                try {
+                    const media = await response.json()
+                    addMedia(media)
+                    setLoading(false)
+                } catch (err) {
+                    setUploadError(true)
+                    setLoading(false)
+                    console.log(err)
+                }
             }
             uploadFile(acceptedFiles)
         },
@@ -47,6 +55,7 @@ function Media({ addMedia, index, close }) {
                             className="flex flex-grow h-full flex-col items-center justify-center"
                             {...getRootProps()}
                         >
+                            {uploadError && <div className="text-red-500 font-semibold mb-2">Sorry, an error occured uploading that file - are you sure it's an image?</div>}
                             <div>
                                 <FaUpload size={30} />
                             </div>
