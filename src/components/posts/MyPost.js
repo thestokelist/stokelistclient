@@ -7,7 +7,6 @@ import { endpoints } from '../../constants/endpoints'
 import { useNetworkRequest } from '../../hooks'
 
 function MyPost({ post }) {
-
     const { state } = useContext(store)
     const [deleted, setDeleted] = useState(false)
     const history = useHistory()
@@ -46,15 +45,20 @@ function MyPost({ post }) {
             <PostSummary post={post} disabled={deleted} />
             <div className="flex w-full justify-end">
                 {deleted ? (
-                    <button className="btn-white" onClick={undeletePost}>
-                        Undelete
-                    </button>
+                    <div className="mt-0 mb-6">
+                        <button
+                            className="btn-white"
+                            onClick={undeletePost}
+                        >
+                            Undo Delete
+                        </button>
+                    </div>
                 ) : (
-                    <div className="flexed-row justify-between w-72">
+                    <div className="flexed-row justify-between w-72 mt-0 mb-6">
                         <button className="btn-white" onClick={editPost}>
                             Edit
                         </button>
-                        <button className="btn-white-red"  onClick={deletePost}>
+                        <button className="btn-white-red" onClick={deletePost}>
                             Delete
                         </button>
                     </div>

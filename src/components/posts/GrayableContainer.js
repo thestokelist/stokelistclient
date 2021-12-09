@@ -7,7 +7,7 @@ function GrayableContainer({ disabled, children }) {
             {disabled && (
                 <div className="grid-area-1 bg-white w-full h-full float-left bg-opacity-80" />
             )}
-            <div className="grid-area-1">{children}</div>
+            <div className="grid-area-1 bg-cream">{children}</div>
         </div>
     )
 }

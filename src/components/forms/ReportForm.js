@@ -34,7 +34,7 @@ function ReportForm({ id }) {
                     value="Slander"
                     ref={register()}
                 />
-                <span className="form-radio-text">Slander</span>
+                <span className="form-radio-text my-1">Slander</span>
             </div>
             <div className="flexed-row">
                 <input
@@ -43,7 +43,7 @@ function ReportForm({ id }) {
                     value="Scam"
                     ref={register()}
                 />
-                <span className="form-radio-text">Scam</span>
+                <span className="form-radio-text my-1">Scam</span>
             </div>
             <div className="flexed-row">
                 <input
@@ -52,7 +52,7 @@ function ReportForm({ id }) {
                     value="Defamation"
                     ref={register()}
                 />
-                <span className="form-radio-text">Defamation</span>
+                <span className="form-radio-text my-1">Defamation</span>
             </div>
             <div className="flexed-row">
                 <input
@@ -61,7 +61,7 @@ function ReportForm({ id }) {
                     value="Xenophobia"
                     ref={register()}
                 />
-                <span className="form-radio-text">Xenophobia</span>
+                <span className="form-radio-text my-1">Xenophobia</span>
             </div>
             <div className="flexed-row">
                 <input
@@ -70,7 +70,7 @@ function ReportForm({ id }) {
                     value="Crime"
                     ref={register()}
                 />
-                <span className="form-radio-text">Incites Crime or Threats</span>
+                <span className="form-radio-text my-1">Incites Crime or Threats</span>
             </div>
             <div className="flexed-row">
                 <input
@@ -80,7 +80,7 @@ function ReportForm({ id }) {
                     //With react-hook-form/required radio buttons, register the last one as required
                     ref={register({ required: true })}
                 />
-                <span className="form-radio-text">Profanity or Obsenity</span>
+                <span className="form-radio-text my-1">Profanity or Obsenity</span>
             </div>
             <div className="form-error">
                 {errors.reason &&
@@ -92,7 +92,7 @@ function ReportForm({ id }) {
                 <textarea className="w-3/5" name="comment" ref={register()} />
             </div>
 
-            <div className="flexed-row justify-between w-20">
+            <div className="flexed-row justify-between w-96">
                 <button className="btn-white" type="button" onClick={doCancel}>
                     Cancel
                 </button>

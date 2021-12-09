@@ -54,7 +54,7 @@ function PostPhoto({ postDetails }) {
                 <div className="flex w-1/4 h-full flex-col h-full max-h-full overflow-y-auto p-2 scrollbar">
                     {remainingImages.map((media, index) => (
                         <div
-                            className="flex my-2 shadow gray-border rounded flex-col h-1/3 max-h-1/3 mb-4 justify-center"
+                            className="flex my-2 shadow gray-border rounded flex-col h-1/3 max-h-1/3 mb-4 justify-center bg-white"
                             key={media.id}
                             onClick={() => setPhotoIndex(index)}
                         >

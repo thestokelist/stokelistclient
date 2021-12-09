@@ -1,9 +1,9 @@
 .form-label {
-    @apply font-medium text-blue my-2
+    @apply font-medium text-blue text-xl mt-8 mb-2
 }
 
 .form-sublabel {
-    @apply text-blue font-normal
+    @apply text-blue text-lg font-light
 }
 
 .form-input-container { 
@@ -11,7 +11,7 @@
 }
 
 .form-radio-text {
-    @apply text-sm text-slate ml-1 mr-4
+    @apply text-base text-slate ml-1 mr-4
 }
 
 .form-error {
@@ -19,7 +19,7 @@
 }
 
 .form-input {
-    @apply h-8 rounded border border-solid border-gray-300 shadow bg-white
+    @apply h-8 rounded border border-solid border-gray-300 shadow bg-white pl-2
 }
 
 .placeholder-blue {

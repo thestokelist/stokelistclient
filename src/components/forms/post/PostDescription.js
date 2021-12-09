@@ -18,7 +18,7 @@ function PostDescription({ errors, register, setValue, watch }) {
             <div className="form-label">
                 Post Description
                 <span className="form-sublabel">
-                    - Be descriptive, this will help your results show up in
+                    {' '}- Be descriptive, this will help your results show up in
                     search
                 </span>
             </div>

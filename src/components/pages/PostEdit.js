@@ -17,7 +17,7 @@ function PostEdit({ match }) {
     const getTitle = () => {
         let title = 'Edit Post'
         if (formState === formTypes.PREVIEW) {
-            title = 'Preview Edits'
+            title = 'Preview Changes'
         }
         return title
     }
@@ -36,7 +36,7 @@ function PostEdit({ match }) {
 
     return (
         <Fragment>
-            <div className="mb-4 title">{getTitle()}</div>
+            <div className="my-4 title">{getTitle()}</div>
             {postUpdated ? (
                 <Redirect to={`/post/${postID}`} />
             ) : postDetails ? (

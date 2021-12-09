@@ -28,7 +28,7 @@ function PostDetail({ postDetails }) {
                     text={postEmail}
                     onCopy={() => setEmailCopied(true)}
                 >
-                    <div className="underline text-blue mx-4 text-center">
+                    <div className="underline text-blue mx-4 mb-2 text-center">
                         <FaPaperclip color={'#175e88'} />
                         Copy Email Address
                     </div>

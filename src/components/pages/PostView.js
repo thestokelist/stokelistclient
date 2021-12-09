@@ -75,7 +75,7 @@ function PostView({ match }) {
                             <u>The Stoke List Commandments?</u>
                         </Link>
                     </div>
-                    <button className="btn-white" onClick={doReport}>
+                    <button className="text-blue bg-white border border-solid border-blue shadow-lg rounded-lg px-6 py-1 text-md font-bold text-center" onClick={doReport}>
                         Report Post
                     </button>
                 </div>

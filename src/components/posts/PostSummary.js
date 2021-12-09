@@ -18,7 +18,7 @@ function PostSummary({ post, disabled, markerNumber }) {
                 <PostSummaryPhoto post={post} markerNumber={markerNumber} />
                 <div className="flex-grow box-border px-4 py-2">
                     <div className="flexed-responsive">
-                        <div className="text-slate font-medium text-2xl">
+                        <div className="text-slate font-semibold text-xl">
                             <div className="no-escape">
                                 <Link to={`/post/${post.id}`}>
                                     {post.title}

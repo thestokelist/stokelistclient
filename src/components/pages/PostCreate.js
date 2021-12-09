@@ -20,7 +20,7 @@ function PostCreate() {
 
     return (
         <Fragment>
-            <div className="mb-4">
+            <div className="my-4">
                 <span className="title">{getTitle()}</span>
             </div>
 
