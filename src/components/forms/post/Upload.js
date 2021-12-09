@@ -6,13 +6,12 @@ import Media from './Media'
 import MediaUpload from './MediaUpload'
 
 function Upload({ errors, register, control }) {
-    const [active, setActive] = useState(false)
-
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'media',
         keyName: 'id',
     })
+    const [active, setActive] = useState(fields.length > 0)
     const attachmentSpace = fields.length < 10
 
     return (
@@ -48,11 +47,13 @@ function Upload({ errors, register, control }) {
                   )
                 : attachmentSpace && (
                       <div
-                          className="form-input-container"
+                          className="form-input-container align-middle bg-white gray-border w-max rounded"
                           onClick={() => setActive(true)}
                       >
-                          <FaPlusCircle size={20} color={'#175E88'} />
-                          <span className="form-sublabel">Upload an Image</span>
+                          <FaPlusCircle className="mb-1 ml-2" size={20} color={'#175E88'} />
+                          <span className="mx-2 text-blue text-lg font-medium">
+                              Upload an Image
+                          </span>
                       </div>
                   )}
         </Fragment>
