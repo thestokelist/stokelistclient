@@ -2,6 +2,7 @@ import React, { useContext, useState, Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
+import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
 import { formTypes } from '../../constants/forms'
@@ -37,6 +38,7 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
     })
     const [postPreview, setPostPreview] = useState(null)
     const [submitError, setSubmitError] = useState(false)
+    const [networkLoading, setNetworkLoading] = useState(false)
     const { executeRecaptcha } = useGoogleReCaptcha()
     const { authApiPut, authApiPost, apiPost } = useNetworkRequest()
     const wholeFormError = Object.keys(errors).length > 0
@@ -165,12 +167,14 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
     }
 
     const doCaptchaAndSubmit = async () => {
+        setNetworkLoading(true)
         const submitPost = Object.assign({}, postPreview)
         if (!editMode) {
             const token = await executeRecaptcha('post')
             submitPost['g-recaptcha-response'] = token
         }
         await doSubmit(submitPost)
+        setNetworkLoading(false)
     }
 
     const getForm = () => {
@@ -226,7 +230,7 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
                     </button>
 
                     <button className="btn-blue" onClick={doCaptchaAndSubmit}>
-                        {buttonText}
+                        {networkLoading ? <Loading /> : buttonText}
                     </button>
                 </div>
                 {submitError && (

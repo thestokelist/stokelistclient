@@ -41,6 +41,7 @@ function PostPhoto({ postDetails }) {
             <div className="flexed-row justify-between h-full max-h-full">
                 <div className="bg-white flex shadow gray-border rounded justify-center w-3/4 flex-col h-full max-h-full">
                     <img
+                        key={photoIndex}
                         className="contained max-w-full max-h-102 my-auto p-2"
                         src={currentImgURL()}
                         alt="post"

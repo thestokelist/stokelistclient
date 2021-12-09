@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
+import Loading from '../shared/Loading'
 import PostSummary from './PostSummary'
 import { store } from '../store'
 import { endpoints } from '../../constants/endpoints'
@@ -9,14 +10,17 @@ import { useNetworkRequest } from '../../hooks'
 function MyPost({ post }) {
     const { state } = useContext(store)
     const [deleted, setDeleted] = useState(false)
+    const [networkLoading, setNetworkLoading] = useState(false)
     const history = useHistory()
     const { authApiDelete, authApiPatch } = useNetworkRequest()
 
     const deletePost = async () => {
+        setNetworkLoading(true)
         const response = await authApiDelete(
             `${endpoints.POSTS}${post.id}`,
             state.token
         )
+        setNetworkLoading(false)
         if (response) {
             setDeleted(true)
         } else {
@@ -25,10 +29,12 @@ function MyPost({ post }) {
     }
 
     const undeletePost = async () => {
+        setNetworkLoading(true)
         const response = await authApiPatch(
             `${endpoints.POSTS}${post.id}`,
             state.token
         )
+        setNetworkLoading(false)
         if (response) {
             setDeleted(false)
         } else {
@@ -46,11 +52,8 @@ function MyPost({ post }) {
             <div className="flex w-full justify-end">
                 {deleted ? (
                     <div className="mt-0 mb-6">
-                        <button
-                            className="btn-white"
-                            onClick={undeletePost}
-                        >
-                            Undo Delete
+                        <button className="btn-white" onClick={undeletePost}>
+                            {networkLoading ? <Loading /> : 'Undo Delete'}
                         </button>
                     </div>
                 ) : (
@@ -59,7 +62,7 @@ function MyPost({ post }) {
                             Edit
                         </button>
                         <button className="btn-white-red" onClick={deletePost}>
-                            Delete
+                            {networkLoading ? <Loading /> : 'Delete'}
                         </button>
                     </div>
                 )}
