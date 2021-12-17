@@ -20,10 +20,10 @@ function PostPrice({ errors, register, watch, setValue }) {
             <div className="form-input-container">
                 <div className="form-label">Add a Price</div>
                 <div className="flex flex-wrap">
-                    <div className="flexed-row">
-                        <div className="flex items-center justify-center bg-white shadow gray-border border-r-0 px-1 h-8 rounded">$</div>
+                    <div className="flexed-row shadow rounded">
+                        <div className="text-sm flex items-center justify-center bg-white border border-solid border-gray-300 border-r-0 pl-2 h-8 rounded-l font-light">$</div>
                         <input
-                            className="form-input mb-0 rounded"
+                            className="h-8 rounded-r border border-solid border-gray-300 bg-white pl-2 mb-0 border-l-0"
                             type="numeric"
                             name="price"
                             ref={register()}
