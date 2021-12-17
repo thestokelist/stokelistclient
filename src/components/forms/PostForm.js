@@ -167,14 +167,16 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
     }
 
     const doCaptchaAndSubmit = async () => {
-        setNetworkLoading(true)
-        const submitPost = Object.assign({}, postPreview)
-        if (!editMode) {
-            const token = await executeRecaptcha('post')
-            submitPost['g-recaptcha-response'] = token
+        if (networkLoading === false) {
+            setNetworkLoading(true)
+            const submitPost = Object.assign({}, postPreview)
+            if (!editMode) {
+                const token = await executeRecaptcha('post')
+                submitPost['g-recaptcha-response'] = token
+            }
+            await doSubmit(submitPost)
+            setNetworkLoading(false)
         }
-        await doSubmit(submitPost)
-        setNetworkLoading(false)
     }
 
     const getForm = () => {

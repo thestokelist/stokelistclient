@@ -15,30 +15,34 @@ function MyPost({ post }) {
     const { authApiDelete, authApiPatch } = useNetworkRequest()
 
     const deletePost = async () => {
-        setNetworkLoading(true)
-        const response = await authApiDelete(
-            `${endpoints.POSTS}${post.id}`,
-            state.token
-        )
-        setNetworkLoading(false)
-        if (response) {
-            setDeleted(true)
-        } else {
-            console.log(`Delete failed for post with id ${post.id}`)
+        if (networkLoading === false) {
+            setNetworkLoading(true)
+            const response = await authApiDelete(
+                `${endpoints.POSTS}${post.id}`,
+                state.token
+            )
+            setNetworkLoading(false)
+            if (response) {
+                setDeleted(true)
+            } else {
+                console.log(`Delete failed for post with id ${post.id}`)
+            }
         }
     }
 
     const undeletePost = async () => {
-        setNetworkLoading(true)
-        const response = await authApiPatch(
-            `${endpoints.POSTS}${post.id}`,
-            state.token
-        )
-        setNetworkLoading(false)
-        if (response) {
-            setDeleted(false)
-        } else {
-            console.log(`Undelete failed for post with id ${post.id}`)
+        if (networkLoading === false) {
+            setNetworkLoading(true)
+            const response = await authApiPatch(
+                `${endpoints.POSTS}${post.id}`,
+                state.token
+            )
+            setNetworkLoading(false)
+            if (response) {
+                setDeleted(false)
+            } else {
+                console.log(`Undelete failed for post with id ${post.id}`)
+            }
         }
     }
 
