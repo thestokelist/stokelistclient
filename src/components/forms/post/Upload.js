@@ -47,7 +47,7 @@ function Upload({ errors, register, control }) {
                   )
                 : attachmentSpace && (
                       <div
-                          className="form-input-container align-middle bg-white gray-border w-max rounded shadow"
+                          className="form-input-container align-middle bg-white gray-border w-max rounded shadow p-1"
                           onClick={() => setActive(true)}
                       >
                           <FaPlusCircle className="mb-1 ml-2" size={20} color={'#175E88'} />
