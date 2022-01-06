@@ -85,7 +85,6 @@ function MainApp() {
                     <Route exact path="/post" component={PostCreate} />
                     {/* (\d+) is regex that restricts these routers to a series of integers */}
                     <Route exact path="/post/:id(\d+)" component={PostView} />
-                    <Route exact path="/edit/:id(\d+)" component={PostEdit} />
                     <Route
                         exact
                         path="/report/:id(\d+)"
@@ -99,6 +98,7 @@ function MainApp() {
                     <Route exact path="/garage/" component={GarageMap} />
 
                     {/*Routes that require permissions*/}
+                    <LoggedInRoute exact path="/edit/:id(\d+)" component={PostEdit} />
                     <LoggedInRoute exact path="/myposts" component={MyPosts} />
                     <AdminRoute exact path="/moderate" component={Moderate} />
                     <AdminRoute exact path="/judge/:id" component={Judge} />
