@@ -97,9 +97,9 @@ function PostSearch({ children }) {
             <div className="mb-4 text-lg text-center text-slate font-light">
                 Buy, sell, love, yell – Revelstoke’s online classifieds.
             </div>
-            <div className="mb-8 rounded-lg gray-border shadow box-border flex flex-row w-full h-16">
+            <div className="mb-4 lg:mb-8 rounded-lg gray-border shadow box-border flex flex-row w-full h-12 lg:h-16">
                 <input
-                    className="flex-grow font-light rounded-lg pl-8 text-xl text-blue border-0 placeholder-blue"
+                    className="flex-grow lg:font-light rounded-lg pl-4 lg:pl-8 text-xl text-blue border-0 placeholder-blue"
                     type="text"
                     onChange={updateSearchTerm}
                     placeholder="Search Posts"

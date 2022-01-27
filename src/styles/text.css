@@ -3,7 +3,7 @@
 }
 
 .header-link {
-    @apply text-blue text-xl mx-4 font-medium;
+    @apply text-blue text-xl mx-4 my-1 lg:my-0 font-medium;
 }
 
 .header-link-active {

@@ -131,7 +131,7 @@ function PostSection({
             </div>
 
             {hideDates === true
-                ? <div className="mt-4">{getPostSummaryList(posts)}</div>
+                ? <div className="mt-2 lg:mt-4">{getPostSummaryList(posts)}</div>
                 : displayPostsByDate(groupedPosts)}
             {children}
         </div>
