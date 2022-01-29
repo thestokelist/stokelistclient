@@ -14,10 +14,13 @@ function PostSummary({ post, disabled, markerNumber }) {
 
     return (
         <GrayableContainer disabled={disabled}>
-            <div className="flex p-1 mb-4 bg-white shadow gray-border rounded">
-                <PostSummaryPhoto post={post} markerNumber={markerNumber} />
-                <div className="flex-grow box-border px-4 py-2">
-                    <div className="flexed-responsive">
+            <div className="flex flex-col lg:flex-row p-1 mb-4 bg-white shadow gray-border rounded">
+                <Link to={`/post/${post.id}`}>
+                    <PostSummaryPhoto post={post} markerNumber={markerNumber} />
+                </Link>
+
+                <div className="hidden lg:block flex-grow box-border px-4 py-2">
+                    <div className="flex flex-row items-center justify-between">
                         <div className="text-slate font-semibold text-xl">
                             <div className="no-escape">
                                 <Link to={`/post/${post.id}`}>
@@ -38,7 +41,38 @@ function PostSummary({ post, disabled, markerNumber }) {
                     </div>
                     <div className="text-slate text-sm">
                         <div className="no-escape">
-                            <ReactMarkdown className="markdown" children={post.description} />
+                            <ReactMarkdown
+                                className="markdown"
+                                children={post.description}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="lg:hidden flex-grow box-border px-4 py-2">
+                    <div className="text-slate font-semibold text-xl">
+                        <div className="no-escape">
+                            <Link to={`/post/${post.id}`}>{post.title}</Link>
+                        </div>
+                    </div>
+                    <div className="text-slate text-sm">
+                        <div className="no-escape">
+                            <ReactMarkdown
+                                className="markdown"
+                                children={post.description}
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-row justify-between">
+                        <div className="mb-2 text-blue text-xl">
+                            {isGarageSale ? (
+                                getDateRangeString(post.startTime, post.endTime)
+                            ) : (
+                                <PostPrice price={post.price} />
+                            )}
+                        </div>
+                        <div className="no-escape">
+                            <PostLocation postDetails={post} />
                         </div>
                     </div>
                 </div>
