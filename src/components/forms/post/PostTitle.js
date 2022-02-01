@@ -16,7 +16,7 @@ function PostTitle({ errors, register, watch }) {
         <div className="form-input-container">
             <div className="form-label">Post Title</div>
             <input
-                className="form-input w-4/5"
+                className="form-input w-full lg:w-4/5"
                 name="title"
                 placeholder="Max 50 characters"
                 ref={register({

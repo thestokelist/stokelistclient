@@ -44,7 +44,7 @@ function LocationMap({ setValue, register, watch }) {
                 <div className="form-label">Add Location</div>
                 <div className="flexed-row">
                     <input 
-                        className="form-input w-2/4 mr-4"
+                        className="form-input lg:w-2/4 mr-4"
                         name="location"
                         ref={register}
                         placeholder="Where you at?"

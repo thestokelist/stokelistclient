@@ -1,5 +1,5 @@
 .form-label {
-    @apply font-medium text-blue text-xl mt-8 mb-2
+    @apply font-medium text-blue text-xl mt-2 lg:mt-8 lg:mb-2
 }
 
 .form-sublabel {

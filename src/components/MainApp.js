@@ -78,7 +78,7 @@ function MainApp() {
         <div className="flex flex-col items-center m-auto max-w-screen-xl">
             {/*Header appears at the top of all pages*/}
             <Header />
-            <div className="App w-full box-border flex-grow bg-cream px-4 lg:px-20 py-8">
+            <div className="App w-full box-border flex-grow bg-cream px-4 lg:px-20 py-4 lg:py-8">
                 <Switch>
                     {/*Routes related to posts*/}
                     <Route exact path="/" component={PostList} />

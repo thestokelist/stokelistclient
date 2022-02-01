@@ -19,13 +19,13 @@ function PostDescription({ errors, register, setValue, watch }) {
         <div className="form-input-container">
             <div className="form-label">
                 Post Description
-                <span className="form-sublabel">
+                <span className="hidden lg:inline form-sublabel">
                     {' '}
                     - Be descriptive, this will help your results show up in
                     search
                 </span>
             </div>
-            <div className="w-4/5">
+            <div className="w-full lg:w-4/5">
                 {' '}
                 <ReactMde
                     value={watch('description')}
@@ -46,7 +46,6 @@ function PostDescription({ errors, register, setValue, watch }) {
                     }
                     toolbarCommands={[
                         ['bold', 'italic', 'header'],
-                        ['code', 'link'],
                         ['ordered-list', 'unordered-list'],
                     ]}
                 />

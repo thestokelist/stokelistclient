@@ -46,7 +46,7 @@ function Media({ addMedia, index, close }) {
 
     return (
         <div className="form-input-container">
-            <div className="flex flex-row w-4/5 bg-white shado gray-border rounded bg-opacity-100 justify-between">
+            <div className="flex flex-row w-full lg:w-4/5 bg-white shado gray-border rounded bg-opacity-100 justify-between">
                 <div className="flex flex-grow items-center justify-center h-40">
                     {loading ? (
                         <Loading />

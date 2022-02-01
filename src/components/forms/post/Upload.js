@@ -18,9 +18,11 @@ function Upload({ errors, register, control }) {
         <Fragment>
             <div className="form-label">
                 Add Images <i>(optional)</i>
-                <span className="form-sublabel">
-                    {' '}
-                    - You can add up to 10 Images
+                <span className="hidden lg:inline form-sublabel">
+                    {' - '}
+                </span>
+                <span className="block lg:inline form-sublabel">
+                    You can add up to 10 Images
                 </span>
             </div>
             <div className="form-error">

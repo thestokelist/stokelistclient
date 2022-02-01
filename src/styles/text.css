@@ -1,5 +1,5 @@
 .title {
-    @apply text-blue text-3xl font-medium mb-2;
+    @apply text-blue text-3xl font-medium lg:mb-2;
 }
 
 .header-link {
