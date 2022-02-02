@@ -49,8 +49,8 @@ function PostView({ match }) {
             ) : (
                 <PostDetail postDetails={postDetails} />
             )}
-            <div className="form-label">Share This Post</div>
-            <div className="flexed-responsive">
+            <div className="form-label mb-1">Share This Post</div>
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between">
                 <div className="flexed-row">
                     <EmailShareButton url={window.location.href}>
                         <EmailIcon size={30} round={true} />
@@ -68,14 +68,14 @@ function PostView({ match }) {
                         <FacebookMessengerIcon size={30} round={true} />
                     </FacebookMessengerShareButton>
                 </div>
-                <div className="flexed-row">
-                    <div className="text-blue italic mr-4">
+                <div className="flex flex-col lg:flex-row lg:items-center">
+                    <div className="text-blue italic mr-4 my-1">
                         Does this post break{' '}
-                        <Link to="/commandments">
+                        <Link className="block lg:inline" to="/commandments">
                             <u>The Stoke List Commandments?</u>
                         </Link>
                     </div>
-                    <button className="text-blue bg-white border border-solid border-blue shadow-lg rounded-lg px-6 py-1 text-md font-bold text-center" onClick={doReport}>
+                    <button className="w-max text-blue bg-white border border-solid border-blue shadow-lg rounded-lg px-6 py-1 text-md font-bold text-center" onClick={doReport}>
                         Report Post
                     </button>
                 </div>

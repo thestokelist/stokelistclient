@@ -15,8 +15,8 @@ function PostDetail({ postDetails }) {
     }
 
     return (
-        <div className="flexed-column">
-            <button className="btn-white mx-auto my-0" onClick={replyToPost}>
+        <div className="flex h-full flex-col">
+            <button className="btn-white mx-auto mb-2 w-60 lg:w-auto" onClick={replyToPost}>
                 Reply to Post
             </button>
             {emailCopied ? (
@@ -28,7 +28,7 @@ function PostDetail({ postDetails }) {
                     text={postEmail}
                     onCopy={() => setEmailCopied(true)}
                 >
-                    <div className="underline text-blue mx-4 mb-2 text-center">
+                    <div className="underline text-blue text-xl lg:text-base lg:mx-4 my-2 lg:my-0 lg:text-center">
                         <FaPaperclip color={'#175e88'} />
                         Copy Email Address
                     </div>

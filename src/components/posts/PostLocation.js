@@ -3,7 +3,7 @@ import { FaMapMarker } from 'react-icons/fa'
 
 function PostLocation({ postDetails }) {
     const getText = () => {
-        const text = <div className="text-lg font-light text-blue">{postDetails.location}</div>
+        const text = <div className="text-2xl lg:text-lg font-light text-blue">{postDetails.location}</div>
         if (
             postDetails.exactLocation &&
             postDetails.exactLocation.coordinates

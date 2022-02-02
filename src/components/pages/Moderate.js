@@ -107,7 +107,7 @@ function Moderate() {
                             onClick={goLeft}
                         />
                         <div className="w-4/5 mx-0 my-auto justify-center">
-                            <div className="flexed-responsive">
+                            <div className="flex flex-col lg:flex-row items-center justify-between">
                                 <div className="flexed-row justify-between mb-1 w-1/3">
                                     {!currentPostKept && (
                                         <button

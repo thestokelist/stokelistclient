@@ -2,14 +2,6 @@
     @apply flex flex-row items-center;
 }
 
-.flexed-responsive {
-    @apply flex flex-col lg:flex-row items-center justify-between;
-}
-
-.flexed-column {
-    @apply flex h-full flex-col;
-}
-
 .no-escape {
     /* https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
     overflow-wrap: break-word;

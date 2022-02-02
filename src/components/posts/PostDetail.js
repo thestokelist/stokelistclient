@@ -14,30 +14,38 @@ function PostDetail({ postDetails, notSubmitted }) {
 
     return post ? (
         <Fragment>
-            <div className="flexed-row justify-between">
-                <div className="flexed-column">
-                    <div className="mb-1 font-medium text-4xl text-slate">
+            <div className="flex-col flex lg:flex-row lg:items-center justify-between">
+                <div className="flex h-full flex-col mb-2">
+                    <div className="mb-1 font-medium text-3xl lg:text-4xl text-slate">
                         {post.title}
                     </div>
-                    <div className="text-blue mb-2 font-medium text-3xl">
+                    <div className="text-blue font-medium text-2xl lg:text-3xl">
                         {isGarageSale ? (
                             getDateRangeString(post.startTime, post.endTime)
                         ) : (
                             <PostPrice price={post.price} />
                         )}
                     </div>
+                    <div className="lg:hidden">
+                        <PostLocation postDetails={post} />
+                    </div>
                 </div>
                 {submitted && <PostCopy postDetails={post} />}
             </div>
+            <div className="hidden lg:block">
+                <PostLocation postDetails={post} />
+            </div>
 
-            <PostLocation postDetails={post} />
             <PostPhoto postDetails={post} />
-            <div className="bg-white shadow gray-border rounded text-slate text-md px-4 py-2 w-3/4 min-h-16 box-border mt-8">
-                <ReactMarkdown className="markdown" children={post.description} />
+            <div className="bg-white shadow gray-border rounded text-slate text-xl lg:text-base px-4 py-2 w-full lg:w-3/4 min-h-16 box-border mt-8">
+                <ReactMarkdown
+                    className="markdown"
+                    children={post.description}
+                />
             </div>
 
             {submitted && (
-                <div className="italic text-slate my-2 text-sm">
+                <div className="italic text-slate my-2 text-base lg:text-sm">
                     {getPrettyDateString(post.created_at)}
                 </div>
             )}
