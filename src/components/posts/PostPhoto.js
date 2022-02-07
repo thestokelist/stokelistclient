@@ -37,36 +37,40 @@ function PostPhoto({ postDetails }) {
     }, [media])
 
     return media ? (
-        <div className="w-full max-h-112 h-112 flex flex-col">
-            <div className="flexed-row justify-between h-full max-h-full">
-                <div className="bg-white flex shadow gray-border rounded justify-center w-full min-w-full lg:min-w-0 lg:w-3/4 flex-col h-full max-h-full">
+        <div className="max-w-full w-full lg:max-h-112 lg:h-112 flex flex-col">
+            <div className="flex flex-col lg:flex-row items-center justify-between h-full max-h-full">
+                <div className="bg-white flex shadow gray-border rounded justify-center w-full min-w-fit lg:min-w-0 lg:w-3/4 flex-col h-112 max-h-full">
                     <img
                         key={photoIndex}
-                        className="contained max-w-full max-h-102 my-auto p-2"
+                        className="w-auto h-auto object-contain max-w-full w-full max-h-102 lg:max-h-102 my-auto p-2"
                         src={currentImgURL()}
                         alt="post"
                     />
                     <div className="flex font-bold bg-slate text-white rounded-b h-10 p-2">
-                        <p>{media.length === 1 ? '' : ` ${photoIndex + 1}/${
-                            media.length
-                        } - `} {currentDescription()}</p>
+                        <p>
+                            {media.length === 1
+                                ? ''
+                                : ` ${photoIndex + 1}/${media.length} - `}{' '}
+                            {currentDescription()}
+                        </p>
                     </div>
                 </div>
-                <div className="flex w-1/4 h-full flex-col h-full max-h-full overflow-y-auto p-2 scrollbar">
-                    {remainingImages.map((media, index) => (
-                        <div
-                            className="flex my-2 shadow gray-border rounded flex-col h-1/3 max-h-1/3 mb-4 justify-center bg-white"
-                            key={media.id}
-                            onClick={() => setPhotoIndex(index)}
-                        >
-                            <img
-                                className="contained max-w-full max-h-full"
-                                src={media.thumbLink}
-                                alt="thumbnail"
-                            />
-                        </div>
-                    ))}
+                <div className="inline whitespace-nowrap lg:flex w-full lg:w-1/4 min-h-40 lg:min-h-auto h-auto lg:h-full overflow-y-hidden overflow-x-scroll lg:overflow-x-hidden lg:overflow-y-auto scrollbar mt-2 lg:mt-0 justify-between items-center lg:flex-col p-2">
+                        {remainingImages.map((media, index) => (
+                            <div
+                                className="inline lg:flex w-full m-2 shadow gray-border rounded flex-col h-full lg:h-1/3 lg:max-h-1/3 mb-4 justify-center bg-white max-w-40"
+                                key={media.id}
+                                onClick={() => setPhotoIndex(index)}
+                            >
+                                <img
+                                    className="rounded inline-block lg:block min-h-max lg:min-h-0 min-w-max lg:min-w-0 w-40 lg:w-auto h-auto object-contain max-w-full max-h-full p-2 lg:p-0"
+                                    src={media.thumbLink}
+                                    alt="thumbnail"
+                                />
+                            </div>
+                        ))}
                 </div>
+
             </div>
         </div>
     ) : null
