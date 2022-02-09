@@ -51,7 +51,7 @@ function Moderate() {
             state.token
         )
         if (response) {
-            const modPost = Object.assign({ kept: true }, currentPost)
+            const modPost = Object.assign({ kept: true, deleted: false }, currentPost)
             setModQueue(replaceQueueAt(postCounter, modPost))
             goRight()
         } else {
@@ -68,7 +68,7 @@ function Moderate() {
             state.token
         )
         if (response) {
-            const modPost = Object.assign({ deleted: true }, currentPost)
+            const modPost = Object.assign({ deleted: true, kept: false }, currentPost)
             setModQueue(replaceQueueAt(postCounter, modPost))
             goRight()
         } else {
@@ -98,17 +98,34 @@ function Moderate() {
     return (
         <Fragment>
             <div className="title">Let's Do the Moderation</div>
+            <div className="flexed-row justify-between">
+                <div onClick={goLeft}>
+                    <FaChevronLeft
+                        size={50}
+                        color={canGoLeft ? '#175E88' : 'grey'}
+                        className="min-w-max z-50"
+                    />
+                    <span className="text-slate text-lg font-bold">Back</span>
+                </div>
+
+                <div onClick={goRight}>
+                    <span className="text-slate text-lg font-bold">Next</span>
+                    <FaChevronRight
+                        size={50}
+                        color={canGoRight ? '#175E88' : 'grey'}
+                        className="min-w-max z-50"
+                    />
+                </div>
+            </div>
             <div className="flexed-row">
                 {modQueue && modQueue.length > 0 ? (
                     <Fragment>
-                        <FaChevronLeft
-                            size={50}
-                            color={canGoLeft ? '#175E88' : 'grey'}
-                            onClick={goLeft}
-                        />
-                        <div className="w-4/5 mx-0 my-auto justify-center">
-                            <div className="flex flex-col lg:flex-row items-center justify-between">
-                                <div className="flexed-row justify-between mb-1 w-1/3">
+                        <div className="w-full lg:w-4/5 mx-0 my-auto justify-center">
+                            {currentPost.reports.map((report) => (
+                                <PostReport key={report} report={report} />
+                            ))}
+                            <div className="flex flex-col lg:flex-row lg:items-center justify-between">
+                                <div className="flexed-row lg:justify-between mb-1 w-1/3">
                                     {!currentPostKept && (
                                         <button
                                             className="btn-white"
@@ -130,11 +147,6 @@ function Moderate() {
                                         </button>
                                     )}
                                 </div>
-                                <Link to={`/judge/${currentPost.id}`}>
-                                    <span className="underline text-lg text-blue font-semibold">
-                                        {'See All Other Posts by this User >>'}
-                                    </span>
-                                </Link>
                             </div>
                             {error && (
                                 <div className="form-error">
@@ -144,24 +156,24 @@ function Moderate() {
                             {currentPost && (
                                 <GrayableContainer
                                     disabled={
-                                        currentPostDeleted || currentPostKept
+                                        currentPostDeleted
                                     }
                                 >
+                                    <div className="bg-blue h-1 my-2" />
                                     <PostDetail
                                         postDetails={currentPost}
                                         notSubmitted={true}
                                     />
-                                    {currentPost.reports.map((report) => (
-                                        <PostReport report={report} />
-                                    ))}
                                 </GrayableContainer>
                             )}
+                            <div className="mt-2">
+                                <Link to={`/judge/${currentPost.id}`}>
+                                    <span className="underline text-lg text-blue font-semibold">
+                                        {'See All Other Posts by this User >>'}
+                                    </span>
+                                </Link>
+                            </div>
                         </div>
-                        <FaChevronRight
-                            size={50}
-                            color={canGoRight ? '#175E88' : 'grey'}
-                            onClick={goRight}
-                        />
                     </Fragment>
                 ) : (
                     <div>Nothing to moderate right now</div>

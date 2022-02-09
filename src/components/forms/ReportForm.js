@@ -92,7 +92,7 @@ function ReportForm({ id }) {
                 <textarea className="w-3/5" name="comment" ref={register()} />
             </div>
 
-            <div className="flexed-row justify-between w-96">
+            <div className="flexed-row justify-between w-full lg:w-96">
                 <button className="btn-white" type="button" onClick={doCancel}>
                     Cancel
                 </button>

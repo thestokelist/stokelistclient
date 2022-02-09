@@ -15,7 +15,7 @@
 }
 
 .form-error {
-    @apply text-red-500 text-sm
+    @apply text-red-500 lg:text-sm text-lg 
 }
 
 .form-input {
