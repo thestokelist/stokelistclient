@@ -55,7 +55,7 @@ function PostPhoto({ postDetails }) {
                         </p>
                     </div>
                 </div>
-                <div className="flex w-full lg:w-1/4 min-h-40 lg:min-h-auto h-auto lg:h-full overflow-y-hidden overflow-x-scroll lg:overflow-x-hidden lg:overflow-y-auto scrollbar mt-2 lg:mt-0 justify-between items-center flex-row flex-nowrap lg:flex-col p-2">
+                <div className="flex w-full lg:w-1/4 min-h-40 lg:min-h-auto h-auto lg:h-full overflow-y-hidden overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto scrollbar mt-2 lg:mt-0 justify-between items-center flex-row flex-nowrap lg:flex-col p-2">
                         {remainingImages.map((media, index) => (
                             <div
                                 className="flex-shrink-0 flex w-40 lg:w-full h-40 lg:h-1/3 lg:max-h-1/3 m-2 shadow gray-border rounded mb-4 justify-center bg-white max-w-40"
