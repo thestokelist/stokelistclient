@@ -37,7 +37,7 @@ function PostPhoto({ postDetails }) {
     }, [media])
 
     return media ? (
-        <div className="max-w-full lg:w-full lg:max-h-112 lg:h-112 flex flex-col">
+        <div className="max-w-full lg:w-full lg:max-h-112 lg:h-112 flex flex-col lg:mt-2">
             <div className="flex flex-col lg:flex-row items-center justify-between h-full max-h-full">
                 <div className="bg-white flex shadow gray-border rounded justify-center w-full min-w-fit lg:min-w-0 lg:w-3/4 flex-col h-112 max-h-full">
                     <img
