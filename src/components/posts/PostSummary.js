@@ -64,14 +64,14 @@ function PostSummary({ post, disabled, markerNumber }) {
                         </div>
                     </div>
                     <div className="flex flex-row justify-between">
-                        <div className="mb-2 text-blue text-xl">
+                        <div className="mb-2 text-blue text-lg font-medium">
                             {isGarageSale ? (
                                 getDateRangeString(post.startTime, post.endTime)
                             ) : (
                                 <PostPrice price={post.price} />
                             )}
                         </div>
-                        <div className="no-escape">
+                        <div className="no-escape text-lg">
                             <PostLocation postDetails={post} />
                         </div>
                     </div>

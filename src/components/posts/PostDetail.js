@@ -26,13 +26,13 @@ function PostDetail({ postDetails, notSubmitted }) {
                             <PostPrice price={post.price} />
                         )}
                     </div>
-                    <div className="lg:hidden">
+                    <div className="lg:hidden text-xl">
                         <PostLocation postDetails={post} />
                     </div>
                 </div>
                 {submitted && <PostCopy postDetails={post} />}
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden text-xl lg:block">
                 <PostLocation postDetails={post} />
             </div>
 
