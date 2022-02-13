@@ -95,11 +95,11 @@ function PostSearch({ children }) {
     return (
         <Fragment>
             <div className="mb-4 text-lg text-center text-slate font-light">
-                Buy, sell, love, yell – Revelstoke’s online classifieds.
+                Buy, sell, love, yell<span className="hidden lg:inline"> – </span><span className="block lg:inline">Revelstoke’s online classifieds.</span>
             </div>
             <div className="mb-4 lg:mb-8 rounded-lg gray-border shadow box-border flex flex-row w-full h-12 lg:h-16">
                 <input
-                    className="flex-grow lg:font-light rounded-lg pl-4 lg:pl-8 text-xl text-blue border-0 placeholder-blue"
+                    className="flex-grow lg:font-light rounded-l-lg pl-4 -mr-4 lg:pl-8 text-xl text-blue border-0 placeholder-blue"
                     type="text"
                     onChange={updateSearchTerm}
                     placeholder="Search Posts"
@@ -110,7 +110,7 @@ function PostSearch({ children }) {
                     }}
                 />
                 <button
-                    className="w-12 bg-white shadow rounded-lg border-l border-l-solid border-l-gray-300 bg-opacity-100"
+                    className="w-12 bg-white shadow rounded-r-lg border-l border-l-solid border-l-gray-300 bg-opacity-100"
                     onClick={doSearch}
                 >
                     <FaSearch size={25} color={'#175E88'} />
