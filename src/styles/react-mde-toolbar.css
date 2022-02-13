@@ -1,15 +1,3 @@
-.btn-base {
-    @apply shadow-lg rounded-lg px-10 py-2 text-xl font-bold text-center m-1;
-}
-
-.btn-white {
-    @apply btn-base text-blue bg-white border border-solid border-blue;
-}
-
-.btn-blue {
-    @apply btn-base border-none text-lg text-white bg-blue;
-}
-
 .mde-header {
     flex-shrink: 0;
     display: flex;
