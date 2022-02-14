@@ -1,5 +1,5 @@
-import React, { useState, Fragment, useMemo } from 'react'
-import { FaSearch } from 'react-icons/fa'
+import React, { useState, Fragment, useMemo, createRef } from 'react'
+import { FaSearch, FaRegTimesCircle } from 'react-icons/fa'
 
 import PostSection from '../posts/PostSection'
 import Loading from '../shared/Loading'
@@ -12,6 +12,8 @@ function PostSearch({ children }) {
     const [searchOffset, setSearchOffset] = useState(0)
     const [searchPosts, setSearchPosts] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
+    const [searchedTerm, setSearchedTerm] = useState('')
+    const searchInputRef = createRef()
 
     const [state, dispatch] = useSearchReducer()
 
@@ -25,6 +27,7 @@ function PostSearch({ children }) {
     const doSearch = async (event) => {
         setSearchOffset(0)
         dispatch({ type: 'loadStart' })
+        setSearchedTerm(searchTerm)
         if (searchTerm === '') {
             setSearchPosts([])
             dispatch({ type: 'loadReset' })
@@ -40,6 +43,14 @@ function PostSearch({ children }) {
                 dispatch({ type: 'loadReset' })
             }
         }
+    }
+
+    const clearSearch = () => {
+        setSearchTerm('')
+        setSearchedTerm('')
+        setSearchPosts([])
+        dispatch({ type: 'loadReset' })
+        searchInputRef.current.value = ''
     }
 
     const loadMoreSearchPosts = async () => {
@@ -67,12 +78,17 @@ function PostSearch({ children }) {
         if (state.searchLoading) {
             return <Loading />
         } else if (state.searchLoaded) {
-            const searchTitle = `Search Results: ${searchTerm}`
+            const searchTitle = `Search Results: ${searchedTerm}`
             const showMoreButton =
                 searchPosts.length > 0 && searchPosts.length % 50 === 0
+
+            const searchClearButton = (
+                <FaRegTimesCircle className="mb-2 ml-4 mr-auto" size={40} color={'#175E88'} onClick={clearSearch} />
+            )
             return (
                 <PostSection
                     title={searchTitle}
+                    titleButton={searchClearButton}
                     posts={searchPosts}
                     hideEmpty={false}
                     includeAds={true}
@@ -95,11 +111,16 @@ function PostSearch({ children }) {
     return (
         <Fragment>
             <div className="mb-4 text-lg text-center text-slate font-light">
-                Buy, sell, love, yell<span className="hidden lg:inline"> – </span><span className="block lg:inline">Revelstoke’s online classifieds.</span>
+                Buy, sell, love, yell
+                <span className="hidden lg:inline"> – </span>
+                <span className="block lg:inline">
+                    Revelstoke’s online classifieds.
+                </span>
             </div>
             <div className="mb-4 lg:mb-8 rounded-lg gray-border shadow box-border flex flex-row w-full h-12 lg:h-16">
                 <input
-                    className="flex-grow lg:font-light rounded-l-lg pl-4 -mr-4 lg:pl-8 text-xl text-blue border-0 placeholder-blue"
+                    className="flex-grow lg:font-light rounded-lg pl-4 -mr-12 lg:pl-8 text-xl text-blue border-0 placeholder-blue"
+                    ref={searchInputRef}
                     type="text"
                     onChange={updateSearchTerm}
                     placeholder="Search Posts"
