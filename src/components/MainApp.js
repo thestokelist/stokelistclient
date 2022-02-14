@@ -75,66 +75,92 @@ function MainApp() {
     )
 
     return (
-        <div className="flex flex-col items-center m-auto max-w-screen-xl">
+        <div className="flex flex-col items-center m-auto">
             {/*Header appears at the top of all pages*/}
             <Header />
-            <div className="App w-full box-border flex-grow bg-cream px-4 lg:px-20 py-4 lg:py-8">
-                <Switch>
-                    {/*Routes related to posts*/}
-                    <Route exact path="/" component={PostList} />
-                    <Route exact path="/post" component={PostCreate} />
-                    {/* (\d+) is regex that restricts these routers to a series of integers */}
-                    <Route exact path="/post/:id(\d+)" component={PostView} />
-                    <Route
-                        exact
-                        path="/report/:id(\d+)"
-                        component={PostReport}
-                    />
-                    <Route
-                        exact
-                        path="/post/v/:uuid"
-                        component={PostValidate}
-                    />
-                    <Route exact path="/garage/" component={GarageMap} />
+            <div className="App w-full box-border flex-grow bg-cream">
+                <div className="max-w-screen-xl w-full mx-auto px-4 lg:px-20 py-4 lg:py-8">
+                    <Switch>
+                        {/*Routes related to posts*/}
+                        <Route exact path="/" component={PostList} />
+                        <Route exact path="/post" component={PostCreate} />
+                        {/* (\d+) is regex that restricts these routers to a series of integers */}
+                        <Route
+                            exact
+                            path="/post/:id(\d+)"
+                            component={PostView}
+                        />
+                        <Route
+                            exact
+                            path="/report/:id(\d+)"
+                            component={PostReport}
+                        />
+                        <Route
+                            exact
+                            path="/post/v/:uuid"
+                            component={PostValidate}
+                        />
+                        <Route exact path="/garage/" component={GarageMap} />
 
-                    {/*Routes that require permissions*/}
-                    <LoggedInRoute exact path="/edit/:id(\d+)" component={PostEdit} />
-                    <LoggedInRoute exact path="/myposts" component={MyPosts} />
-                    <AdminRoute exact path="/moderate" component={Moderate} />
-                    <AdminRoute exact path="/judge/:id" component={Judge} />
+                        {/*Routes that require permissions*/}
+                        <LoggedInRoute
+                            exact
+                            path="/edit/:id(\d+)"
+                            component={PostEdit}
+                        />
+                        <LoggedInRoute
+                            exact
+                            path="/myposts"
+                            component={MyPosts}
+                        />
+                        <AdminRoute
+                            exact
+                            path="/moderate"
+                            component={Moderate}
+                        />
+                        <AdminRoute exact path="/judge/:id" component={Judge} />
 
-                    {/*Routes related to users*/}
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/login/:uuid" component={UserLogin} />
+                        {/*Routes related to users*/}
+                        <Route exact path="/login" component={Login} />
+                        <Route
+                            exact
+                            path="/login/:uuid"
+                            component={UserLogin}
+                        />
 
-                    {/* Static Routes */}
-                    <Route exact path="/about" component={About} />
-                    <Route exact path="/terms" component={Terms} />
-                    <Route
-                        exact
-                        path="/commandments"
-                        component={Commandments}
-                    />
+                        {/* Static Routes */}
+                        <Route exact path="/about" component={About} />
+                        <Route exact path="/terms" component={Terms} />
+                        <Route
+                            exact
+                            path="/commandments"
+                            component={Commandments}
+                        />
 
-                    {/* Landng Pages */}
-                    <Route
-                        exact
-                        path="/submitted"
-                        component={PostSubmitLanding}
-                    />
-                    <Route exact path="/loginemail" component={LoginLanding} />
-                    <Route
-                        exact
-                        path="/validationfailed"
-                        component={ValidationFailedLanding}
-                    />
-                    <Route
-                        exact
-                        path="/reported"
-                        component={ReportLanding}
-                    />
-                    <Route component={ErrorLanding} />
-                </Switch>
+                        {/* Landng Pages */}
+                        <Route
+                            exact
+                            path="/submitted"
+                            component={PostSubmitLanding}
+                        />
+                        <Route
+                            exact
+                            path="/loginemail"
+                            component={LoginLanding}
+                        />
+                        <Route
+                            exact
+                            path="/validationfailed"
+                            component={ValidationFailedLanding}
+                        />
+                        <Route
+                            exact
+                            path="/reported"
+                            component={ReportLanding}
+                        />
+                        <Route component={ErrorLanding} />
+                    </Switch>
+                </div>
             </div>
             <Footer />
         </div>
