@@ -37,7 +37,7 @@ function PostDetail({ postDetails, notSubmitted }) {
             </div>
 
             <PostPhoto postDetails={post} />
-            <div className="bg-white shadow gray-border rounded text-slate text-xl lg:text-base px-4 py-2 w-full lg:w-3/4 min-h-16 box-border mt-8">
+            <div className="bg-white shadow gray-border rounded text-slate text-base px-4 py-2 w-full lg:w-3/4 h-32 box-border mt-8">
                 <ReactMarkdown
                     className="markdown"
                     children={post.description}
@@ -45,7 +45,7 @@ function PostDetail({ postDetails, notSubmitted }) {
             </div>
 
             {submitted && (
-                <div className="italic text-slate my-2 text-base lg:text-sm">
+                <div className="italic text-slate mt-2 mb-6 lg:mb-2 text-base lg:text-sm">
                     {getPrettyDateString(post.created_at)}
                 </div>
             )}
