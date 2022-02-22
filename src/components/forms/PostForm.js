@@ -1,11 +1,10 @@
-import React, { useContext, useState, Fragment } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import Loading from '../shared/Loading'
-import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
-import { formTypes } from '../../constants/forms'
+
 import {
     getDatePortionForInput,
     getTimePortionForInput,
@@ -22,7 +21,7 @@ import PostTitle from './post/PostTitle'
 import Terms from './post/Terms'
 import Upload from './post/Upload'
 
-function PostForm({ post, responseCallback, stateCallback, buttonText, editMode }) {
+function PostForm({ post, responseCallback, buttonText, editMode }) {
     const formInit = postToForm(post)
     const { state } = useContext(store)
     const {
@@ -32,11 +31,9 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
         errors,
         setValue,
         watch,
-        reset,
     } = useForm({
         defaultValues: formInit,
     })
-    const [postPreview, setPostPreview] = useState(null)
     const [submitError, setSubmitError] = useState(false)
     const [networkLoading, setNetworkLoading] = useState(false)
     const { executeRecaptcha } = useGoogleReCaptcha()
@@ -120,26 +117,6 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
         return formValues
     }
 
-    const onPreview = (data) => {
-        stateCallback(formTypes.PREVIEW)
-        const postData = formToPost(data)
-        if (editMode) {
-            delete postData.email
-        }
-        setPostPreview(postData)
-    }
-
-    const backToCreate = () => {
-        stateCallback(formTypes.POST)
-        //Reset the form with the values we used for the preview
-        let formData = postToForm(postPreview)
-        //If we're going back to create, we already accepted the TOS the first time.
-        formData.terms = true
-        reset(formData)
-        //Clear the preview, so we return to the form
-        setPostPreview(null)
-    }
-
     const doSubmit = async (data) => {
         setSubmitError(false)
         let response
@@ -150,26 +127,26 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
                 state.token
             )
         } else if (state.loggedIn) {
-            response = await authApiPost(
-                endpoints.POSTS,
-                data,
-                state.token
-            )
+            response = await authApiPost(endpoints.POSTS, data, state.token)
         } else {
             response = await apiPost(endpoints.POSTS, data)
         }
         if (response) {
-            responseCallback(postPreview)
+            responseCallback(data)
             console.log('New post successfully submitted')
         } else {
             setSubmitError(true)
         }
     }
 
-    const doCaptchaAndSubmit = async () => {
+    const doCaptchaAndSubmit = async (data) => {
         if (networkLoading === false) {
+            const postData = formToPost(data)
+            if (editMode) {
+                delete postData.email
+            }
             setNetworkLoading(true)
-            const submitPost = Object.assign({}, postPreview)
+            const submitPost = Object.assign({}, postData)
             if (!editMode) {
                 const token = await executeRecaptcha('post')
                 submitPost['g-recaptcha-response'] = token
@@ -179,72 +156,44 @@ function PostForm({ post, responseCallback, stateCallback, buttonText, editMode 
         }
     }
 
-    const getForm = () => {
-        return (
-            <form onSubmit={handleSubmit(onPreview)}>
-                {wholeFormError && (
-                    <div className="form-error font-bold mb-2">
-                        Aw, snap - you missed a step! See the alerts in red
-                        below
-                    </div>
-                )}
-                <PostTitle errors={errors} register={register} watch={watch} />
-                <PostDescription
-                    errors={errors}
-                    register={register}
-                    setValue={setValue}
-                    watch={watch}
-                />
-                <Upload errors={errors} register={register} control={control} />
-                <PriceGarage
-                    errors={errors}
-                    setValue={setValue}
-                    watch={watch}
-                    register={register}
-                />
-                <LocationMap
-                    setValue={setValue}
-                    register={register}
-                    watch={watch}
-                />
-                {!editMode && !state.loggedIn && (
-                    <PostEmail
-                        errors={errors}
-                        register={register}
-                        watch={watch}
-                    />
-                )}
-                {!editMode && <Terms register={register} errors={errors} />}
-
-                <button className="btn-blue" type="submit">
-                    Preview
-                </button>
-            </form>
-        )
-    }
-
-    const getPreview = () => {
-        return (
-            <Fragment>
-                <div className="flexed-row justify-between mx-8 mb-4">
-                    <button className="btn-white" onClick={backToCreate}>
-                        Edit
-                    </button>
-
-                    <button className="btn-blue" onClick={doCaptchaAndSubmit}>
-                        {networkLoading ? <Loading /> : buttonText}
-                    </button>
+    return (
+        <form onSubmit={handleSubmit(doCaptchaAndSubmit)}>
+            {wholeFormError && (
+                <div className="form-error font-bold mb-2">
+                    Aw, snap - you missed a step! See the alerts in red below
                 </div>
-                {submitError && (
-                    <div className="form-error">Error submitting post</div>
-                )}
-                <hr className="border-blue border-2 border-solid mb-8" />
-                <PostDetail postDetails={postPreview} notSubmitted={true} />
-            </Fragment>
-        )
-    }
-
-    return postPreview ? getPreview() : getForm()
+            )}
+            <PostTitle errors={errors} register={register} watch={watch} />
+            <PostDescription
+                errors={errors}
+                register={register}
+                setValue={setValue}
+                watch={watch}
+            />
+            <Upload errors={errors} register={register} control={control} />
+            <PriceGarage
+                errors={errors}
+                setValue={setValue}
+                watch={watch}
+                register={register}
+            />
+            <LocationMap
+                setValue={setValue}
+                register={register}
+                watch={watch}
+            />
+            {!editMode && !state.loggedIn && (
+                <PostEmail errors={errors} register={register} watch={watch} />
+            )}
+            {!editMode && <Terms register={register} errors={errors} />}
+            {submitError && (
+                <div className="form-error">Error submitting post</div>
+            )}
+            <button className="btn-blue" type="submit">
+                {networkLoading ? <Loading /> : buttonText}
+            </button>
+        </form>
+    )
 }
 
 export default PostForm
