@@ -17,8 +17,8 @@ function Footer() {
                     </Link>
                 </div>
                 {/*eslint-disable-next-line*/}
-                <div className="text-white text-3xl lg:text-4xl lg:font-light mb-2 lg:mb-0">
-                    //the <span className="font-medium">stoke list.</span>
+                <div className="text-white text-3xl lg:text-4xl lg:font-light h-12 mb-2 lg:mb-0 flex">
+                    <img src="/title-white.png" className="contained max-w-full max-h-full" alt="white title"/>
                 </div>
                 <div className="text-white text-center lg:text-right lg:font-light">
                     <div>Copyright 2009-2021</div>

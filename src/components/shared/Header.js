@@ -36,11 +36,12 @@ function Header() {
         <div className="bg-white w-full flex flex-grow h-auto lg:h-24 box-border z-10 bottom-shadow">
             <div className="max-w-screen-xl w-full flex-col lg:flex-row flex h-full mx-auto items-left lg:items-center justify-between px-4 lg:px-20 py-4 lg:py-0">
                 <div className="flexed-row justify-between">
-                    <NavLink to="/">
-                        <div className="text-black text-4xl lg:text-5xl font-light">
-                            {'//'}the{' '}
-                            <span className="font-medium">stoke list.</span>
-                        </div>
+                    <NavLink to="/" className="h-12 lg:h-16">
+                        <img
+                            src="/title-black.png"
+                            className="contained max-w-full max-h-full"
+                            alt="white title"
+                        />
                     </NavLink>
                     {isSmallScreen && (
                         <div onClick={toggleMenuOpen}>
