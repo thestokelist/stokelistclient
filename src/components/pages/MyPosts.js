@@ -59,7 +59,7 @@ function MyPosts() {
                         <button className="btn-white" onClick={logout}>
                             Log Out
                         </button>
-                        <div className="text-blue text-xs underline mt-4" onClick={logoutEverywhere}>
+                        <div className="text-blue text-s underline mt-4" onClick={logoutEverywhere}>
                             Log Out on All Devices
                         </div>
                     </div>
