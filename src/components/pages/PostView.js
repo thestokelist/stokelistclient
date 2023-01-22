@@ -29,10 +29,12 @@ function PostView({ match }) {
     useMountEffect(() => {
         async function loadPost() {
             console.log('Loading post details')
-            const res = await apiGet(`${endpoints.POSTS}${postID}`)
-            if (res) {
+            try {
+                const res = await apiGet(`${endpoints.POSTS}${postID}`)
                 const post = await res.json()
                 setPostDetails(post)
+            } catch (e) {
+                setPostDetails(false)
             }
         }
         loadPost()
@@ -46,6 +48,11 @@ function PostView({ match }) {
         <div>
             {postDetails === null ? (
                 <Loading />
+            ) : postDetails === false ? (
+                <div className="text-xl form-label">
+                    Sorry, we couldn't find this post. It could have been
+                    deleted by the user who posted it.
+                </div>
             ) : (
                 <PostDetail postDetails={postDetails} />
             )}
