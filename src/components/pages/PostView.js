@@ -52,18 +52,26 @@ function PostView({ match }) {
             <div className="form-label mb-1">Share This Post</div>
             <div className="flex flex-col lg:flex-row lg:items-center justify-between">
                 <div className="flexed-row my-2 lg:my-0">
-                    <EmailShareButton url={window.location.href}>
-                        <EmailIcon size={30} round={true} />
-                    </EmailShareButton>
-                    <RedditShareButton url={window.location.href}>
-                        <RedditIcon size={30} round={true} />
-                    </RedditShareButton>
-                    <TwitterShareButton url={window.location.href}>
-                        <TwitterIcon size={30} round={true} />
-                    </TwitterShareButton>
-                    <WhatsappShareButton url={window.location.href}>
-                        <WhatsappIcon size={30} round={true} />
-                    </WhatsappShareButton>
+                    <div className="mr-1">
+                        <EmailShareButton url={window.location.href}>
+                            <EmailIcon size={30} round={true} />
+                        </EmailShareButton>
+                    </div>
+                    <div className="mr-1">
+                        <RedditShareButton url={window.location.href}>
+                            <RedditIcon size={30} round={true} />
+                        </RedditShareButton>
+                    </div>
+                    <div className="mr-1">
+                        <TwitterShareButton url={window.location.href}>
+                            <TwitterIcon size={30} round={true} />
+                        </TwitterShareButton>
+                    </div>
+                    <div className="mr-1">
+                        <WhatsappShareButton url={window.location.href}>
+                            <WhatsappIcon size={30} round={true} />
+                        </WhatsappShareButton>
+                    </div>
                     <FacebookMessengerShareButton url={window.location.href}>
                         <FacebookMessengerIcon size={30} round={true} />
                     </FacebookMessengerShareButton>
@@ -75,7 +83,10 @@ function PostView({ match }) {
                             <u>The Stoke List Commandments?</u>
                         </Link>
                     </div>
-                    <button className="w-max text-blue bg-white border border-solid border-blue shadow-lg rounded-lg px-6 py-1 text-md font-bold text-center my-2 lg:my-0" onClick={doReport}>
+                    <button
+                        className="w-max text-blue bg-white border border-solid border-blue shadow-lg rounded-lg px-6 py-1 text-md font-bold text-center my-2 lg:my-0"
+                        onClick={doReport}
+                    >
                         Report Post
                     </button>
                 </div>
