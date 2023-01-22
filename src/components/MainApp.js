@@ -5,7 +5,6 @@ import { store } from './store'
 
 // static pages
 import Commandments from './pages/static/Commandments'
-import About from './pages/static/About'
 import Terms from './pages/static/Terms'
 
 // pages
@@ -129,7 +128,6 @@ function MainApp() {
                         />
 
                         {/* Static Routes */}
-                        <Route exact path="/about" component={About} />
                         <Route exact path="/terms" component={Terms} />
                         <Route
                             exact
