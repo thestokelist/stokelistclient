@@ -41,7 +41,7 @@ function PostSection({
         let postArray = []
 
         for (const post of posts) {
-            const postDate = new Date(post.created_at.substring(0, 10))
+            const postDate = new Date(post.created_at)
             const differenceInDays = Math.floor(
                 (currentDate - postDate) / (1000 * 60 * 60 * 24)
             )
