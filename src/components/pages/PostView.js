@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
+import { store } from '../store'
 import Loading from '../shared/Loading'
 import PostDetail from '../posts/PostDetail'
 import { endpoints } from '../../constants/endpoints'
@@ -25,6 +26,7 @@ function PostView({ match }) {
     const [postDetails, setPostDetails] = useState(null)
     const history = useHistory()
     const { apiGet } = useNetworkRequest()
+    const { state } = useContext(store)
 
     useMountEffect(() => {
         async function loadPost() {
@@ -96,6 +98,11 @@ function PostView({ match }) {
                     >
                         Report Post
                     </button>
+                    {state.loggedIn && state.isAdmin && (
+                        <div className="w-max text-red-600 bg-white border border-solid border-red-600 shadow-lg rounded-lg px-6 py-1 text-md font-bold text-center my-2 lg:my-0 lg:ml-1">
+                            <a href={`/judge/${postID}`}>See all posts</a>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="my-4">
