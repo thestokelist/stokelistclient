@@ -13,6 +13,7 @@ const initialState = {
     isAdmin: false,
     email: null,
     token: null,
+    latestScroll: 0,
 }
 const store = createContext(initialState)
 const { Provider } = store
@@ -34,6 +35,10 @@ const StateProvider = ({ children, init }) => {
             case actionTypes.LOGOUT:
                 newState = { ...state, loggedIn: false, email: null, token: null, isAdmin: false }
                 return newState
+            case actionTypes.LATEST_SCROLL: {
+                newState = {...state, latestScroll: action.item.position}
+                return newState
+            }
             default:
                 throw new Error()
         }
@@ -41,9 +46,10 @@ const StateProvider = ({ children, init }) => {
         //else use local state if we can, fall back to initial state
     }, init || localState || initialState)
 
-    //Persist our state to local storage every time we update
+    //Persist our state to local storage every time we update, except for scroll position which resets on refresh
     useEffect(() => {
-        localStorage.setItem('state', JSON.stringify(state))
+        const {latestScroll, ...rest} = state
+        localStorage.setItem('state', JSON.stringify(rest))
     }, [state])
 
     return <Provider value={{ state, dispatch }}>{children}</Provider>

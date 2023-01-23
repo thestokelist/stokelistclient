@@ -2,6 +2,8 @@ import React, { useCallback, useContext } from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 
 import { store } from './store'
+import { useMountEffect } from '../hooks'
+import { actionTypes } from '../constants/actions'
 
 // static pages
 import Commandments from './pages/static/Commandments'
@@ -33,7 +35,17 @@ import Header from './shared/Header'
 import Footer from './shared/Footer'
 
 function MainApp() {
-    const { state } = useContext(store)
+    const { state, dispatch } = useContext(store)
+
+    //Reset scroll position when app is mounted
+    useMountEffect(() => {
+        dispatch({
+            type: actionTypes.LATEST_SCROLL,
+            item: {
+                position: 0,
+            },
+        })
+    })
 
     //Route which checks user is logged in
     const LoggedInRoute = useCallback(

@@ -6,12 +6,23 @@ import PostSearch from '../posts/PostSearch'
 import Loading from '../shared/Loading'
 import { usePosts, useMountEffect } from '../../hooks'
 import { endpoints } from '../../constants/endpoints'
+import { actionTypes } from '../../constants/actions'
 
 function PostList({ location }) {
     const [latestPosts, loadLatestPosts] = usePosts(endpoints.POSTS)
     const [stickyPosts, loadStickyPosts] = usePosts(endpoints.STICKY)
     const [loading, setLoading] = useState(true)
-    const { state } = useContext(store)
+    const { state, dispatch } = useContext(store)
+
+    const handleScroll = () => {
+        const position = window.pageYOffset
+        dispatch({
+            type: actionTypes.LATEST_SCROLL,
+            item: {
+                position: position,
+            },
+        })
+    }
 
     const fromValidation = !!(
         location.state && location.state.validated === true
@@ -21,8 +32,17 @@ function PostList({ location }) {
         const loadPosts = async () => {
             await Promise.allSettled([loadLatestPosts(), loadStickyPosts()])
             setLoading(false)
+            if (state.latestScroll) {
+                window.scrollTo(0, state.latestScroll)
+            } else {
+                window.scrollTo(0, 0)
+            }
+            window.addEventListener('scroll', handleScroll, { passive: true })
         }
         loadPosts()
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
     })
 
     return loading ? (
