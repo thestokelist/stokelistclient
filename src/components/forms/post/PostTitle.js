@@ -18,6 +18,7 @@ function PostTitle({ errors, register, watch }) {
             <input
                 className="form-input w-full lg:w-4/5"
                 name="title"
+                maxlength="50"
                 placeholder="Max 50 characters"
                 ref={register({
                     required: true,
