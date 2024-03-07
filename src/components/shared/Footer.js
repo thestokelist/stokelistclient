@@ -21,7 +21,7 @@ function Footer() {
                     <img src="/title-white.png" className="contained max-w-full max-h-full" alt="white title"/>
                 </div>
                 <div className="text-white text-center lg:text-right lg:font-light">
-                    <div>Copyright 2009-2021</div>
+                    <div>Copyright 2009-2024</div>
                     <div>All Rights Reserved</div>
                 </div>
             </div>
