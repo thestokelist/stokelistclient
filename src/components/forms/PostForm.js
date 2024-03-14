@@ -34,7 +34,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     } = useForm({
         defaultValues: formInit,
     })
-    const [submitError, setSubmitError] = useState(false)
+    const [submitError, setSubmitError] = useState(0)
     const [networkLoading, setNetworkLoading] = useState(false)
     const { executeRecaptcha } = useGoogleReCaptcha()
     const { authApiPut, authApiPost, apiPost } = useNetworkRequest()
@@ -118,7 +118,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
     }
 
     const doSubmit = async (data) => {
-        setSubmitError(false)
+        setSubmitError(0)
         let response
         if (editMode) {
             response = await authApiPut(
@@ -135,7 +135,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
             responseCallback(data)
             console.log('New post successfully submitted')
         } else {
-            setSubmitError(true)
+            setSubmitError(response.status)
         }
     }
 
@@ -187,7 +187,19 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
             )}
             {!editMode && <Terms register={register} errors={errors} />}
             {submitError && (
+                submitError === 498 ? (
+                <div className="form-error">
+                    <p>The system thinks you're a robot!</p>
+                    <p>Is this a fresh browser window? To convince it you're not, go do some non-robot things:</p>
+                    <ul>
+                        <li>check your email</li>
+                        <li>read the news</li>
+                    </ul>
+                    <p>If this happens continually, please email <a href="mailto:simon@simonwex.com">simon@simonwex.com</a>.</p>
+              </div>
+                ) : (
                 <div className="form-error">Error submitting post</div>
+                )
             )}
             <button className="btn-blue" type="submit">
                 {networkLoading ? <Loading /> : buttonText}
