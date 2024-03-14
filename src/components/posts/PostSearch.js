@@ -32,11 +32,11 @@ function PostSearch({ children }) {
             setSearchPosts([])
             dispatch({ type: 'loadReset' })
         } else {
-            const searchResponse = await apiGet(endpoints.SEARCH, {
+            const {success, response} = await apiGet(endpoints.SEARCH, {
                 term: searchTerm,
             })
-            if (searchResponse) {
-                const searchPosts = await searchResponse.json()
+            if (success) {
+                const searchPosts = await response.json()
                 setSearchPosts(searchPosts)
                 dispatch({ type: 'loadSuccess' })
             } else {
@@ -56,12 +56,12 @@ function PostSearch({ children }) {
     const loadMoreSearchPosts = async () => {
         const currentOffset = searchOffset + 50
         setSearchOffset(currentOffset)
-        const moreSearchResponse = await apiGet(endpoints.SEARCH, {
+        const {success, response} = await apiGet(endpoints.SEARCH, {
             term: searchTerm,
             offset: currentOffset,
         })
-        if (moreSearchResponse) {
-            const moreSearchPosts = await moreSearchResponse.json()
+        if (success) {
+            const moreSearchPosts = await response.json()
             setSearchPosts(searchPosts.concat(moreSearchPosts))
         }
     }

@@ -119,19 +119,19 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
 
     const doSubmit = async (data) => {
         setSubmitError(0)
-        let response
+        let success, response
         if (editMode) {
-            response = await authApiPut(
+            ({success, response} = await authApiPut(
                 `${endpoints.POSTS}${post.id}`,
                 data,
                 state.token
-            )
+            ))
         } else if (state.loggedIn) {
-            response = await authApiPost(endpoints.POSTS, data, state.token)
+            ({success, response} = await authApiPost(endpoints.POSTS, data, state.token))
         } else {
-            response = await apiPost(endpoints.POSTS, data)
+            ({success, response} = await apiPost(endpoints.POSTS, data))
         }
-        if (response) {
+        if (success) {
             responseCallback(data)
             console.log('New post successfully submitted')
         } else {

@@ -20,13 +20,13 @@ function UserLogin({ match, location }) {
         async function login() {
             console.log(`Logging in with login token: ${loginToken}`)
             const bodyObject = { email: parsed.email }
-            const res = await apiPost(
+            const {success, response} = await apiPost(
                 `${endpoints.LOGIN}/${loginToken}`,
                 bodyObject
             )
-            if (res) {
+            if (success) {
                 console.log(`Logged in with login token: ${loginToken}`)
-                const token = await res.text()
+                const token = await response.text()
                 dispatch({
                     type: actionTypes.LOGIN_SUCCESS,
                     item: {

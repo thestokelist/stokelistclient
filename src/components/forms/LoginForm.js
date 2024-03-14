@@ -12,8 +12,8 @@ function LoginForm({emailSent}) {
 
     const onSubmit = async (data) => {
         const postData = { email: data.email }
-        const response = await apiPost(endpoints.LOGIN, postData)
-        if (response) {
+        const {success} = await apiPost(endpoints.LOGIN, postData)
+        if (success) {
             emailSent()
         }
     }

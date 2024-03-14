@@ -12,11 +12,11 @@ function ReportForm({ id }) {
 
     const onSubmit = async (data) => {
         const postData = { reason: data.reason, comment: data.comment }
-        const response = await apiPost(
+        const {success} = await apiPost(
             `${endpoints.REPORT}${id}`,
             postData
         )
-        if (response) {
+        if (success) {
             history.push('/reported')
         }
     }

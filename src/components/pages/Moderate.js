@@ -27,8 +27,8 @@ function Moderate() {
     useMountEffect(() => {
         async function fetchPosts() {
             console.log(`Fetching posts`)
-            const response = await authApiGet(endpoints.MODERATE, state.token)
-            if (response) {
+            const {success, response} = await authApiGet(endpoints.MODERATE, state.token)
+            if (success) {
                 const responseObject = await response.json()
                 setModQueue(responseObject)
             }
@@ -45,12 +45,12 @@ function Moderate() {
     const keepCurrentPost = async () => {
         const postId = currentPost.id
         //make network request to set post as unmoderated
-        const response = await authApiPut(
+        const {success} = await authApiPut(
             endpoints.APPROVE + postId,
             {},
             state.token
         )
-        if (response) {
+        if (success) {
             const modPost = Object.assign({ kept: true, deleted: false }, currentPost)
             setModQueue(replaceQueueAt(postCounter, modPost))
             goRight()
@@ -63,11 +63,11 @@ function Moderate() {
     const deleteCurrentPost = async () => {
         const postId = currentPost.id
         //make network request to delete post
-        const response = await authApiDelete(
+        const {success}  = await authApiDelete(
             endpoints.POSTS + postId,
             state.token
         )
-        if (response) {
+        if (success) {
             const modPost = Object.assign({ deleted: true, kept: false }, currentPost)
             setModQueue(replaceQueueAt(postCounter, modPost))
             goRight()

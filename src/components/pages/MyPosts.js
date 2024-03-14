@@ -17,8 +17,8 @@ function MyPosts() {
     useMountEffect(() => {
         async function fetchPosts() {
             console.log(`Fetching posts`)
-            const response = await authApiGet(endpoints.MY_POSTS, state.token)
-            if (response) {
+            const {success, response} = await authApiGet(endpoints.MY_POSTS, state.token)
+            if (success) {
                 const responseObject = await response.json()
                 setMyPosts(responseObject)
             }
@@ -36,8 +36,8 @@ function MyPosts() {
 
     const logoutEverywhere = async () => {
         console.log('Logging out everywhere')
-        const response = await authApiDelete(endpoints.LOGIN, state.token)
-        if (response) {
+        const {success} = await authApiDelete(endpoints.LOGIN, state.token)
+        if (success) {
             console.log('Logged out everywhere')
             dispatch({
                 type: actionTypes.LOGOUT,

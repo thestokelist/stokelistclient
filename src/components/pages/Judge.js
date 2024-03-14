@@ -19,11 +19,11 @@ function Judge({ match }) {
     useMountEffect(() => {
         async function fetchPosts() {
             console.log(`Fetching posts`)
-            const response = await authApiGet(
+            const {success, response}  = await authApiGet(
                 endpoints.JUDGE + postID,
                 state.token
             )
-            if (response) {
+            if (success) {
                 const responseObject = await response.json()
                 setJudgeQueue(responseObject)
             }
@@ -33,11 +33,11 @@ function Judge({ match }) {
 
     const banUser = async () => {
         setError(false)
-        const response = await authApiDelete(
+        const {success}  = await authApiDelete(
             endpoints.JUDGE + postID,
             state.token
         )
-        if (response) {
+        if (success) {
             history.push('/moderate')
             //Redirect to ban landing page
         } else {

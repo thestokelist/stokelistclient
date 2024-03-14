@@ -21,7 +21,7 @@ function Media({ addMedia, index, close }) {
                 const formData = new FormData()
                 formData.append('media', acceptedFiles[0])
                 //Upload the actual file
-                const response = await authApiMultipartPost(
+                const {response}  = await authApiMultipartPost(
                     endpoints.UPLOAD,
                     formData,
                     state.token

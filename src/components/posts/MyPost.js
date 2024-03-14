@@ -17,12 +17,12 @@ function MyPost({ post }) {
     const deletePost = async () => {
         if (networkLoading === false) {
             setNetworkLoading(true)
-            const response = await authApiDelete(
+            const {success} = await authApiDelete(
                 `${endpoints.POSTS}${post.id}`,
                 state.token
             )
             setNetworkLoading(false)
-            if (response) {
+            if (success) {
                 setDeleted(true)
             } else {
                 console.log(`Delete failed for post with id ${post.id}`)
@@ -33,12 +33,12 @@ function MyPost({ post }) {
     const undeletePost = async () => {
         if (networkLoading === false) {
             setNetworkLoading(true)
-            const response = await authApiPatch(
+            const {success} = await authApiPatch(
                 `${endpoints.POSTS}${post.id}`,
                 state.token
             )
             setNetworkLoading(false)
-            if (response) {
+            if (success) {
                 setDeleted(false)
             } else {
                 console.log(`Undelete failed for post with id ${post.id}`)

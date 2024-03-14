@@ -11,8 +11,8 @@ export const usePosts = (endpoint) => {
     const loadMorePosts = async () => {
         const currentOffset = offset === null ? 0 : offset + 50
         setOffset(currentOffset)
-        const response = await apiGet(endpoint, { offset: currentOffset })
-        if (response) {
+        const {success, response} = await apiGet(endpoint, { offset: currentOffset })
+        if (success) {
             const morePosts = await response.json()
             setPosts(posts.concat(morePosts))
         }
@@ -49,14 +49,12 @@ export const useNetworkRequest = () => {
                 type: actionTypes.LOGOUT,
             })
             console.log('Token expired, logging out')
-            response = null
         } else if (isNotOK) {
             console.log(
                 `Error occured whilst attempting ${method} to ${response.url}: ${response.statusText}`
             )
-            response = null
         }
-        return response
+        return { success: !isNotOK }
     }
 
     const tokenHeaders = (token) => {
@@ -66,82 +64,81 @@ export const useNetworkRequest = () => {
     }
 
     const apiPost = async (endpoint, data) => {
-        let response = await fetch(apiUrl + endpoint, {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'POST',
             headers: standardHeaders,
             body: JSON.stringify(data),
         })
-        response = await handleErrors(response, 'POST')
-        return response
+        const success = await handleErrors(response, 'POST')
+        return {success, response}
     }
 
     const authApiMultipartPost = async (endpoint, data) => {
-        let response = await fetch(apiUrl + '/upload', {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'POST',
             body: data,
         })
-        response = await handleErrors(response, 'POST')
-        return response
+        const success = await handleErrors(response, 'POST')
+        return {success, response}
     }
 
     const authApiPost = async (endpoint, data, token) => {
-        let response = await fetch(apiUrl + endpoint, {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'POST',
             headers: tokenHeaders(token),
             body: JSON.stringify(data),
         })
-        response = await handleErrors(response, 'POST')
-        return response
+        const success = await handleErrors(response, 'POST')
+        return {success, response}
     }
 
     const authApiGet = async (endpoint, token) => {
-        let response = await fetch(apiUrl + endpoint, {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'GET',
             headers: tokenHeaders(token),
         })
-        response = await handleErrors(response, 'GET')
-        return response
+        const success = await handleErrors(response, 'GET')
+        return {success, response}
     }
 
     const apiGet = async (endpoint, params) => {
-        console.log(endpoint)
-        let response = await fetch(
+        const response = await fetch(
             `${apiUrl}${endpoint}?${queryString.stringify(params)}`,
             {
                 method: 'GET',
                 headers: standardHeaders,
             }
         )
-        response = await handleErrors(response, 'GET')
-        return response
+        const success = await handleErrors(response, 'GET')
+        return {success, response}
     }
 
     const authApiDelete = async (endpoint, token) => {
-        let response = await fetch(apiUrl + endpoint, {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'DELETE',
             headers: tokenHeaders(token),
         })
-        response = await handleErrors(response, 'DELETE')
-        return response
+        const success = await handleErrors(response, 'DELETE')
+        return {success, response}
     }
 
     const authApiPut = async (endpoint, data, token) => {
-        let response = await fetch(apiUrl + endpoint, {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'PUT',
             headers: tokenHeaders(token),
             body: JSON.stringify(data),
         })
-        response = await handleErrors(response, 'PUT')
-        return response
+        const success = await handleErrors(response, 'PUT')
+        return {success, response}
     }
 
     const authApiPatch = async (endpoint, token) => {
-        let response = await fetch(apiUrl + endpoint, {
+        const response = await fetch(apiUrl + endpoint, {
             method: 'PATCH',
             headers: tokenHeaders(token),
         })
-        response = await handleErrors(response, 'PATCH')
-        return response
+        const success = await handleErrors(response, 'PATCH')
+        return {success, response}
     }
 
     return {

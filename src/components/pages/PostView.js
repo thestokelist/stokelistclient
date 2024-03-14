@@ -32,8 +32,8 @@ function PostView({ match }) {
         async function loadPost() {
             console.log('Loading post details')
             try {
-                const res = await apiGet(`${endpoints.POSTS}${postID}`)
-                const post = await res.json()
+                const {response} = await apiGet(`${endpoints.POSTS}${postID}`)
+                const post = await response.json()
                 setPostDetails(post)
             } catch (e) {
                 setPostDetails(false)
