@@ -186,7 +186,7 @@ function PostForm({ post, responseCallback, buttonText, editMode }) {
                 <PostEmail errors={errors} register={register} watch={watch} />
             )}
             {!editMode && <Terms register={register} errors={errors} />}
-            {submitError && (
+            {submitError !== 0 && (
                 submitError === 498 ? (
                 <div className="form-error">
                     <p>The system thinks you're a robot!</p>
