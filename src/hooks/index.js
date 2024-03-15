@@ -54,7 +54,7 @@ export const useNetworkRequest = () => {
                 `Error occured whilst attempting ${method} to ${response.url}: ${response.statusText}`
             )
         }
-        return { success: !isNotOK }
+        return !isNotOK
     }
 
     const tokenHeaders = (token) => {
