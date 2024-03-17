@@ -15,9 +15,9 @@ function PostEdit({ match }) {
     useMountEffect(() => {
         async function loadPost() {
             console.log('Loading post details')
-            const res = await apiGet(`${endpoints.POSTS}${postID}`)
-            if (res) {
-                const post = await res.json()
+            const {success, response} = await apiGet(`${endpoints.POSTS}${postID}`)
+            if (success) {
+                const post = await response.json()
                 setPostDetails(post)
             }
         }
